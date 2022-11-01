@@ -1,0 +1,98 @@
+<div class="full-container">
+	<div class="col-3-12 full-col m-pl-list-l m-inactive" id="m-list-toggle-target">
+		<div class="full-container scrollable-nobar main-padd">
+			<div class="display-m list-header">LIST<span class="btn plsvg" id="m-plastic-list-toggle" svg-src="./assets/svg/arrow1.svg"></span></div>
+			<ul class="list m-inactive" id="beach-list">
+				<li data-link="./assets/json/beaches/sample/Naechi.json">
+					<span class="EN">Naechi Beach</span>
+					<span class="KR">내치 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Songpyeong.json">
+					<span class="EN">Songpyeong Beach</span>
+					<span class="KR">송평 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Cheonggan.json">
+					<span class="EN">Cheonggan Beach</span>
+					<span class="KR">청간 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Gamchu.json">
+					<span class="EN">Gamchu Beach</span>
+					<span class="KR">감추 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Yumjeon.json">
+					<span class="EN">YumJeon Beach</span>
+					<span class="KR">염전 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Dogu.json">
+					<span class="EN">Dogu Beach</span>
+					<span class="KR">도구 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Guryeongpo.json">
+					<span class="EN">Guryeongpo Beach</span>
+					<span class="KR">구룡포 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/DumoMongdol.json">
+					<span class="EN">Dumo Mondgol Beach</span>
+					<span class="KR">두모 몽돌 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Masian.json" data-nogeo="true">
+					<span class="EN">Masian Beach</span>
+					<span class="KR">마시안 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Bangameori.json" data-nogeo="true">
+					<span class="EN">Bangameori Beach</span>
+					<span class="KR">방아머리 해변</span>
+				</li>
+				<li data-link="./assets/json/beaches/sample/Jangan.json" data-nogeo="true">
+					<span class="EN">Jangan Beach</span>
+					<span class="KR">장안 해변</span>
+				</li>
+			</ul>
+			<div class="footnote">
+				<div class="EN">
+					After consulting on our research methodology with the <span class="left-para">「</span>East Asian Sea Community Ocean<span class="right-para">」</span>, a non-profit independent research institute, 11 beaches were selected to collect waste plastics for our dataset.<br>
+					The 3D scanned models of these waste plastics subsequently turn into microplastics inside our project's <span class="left-para">「</span>ECOSYSTEM<span class="right-para">」</span> page.
+				</div>
+				<div class="KR">
+					비영리 독립 연구소 <span class="left-para">「</span>(사)동아시아 바다공동체 오션<span class="right-para">」</span>에서 해변 조사 방법론에 대한 자문을 거친 후, 전국의 해변 11 곳에서 폐플라스틱을 수집하여 데이터셋을 구축하였다.<br>
+					수집된 폐플라스틱들은 3D 스캐닝되어 본 프로젝트의 <span class="left-para">「</span>ECOSYSTEM<span class="right-para">」</span> 페이지에서 미세플라스틱으로 변환됩니다.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-9-12 full-col col-b-l">
+		<div class="full-container scrollable map-wrapper">
+			<div id="map-container">
+				<div id="map-caption" class="z1">
+					<div class="beach-name">
+						&#9679;&ensp;<span class="KR"></span><span class="EN"></span>&ensp;&#9679;
+					</div>
+					<div class="beach-address">
+						<span class="KR"></span>
+						<span class="EN"></span>
+					</div>
+				</div>
+				<div class="z1 zoom-control">
+					<span id="zoom-in" class="plsvg" svg-src="./assets/svg/plus.svg"></span>
+					<span id="zoom-out" class="plsvg" svg-src="./assets/svg/minus.svg"></span>
+				</div>
+			</div>
+			<div id="map-list" class="plastic-list main-padd"></div>
+			<div id="plastic-detail" class="inactive">
+			</div>
+		</div>
+		<div id="map-preloader" class="preloader bck-wh z1"></div>
+	</div>
+</div>
+<div class="full-container inactive z3" id="plastic-detail-wrapper">
+	<div id="plastic-detail-layer">
+		<span id="plastic-detail-closer" class="btn closer">
+			<span class="plsvg display-pc" svg-src="./assets/svg/minus_white.svg"></span>
+			<span class="plsvg display-m" svg-src="./assets/svg/arrow2_white.svg"></span>
+		</span>
+		<div class="caption">
+			<div class="detail-layer-caption-2"></div>
+			<div class="detail-layer-caption-1" style="display: none;"></div>
+		</div>
+	</div>
+</div>

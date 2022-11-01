@@ -1,0 +1,443 @@
+{
+    "features": [
+        {
+            "properties": {
+                "index": 1,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GAM#1"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.126008333333,
+                    37.5150611111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 2,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GAM#2"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.125916666667,
+                    37.5155861111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 3,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GAM#3"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.126113888889,
+                    37.5155916666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 4,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GAM#4"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.125808333333,
+                    37.5158472222222
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 5,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GAM#5"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.126358333333,
+                    37.5148111111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 6,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GAM#6"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.125808333333,
+                    37.5153583333333
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 7,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GAM#7"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.126372222222,
+                    37.5148083333333
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 8,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GAM#8"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.126219444444,
+                    37.5156777777778
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 9,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GAM#9"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.125977777778,
+                    37.5157
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 10,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GAM#10"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.126038888889,
+                    37.5149944444444
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 11,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GAM#11"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.125808333333,
+                    37.5153722222222
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 12,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GAM#12"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.1259,
+                    37.515625
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 13,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GAM#13"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.125930555556,
+                    37.5155833333333
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 14,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GAM#14"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.121613888889,
+                    37.5183805555556
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 15,
+                "beach": "Gamchu",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GAM#15"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.123108333333,
+                    37.5174416666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "shape"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              129.12219242605875,
+              37.52896145411748
+            ],
+            [
+              129.11048513240513,
+              37.52762421696088
+            ],
+            [
+              129.1089889861695,
+              37.51331196937431
+            ],
+            [
+              129.10933779331344,
+              37.50476794892928
+            ],
+            [
+              129.13487768235785,
+              37.50484952488762
+            ],
+            [
+              129.12806510925293,
+              37.51290450270177
+            ],
+            [
+              129.12830114364624,
+              37.5133640567682
+            ],
+            [
+              129.1278451681137,
+              37.51393424028746
+            ],
+            [
+              129.12740528583527,
+              37.513925730117705
+            ],
+            [
+              129.12741065025327,
+              37.51420231013808
+            ],
+            [
+              129.12792563438416,
+              37.51481078257491
+            ],
+            [
+              129.12713170051575,
+              37.51484482284443
+            ],
+            [
+              129.12655234336853,
+              37.514972473716824
+            ],
+            [
+              129.12619829177856,
+              37.51524053983815
+            ],
+            [
+              129.12616610527039,
+              37.51564050972105
+            ],
+            [
+              129.12666499614716,
+              37.51603622249566
+            ],
+            [
+              129.12594616413116,
+              37.516861681099485
+            ],
+            [
+              129.1254472732544,
+              37.517346740143566
+            ],
+            [
+              129.1247981786728,
+              37.517168034546785
+            ],
+            [
+              129.1243314743042,
+              37.51724036781607
+            ],
+            [
+              129.12376821041107,
+              37.51799773548414
+            ],
+            [
+              129.123575091362,
+              37.51830408426749
+            ],
+            [
+              129.1226041316986,
+              37.51994217794642
+            ],
+            [
+              129.1223359107971,
+              37.52054209416705
+            ],
+            [
+              129.12219242605875,
+              37.52896145411748
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+        {
+            "properties": {
+                "name": "bbox"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            129.1189455986023,
+                            37.514219330413525
+                        ],
+                        [
+                            129.13222789764404,
+                            37.514219330413525
+                        ],
+                        [
+                            129.13222789764404,
+                            37.51937629510488
+                        ],
+                        [
+                            129.1189455986023,
+                            37.51937629510488
+                        ],
+                        [
+                            129.1189455986023,
+                            37.514219330413525
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "properties": {
+                "name": "mbbox"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            129.12102699279788,
+                            37.51382786309575
+                        ],
+                        [
+                            129.12735700607303,
+                            37.51382786309575
+                        ],
+                        [
+                            129.12735700607303,
+                            37.52009109377037
+                        ],
+                        [
+                            129.12102699279788,
+                            37.52009109377037
+                        ],
+                        [
+                            129.12102699279788,
+                            37.51382786309575
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        }
+    ],
+    "name_KR": "감추 해변",
+    "name_EN": "Gamchu Beach",
+    "address_KR": "대한민국 강원도 동해시 해안로",
+    "address_EN": "Haean-ro, Donghae-si, Gangwon-do, Republic of Korea",
+    "type": "FeatureCollection"
+}

@@ -1,0 +1,54 @@
+html,body {
+    touch-action: none;
+}
+html,body,* {padding:0;margin:0;box-sizing: border-box;
+-webkit-tap-highlight-color: transparent; -moz-appearance: none;
+font-family: 'Noto Sans KR', sans-serif;}
+ul {
+    list-style-type: none;
+    padding:0;margin:0;box-sizing: border-box;
+}
+
+*:not(input) {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+    image-rendering: smooth;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+input {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
+::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: none; 
+    -webkit-border-radius: none;
+    border-radius: none;
+    background: transparent;    
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: none;
+    border-radius: none;
+    background: transparent; 
+    -webkit-box-shadow: none; 
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent; 
+}

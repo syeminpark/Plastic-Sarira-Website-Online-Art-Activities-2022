@@ -1,0 +1,798 @@
+{
+    "features": [
+        {
+            "properties": {
+                "index": 1,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GU#1"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566941666667,
+                    35.9977416666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 2,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GU#2"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.565841666667,
+                    35.996025
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 3,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GU#3"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.5672,
+                    35.997925
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 4,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GU#4"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.56665,
+                    35.994325
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 5,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GU#5"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566741666667,
+                    35.9975166666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 6,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GU#6"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566422222222,
+                    35.9952277777778
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 7,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GU#7"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566116666667,
+                    35.9949305555556
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 8,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GU#8"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566161111111,
+                    35.9948
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 9,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GU#9"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566025,
+                    35.99495
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 10,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GU#10"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566130555556,
+                    35.9948916666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 11,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GU#11"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566575,
+                    35.9943611111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 12,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GU#12"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566161111111,
+                    35.9949611111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 13,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GU#13"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566147222222,
+                    35.9949333333333
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 14,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GU#14"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566941666667,
+                    35.9977527777778
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 15,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GU#15"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566147222222,
+                    35.9949694444444
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 16,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GU#16"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566147222222,
+                    35.9948888888889
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 17,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GU#17"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.565963888889,
+                    35.9963027777778
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 18,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GU#18"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566130555556,
+                    35.9949305555556
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 19,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GU#19"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.565827777778,
+                    35.9960416666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 20,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GU#20"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566252777778,
+                    35.9949611111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 21,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GU#21"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566161111111,
+                    35.9949027777778
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 22,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GU#22"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566222222222,
+                    35.9950138888889
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 23,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GU#23"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566161111111,
+                    35.9949333333333
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 24,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GU#24"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566147222222,
+                    35.9948055555556
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 25,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00001.png",
+                "thumb-src": "./assets/img/MA_thumb_00001.png",
+                "id": "GU#25"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566177777778,
+                    35.9949694444444
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 26,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00002.png",
+                "thumb-src": "./assets/img/MA_thumb_00002.png",
+                "id": "GU#26"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566894444444,
+                    35.9973861111111
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 27,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00003.png",
+                "thumb-src": "./assets/img/MA_thumb_00003.png",
+                "id": "GU#27"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566147222222,
+                    35.9951527777778
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 28,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00004.png",
+                "thumb-src": "./assets/img/MA_thumb_00004.png",
+                "id": "GU#28"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566208333333,
+                    35.9949916666667
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 29,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00005.png",
+                "thumb-src": "./assets/img/MA_thumb_00005.png",
+                "id": "GU#29"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566238888889,
+                    35.9967694444444
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "properties": {
+                "index": 30,
+                "beach": "Guryeongpo",
+                "img-src": "./assets/img/MA_00006.png",
+                "thumb-src": "./assets/img/MA_thumb_00006.png",
+                "id": "GU#30"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    129.566222222222,
+                    35.9950972222222
+                ],
+                "type": "Point"
+            }
+        },
+        {
+      "type": "Feature",
+      "properties": {
+        "name": "shape"
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              129.57017362117767,
+              35.999908409065
+            ],
+            [
+              129.5649218559265,
+              36.00104545739021
+            ],
+            [
+              129.55629634958626,
+              36.00136412787557
+            ],
+            [
+              129.55614359028237,
+              35.9912296257533
+            ],
+            [
+              129.56698179244995,
+              35.99203541867131
+            ],
+            [
+              129.567259401083,
+              35.99244666515727
+            ],
+            [
+              129.56703141331673,
+              35.9924705369191
+            ],
+            [
+              129.5668463408947,
+              35.9926756167573
+            ],
+            [
+              129.5666371285915,
+              35.9929034826189
+            ],
+            [
+              129.56647619605062,
+              35.99330495896391
+            ],
+            [
+              129.56674173474312,
+              35.99338199878563
+            ],
+            [
+              129.56689462065697,
+              35.993523057419125
+            ],
+            [
+              129.5669563114643,
+              35.993672796307884
+            ],
+            [
+              129.56689059734344,
+              35.99393972144809
+            ],
+            [
+              129.56656873226166,
+              35.99403086641104
+            ],
+            [
+              129.5667980611324,
+              35.994062333100004
+            ],
+            [
+              129.56703007221222,
+              35.99405582275159
+            ],
+            [
+              129.56741899251938,
+              35.99423377208132
+            ],
+            [
+              129.5674055814743,
+              35.99466236790442
+            ],
+            [
+              129.56724599003792,
+              35.99485008129105
+            ],
+            [
+              129.56695094704628,
+              35.994778468144226
+            ],
+            [
+              129.56675916910172,
+              35.9949683513457
+            ],
+            [
+              129.56651777029037,
+              35.99489022802673
+            ],
+            [
+              129.56658482551575,
+              35.99508119600317
+            ],
+            [
+              129.56665188074112,
+              35.995248292603286
+            ],
+            [
+              129.5664305984974,
+              35.99531122499728
+            ],
+            [
+              129.56626161932945,
+              35.995648671977534
+            ],
+            [
+              129.56605911254883,
+              35.995727879580414
+            ],
+            [
+              129.56611678004265,
+              35.996045794227236
+            ],
+            [
+              129.56613689661026,
+              35.99614236190375
+            ],
+            [
+              129.56633672118187,
+              35.99683135256913
+            ],
+            [
+              129.5665580034256,
+              35.99734022527499
+            ],
+            [
+              129.56705152988434,
+              35.99784041464961
+            ],
+            [
+              129.5674605667591,
+              35.99806392557894
+            ],
+            [
+              129.56789508461952,
+              35.99817242580169
+            ],
+            [
+              129.56818342208862,
+              35.99816374578938
+            ],
+            [
+              129.56868767738342,
+              35.99791202501632
+            ],
+            [
+              129.56847310066223,
+              35.99757350270995
+            ],
+            [
+              129.56862330436707,
+              35.997538782391246
+            ],
+            [
+              129.56881642341614,
+              35.99779918440897
+            ],
+            [
+              129.56905245780945,
+              35.99772106389393
+            ],
+            [
+              129.56922948360443,
+              35.99785560473282
+            ],
+            [
+              129.56939041614532,
+              35.99785126470935
+            ],
+            [
+              129.5697283744812,
+              35.99807260560225
+            ],
+            [
+              129.5695674419403,
+              35.9985413254425
+            ],
+            [
+              129.56909000873566,
+              35.999122881371896
+            ],
+            [
+              129.5692080259323,
+              35.99938327815923
+            ],
+            [
+              129.56939041614532,
+              35.9995351758881
+            ],
+            [
+              129.57000732421875,
+              35.99976519189204
+            ],
+            [
+              129.57017362117767,
+              35.999908409065
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+        {
+            "properties": {
+                "name": "bbox"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            129.5627224445343,
+                            35.99422292152394
+                        ],
+                        [
+                            129.5720458030701,
+                            35.99422292152394
+                        ],
+                        [
+                            129.5720458030701,
+                            35.99865850496732
+                        ],
+                        [
+                            129.5627224445343,
+                            35.99865850496732
+                        ],
+                        [
+                            129.5627224445343,
+                            35.99422292152394
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "properties": {
+                "name": "mbbox"
+            },
+            "type": "Feature",
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            129.56477165222168,
+                            35.99390174434914
+                        ],
+                        [
+                            129.569878578186,
+                            35.99390174434914
+                        ],
+                        [
+                            129.569878578186,
+                            35.99870190474713
+                        ],
+                        [
+                            129.56477165222168,
+                            35.99870190474713
+                        ],
+                        [
+                            129.56477165222168,
+                            35.99390174434914
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        }
+    ],
+    "name_KR": "구룡표 해변",
+    "name_EN": "Guryeongpo Beach",
+    "address_KR": "대한민국 경북 포항시 남구 구룡포읍",
+    "address_EN": "Guryongpo-eup, Nam-gu, Pohang-si, Gyeongsangbuk-do, Republic of Korea",
+    "type": "FeatureCollection"
+}
