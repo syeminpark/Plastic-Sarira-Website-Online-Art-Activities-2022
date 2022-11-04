@@ -2,7 +2,9 @@
 	:root{
 		--main-padding: 4vw;
 		--font-large: 3.5vw;
+		--font-title: 4vw;
 		--font-small: 2.5vw;
+		--font-citation: 1.4vw;
 		--bevel-large: 5px;
 		--bevel-small: 2.5px;
 		--nav-bar: 9vw;
@@ -582,3 +584,4 @@
 		display: none;
 	}
 }
+
