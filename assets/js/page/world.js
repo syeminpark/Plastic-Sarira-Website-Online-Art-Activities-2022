@@ -18,7 +18,7 @@ class World12345 extends Page12345 {
 		super();
 
 		this.time = 0;
-		this.time_limit = 10;
+		this.time_limit = 30;
 		this.pagelayer = _pagelayer;
 	}
 
