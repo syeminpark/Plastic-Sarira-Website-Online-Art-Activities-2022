@@ -1,7 +1,9 @@
 :root{
 	--main-padding: 1vw;
+	--font-title: 1.5vw;
 	--font-large: 1.2vw;
 	--font-small: 0.75vw;
+	--font-citation: 0.5vw;
 	--bevel-large: 10px;
 	--bevel-small: 5px;
 	--nav-bar: 3vw;
@@ -46,7 +48,8 @@ html, body {
 .col-3-12 {width: calc(300% / 12);}
 .col-4-12 {width: calc(400% / 12);}
 .col-5-12 {width: calc(500% / 12);}
-.col-6-12 {width: calc(600% / 12);}
+.col-5-5-12 {width: calc(550% / 12);}
+.col-6-12 {width: calc(6000% / 12);}
 .col-7-12 {width: calc(700% / 12);}
 .col-8-12 {width: calc(800% / 12);}
 .col-9-12 {width: calc(900% / 12);}
@@ -1058,4 +1061,15 @@ html, body {
 
 .display-m {
 	display: none;
+}
+.title {
+	font-size: var(--font-title);
+	
+}
+.right{
+	float:right
+}
+
+.citation{
+	font-size: var(--font-citation);
 }
