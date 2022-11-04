@@ -14,15 +14,13 @@ class Language12345{
 		this.language = window.navigator.userLanguage || window.navigator.language;
 		console.log(this.language);
 
-		/*
+
 		if(this.language === 'ko-KR'){
 			this.KR();
 		}else{
 			this.EN();
 		}
-		*/
 
-		this.EN();
 	}
 
 	EN(){

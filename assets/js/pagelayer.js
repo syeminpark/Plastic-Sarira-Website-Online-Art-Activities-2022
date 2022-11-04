@@ -45,6 +45,7 @@ class PageLayer12345{
 	}
 
 	onclick(e){
+		console.log(e)
 		if(!this.is_hidden){
 			console.log(this.close_on_outside_click);
 			const navbar = document.getElementById('navigation');
@@ -55,7 +56,7 @@ class PageLayer12345{
 					console.log("popup layer : click inside popup");
 				}else{
 					console.log("popup layer : click outside popup");
-					if(window.innerWidth>800)this.hide();
+					// if(window.innerWidth>800)this.hide();
 				}
 			}
 		}
@@ -179,9 +180,6 @@ class PageLayer12345{
 		//console.log(text);
 
 		this.popup_container.innerHTML = text;
-
-		
-
 		console.log(_lang);
 		if(_lang){
 			if(_lang.current_lang == "EN"){
