@@ -127,7 +127,7 @@ class PageLayer12345{
 	}
 
 	triggerLoad(_btn, _lang, _no_preloader){
-		this.is_loading = true;
+	
 		if(this.other_pagelayer){
 			if(this.other_pagelayer.is_loading){ 
 				console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
@@ -137,6 +137,7 @@ class PageLayer12345{
 
 		if(!_no_preloader)this.preloader.reset();
 		setTimeout(()=>{
+			this.is_loading = true;
 			this.load(_btn, _lang, _no_preloader);
 		},600);
 	}
@@ -153,6 +154,7 @@ class PageLayer12345{
 	}
 
 	async load(_btn, _lang, _no_preloader){
+		
 		//console.log(_btn);
 		const url = _btn.getAttribute('data-src');
 		this.is_hidden = false;
@@ -164,9 +166,16 @@ class PageLayer12345{
 			title.querySelector(".KR").innerHTML = _btn.getAttribute("title-kr");
 			title.querySelector(".EN").innerHTML = _btn.getAttribute("title-en");
 		}
+		let response;
+		let text;
+		try{
+		response = await fetch(url);
+		text = await response.text();
+		}
+		catch(error){
 
-		const response = await fetch(url);
-		const text = await response.text();
+			console.error(error)
+		}
 		//console.log(text);
 
 		this.popup_container.innerHTML = text;
@@ -197,7 +206,7 @@ class PageLayer12345{
 		if(!_no_preloader)this.preloader.onLoad();
 		
 		this.popup.classList.remove('inactive');
-
+		this.is_loading = false;
 		setTimeout(()=>{
 			this.is_loading = false;
 		}, 300);

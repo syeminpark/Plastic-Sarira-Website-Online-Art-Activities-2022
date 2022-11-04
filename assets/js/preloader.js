@@ -1,15 +1,17 @@
-import {Sarira12345} from "./sarira.js"; 
+import {
+	Sarira12345
+} from "./sarira.js";
 
-class Preloader12345{
-	constructor(_container, _white_or_black, _animate, _favicon, _options, _nosarira){
-		if(_container instanceof Element){
+class Preloader12345 {
+	constructor(_container, _white_or_black, _animate, _favicon, _options, _nosarira) {
+		if (_container instanceof Element) {
 			this.preloader = _container;
-			if(!_nosarira){
+			if (!_nosarira) {
 				this.sarira = new Sarira12345(this, this.preloader, _white_or_black, _animate, _favicon, _options);
-			}else{
+			} else {
 				this.sarira = false;
 			}
-		}else{
+		} else {
 			console.error("Preloader12345 : container not a DOM element");
 			return false;
 		}
@@ -18,19 +20,22 @@ class Preloader12345{
 		this.onanimationend_called = false;
 		this.started = false;
 
-		if(!this.sarira){
+		if (!this.sarira) {
 			this.onanimationend_called = true;
 		}
 	}
 
-	start(){
-		if(this.sarira)
-		this.sarira.start();
-		this.started = true;
+	start() {
+		if (this.sarira) {
+			this.sarira.start();
+			this.started = true;
+		} else {
+			console.error("NO Sarira")
+		}
 	}
 
-	reset(){
-		if(this.sarira){
+	reset() {
+		if (this.sarira) {
 			this.sarira.resetPosition();
 			this.onanimationend_called = false;
 		}
@@ -38,23 +43,25 @@ class Preloader12345{
 		this.preloader.classList.remove('inactive');
 	}
 
-	onLoad(){
-		if(this.onanimationend_called){
+	onLoad() {
+		if (this.onanimationend_called) {
 			console.log("preloader inactive.");
 			this.preloader.classList.add('inactive');
-		}else{
+		} else {
 			console.log("onload called but animation has not ended.");
 			this.onload_called = true;
 		}
 	}
 
-	onAnimationEnd(){
+	onAnimationEnd() {
 		console.log("preloader animation has ended.");
 		this.onanimationend_called = true;
-		if(this.onload_called){
+		if (this.onload_called) {
 			this.onLoad();
 		}
 	}
 }
 
-export {Preloader12345};
+export {
+	Preloader12345
+};

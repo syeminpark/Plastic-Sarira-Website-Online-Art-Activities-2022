@@ -1009,9 +1009,8 @@ html, body {
 
 #sari-detail-layer .full-col .sari .vert-caption {
 	position: absolute;
-    top: calc(var(--main-padding) * 1.5);
-    right: calc(var(--main-padding) * 1.2);
-    transform: translate(-100%, 0%) rotate(90deg);
+	bottom: calc(var(--main-padding) * 3);
+    left: 10%;
     font-size: var(--font-small);
     color: white;
 }

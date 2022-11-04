@@ -18,7 +18,7 @@ class World12345 extends Page12345 {
 		super();
 
 		this.time = 0;
-		this.time_limit = 300;
+		this.time_limit = 10;
 		this.pagelayer = _pagelayer;
 	}
 
@@ -69,7 +69,7 @@ class World12345 extends Page12345 {
 			this.pagelayer.popup.querySelector('#history-img-slide-prev-btn'),
 			this.pagelayer.popup.querySelector('#history-img-slide-next-btn'),
 			this.pagelayer.popup.querySelector('#img-caption-id'),
-			this.pagelayer.popup.querySelector('#img-caption-timestamp')
+			//this.pagelayer.popup.querySelector('#img-caption-timestamp')
 		);
 		console.log(this.imageslider);
 

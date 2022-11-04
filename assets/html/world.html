@@ -10,28 +10,30 @@
 	</div>
 
 	<div id="world-end" class="world-main-popup inactive">
-		<div class="world-end-header">YOUR LIFE HAS ENDED</div>
+		<div class="world-end-header">
+			YOUR LIFE HAS ENDED
+		</div>
 		<div id="world-end-sarira"></div>
 		<span id="world-to-sarira" class="txt-btn">
-			SEE SARIRA ARCHIVE 
+			EXPLORE OTHER SARIRAS
 			<span class="world-svg" svg-src="./assets/svg/arrow2.svg"></span>
 		</span>
 	</div>
 	
 	<div id="world-profile" class="world-popup inactive">
-		<div class="world-popup-header"><span class="world-popup-title">SARIRA</span> <span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
+		<div class="world-popup-header"><span class="world-popup-title">MY SARIRA</span> <span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
 		<div class="world-popup-container">
 			<div class="sari-profile"></div>
 		</div>
 	</div>
 	<div id="world-history" class="world-popup inactive">
-		<div class="world-popup-header"><span class="world-popup-title">RECENT INPUT</span> <span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
+		<div class="world-popup-header"><span class="world-popup-title">RECENT PLASTIC INPUT</span> <span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
 		<div class="world-popup-container">
 			<span class="world-svg btn prev z3" id="history-img-slide-prev-btn" svg-src="./assets/svg/arrow2.svg"></span>
 			<span class="world-svg btn next z3" id="history-img-slide-next-btn" svg-src="./assets/svg/arrow2.svg"></span>
 			<div class="img-caption z3">
 				<div class="img-caption-id" id="img-caption-id">MA1</div>
-				<div class="img-caption-datetime" id="img-caption-timestamp">2006-08-09</div>
+				<!-- <div class="img-caption-datetime" id="img-caption-timestamp">2006-08-09</div> -->
 			</div>
 			<div class="img-slide" id="history-img-slide">
 				<div class="prev" id="history-img-slide-prev"></div>
@@ -64,8 +66,10 @@
 					<div class="col-3-12">D</div><div class="col-9-12">RIGHT</div>
 					<div class="col-3-12">Z</div><div class="col-9-12">CHANGE VIEW</div>
 					<div class="col-12-12"><br></div>
-					<div class="col-6-12">MOUSE DRAG</div><div class="col-6-12">ROTATE</div>
 
+					<div class="col-3-12">DRAG</div><div class="col-9-12">ROTATE</div>
+					<div class="col-12-12">&nbsp;&nbsp;<span id="boot-icon" class="bi bi-mouse" style="font-size: 150%"></span></div>
+				
 				</div>
 			</div>
 			<div class="display-m full-container">
@@ -85,7 +89,7 @@
 						<span class="world-svg right-arrow" svg-src="./assets/svg/arrow2.svg"></span>
 						<span class="world-svg down-arrow" svg-src="./assets/svg/arrow2.svg"></span>
 					</div>
-					<div class="help-joystick-caption">ROTATE VIEW</div>
+					<div class="help-joystick-caption">ROTATE</div>
 				</div>
 			</div>
 		</div>

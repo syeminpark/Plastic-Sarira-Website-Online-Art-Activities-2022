@@ -10,7 +10,7 @@ class ImageSlide12345{
 		this.next_btn = _next_btn;
 
 		this.id = _id;
-		this.timestamp = _timestamp;
+		//this.timestamp = _timestamp;
 
 		this.data = [];
 		this.index = 0;
@@ -107,7 +107,7 @@ class ImageSlide12345{
 
 	reposition_complete(){
 		this.id.innerHTML = this.data[this.index].id;
-		this.timestamp.innerHTML = this.data[this.index].timestamp;
+		//this.timestamp.innerHTML = this.data[this.index].timestamp;
 		this.slide_container.classList.add("no-transition");
 		this.slide_container.classList.remove("going-prev");
 		this.slide_container.classList.remove("going-next");
