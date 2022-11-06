@@ -1,0 +1,24 @@
+{
+  "name": "plastic-sarira-website-online-art-activities-2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022/issues"
+  },
+  "homepage": "https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node": "^19.0.1"
+  }
+}
