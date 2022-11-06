@@ -1,9 +1,12 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static('public'));
+
 app.get("",(req,res)=>{
-    res.send("hello world");
+    res.send(index.js);
 });
 
 app.listen(PORT, ()=>{
