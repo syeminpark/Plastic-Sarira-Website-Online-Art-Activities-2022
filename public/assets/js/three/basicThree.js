@@ -1,11 +1,9 @@
-import * as THREE from 'three'
-import {
-    OrbitControls
-} from 'three/examples/jsm/controls/OrbitControls'
-import {
-    PLYLoader
-} from 'three/examples/jsm/loaders/PLYLoader.js'
+
+import * as THREE from 'https://cdn.skypack.dev/three';
+import { OrbitControls } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
+import { PLYLoader } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 export default class BasicThree {
+
     constructor() {
         this.object;
 
@@ -40,7 +38,7 @@ export default class BasicThree {
          this.renderer.setSize(window.innerWidth, window.innerHeight)
 
            //orbitControls
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+        this.controls = new  OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
 
@@ -81,7 +79,7 @@ export default class BasicThree {
         this.animationRequest = requestAnimationFrame(this.animate);
         this.controls.update()
         this.renderer.render(this.scene, this.camera)
-        console.log("animation")
+       //console.log("animation")
     }
 
     updateSize() {

@@ -18,7 +18,7 @@ class Audio12345 {
 
 		this.visualizer = new AudioVisualizer12345(_visualizer);
 
-		this.initAudio();
+	    this.initAudio();
 
 	}
 
