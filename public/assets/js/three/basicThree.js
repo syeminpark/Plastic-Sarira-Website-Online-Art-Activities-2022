@@ -1,69 +1,67 @@
+import * as THREE from 'three'
 import {
-    setgroups
-} from "process";
-
+    OrbitControls
+} from 'three/examples/jsm/controls/OrbitControls'
+import {
+    PLYLoader
+} from 'three/examples/jsm/loaders/PLYLoader.js'
 export default class BasicThree {
-    constructor(domElementID,sourcePath) {
-
-        this.animationRequest;
-        this.camera;
-        this.scene;
-        this.renderer;
+    constructor() {
         this.object;
-        this.animationRequest
-        this.domElementID=domElementID;
-        if(this.domElementID=="home"){
-            this.sourcePath=this.getRandomSourcePath();
-        }
-        else{
-            this.sourcePath=sourcePath
-        }
-    }
 
-    setup() {
-        //scene
-        this.scene = new THREE.Scene()
-        //lights
-        const light = new THREE.SpotLight()
-        const ambientLight = new THREE.AmbientLight(0x404040);
-        ambientLight.intensity = 10;
-        light.position.set(20, 20, 20)
-        this.scene.add(light)
-        this.scene.add(ambientLight)
+         //scene
+         this.scene = new THREE.Scene()
+         // this.scene.add(new THREE.AxesHelper(5))
+         //lights
+         const light = new THREE.SpotLight()
+         const ambientLight = new THREE.AmbientLight(0x404040);
+         ambientLight.intensity = 10;
+         light.position.set(20, 20, 20)
+         const directionalLight = new THREE.DirectionalLight(0xf0f0f0,  0.4,);
+         directionalLight.position.set(-75,280, 150);
+        directionalLight.visible = true;
 
-        //camera
-        this.camera = new THREE.PerspectiveCamera(
-            40,
-            window.innerWidth / window.innerHeight,
-            0.02,
-            1300
-        )
-        this.camera.position.set(0, 0, 400)
+         this.scene.add(light)
+         this.scene.add(ambientLight)
+         this.scene.add(directionalLight)
+ 
+         //camera
+         this.camera = new THREE.PerspectiveCamera(
+             25,
+             window.innerWidth / window.innerHeight,
+             0.02,
+             1300
+         )
+         this.camera.position.set(0, 0, 400)
+ 
+         //renderer
+         this.renderer = new THREE.WebGLRenderer()
+         this.renderer.outputEncoding = THREE.sRGBEncoding
+         this.renderer.setSize(window.innerWidth, window.innerHeight)
 
-        //renderer
-        this.renderer = new THREE.WebGLRenderer()
-        this.renderer.outputEncoding = THREE.sRGBEncoding
-        this.renderer.setSize(window.innerWidth, window.innerHeight)
-        document.getElementById(this.domElement).appendChild(this.renderer.domElement)
-
-        //orbitControls
+           //orbitControls
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
 
         //material
-        const material = new THREE.PointsMaterial({
+        this.material = new THREE.PointsMaterial({
             size: 3,
             vertexColors: true,
             sizeAttenuation: true,
         });
+      
+    }
+
+    import(domElement, sourcePath) {
+        domElement.appendChild(this.renderer.domElement)
 
         const loader = new PLYLoader()
         loader.load(
-            './assets/3dmodel/Bangameori/1.ply',
+           sourcePath,
             (geometry) => {
                 geometry.computeVertexNormals()
-                this.object = new THREE.Points(geometry, material);
+                this.object = new THREE.Points(geometry, this.material);
                 this.scene.add(this.object)
                 this.updateSize()
                 this.animate()
@@ -79,7 +77,6 @@ export default class BasicThree {
     }
     animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
-        console.log("animateion")
         this.controls.update()
         this.renderer.render(this.scene, this.camera)
     }
@@ -89,12 +86,7 @@ export default class BasicThree {
         this.camera.updateProjectionMatrix();
     }
 
-    reset_page = () => {
-        super.reset_page()
+    stopAnimation =()=>{
         cancelAnimationFrame(this.animationRequest)
-    }
-
-    getRandomSourcePath(){
-    
     }
 }
