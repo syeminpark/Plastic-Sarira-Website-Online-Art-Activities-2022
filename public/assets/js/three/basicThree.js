@@ -54,6 +54,8 @@ export default class BasicThree {
     }
 
     import(domElement, sourcePath) {
+        this.reset();
+        
         domElement.appendChild(this.renderer.domElement)
 
         const loader = new PLYLoader()
@@ -79,6 +81,7 @@ export default class BasicThree {
         this.animationRequest = requestAnimationFrame(this.animate);
         this.controls.update()
         this.renderer.render(this.scene, this.camera)
+        console.log("animation")
     }
 
     updateSize() {
@@ -86,7 +89,11 @@ export default class BasicThree {
         this.camera.updateProjectionMatrix();
     }
 
-    stopAnimation =()=>{
+    reset(){
+        this.scene.remove(this.object)
+        this.object=undefined
         cancelAnimationFrame(this.animationRequest)
+        
+       
     }
 }
