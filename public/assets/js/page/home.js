@@ -18,7 +18,8 @@ class Home12345 extends Page12345 {
     setup() {
         this.homeThree.import(
             document.getElementById('home'), 
-            this.getRandomSourcePath()
+            this.getRandomSourcePath(),
+            spread=true
         );
     }
 
