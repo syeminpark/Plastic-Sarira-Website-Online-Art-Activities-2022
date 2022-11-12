@@ -7,7 +7,7 @@ class Joystick12345{
 			this.stick = _params.stick;
 			this.stick.style.position = "absolute";
 
-			console.log(this.stick);
+			//console.log(this.stick);
 
 			this.is_pressed = false;
 			this.is_dragged = false;

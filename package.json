@@ -4,14 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node forever.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "publish": "node forever.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "npm run build && npm run watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022.git"
   },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022/issues"
@@ -20,6 +21,12 @@
   "dependencies": {
     "express": "^4.18.2",
     "forever-monitor": "^3.0.3",
-    "node": "^19.0.1"
+    "node": "^19.0.1",
+    "three": "^0.146.0"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^4.10.0"
   }
 }

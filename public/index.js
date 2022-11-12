@@ -1,8 +1,8 @@
-import {Preloader12345} from '../assets/js/preloader.js';
-import {SVGLoader12345} from '../assets/js/svgloader.js';
-import {Language12345} from '../assets/js/language.js';
-import {PageLayer12345} from '../assets/js/pagelayer.js';
-import {Audio12345} from '../assets/js/audio.js';
+import {Preloader12345} from './assets/js/preloader.js';
+import {SVGLoader12345} from './assets/js/svgloader.js';
+import {Language12345} from './assets/js/language.js';
+import {PageLayer12345} from './assets/js/pagelayer.js';
+import {Audio12345} from './assets/js/audio.js';
 
 //Preloader가 사리 만드는 역할
 const preloader = new Preloader12345(
@@ -34,7 +34,7 @@ const background_controller = new PageLayer12345(
 	document.getElementById("bck-preloader"), 'white', false);
 background_controller.assign(document.getElementById("nav-home-btn"),language);
 background_controller.assign(document.getElementById("nav-world-btn"),language);
-background_controller.assign(document.getElementById("plastic-sarira-title"),language);
+background_controller.assign(document.getElementById("plastic-sarira-title"),language,false);
 
 background_controller.assign_hide(mainpopup_controller);
 mainpopup_controller.assign_hide(background_controller);

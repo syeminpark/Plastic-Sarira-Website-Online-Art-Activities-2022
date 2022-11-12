@@ -5,7 +5,7 @@ class SVGLoader12345{
 		this.attribute = _attribute;
 
 		if(this.svg_targets.length){
-			console.log(this.svg_targets);
+			//console.log(this.svg_targets);
 			this.load();
 		}else{
 			console.error("SVG loader: no svg targets found.");

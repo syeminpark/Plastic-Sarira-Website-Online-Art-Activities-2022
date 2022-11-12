@@ -81,7 +81,7 @@ class Research12345 extends Page12345{
 	}
 
 	onBeachSelect(_btn){
-		console.log(_btn);
+		//console.log(_btn);
 		this.map_preloader.reset();
 		this.mobiletogglelist();
 		setTimeout(()=>{
@@ -95,7 +95,7 @@ class Research12345 extends Page12345{
 		const url = _btn.getAttribute('data-link');
 		const response = await fetch(url);
 		const json = await response.json();
-		console.log(json);
+		//console.log(json);
 
 		if(_btn.getAttribute('data-nogeo')=="true"){
 			json["nogeo"] = true;

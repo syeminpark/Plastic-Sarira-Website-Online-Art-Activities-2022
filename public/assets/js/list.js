@@ -37,7 +37,7 @@ class List12345{
 
 	load(_data){
 		this.marker_data = _data;
-		console.log(this.marker_data);
+		//console.log(this.marker_data);
 
 		//this.reset();
 

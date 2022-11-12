@@ -140,7 +140,7 @@ class Sarira12345{
 	stop(){
 		if(this.animation){
 			cancelAnimationFrame(this.animation);
-			console.log('loading animation ended');
+			//console.log('loading animation ended');
 			if(this.load_favicon)this.loadfavicon();
 			this.parent.onAnimationEnd();
 		}
@@ -150,7 +150,7 @@ class Sarira12345{
 
 	loadfavicon(){
 		if(this.canvas.width > 0 && this.canvas.height > 0){
-			console.log('loading favicon');
+			//console.log('loading favicon');
 
 			let favcanvas = document.createElement('canvas');
 			favcanvas.width = 192;

@@ -71,7 +71,7 @@ class World12345 extends Page12345 {
 			this.pagelayer.popup.querySelector('#img-caption-id'),
 			//this.pagelayer.popup.querySelector('#img-caption-timestamp')
 		);
-		console.log(this.imageslider);
+		//console.log(this.imageslider);
 
 		for(let i=0; i<test_img_srcs.length; i++){
 			this.imageslider.add_data(test_img_srcs[i]);
@@ -151,7 +151,7 @@ class World12345 extends Page12345 {
 	}
 
 	worldEnd(){
-		console.log("world ended");
+		//console.log("world ended");
 		if(document.querySelector('#show-m-navigation').classList.contains('expanded')){
 			document.querySelector('#show-m-navigation').click();
 		}

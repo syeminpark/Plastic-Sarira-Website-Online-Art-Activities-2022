@@ -99,7 +99,7 @@ class Map12345{
 		if(this.data){
 			if(this.data.nogeo) return;
 		}
-		console.log('map: zoom in!');
+		//console.log('map: zoom in!');
 		this.zoom *= 1.5;
 		this.zoom = Math.min(5.0,this.zoom);
 		if(!this.animation) this.animate();
@@ -109,7 +109,7 @@ class Map12345{
 		if(this.data){
 			if(this.data.nogeo) return;
 		}
-		console.log('map: zoom out!');
+		//console.log('map: zoom out!');
 		this.zoom *= 1.0/1.5;
 		this.zoom = Math.max(1.0,this.zoom);
 		if(!this.animation) this.animate();
@@ -156,7 +156,7 @@ class Map12345{
 	load(_data){
 		this.data = _data;
 
-		console.log(this.data.nogeo);
+		//console.log(this.data.nogeo);
 
 		this.path_data = this.data["features"].filter((d)=>{
 			return d.properties.name === "shape";
@@ -208,7 +208,7 @@ class Map12345{
 		this.pan_pos = {x: 0, y: 0};
 		this.pan_tpos = {x: 0, y: 0};
 
-		console.log(this.path_data, this.bbox_data, this.marker_data);
+		//console.log(this.path_data, this.bbox_data, this.marker_data);
 		this.setDataBbox();
 		
 		this.drawMarkers();
@@ -335,9 +335,9 @@ class Map12345{
 		this.ctx.closePath();
 		this.ctx.fill();
 
-		console.log(this.data.nogeo)
+		//console.log(this.data.nogeo)
 		if(!this.marker_data || this.data.nogeo){ 
-			console.log("stop drawing markers");
+			//console.log("stop drawing markers");
 			return;
 		}
 
@@ -367,7 +367,7 @@ class Map12345{
 		this.markers = [];
 
 		if(!this.path_data || !this.marker_data || this.data.nogeo) return;
-		console.log("draw markers");
+		//console.log("draw markers");
 
 		//let xsc = (this.canvas.width / Math.max(this.canvas.width,this.canvas.height));
 		//let ysc = (this.canvas.height / Math.max(this.canvas.width,this.canvas.height));
@@ -419,14 +419,14 @@ class Map12345{
 
 	setListTarget(_list){
 		this.list = _list;
-		console.log(this.list);
+		//console.log(this.list);
 	}
 
 	onMarkerClick(_marker){
 		if(this.list.scroller){
 			const target_id = _marker.getAttribute("data-id");
 			const list_target = this.list.scroller.querySelector('.list-item[data-id='+target_id+']');
-			console.log(list_target);
+			//console.log(list_target);
 			this.list.scroller.scrollTop = list_target.offsetTop;
 		}
 	}

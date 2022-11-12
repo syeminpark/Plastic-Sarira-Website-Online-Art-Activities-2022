@@ -45,16 +45,16 @@ class Preloader12345 {
 
 	onLoad() {
 		if (this.onanimationend_called) {
-			console.log("preloader inactive.");
+			//console.log("preloader inactive.");
 			this.preloader.classList.add('inactive');
 		} else {
-			console.log("onload called but animation has not ended.");
+			//console.log("onload called but animation has not ended.");
 			this.onload_called = true;
 		}
 	}
 
 	onAnimationEnd() {
-		console.log("preloader animation has ended.");
+		//console.log("preloader animation has ended.");
 		this.onanimationend_called = true;
 		if (this.onload_called) {
 			this.onLoad();

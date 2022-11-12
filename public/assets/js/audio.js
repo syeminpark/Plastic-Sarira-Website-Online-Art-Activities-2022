@@ -60,7 +60,7 @@ class Audio12345 {
 	on() {
 		this.analyserNode.connect(this.audioCtx.destination);
 		this.is_audio_on = true;
-		console.log("audio on!");
+		//console.log("audio on!");
 		this.button.classList.add("active");
 		this.visualizer.show();
 		if (this.gainNode)
@@ -71,7 +71,7 @@ class Audio12345 {
 	off() {
 		this.analyserNode.disconnect(this.audioCtx.destination);
 		this.is_audio_on = false;
-		console.log("audio off!");
+		//console.log("audio off!");
 		this.button.classList.remove("active");
 		this.visualizer.hide();
 		if (this.gainNode)

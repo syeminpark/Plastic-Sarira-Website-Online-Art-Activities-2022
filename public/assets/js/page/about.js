@@ -41,7 +41,7 @@ class About12345 extends Page12345{
 		}
 
 		this.scroll_el = this.pagelayer.popup.querySelector(".scrollable");
-		console.log(this.scroll_el);
+		//console.log(this.scroll_el);
 		if(this.scroll_el){
 			this.scroll_el.addEventListener('scroll',this.onScroll.bind(this));
 		}
@@ -53,7 +53,7 @@ class About12345 extends Page12345{
 		for(let i=0; i<this.profiles.length; i++){
 			let elbox = this.profiles[i].getBoundingClientRect();
 			if(elbox.top < popupbox.top + popupbox.height){
-				console.log(this.profile_imgs[i].started);
+				//console.log(this.profile_imgs[i].started);
 				if(!this.profile_imgs[i].started)
 				this.profile_imgs[i].start();
 			}

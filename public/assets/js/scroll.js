@@ -8,7 +8,7 @@ class Scroll12345{
 		}
 
 		this.mutation_observer = new MutationObserver((mutations) => {
-			console.log("!");
+			//console.log("!");
 			this.onResize();
 		    this.onScroll();
 		});
@@ -40,7 +40,7 @@ class Scroll12345{
 	close(){
 		this.scrollable.remove(this.scrollbar_track);
 		this.mutation_observer.disconnect();
-		console.log("scroll close");
+		//console.log("scroll close");
 	}
 
 	onResize(){
@@ -48,7 +48,7 @@ class Scroll12345{
 		this.scrollbar_track.style.height = this.scrollable_bbox.height + "px";
 		this.thumbsize = 100 * this.scrollable_bbox.height / this.scrollable.scrollHeight;
 		this.scrollbar_thumb.style.height = (this.thumbsize) + '%';
-		console.log(this.scrollable.scrollHeight);
+		//console.log(this.scrollable.scrollHeight);
 	}
 
 	onScroll(){

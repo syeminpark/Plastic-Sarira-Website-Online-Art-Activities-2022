@@ -52,7 +52,14 @@
 			<div id="audio-visualizer" class="inactive z3"></div>
 			<span class="btn audio-svg z3" id="sound-btn" svg-src="./assets/svg/music.svg"></span>
 		</div>
-
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://unpkg.com/three/build/three.module.js",
+					"three/": "https://unpkg.com/three/"
+				}
+			}
+		</script>
 		<script type="module" src="./index.js"></script>
 	</body>
 </html>
