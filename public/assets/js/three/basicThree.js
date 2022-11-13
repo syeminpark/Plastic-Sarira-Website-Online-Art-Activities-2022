@@ -101,9 +101,9 @@ export default class BasicThree {
     reset() {
         this.scene.remove(this.object)
         this.object = undefined
-        cancelAnimationFrame(this.animationRequest)
         this.selectedArray = [];
         this.originalArray = [];
+        cancelAnimationFrame(this.animationRequest)
     }
 
     setObjectPosition() {
