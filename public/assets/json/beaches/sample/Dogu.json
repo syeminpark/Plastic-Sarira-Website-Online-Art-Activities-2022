@@ -1,826 +1,826 @@
 {
-    "features": [
-        {
-            "properties": {
-                "index": 1,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "DO#1"
+      "features": [
+            {
+                  "properties": {
+                        "index": 1,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/1.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/1.png",
+                        "id": "DO #1"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.446136111111,
+                              35.9916583333333
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.446136111111,
-                    35.9916583333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 2,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "DO#2"
+            {
+                  "properties": {
+                        "index": 2,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/2.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/2.png",
+                        "id": "DO #2"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445647222222,
+                              35.9916388888889
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445647222222,
-                    35.9916388888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 3,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "DO#3"
+            {
+                  "properties": {
+                        "index": 3,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/3.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/3.png",
+                        "id": "DO #3"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.446961111111,
+                              35.9919555555556
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.446961111111,
-                    35.9919555555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 4,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "DO#4"
+            {
+                  "properties": {
+                        "index": 4,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/4.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/4.png",
+                        "id": "DO #4"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445175,
+                              35.99125
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445175,
-                    35.99125
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 5,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "DO#5"
+            {
+                  "properties": {
+                        "index": 5,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/5.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/5.png",
+                        "id": "DO #5"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.449263888889,
+                              35.9914777777778
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.449263888889,
-                    35.9914777777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 6,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "DO#6"
+            {
+                  "properties": {
+                        "index": 6,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/6.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/6.png",
+                        "id": "DO #6"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.448958333333,
+                              35.9914444444444
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.448958333333,
-                    35.9914444444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 7,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "DO#7"
+            {
+                  "properties": {
+                        "index": 7,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/7.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/7.png",
+                        "id": "DO #7"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.447327777778,
+                              35.9915111111111
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.447327777778,
-                    35.9915111111111
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 8,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "DO#8"
+            {
+                  "properties": {
+                        "index": 8,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/8.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/8.png",
+                        "id": "DO #8"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.44435,
+                              35.9919555555556
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.44435,
-                    35.9919555555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 9,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "DO#9"
+            {
+                  "properties": {
+                        "index": 9,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/9.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/9.png",
+                        "id": "DO #9"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445786111111,
+                              35.991725
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445786111111,
-                    35.991725
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 10,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "DO#10"
+            {
+                  "properties": {
+                        "index": 10,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/10.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/10.png",
+                        "id": "DO #10"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.444930555556,
+                              35.9916416666667
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.444930555556,
-                    35.9916416666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 11,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "DO#11"
+            {
+                  "properties": {
+                        "index": 11,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/11.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/11.png",
+                        "id": "DO #11"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445252777778,
+                              35.9913722222222
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445252777778,
-                    35.9913722222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 12,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "DO#12"
+            {
+                  "properties": {
+                        "index": 12,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/12.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/12.png",
+                        "id": "DO #12"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445816666667,
+                              35.9916527777778
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445816666667,
-                    35.9916527777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 13,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "DO#13"
+            {
+                  "properties": {
+                        "index": 13,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/13.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/13.png",
+                        "id": "DO #13"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.448927777778,
+                              35.9915166666667
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.448927777778,
-                    35.9915166666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 14,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "DO#14"
+            {
+                  "properties": {
+                        "index": 14,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/14.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/14.png",
+                        "id": "DO #14"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.446336111111,
+                              35.9916
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.446336111111,
-                    35.9916
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 15,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "DO#15"
+            {
+                  "properties": {
+                        "index": 15,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/15.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/15.png",
+                        "id": "DO #15"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445083333333,
+                              35.9913777777778
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445083333333,
-                    35.9913777777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 16,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "DO#16"
+            {
+                  "properties": {
+                        "index": 16,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/16.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/16.png",
+                        "id": "DO #16"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445205555556,
+                              35.9916916666667
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445205555556,
-                    35.9916916666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 17,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "DO#17"
+            {
+                  "properties": {
+                        "index": 17,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/17.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/17.png",
+                        "id": "DO #17"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.444916666667,
+                              35.9918638888889
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.444916666667,
-                    35.9918638888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 18,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "DO#18"
+            {
+                  "properties": {
+                        "index": 18,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/18.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/18.png",
+                        "id": "DO #18"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.447127777778,
+                              35.9915611111111
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.447127777778,
-                    35.9915611111111
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 19,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "DO#19"
+            {
+                  "properties": {
+                        "index": 19,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/19.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/19.png",
+                        "id": "DO #19"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445175,
+                              35.9912555555556
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445175,
-                    35.9912555555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 20,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "DO#20"
+            {
+                  "properties": {
+                        "index": 20,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/20.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/20.png",
+                        "id": "DO #20"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445983333333,
+                              35.9916277777778
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445983333333,
-                    35.9916277777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 21,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "DO#21"
+            {
+                  "properties": {
+                        "index": 21,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/21.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/21.png",
+                        "id": "DO #21"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445341666667,
+                              35.9913972222222
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445341666667,
-                    35.9913972222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 22,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "DO#22"
+            {
+                  "properties": {
+                        "index": 22,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/22.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/22.png",
+                        "id": "DO #22"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445341666667,
+                              35.9913944444444
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445341666667,
-                    35.9913944444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 23,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "DO#23"
+            {
+                  "properties": {
+                        "index": 23,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/23.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/23.png",
+                        "id": "DO #23"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.446075,
+                              35.9916277777778
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.446075,
-                    35.9916277777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 24,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "DO#24"
+            {
+                  "properties": {
+                        "index": 24,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/24.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/24.png",
+                        "id": "DO #24"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445266666667,
+                              35.9913833333333
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445266666667,
-                    35.9913833333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 25,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "DO#25"
+            {
+                  "properties": {
+                        "index": 25,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/25.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/25.png",
+                        "id": "DO #25"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445069444444,
+                              35.9917916666667
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445069444444,
-                    35.9917916666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 26,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "DO#26"
+            {
+                  "properties": {
+                        "index": 26,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/26.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/26.png",
+                        "id": "DO #26"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445069444444,
+                              35.9917944444444
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445069444444,
-                    35.9917944444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 27,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "DO#27"
+            {
+                  "properties": {
+                        "index": 27,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/27.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/27.png",
+                        "id": "DO #27"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.445283333333,
+                              35.9913833333333
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.445283333333,
-                    35.9913833333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 28,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "DO#28"
+            {
+                  "properties": {
+                        "index": 28,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/28.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/28.png",
+                        "id": "DO #28"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.4449,
+                              35.9917416666667
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.4449,
-                    35.9917416666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 29,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "DO#29"
+            {
+                  "properties": {
+                        "index": 29,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/29.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/29.png",
+                        "id": "DO #29"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.448897222222,
+                              35.9914777777778
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.448897222222,
-                    35.9914777777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 30,
-                "beach": "Dogu",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "DO#30"
+            {
+                  "properties": {
+                        "index": 30,
+                        "beach": "Dogu",
+                        "img-src": "./assets/img/Dogu/studio/30.png",
+                        "thumb-src": "./assets/img/Dogu/on-site/30.png",
+                        "id": "DO #30"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              129.444991666667,
+                              35.99285
+                        ],
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    129.444991666667,
-                    35.99285
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "name": "shape"
+            {
+                  "properties": {
+                        "name": "shape"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          129.4391369819641,
+                                          35.99352848274615
+                                    ],
+                                    [
+                                          129.43686246871948,
+                                          35.985958703571974
+                                    ],
+                                    [
+                                          129.45587396621704,
+                                          35.98524682917725
+                                    ],
+                                    [
+                                          129.45575058460236,
+                                          35.992914333357774
+                                    ],
+                                    [
+                                          129.4555078446865,
+                                          35.99279931544955
+                                    ],
+                                    [
+                                          129.45544213056564,
+                                          35.99292735424247
+                                    ],
+                                    [
+                                          129.45452749729156,
+                                          35.99259966132385
+                                    ],
+                                    [
+                                          129.45330172777176,
+                                          35.99217105429282
+                                    ],
+                                    [
+                                          129.45156633853912,
+                                          35.99160789366629
+                                    ],
+                                    [
+                                          129.45156902074814,
+                                          35.991479852731665
+                                    ],
+                                    [
+                                          129.4509695470333,
+                                          35.99123679140272
+                                    ],
+                                    [
+                                          129.4501031935215,
+                                          35.9912834505552
+                                    ],
+                                    [
+                                          129.4501206278801,
+                                          35.99117494085574
+                                    ],
+                                    [
+                                          129.45016086101532,
+                                          35.9911857918324
+                                    ],
+                                    [
+                                          129.4501930475235,
+                                          35.99113696242566
+                                    ],
+                                    [
+                                          129.45032849907872,
+                                          35.99108053729578
+                                    ],
+                                    [
+                                          129.45077106356618,
+                                          35.99101000582667
+                                    ],
+                                    [
+                                          129.45125654339788,
+                                          35.99090475105553
+                                    ],
+                                    [
+                                          129.45163071155548,
+                                          35.99079515573219
+                                    ],
+                                    [
+                                          129.45188954472542,
+                                          35.99073873035784
+                                    ],
+                                    [
+                                          129.45214435458183,
+                                          35.99063781564536
+                                    ],
+                                    [
+                                          129.45265129208565,
+                                          35.99049783695951
+                                    ],
+                                    [
+                                          129.4531287252903,
+                                          35.99039583683044
+                                    ],
+                                    [
+                                          129.45326685905457,
+                                          35.9903350707334
+                                    ],
+                                    [
+                                          129.452985227108,
+                                          35.990339411170446
+                                    ],
+                                    [
+                                          129.4524273276329,
+                                          35.9904479220192
+                                    ],
+                                    [
+                                          129.45164144039154,
+                                          35.99072028359207
+                                    ],
+                                    [
+                                          129.45102721452713,
+                                          35.99084290024821
+                                    ],
+                                    [
+                                          129.45058465003967,
+                                          35.99091668717065
+                                    ],
+                                    [
+                                          129.45014476776123,
+                                          35.99096660181436
+                                    ],
+                                    [
+                                          129.45003613829613,
+                                          35.99115649419198
+                                    ],
+                                    [
+                                          129.45010855793953,
+                                          35.991172770660235
+                                    ],
+                                    [
+                                          129.45009112358093,
+                                          35.99128562074768
+                                    ],
+                                    [
+                                          129.44566011428833,
+                                          35.99159595765575
+                                    ],
+                                    [
+                                          129.44521889090538,
+                                          35.991363747636726
+                                    ],
+                                    [
+                                          129.44504722952843,
+                                          35.99100783562663
+                                    ],
+                                    [
+                                          129.4450056552887,
+                                          35.99081577268583
+                                    ],
+                                    [
+                                          129.44504857063293,
+                                          35.990694241091894
+                                    ],
+                                    [
+                                          129.44477498531342,
+                                          35.98878443431383
+                                    ],
+                                    [
+                                          129.44485008716583,
+                                          35.98812901269569
+                                    ],
+                                    [
+                                          129.4449681043625,
+                                          35.98790330332839
+                                    ],
+                                    [
+                                          129.44575130939484,
+                                          35.98772533971811
+                                    ],
+                                    [
+                                          129.4461214542389,
+                                          35.98750396978901
+                                    ],
+                                    [
+                                          129.44620728492737,
+                                          35.98718710586847
+                                    ],
+                                    [
+                                          129.44609463214874,
+                                          35.987152380977896
+                                    ],
+                                    [
+                                          129.44600343704224,
+                                          35.98735638949119
+                                    ],
+                                    [
+                                          129.44582641124725,
+                                          35.9875734192454
+                                    ],
+                                    [
+                                          129.44553673267365,
+                                          35.987686274481625
+                                    ],
+                                    [
+                                          129.44495737552643,
+                                          35.98779044840258
+                                    ],
+                                    [
+                                          129.44477498531342,
+                                          35.98790330332839
+                                    ],
+                                    [
+                                          129.44461941719055,
+                                          35.98881481796538
+                                    ],
+                                    [
+                                          129.44507539272308,
+                                          35.991540617946896
+                                    ],
+                                    [
+                                          129.44493055343628,
+                                          35.99170555186654
+                                    ],
+                                    [
+                                          129.44311201572418,
+                                          35.99212656583466
+                                    ],
+                                    [
+                                          129.44260776042938,
+                                          35.99245209055831
+                                    ],
+                                    [
+                                          129.44162607192993,
+                                          35.992851399051425
+                                    ],
+                                    [
+                                          129.4391369819641,
+                                          35.99352848274615
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            129.4391369819641,
-                            35.99352848274615
+            {
+                  "properties": {
+                        "name": "bbox"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          129.44220542907715,
+                                          35.99035134737111
+                                    ],
+                                    [
+                                          129.45175409317017,
+                                          35.99035134737111
+                                    ],
+                                    [
+                                          129.45175409317017,
+                                          35.99387570289925
+                                    ],
+                                    [
+                                          129.44220542907715,
+                                          35.99387570289925
+                                    ],
+                                    [
+                                          129.44220542907715,
+                                          35.99035134737111
+                                    ]
+                              ]
                         ],
-                        [
-                            129.43686246871948,
-                            35.985958703571974
-                        ],
-                        [
-                            129.45587396621704,
-                            35.98524682917725
-                        ],
-                        [
-                            129.45575058460236,
-                            35.992914333357774
-                        ],
-                        [
-                            129.4555078446865,
-                            35.99279931544955
-                        ],
-                        [
-                            129.45544213056564,
-                            35.99292735424247
-                        ],
-                        [
-                            129.45452749729156,
-                            35.99259966132385
-                        ],
-                        [
-                            129.45330172777176,
-                            35.99217105429282
-                        ],
-                        [
-                            129.45156633853912,
-                            35.99160789366629
-                        ],
-                        [
-                            129.45156902074814,
-                            35.991479852731665
-                        ],
-                        [
-                            129.4509695470333,
-                            35.99123679140272
-                        ],
-                        [
-                            129.4501031935215,
-                            35.9912834505552
-                        ],
-                        [
-                            129.4501206278801,
-                            35.99117494085574
-                        ],
-                        [
-                            129.45016086101532,
-                            35.9911857918324
-                        ],
-                        [
-                            129.4501930475235,
-                            35.99113696242566
-                        ],
-                        [
-                            129.45032849907872,
-                            35.99108053729578
-                        ],
-                        [
-                            129.45077106356618,
-                            35.99101000582667
-                        ],
-                        [
-                            129.45125654339788,
-                            35.99090475105553
-                        ],
-                        [
-                            129.45163071155548,
-                            35.99079515573219
-                        ],
-                        [
-                            129.45188954472542,
-                            35.99073873035784
-                        ],
-                        [
-                            129.45214435458183,
-                            35.99063781564536
-                        ],
-                        [
-                            129.45265129208565,
-                            35.99049783695951
-                        ],
-                        [
-                            129.4531287252903,
-                            35.99039583683044
-                        ],
-                        [
-                            129.45326685905457,
-                            35.9903350707334
-                        ],
-                        [
-                            129.452985227108,
-                            35.990339411170446
-                        ],
-                        [
-                            129.4524273276329,
-                            35.9904479220192
-                        ],
-                        [
-                            129.45164144039154,
-                            35.99072028359207
-                        ],
-                        [
-                            129.45102721452713,
-                            35.99084290024821
-                        ],
-                        [
-                            129.45058465003967,
-                            35.99091668717065
-                        ],
-                        [
-                            129.45014476776123,
-                            35.99096660181436
-                        ],
-                        [
-                            129.45003613829613,
-                            35.99115649419198
-                        ],
-                        [
-                            129.45010855793953,
-                            35.991172770660235
-                        ],
-                        [
-                            129.45009112358093,
-                            35.99128562074768
-                        ],
-                        [
-                            129.44566011428833,
-                            35.99159595765575
-                        ],
-                        [
-                            129.44521889090538,
-                            35.991363747636726
-                        ],
-                        [
-                            129.44504722952843,
-                            35.99100783562663
-                        ],
-                        [
-                            129.4450056552887,
-                            35.99081577268583
-                        ],
-                        [
-                            129.44504857063293,
-                            35.990694241091894
-                        ],
-                        [
-                            129.44477498531342,
-                            35.98878443431383
-                        ],
-                        [
-                            129.44485008716583,
-                            35.98812901269569
-                        ],
-                        [
-                            129.4449681043625,
-                            35.98790330332839
-                        ],
-                        [
-                            129.44575130939484,
-                            35.98772533971811
-                        ],
-                        [
-                            129.4461214542389,
-                            35.98750396978901
-                        ],
-                        [
-                            129.44620728492737,
-                            35.98718710586847
-                        ],
-                        [
-                            129.44609463214874,
-                            35.987152380977896
-                        ],
-                        [
-                            129.44600343704224,
-                            35.98735638949119
-                        ],
-                        [
-                            129.44582641124725,
-                            35.9875734192454
-                        ],
-                        [
-                            129.44553673267365,
-                            35.987686274481625
-                        ],
-                        [
-                            129.44495737552643,
-                            35.98779044840258
-                        ],
-                        [
-                            129.44477498531342,
-                            35.98790330332839
-                        ],
-                        [
-                            129.44461941719055,
-                            35.98881481796538
-                        ],
-                        [
-                            129.44507539272308,
-                            35.991540617946896
-                        ],
-                        [
-                            129.44493055343628,
-                            35.99170555186654
-                        ],
-                        [
-                            129.44311201572418,
-                            35.99212656583466
-                        ],
-                        [
-                            129.44260776042938,
-                            35.99245209055831
-                        ],
-                        [
-                            129.44162607192993,
-                            35.992851399051425
-                        ],
-                        [
-                            129.4391369819641,
-                            35.99352848274615
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            }
-        },
-        {
-            "properties": {
-                "name": "bbox"
+                        "type": "Polygon"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            129.44220542907715,
-                            35.99035134737111
+            {
+                  "properties": {
+                        "name": "mbbox"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          129.44353580474854,
+                                          35.98927491183027
+                                    ],
+                                    [
+                                          129.45042371749878,
+                                          35.98927491183027
+                                    ],
+                                    [
+                                          129.45042371749878,
+                                          35.9952992895471
+                                    ],
+                                    [
+                                          129.44353580474854,
+                                          35.9952992895471
+                                    ],
+                                    [
+                                          129.44353580474854,
+                                          35.98927491183027
+                                    ]
+                              ]
                         ],
-                        [
-                            129.45175409317017,
-                            35.99035134737111
-                        ],
-                        [
-                            129.45175409317017,
-                            35.99387570289925
-                        ],
-                        [
-                            129.44220542907715,
-                            35.99387570289925
-                        ],
-                        [
-                            129.44220542907715,
-                            35.99035134737111
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
+                        "type": "Polygon"
+                  }
             }
-        },
-        {
-            "properties": {
-                "name": "mbbox"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            129.44353580474854,
-                            35.98927491183027
-                        ],
-                        [
-                            129.45042371749878,
-                            35.98927491183027
-                        ],
-                        [
-                            129.45042371749878,
-                            35.9952992895471
-                        ],
-                        [
-                            129.44353580474854,
-                            35.9952992895471
-                        ],
-                        [
-                            129.44353580474854,
-                            35.98927491183027
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            }
-        }
-    ],
-    "name_KR": "도구 해변",
-    "name_EN": "Dogu Beach",
-    "address_KR": "대한민국 경북 포항시 남구 동해면 도구리 729-17",
-    "address_EN": "729-17, Dogu-ri, Donghae-myeon, Nam-gu, Pohang-si, Gyeongsangbuk-do, Republic of Korea",
-    "type": "FeatureCollection"
+      ],
+      "name_KR": "\ub3c4\uad6c \ud574\ubcc0",
+      "name_EN": "Dogu Beach",
+      "address_KR": "\ub300\ud55c\ubbfc\uad6d \uacbd\ubd81 \ud3ec\ud56d\uc2dc \ub0a8\uad6c \ub3d9\ud574\uba74 \ub3c4\uad6c\ub9ac 729-17",
+      "address_EN": "729-17, Dogu-ri, Donghae-myeon, Nam-gu, Pohang-si, Gyeongsangbuk-do, Republic of Korea",
+      "type": "FeatureCollection"
 }

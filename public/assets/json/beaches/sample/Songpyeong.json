@@ -1,686 +1,686 @@
 {
-    "features": [
-        {
-            "properties": {
-                "index": 1,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "SONG#1"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471527777778,
-                    34.4347722222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 2,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "SONG#2"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471894444444,
-                    34.4340527777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 3,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "SONG#3"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471786111111,
-                    34.4341666666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 4,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "SONG#4"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469894444444,
-                    34.4372583333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 5,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "SONG#5"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469841666667,
-                    34.4371833333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 6,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "SONG#6"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471894444444,
-                    34.4340777777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 7,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "SONG#7"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471716666667,
-                    34.4340666666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 8,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "SONG#8"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469405555556,
-                    34.4377166666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 9,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "SONG#9"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471108333333,
-                    34.4354555555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 10,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "SONG#10"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469116666667,
-                    34.4382638888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 11,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "SONG#11"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.47155,
-                    34.4347138888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 12,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "SONG#12"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469863888889,
-                    34.4378083333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 13,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "SONG#13"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.470811111111,
-                    34.4361
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 14,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "SONG#14"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471938888889,
-                    34.4343444444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 15,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "SONG#15"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469544444444,
-                    34.4379166666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 16,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "SONG#16"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471083333333,
-                    34.4356083333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 17,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "SONG#17"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469947222222,
-                    34.4374388888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 18,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "SONG#18"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.470444444444,
-                    34.4365055555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 19,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "SONG#19"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.469261111111,
-                    34.4380722222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 20,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "SONG#20"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471038888889,
-                    34.4356194444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 21,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "SONG#21"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.470230555556,
-                    34.4367944444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 22,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "SONG#22"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471497222222,
-                    34.4349333333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 23,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "SONG#23"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471327777778,
-                    34.4350055555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 24,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "SONG#24"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471711111111,
-                    34.4343388888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 25,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "SONG#25"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.470877777778,
-                    34.4358972222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 26,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "SONG#26"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.470741666667,
-                    34.4361583333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 27,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "SONG#27"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471558333333,
-                    34.4347
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 28,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "SONG#28"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.470405555556,
-                    34.4365305555556
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 29,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "SONG#29"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.471908333333,
-                    34.43415
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 30,
-                "beach": "Songpyeong",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "SONG#30"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    126.468894444444,
-                    34.4386638888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-      "type": "Feature",
-      "properties": {
-        "name": "shape"
-      },
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              126.46573662757874,
-              34.441486397279895
-            ],
-            [
-              126.46618723869324,
-              34.44130058663303
-            ],
-            [
-              126.46636962890625,
-              34.44111477557294
-            ],
-            [
-              126.46768927574156,
-              34.43961942390223
-            ],
-            [
-              126.46869778633116,
-              34.438486832044774
-            ],
-            [
-              126.46998524665831,
-              34.43676136962812
-            ],
-            [
-              126.4701247215271,
-              34.43659324574414
-            ],
-            [
-              126.470285654068,
-              34.43646051612313
-            ],
-            [
-              126.47085428237915,
-              34.435575646595375
-            ],
-            [
-              126.47116541862488,
-              34.43502702278267
-            ],
-            [
-              126.47180914878845,
-              34.433876670836895
-            ],
-            [
-              126.47199153900146,
-              34.43354926008066
-            ],
-            [
-              126.4727210998535,
-              34.43261126540766
-            ],
-            [
-              126.47287130355835,
-              34.432168811436156
-            ],
-            [
-              126.47311806678772,
-              34.43211571680216
-            ],
-            [
-              126.47425532341002,
-              34.43123080126999
-            ],
-            [
-              126.47487759590149,
-              34.43069099819462
-            ],
-            [
-              126.47538185119627,
-              34.43016004094897
-            ],
-            [
-              126.48688487936941,
-              34.429983323433135
-            ],
-            [
-              126.48679586259685,
-              34.44278699079113
-            ],
-            [
-              126.46950244903563,
-              34.44284014809103
-            ],
-            [
-              126.46573662757874,
-              34.441486397279895
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    },
-        {
-            "properties": {
-                "name": "bbox"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            126.46130561828613,
-                            34.43360235380395
+      "features": [
+            {
+                  "properties": {
+                        "index": 1,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/1.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/1.png",
+                        "id": "SONG #1"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471527777778,
+                              34.4347722222222
                         ],
-                        [
-                            126.47559642791748,
-                            34.43360235380395
-                        ],
-                        [
-                            126.47559642791748,
-                            34.439477850759616
-                        ],
-                        [
-                            126.46130561828613,
-                            34.439477850759616
-                        ],
-                        [
-                            126.46130561828613,
-                            34.43360235380395
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            }
-        },
-        {
-            "properties": {
-                "name": "mbbox"
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            126.4671206474304,
-                            34.433212999049935
+            {
+                  "properties": {
+                        "index": 2,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/2.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/2.png",
+                        "id": "SONG #2"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471894444444,
+                              34.4340527777778
                         ],
-                        [
-                            126.47355794906616,
-                            34.433212999049935
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 3,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/3.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/3.png",
+                        "id": "SONG #3"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471786111111,
+                              34.4341666666667
                         ],
-                        [
-                            126.47355794906616,
-                            34.43970790699456
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 4,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/4.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/4.png",
+                        "id": "SONG #4"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469894444444,
+                              34.4372583333333
                         ],
-                        [
-                            126.4671206474304,
-                            34.43970790699456
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 5,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/5.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/5.png",
+                        "id": "SONG #5"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469841666667,
+                              34.4371833333333
                         ],
-                        [
-                            126.4671206474304,
-                            34.433212999049935
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 6,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/6.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/6.png",
+                        "id": "SONG #6"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471894444444,
+                              34.4340777777778
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 7,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/7.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/7.png",
+                        "id": "SONG #7"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471716666667,
+                              34.4340666666667
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 8,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/8.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/8.png",
+                        "id": "SONG #8"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469405555556,
+                              34.4377166666667
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 9,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/9.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/9.png",
+                        "id": "SONG #9"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471108333333,
+                              34.4354555555556
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 10,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/10.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/10.png",
+                        "id": "SONG #10"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469116666667,
+                              34.4382638888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 11,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/11.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/11.png",
+                        "id": "SONG #11"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.47155,
+                              34.4347138888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 12,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/12.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/12.png",
+                        "id": "SONG #12"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469863888889,
+                              34.4378083333333
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 13,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/13.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/13.png",
+                        "id": "SONG #13"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.470811111111,
+                              34.4361
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 14,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/14.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/14.png",
+                        "id": "SONG #14"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471938888889,
+                              34.4343444444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 15,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/15.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/15.png",
+                        "id": "SONG #15"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469544444444,
+                              34.4379166666667
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 16,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/16.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/16.png",
+                        "id": "SONG #16"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471083333333,
+                              34.4356083333333
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 17,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/17.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/17.png",
+                        "id": "SONG #17"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469947222222,
+                              34.4374388888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 18,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/18.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/18.png",
+                        "id": "SONG #18"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.470444444444,
+                              34.4365055555556
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 19,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/19.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/19.png",
+                        "id": "SONG #19"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.469261111111,
+                              34.4380722222222
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 20,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/20.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/20.png",
+                        "id": "SONG #20"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471038888889,
+                              34.4356194444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 21,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/21.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/21.png",
+                        "id": "SONG #21"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.470230555556,
+                              34.4367944444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 22,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/22.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/22.png",
+                        "id": "SONG #22"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471497222222,
+                              34.4349333333333
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 23,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/23.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/23.png",
+                        "id": "SONG #23"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471327777778,
+                              34.4350055555556
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 24,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/24.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/24.png",
+                        "id": "SONG #24"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471711111111,
+                              34.4343388888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 25,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/25.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/25.png",
+                        "id": "SONG #25"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.470877777778,
+                              34.4358972222222
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 26,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/26.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/26.png",
+                        "id": "SONG #26"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.470741666667,
+                              34.4361583333333
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 27,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/27.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/27.png",
+                        "id": "SONG #27"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471558333333,
+                              34.4347
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 28,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/28.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/28.png",
+                        "id": "SONG #28"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.470405555556,
+                              34.4365305555556
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 29,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/29.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/29.png",
+                        "id": "SONG #29"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.471908333333,
+                              34.43415
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 30,
+                        "beach": "Songpyeong",
+                        "img-src": "./assets/img/Songpyeong/studio/30.png",
+                        "thumb-src": "./assets/img/Songpyeong/on-site/30.png",
+                        "id": "SONG #30"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              126.468894444444,
+                              34.4386638888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "type": "Feature",
+                  "properties": {
+                        "name": "shape"
+                  },
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          126.46573662757874,
+                                          34.441486397279895
+                                    ],
+                                    [
+                                          126.46618723869324,
+                                          34.44130058663303
+                                    ],
+                                    [
+                                          126.46636962890625,
+                                          34.44111477557294
+                                    ],
+                                    [
+                                          126.46768927574156,
+                                          34.43961942390223
+                                    ],
+                                    [
+                                          126.46869778633116,
+                                          34.438486832044774
+                                    ],
+                                    [
+                                          126.46998524665831,
+                                          34.43676136962812
+                                    ],
+                                    [
+                                          126.4701247215271,
+                                          34.43659324574414
+                                    ],
+                                    [
+                                          126.470285654068,
+                                          34.43646051612313
+                                    ],
+                                    [
+                                          126.47085428237915,
+                                          34.435575646595375
+                                    ],
+                                    [
+                                          126.47116541862488,
+                                          34.43502702278267
+                                    ],
+                                    [
+                                          126.47180914878845,
+                                          34.433876670836895
+                                    ],
+                                    [
+                                          126.47199153900146,
+                                          34.43354926008066
+                                    ],
+                                    [
+                                          126.4727210998535,
+                                          34.43261126540766
+                                    ],
+                                    [
+                                          126.47287130355835,
+                                          34.432168811436156
+                                    ],
+                                    [
+                                          126.47311806678772,
+                                          34.43211571680216
+                                    ],
+                                    [
+                                          126.47425532341002,
+                                          34.43123080126999
+                                    ],
+                                    [
+                                          126.47487759590149,
+                                          34.43069099819462
+                                    ],
+                                    [
+                                          126.47538185119627,
+                                          34.43016004094897
+                                    ],
+                                    [
+                                          126.48688487936941,
+                                          34.429983323433135
+                                    ],
+                                    [
+                                          126.48679586259685,
+                                          34.44278699079113
+                                    ],
+                                    [
+                                          126.46950244903563,
+                                          34.44284014809103
+                                    ],
+                                    [
+                                          126.46573662757874,
+                                          34.441486397279895
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
+            },
+            {
+                  "properties": {
+                        "name": "bbox"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          126.46130561828613,
+                                          34.43360235380395
+                                    ],
+                                    [
+                                          126.47559642791748,
+                                          34.43360235380395
+                                    ],
+                                    [
+                                          126.47559642791748,
+                                          34.439477850759616
+                                    ],
+                                    [
+                                          126.46130561828613,
+                                          34.439477850759616
+                                    ],
+                                    [
+                                          126.46130561828613,
+                                          34.43360235380395
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
+            },
+            {
+                  "properties": {
+                        "name": "mbbox"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          126.4671206474304,
+                                          34.433212999049935
+                                    ],
+                                    [
+                                          126.47355794906616,
+                                          34.433212999049935
+                                    ],
+                                    [
+                                          126.47355794906616,
+                                          34.43970790699456
+                                    ],
+                                    [
+                                          126.4671206474304,
+                                          34.43970790699456
+                                    ],
+                                    [
+                                          126.4671206474304,
+                                          34.433212999049935
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
             }
-        }
-    ],
-    "name_KR": "송평 해변",
-    "name_EN": "Songpyeong Beach",
-    "address_KR": "대한민국 전남 해남군 화산면 평호리",
-    "address_EN": "Pyeongho-gil, Hwasan-myeon, Haenam-gun, Jeollanam-do, Republic of Korea",
-    "type": "FeatureCollection"
+      ],
+      "name_KR": "\uc1a1\ud3c9 \ud574\ubcc0",
+      "name_EN": "Songpyeong Beach",
+      "address_KR": "\ub300\ud55c\ubbfc\uad6d \uc804\ub0a8 \ud574\ub0a8\uad70 \ud654\uc0b0\uba74 \ud3c9\ud638\ub9ac",
+      "address_EN": "Pyeongho-gil, Hwasan-myeon, Haenam-gun, Jeollanam-do, Republic of Korea",
+      "type": "FeatureCollection"
 }

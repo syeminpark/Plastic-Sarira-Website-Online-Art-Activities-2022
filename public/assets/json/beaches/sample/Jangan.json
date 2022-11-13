@@ -1,420 +1,450 @@
 {
-    "type": "FeatureCollection",
-    "name_EN": "Jangan Beach",
-    "address_KR": "\ub300\ud55c\ubbfc\uad6d \ucda9\ub0a8 \ubcf4\ub839\uc2dc \uc6c5\ucc9c\uc74d",
-    "features": [
-        {
-            "geometry": {
-                "coordinates": [
-                    126.41748905181883,
-                    37.43026222297615
-                ],
-                "type": "Point"
+      "type": "FeatureCollection",
+      "name_EN": "Jangan Beach",
+      "address_KR": "\ub300\ud55c\ubbfc\uad6d \ucda9\ub0a8 \ubcf4\ub839\uc2dc \uc6c5\ucc9c\uc74d",
+      "features": [
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.41748905181883,
+                              37.43026222297615
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #1",
+                        "img-src": "./assets/img/Jangan/studio/1.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/1.png",
+                        "index": 1,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#1",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.41808986663817,
+                              37.42937616880579
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #2",
+                        "img-src": "./assets/img/Jangan/studio/2.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/2.png",
+                        "index": 2,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.41808986663817,
-                    37.42937616880579
-                ],
-                "type": "Point"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.41864776611328,
+                              37.42818338701506
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #3",
+                        "img-src": "./assets/img/Jangan/studio/3.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/3.png",
+                        "index": 3,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#2",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.4189910888672,
+                              37.42678610417518
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #4",
+                        "img-src": "./assets/img/Jangan/studio/4.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/4.png",
+                        "index": 4,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.41864776611328,
-                    37.42818338701506
-                ],
-                "type": "Point"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.4201498031616,
+                              37.42617265469055
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #5",
+                        "img-src": "./assets/img/Jangan/studio/5.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/5.png",
+                        "index": 5,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#3",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.41972064971924,
+                              37.425013903061114
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #6",
+                        "img-src": "./assets/img/Jangan/studio/6.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/6.png",
+                        "index": 6,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.4189910888672,
-                    37.42678610417518
-                ],
-                "type": "Point"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.41989231109619,
+                              37.423855133498044
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #7",
+                        "img-src": "./assets/img/Jangan/studio/7.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/7.png",
+                        "index": 7,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#4",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.4207077026367,
+                              37.425013903061114
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #8",
+                        "img-src": "./assets/img/Jangan/studio/8.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/8.png",
+                        "index": 8,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.4201498031616,
-                    37.42617265469055
-                ],
-                "type": "Point"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.4200210571289,
+                              37.422934921363904
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #9",
+                        "img-src": "./assets/img/Jangan/studio/9.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/9.png",
+                        "index": 9,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#5",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.4201498031616,
+                              37.4221851105226
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #10",
+                        "img-src": "./assets/img/Jangan/studio/10.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/10.png",
+                        "index": 10,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.41972064971924,
-                    37.425013903061114
-                ],
-                "type": "Point"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.42062187194824,
+                              37.4216397888311
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #11",
+                        "img-src": "./assets/img/Jangan/studio/11.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/11.png",
+                        "index": 11,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#6",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              126.4227247238159,
+                              37.42194653277123
+                        ],
+                        "type": "Point"
+                  },
+                  "properties": {
+                        "id": "JANG #12",
+                        "img-src": "./assets/img/Jangan/studio/12.png",
+                        "thumb-src": "./assets/img/Jangan/on-site/12.png",
+                        "index": 12,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.41989231109619,
-                    37.423855133498044
-                ],
-                "type": "Point"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          126.5374332772405,
+                                          36.20978730506086
+                                    ],
+                                    [
+                                          126.5375135924013,
+                                          36.20816721217915
+                                    ],
+                                    [
+                                          126.53819627127865,
+                                          36.205477783950386
+                                    ],
+                                    [
+                                          126.53831674402227,
+                                          36.20460288978583
+                                    ],
+                                    [
+                                          126.53883879257637,
+                                          36.202723454439194
+                                    ],
+                                    [
+                                          126.53867816225153,
+                                          36.20188093429037
+                                    ],
+                                    [
+                                          126.53874995837555,
+                                          36.20002303054348
+                                    ],
+                                    [
+                                          126.5385917656497,
+                                          36.199614532795536
+                                    ],
+                                    [
+                                          126.53855679484974,
+                                          36.199539477761476
+                                    ],
+                                    [
+                                          126.53756957028759,
+                                          36.19936621286104
+                                    ],
+                                    [
+                                          126.53475045036464,
+                                          36.19906230856667
+                                    ],
+                                    [
+                                          126.5340133903872,
+                                          36.19846317950055
+                                    ],
+                                    [
+                                          126.53257788632266,
+                                          36.196656472186035
+                                    ],
+                                    [
+                                          126.53246575202195,
+                                          36.196335636982326
+                                    ],
+                                    [
+                                          126.53143615525448,
+                                          36.19514277661992
+                                    ],
+                                    [
+                                          126.53035558835421,
+                                          36.19374422753175
+                                    ],
+                                    [
+                                          126.52915269312507,
+                                          36.19222224867126
+                                    ],
+                                    [
+                                          126.52824542469,
+                                          36.1911691865233
+                                    ],
+                                    [
+                                          126.52636459814278,
+                                          36.188771211936654
+                                    ],
+                                    [
+                                          126.52702515299245,
+                                          36.18842263401025
+                                    ],
+                                    [
+                                          126.52730461850746,
+                                          36.18881222100268
+                                    ],
+                                    [
+                                          126.5275078661528,
+                                          36.18870969829824
+                                    ],
+                                    [
+                                          126.53230959180019,
+                                          36.194696799308105
+                                    ],
+                                    [
+                                          126.53518046480428,
+                                          36.19350761704523
+                                    ],
+                                    [
+                                          126.53772106038548,
+                                          36.19168280224757
+                                    ],
+                                    [
+                                          126.53779727825321,
+                                          36.191395748858426
+                                    ],
+                                    [
+                                          126.53812755567805,
+                                          36.191334237280614
+                                    ],
+                                    [
+                                          126.53812755567805,
+                                          36.191580283301064
+                                    ],
+                                    [
+                                          126.53922001177625,
+                                          36.19125222176929
+                                    ],
+                                    [
+                                          126.54076977508498,
+                                          36.190575590516886
+                                    ],
+                                    [
+                                          126.54127789419914,
+                                          36.19065760673777
+                                    ],
+                                    [
+                                          126.54127789419914,
+                                          36.19014500395073
+                                    ],
+                                    [
+                                          126.54178601331546,
+                                          36.190062987193
+                                    ],
+                                    [
+                                          126.54209088478643,
+                                          36.19018601229655
+                                    ],
+                                    [
+                                          126.54765478910514,
+                                          36.19475830824203
+                                    ],
+                                    [
+                                          126.54869643329124,
+                                          36.20496812186994
+                                    ],
+                                    [
+                                          126.54148114184557,
+                                          36.212634857365785
+                                    ],
+                                    [
+                                          126.5374332772405,
+                                          36.20978730506086
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  },
+                  "properties": {
+                        "name": "shape",
+                        "index": 13,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "properties": {
-                "id": "JANG#7",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png"
+            {
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          126.52139742262915,
+                                          36.20221087098642
+                                    ],
+                                    [
+                                          126.52139742262915,
+                                          36.193682394181934
+                                    ],
+                                    [
+                                          126.542805141406,
+                                          36.193682394181934
+                                    ],
+                                    [
+                                          126.542805141406,
+                                          36.20221087098642
+                                    ],
+                                    [
+                                          126.52139742262915,
+                                          36.20221087098642
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  },
+                  "properties": {
+                        "name": "bbox",
+                        "index": 14,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
             },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.4207077026367,
-                    37.425013903061114
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "id": "JANG#8",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.4200210571289,
-                    37.422934921363904
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "id": "JANG#9",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.4201498031616,
-                    37.4221851105226
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "id": "JANG#10",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.42062187194824,
-                    37.4216397888311
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "id": "JANG#11",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    126.4227247238159,
-                    37.42194653277123
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "id": "JANG#12",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            126.5374332772405,
-                            36.20978730506086
+            {
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          126.52972049593376,
+                                          36.20349162425765
+                                    ],
+                                    [
+                                          126.52972049593376,
+                                          36.19277638418495
+                                    ],
+                                    [
+                                          126.54052113524403,
+                                          36.19277638418495
+                                    ],
+                                    [
+                                          126.54052113524403,
+                                          36.20349162425765
+                                    ],
+                                    [
+                                          126.52972049593376,
+                                          36.20349162425765
+                                    ]
+                              ]
                         ],
-                        [
-                            126.5375135924013,
-                            36.20816721217915
-                        ],
-                        [
-                            126.53819627127865,
-                            36.205477783950386
-                        ],
-                        [
-                            126.53831674402227,
-                            36.20460288978583
-                        ],
-                        [
-                            126.53883879257637,
-                            36.202723454439194
-                        ],
-                        [
-                            126.53867816225153,
-                            36.20188093429037
-                        ],
-                        [
-                            126.53874995837555,
-                            36.20002303054348
-                        ],
-                        [
-                            126.5385917656497,
-                            36.199614532795536
-                        ],
-                        [
-                            126.53855679484974,
-                            36.199539477761476
-                        ],
-                        [
-                            126.53756957028759,
-                            36.19936621286104
-                        ],
-                        [
-                            126.53475045036464,
-                            36.19906230856667
-                        ],
-                        [
-                            126.5340133903872,
-                            36.19846317950055
-                        ],
-                        [
-                            126.53257788632266,
-                            36.196656472186035
-                        ],
-                        [
-                            126.53246575202195,
-                            36.196335636982326
-                        ],
-                        [
-                            126.53143615525448,
-                            36.19514277661992
-                        ],
-                        [
-                            126.53035558835421,
-                            36.19374422753175
-                        ],
-                        [
-                            126.52915269312507,
-                            36.19222224867126
-                        ],
-                        [
-                            126.52824542469,
-                            36.1911691865233
-                        ],
-                        [
-                            126.52636459814278,
-                            36.188771211936654
-                        ],
-                        [
-                            126.52702515299245,
-                            36.18842263401025
-                        ],
-                        [
-                            126.52730461850746,
-                            36.18881222100268
-                        ],
-                        [
-                            126.5275078661528,
-                            36.18870969829824
-                        ],
-                        [
-                            126.53230959180019,
-                            36.194696799308105
-                        ],
-                        [
-                            126.53518046480428,
-                            36.19350761704523
-                        ],
-                        [
-                            126.53772106038548,
-                            36.19168280224757
-                        ],
-                        [
-                            126.53779727825321,
-                            36.191395748858426
-                        ],
-                        [
-                            126.53812755567805,
-                            36.191334237280614
-                        ],
-                        [
-                            126.53812755567805,
-                            36.191580283301064
-                        ],
-                        [
-                            126.53922001177625,
-                            36.19125222176929
-                        ],
-                        [
-                            126.54076977508498,
-                            36.190575590516886
-                        ],
-                        [
-                            126.54127789419914,
-                            36.19065760673777
-                        ],
-                        [
-                            126.54127789419914,
-                            36.19014500395073
-                        ],
-                        [
-                            126.54178601331546,
-                            36.190062987193
-                        ],
-                        [
-                            126.54209088478643,
-                            36.19018601229655
-                        ],
-                        [
-                            126.54765478910514,
-                            36.19475830824203
-                        ],
-                        [
-                            126.54869643329124,
-                            36.20496812186994
-                        ],
-                        [
-                            126.54148114184557,
-                            36.212634857365785
-                        ],
-                        [
-                            126.5374332772405,
-                            36.20978730506086
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            },
-            "properties": {
-                "name": "shape"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            126.52139742262915,
-                            36.20221087098642
-                        ],
-                        [
-                            126.52139742262915,
-                            36.193682394181934
-                        ],
-                        [
-                            126.542805141406,
-                            36.193682394181934
-                        ],
-                        [
-                            126.542805141406,
-                            36.20221087098642
-                        ],
-                        [
-                            126.52139742262915,
-                            36.20221087098642
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            },
-            "properties": {
-                "name": "bbox"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            126.52972049593376,
-                            36.20349162425765
-                        ],
-                        [
-                            126.52972049593376,
-                            36.19277638418495
-                        ],
-                        [
-                            126.54052113524403,
-                            36.19277638418495
-                        ],
-                        [
-                            126.54052113524403,
-                            36.20349162425765
-                        ],
-                        [
-                            126.52972049593376,
-                            36.20349162425765
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            },
-            "properties": {
-                "name": "mbbox"
-            },
-            "type": "Feature"
-        }
-    ],
-    "address_EN": "Ungcheon-eup, Boryeong-si, Chungcheongnam-do, Republic of Korea",
-    "name_KR": "\uc7a5\uc548 \ud574\ubcc0"
+                        "type": "Polygon"
+                  },
+                  "properties": {
+                        "name": "mbbox",
+                        "index": 15,
+                        "beach": "Jangan"
+                  },
+                  "type": "Feature"
+            }
+      ],
+      "address_EN": "Ungcheon-eup, Boryeong-si, Chungcheongnam-do, Republic of Korea",
+      "name_KR": "\uc7a5\uc548 \ud574\ubcc0"
 }

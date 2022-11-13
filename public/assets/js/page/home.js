@@ -36,7 +36,7 @@ class Home12345 extends Page12345 {
         const randomWastePlasticIndex = Math.floor(Math.random() *  (wastePlasticDataset.data[randomBeachIndex].wastePlasticCount -1) +1)
        
         const path = `${folderPath}/${randomBeach}/${randomWastePlasticIndex}.ply`
-        console.log(path)
+
         return path 
     }
 }

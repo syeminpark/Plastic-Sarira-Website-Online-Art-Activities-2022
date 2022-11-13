@@ -1,537 +1,537 @@
 {
-    "features": [
-        {
-            "properties": {
-                "index": 1,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "CHEONG#1"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.559022222222,
-                    38.2660416666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 2,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "CHEONG#2"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557066666667,
-                    38.2670444444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 3,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "CHEONG#3"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.559263888889,
-                    38.2661972222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 4,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "CHEONG#4"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557769444444,
-                    38.2665972222222
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 5,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "CHEONG#5"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.55925,
-                    38.2661944444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 6,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "CHEONG#6"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557952777778,
-                    38.2663833333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 7,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "CHEONG#7"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557694444444,
-                    38.2666638888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 8,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "CHEONG#8"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557205555556,
-                    38.2669194444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 9,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "CHEONG#9"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.559219444444,
-                    38.2661694444444
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 10,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "CHEONG#10"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.558013888889,
-                    38.2663527777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 11,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00005.png",
-                "thumb-src": "./assets/img/MA_thumb_00005.png",
-                "id": "CHEONG#10"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557083333333,
-                    38.2670283333333
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 12,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00006.png",
-                "thumb-src": "./assets/img/MA_thumb_00006.png",
-                "id": "CHEONG#12"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557816666667,
-                    38.266425
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 13,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00001.png",
-                "thumb-src": "./assets/img/MA_thumb_00001.png",
-                "id": "CHEONG#13"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.557938888889,
-                    38.2663638888889
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 14,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00002.png",
-                "thumb-src": "./assets/img/MA_thumb_00002.png",
-                "id": "CHEONG#14"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.558,
-                    38.2663611111111
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 15,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00003.png",
-                "thumb-src": "./assets/img/MA_thumb_00003.png",
-                "id": "CHEONG#15"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.559036111111,
-                    38.2661666666667
-                ],
-                "type": "Point"
-            }
-        },
-        {
-            "properties": {
-                "index": 16,
-                "beach": "Cheonggan",
-                "img-src": "./assets/img/MA_00004.png",
-                "thumb-src": "./assets/img/MA_thumb_00004.png",
-                "id": "CHEONG#16"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    128.559188888889,
-                    38.2661527777778
-                ],
-                "type": "Point"
-            }
-        },
-        {
-      "type": "Feature",
-      "properties": {
-        "name": "shape"
-      },
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              128.55748146772385,
-              38.26944353905567
-            ],
-            [
-              128.5516510732483,
-              38.26949204260193
-            ],
-            [
-              128.55139083201874,
-              38.26263009848768
-            ],
-            [
-              128.56013622545038,
-              38.26268926465794
-            ],
-            [
-              128.5599296540022,
-              38.26528231850892
-            ],
-            [
-              128.55997055768967,
-              38.265427628304046
-            ],
-            [
-              128.559855222702,
-              38.26548448857955
-            ],
-            [
-              128.55994641780853,
-              38.2657645774351
-            ],
-            [
-              128.56013685464856,
-              38.265911992188464
-            ],
-            [
-              128.56011539697647,
-              38.26597938169034
-            ],
-            [
-              128.55989813804626,
-              38.26600254681717
-            ],
-            [
-              128.55961583554745,
-              38.26611573994433
-            ],
-            [
-              128.5592282563448,
-              38.26615996418794
-            ],
-            [
-              128.55902574956417,
-              38.26618470869347
-            ],
-            [
-              128.5594354569912,
-              38.266253150898876
-            ],
-            [
-              128.55935901403427,
-              38.26632211951753
-            ],
-            [
-              128.55927251279354,
-              38.266358972951025
-            ],
-            [
-              128.55907805263993,
-              38.266387402729826
-            ],
-            [
-              128.55907268822193,
-              38.266493224586405
-            ],
-            [
-              128.5589975863695,
-              38.26650006878076
-            ],
-            [
-              128.55893187224865,
-              38.2663921410252
-            ],
-            [
-              128.55857647955418,
-              38.26664748204147
-            ],
-            [
-              128.5583183169365,
-              38.266283160153186
-            ],
-            [
-              128.5579977929592,
-              38.266406882386626
-            ],
-            [
-              128.5574787855148,
-              38.26677278307785
-            ],
-            [
-              128.55725951492786,
-              38.2671476319465
-            ],
-            [
-              128.5568444430828,
-              38.268103698391535
-            ],
-            [
-              128.5569490492344,
-              38.268621737948436
-            ],
-            [
-              128.55728968977928,
-              38.26876704106304
-            ],
-            [
-              128.5573661327362,
-              38.26897078081031
-            ],
-            [
-              128.55757869780064,
-              38.26895446059319
-            ],
-            [
-              128.55748146772385,
-              38.26944353905567
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "shape"
-      },
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              128.55947971343994,
-              38.26639635284306
-            ],
-            [
-              128.5595977306366,
-              38.26637950557015
-            ],
-            [
-              128.5595065355301,
-              38.266248939072696
-            ],
-            [
-              128.55980962514877,
-              38.266274210026005
-            ],
-            [
-              128.55993032455444,
-              38.26631632826199
-            ],
-            [
-              128.5598310828209,
-              38.26632264599528
-            ],
-            [
-              128.55984449386597,
-              38.26641530602041
-            ],
-            [
-              128.55959236621857,
-              38.26641741192869
-            ],
-            [
-              128.55947971343994,
-              38.26639635284306
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    },
-        {
-            "properties": {
-                "name": "bbox"
-            },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            128.55639517307281,
-                            38.265718247022285
+      "features": [
+            {
+                  "properties": {
+                        "index": 1,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/1.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/1.png",
+                        "id": "CHEONG #1"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.559022222222,
+                              38.2660416666667
                         ],
-                        [
-                            128.56068670749664,
-                            38.265718247022285
-                        ],
-                        [
-                            128.56068670749664,
-                            38.26740718206621
-                        ],
-                        [
-                            128.55639517307281,
-                            38.26740718206621
-                        ],
-                        [
-                            128.55639517307281,
-                            38.265718247022285
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            }
-        },
-        {
-            "properties": {
-                "name": "mbbox"
+                        "type": "Point"
+                  }
             },
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-              128.55675810431123,
-              38.26594160498757
-            ],
-            [
-              128.5596685787653,
-              38.26593550520669
-            ],
-            [
-              128.55969965457905,
-              38.26738628563938
-            ],
-            [
-              128.55675033535724,
-              38.26737408617682
-            ],
-            [
-              128.55675810431123,
-              38.26594160498757
-            ]
-                    ]
-                ],
-                "type": "Polygon"
+            {
+                  "properties": {
+                        "index": 2,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/2.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/2.png",
+                        "id": "CHEONG #2"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557066666667,
+                              38.2670444444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 3,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/3.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/3.png",
+                        "id": "CHEONG #3"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.559263888889,
+                              38.2661972222222
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 4,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/4.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/4.png",
+                        "id": "CHEONG #4"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557769444444,
+                              38.2665972222222
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 5,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/5.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/5.png",
+                        "id": "CHEONG #5"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.55925,
+                              38.2661944444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 6,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/6.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/6.png",
+                        "id": "CHEONG #6"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557952777778,
+                              38.2663833333333
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 7,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/7.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/7.png",
+                        "id": "CHEONG #7"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557694444444,
+                              38.2666638888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 8,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/8.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/8.png",
+                        "id": "CHEONG #8"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557205555556,
+                              38.2669194444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 9,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/9.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/9.png",
+                        "id": "CHEONG #9"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.559219444444,
+                              38.2661694444444
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 10,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/10.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/10.png",
+                        "id": "CHEONG #10"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.558013888889,
+                              38.2663527777778
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 11,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/11.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/11.png",
+                        "id": "CHEONG #10"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557083333333,
+                              38.2670283333333
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 12,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/12.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/12.png",
+                        "id": "CHEONG #12"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557816666667,
+                              38.266425
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 13,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/13.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/13.png",
+                        "id": "CHEONG #13"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.557938888889,
+                              38.2663638888889
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 14,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/14.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/14.png",
+                        "id": "CHEONG #14"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.558,
+                              38.2663611111111
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 15,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/15.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/15.png",
+                        "id": "CHEONG #15"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.559036111111,
+                              38.2661666666667
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "properties": {
+                        "index": 16,
+                        "beach": "Cheonggan",
+                        "img-src": "./assets/img/Cheonggan/studio/16.png",
+                        "thumb-src": "./assets/img/Cheonggan/on-site/16.png",
+                        "id": "CHEONG #16"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              128.559188888889,
+                              38.2661527777778
+                        ],
+                        "type": "Point"
+                  }
+            },
+            {
+                  "type": "Feature",
+                  "properties": {
+                        "name": "shape"
+                  },
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          128.55748146772385,
+                                          38.26944353905567
+                                    ],
+                                    [
+                                          128.5516510732483,
+                                          38.26949204260193
+                                    ],
+                                    [
+                                          128.55139083201874,
+                                          38.26263009848768
+                                    ],
+                                    [
+                                          128.56013622545038,
+                                          38.26268926465794
+                                    ],
+                                    [
+                                          128.5599296540022,
+                                          38.26528231850892
+                                    ],
+                                    [
+                                          128.55997055768967,
+                                          38.265427628304046
+                                    ],
+                                    [
+                                          128.559855222702,
+                                          38.26548448857955
+                                    ],
+                                    [
+                                          128.55994641780853,
+                                          38.2657645774351
+                                    ],
+                                    [
+                                          128.56013685464856,
+                                          38.265911992188464
+                                    ],
+                                    [
+                                          128.56011539697647,
+                                          38.26597938169034
+                                    ],
+                                    [
+                                          128.55989813804626,
+                                          38.26600254681717
+                                    ],
+                                    [
+                                          128.55961583554745,
+                                          38.26611573994433
+                                    ],
+                                    [
+                                          128.5592282563448,
+                                          38.26615996418794
+                                    ],
+                                    [
+                                          128.55902574956417,
+                                          38.26618470869347
+                                    ],
+                                    [
+                                          128.5594354569912,
+                                          38.266253150898876
+                                    ],
+                                    [
+                                          128.55935901403427,
+                                          38.26632211951753
+                                    ],
+                                    [
+                                          128.55927251279354,
+                                          38.266358972951025
+                                    ],
+                                    [
+                                          128.55907805263993,
+                                          38.266387402729826
+                                    ],
+                                    [
+                                          128.55907268822193,
+                                          38.266493224586405
+                                    ],
+                                    [
+                                          128.5589975863695,
+                                          38.26650006878076
+                                    ],
+                                    [
+                                          128.55893187224865,
+                                          38.2663921410252
+                                    ],
+                                    [
+                                          128.55857647955418,
+                                          38.26664748204147
+                                    ],
+                                    [
+                                          128.5583183169365,
+                                          38.266283160153186
+                                    ],
+                                    [
+                                          128.5579977929592,
+                                          38.266406882386626
+                                    ],
+                                    [
+                                          128.5574787855148,
+                                          38.26677278307785
+                                    ],
+                                    [
+                                          128.55725951492786,
+                                          38.2671476319465
+                                    ],
+                                    [
+                                          128.5568444430828,
+                                          38.268103698391535
+                                    ],
+                                    [
+                                          128.5569490492344,
+                                          38.268621737948436
+                                    ],
+                                    [
+                                          128.55728968977928,
+                                          38.26876704106304
+                                    ],
+                                    [
+                                          128.5573661327362,
+                                          38.26897078081031
+                                    ],
+                                    [
+                                          128.55757869780064,
+                                          38.26895446059319
+                                    ],
+                                    [
+                                          128.55748146772385,
+                                          38.26944353905567
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
+            },
+            {
+                  "type": "Feature",
+                  "properties": {
+                        "name": "shape"
+                  },
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          128.55947971343994,
+                                          38.26639635284306
+                                    ],
+                                    [
+                                          128.5595977306366,
+                                          38.26637950557015
+                                    ],
+                                    [
+                                          128.5595065355301,
+                                          38.266248939072696
+                                    ],
+                                    [
+                                          128.55980962514877,
+                                          38.266274210026005
+                                    ],
+                                    [
+                                          128.55993032455444,
+                                          38.26631632826199
+                                    ],
+                                    [
+                                          128.5598310828209,
+                                          38.26632264599528
+                                    ],
+                                    [
+                                          128.55984449386597,
+                                          38.26641530602041
+                                    ],
+                                    [
+                                          128.55959236621857,
+                                          38.26641741192869
+                                    ],
+                                    [
+                                          128.55947971343994,
+                                          38.26639635284306
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
+            },
+            {
+                  "properties": {
+                        "name": "bbox"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          128.55639517307281,
+                                          38.265718247022285
+                                    ],
+                                    [
+                                          128.56068670749664,
+                                          38.265718247022285
+                                    ],
+                                    [
+                                          128.56068670749664,
+                                          38.26740718206621
+                                    ],
+                                    [
+                                          128.55639517307281,
+                                          38.26740718206621
+                                    ],
+                                    [
+                                          128.55639517307281,
+                                          38.265718247022285
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
+            },
+            {
+                  "properties": {
+                        "name": "mbbox"
+                  },
+                  "type": "Feature",
+                  "geometry": {
+                        "coordinates": [
+                              [
+                                    [
+                                          128.55675810431123,
+                                          38.26594160498757
+                                    ],
+                                    [
+                                          128.5596685787653,
+                                          38.26593550520669
+                                    ],
+                                    [
+                                          128.55969965457905,
+                                          38.26738628563938
+                                    ],
+                                    [
+                                          128.55675033535724,
+                                          38.26737408617682
+                                    ],
+                                    [
+                                          128.55675810431123,
+                                          38.26594160498757
+                                    ]
+                              ]
+                        ],
+                        "type": "Polygon"
+                  }
             }
-        }
-    ],
-    "name_KR": "청간 해변",
-    "name_EN": "Cheonggan Beach",
-    "address_KR": "대한민국 강원 고성군 토성면 청간리",
-    "address_EN": "Cheongganjeong-gil, Toseong-myeon, Goseong-gun, Gangwon-do, Republic of Korea",
-    "type": "FeatureCollection"
+      ],
+      "name_KR": "\uccad\uac04 \ud574\ubcc0",
+      "name_EN": "Cheonggan Beach",
+      "address_KR": "\ub300\ud55c\ubbfc\uad6d \uac15\uc6d0 \uace0\uc131\uad70 \ud1a0\uc131\uba74 \uccad\uac04\ub9ac",
+      "address_EN": "Cheongganjeong-gil, Toseong-myeon, Goseong-gun, Gangwon-do, Republic of Korea",
+      "type": "FeatureCollection"
 }

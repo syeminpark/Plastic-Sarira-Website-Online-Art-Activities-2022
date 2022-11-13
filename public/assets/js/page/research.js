@@ -3,7 +3,9 @@ import {Preloader12345} from './../preloader.js';
 import {SVGLoader12345} from './../svgloader.js';
 import {Map12345} from './../map.js';
 import {List12345} from './../list.js';
+import BasicThree from '../three/basicThree.js';
 
+//리서치 페이지 
 class Research12345 extends Page12345{
 	constructor(_pagelayer){
 		super();
@@ -11,21 +13,27 @@ class Research12345 extends Page12345{
 		this.pagelayer = _pagelayer
 		this.map = new Map12345();
 		this.list = new List12345();
+		this.researchThree= new BasicThree();
 	}
 
+	//
 	setup(){
+		
+		//preloads the map
 		const mappreload_el = this.pagelayer.popup.querySelector('#map-preloader');
 		if(mappreload_el)
 		this.map_preloader = new Preloader12345(mappreload_el, "black", false, false, false, true);
 		
 		const beach_list = this.pagelayer.popup.querySelector('#beach-list');
 		if(beach_list){
+			//map에 이미지를 띄울 위치값을 담은 json 
 			this.beach_list_items = beach_list.querySelectorAll('li[data-link]');
 			if(this.beach_list_items.length){
 				for(let i=0; i<this.beach_list_items.length; i++){
 					const btn = this.beach_list_items[i];
 					btn.addEventListener('click',()=>{
 						this.onBeachSelect(btn);
+					
 						for(let j=0; j<this.beach_list_items.length; j++){
 							if(this.beach_list_items[j] != btn)
 							this.beach_list_items[j].classList.remove("selected");
@@ -107,6 +115,7 @@ class Research12345 extends Page12345{
 		this.map_preloader.onLoad();
 
 		this.set_scrolls(this.pagelayer);
+
 	}
 
 	loadMap(_data){
@@ -141,7 +150,8 @@ class Research12345 extends Page12345{
 			this.list_data[i]["vert_caption"] = this.degree2Decimal(this.list_data[i]["lon"],this.list_data[i]["lat"]);
 			this.list_data[i]["img-src"] = this.list_data[i].properties["img-src"];
 		}
-		this.list.load(this.list_data);
+		
+		this.list.load(this.list_data, this.researchThree.import)
 	}
 }
 

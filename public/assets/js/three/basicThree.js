@@ -10,23 +10,11 @@ export default class BasicThree {
         this.object;
         this.originalArray
         this.selectedArray = []
+        this.domElement;
 
         //scene
         this.scene = new THREE.Scene()
         // this.scene.add(new THREE.AxesHelper(5))
-        //lights
-        const light = new THREE.SpotLight()
-        const ambientLight = new THREE.AmbientLight(0x404040);
-        ambientLight.intensity = 10;
-        light.position.set(20, 20, 20)
-        const directionalLight = new THREE.DirectionalLight(0xf0f0f0, 0.4, );
-        directionalLight.position.set(-75, 280, 150);
-        directionalLight.visible = true;
-
-        this.scene.add(light)
-        this.scene.add(ambientLight)
-        this.scene.add(directionalLight)
-
         //camera
         this.camera = new THREE.PerspectiveCamera(
             25,
@@ -39,8 +27,6 @@ export default class BasicThree {
         //renderer
         this.renderer = new THREE.WebGLRenderer()
         this.renderer.outputEncoding = THREE.sRGBEncoding
-        this.renderer.setSize(window.innerWidth, window.innerHeight)
-
         //orbitControls
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enableDamping = true
@@ -50,72 +36,78 @@ export default class BasicThree {
         this.material = new THREE.PointsMaterial({
             size: 3,
             vertexColors: true,
-            sizeAttenuation: true,
         });
 
     }
 
-    import(domElement, sourcePath,isSpread) {
+    import = (domElement, sourcePath, isSpread) => {
+        this.spread= isSpread
+        this.domElement=domElement;
+
         this.reset();
         let modelLength;
-        domElement.appendChild(this.renderer.domElement)
-
+        this.domElement.appendChild(this.renderer.domElement)
+        this.renderer.setSize(this.domElement.getBoundingClientRect().width,this.domElement.getBoundingClientRect().height)
         const loader = new PLYLoader()
         loader.load(
             sourcePath,
             (geometry) => {
-              
-                geometry.computeVertexNormals()
+
+          
                 geometry.computeBoundingBox()
                 modelLength = geometry.boundingBox.max.y
                 this.originalArray = new Array(geometry.attributes.position.count)
                 for (let i = 0; i < this.originalArray.length; i++) {
                     this.originalArray[i] = i;
                 }
+                
                 this.object = new THREE.Points(geometry, this.material);
                 this.scene.add(this.object)
                 this.updateSize()
-                this.animate(isSpread)
-                this.camera.position.set(0, 0, 100+ modelLength*5)
+                
+               
+                this.animate()
+                this.camera.position.set(0, 0, 150 + modelLength * 5)
             },
             (xhr) => {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+                //console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
             },
             (error) => {
-                console.log(error)
+                // console.log(error)
             }
         )
-        window.addEventListener('resize', () => this.updateSize(this.renderer), false);
+        window.addEventListener('resize', () => this.updateSize(), false);
     }
-    animate = (isSpread) => {
+    animate = () => {
+
         this.animationRequest = requestAnimationFrame(this.animate);
         this.controls.update()
         this.renderer.render(this.scene, this.camera)
 
-        if(isSpread){
+        if (this.spread) {
             this.setObjectPosition()
         }
-     
     }
 
+
+
     updateSize() {
+        this.renderer.setSize(this.domElement.getBoundingClientRect().width,this.domElement.getBoundingClientRect().height)
         this.camera.aspect = this.renderer.domElement.width / this.renderer.domElement.height;
         this.camera.updateProjectionMatrix();
+
     }
 
     reset() {
         this.scene.remove(this.object)
         this.object = undefined
         cancelAnimationFrame(this.animationRequest)
-        this.selectedArray=[];
-        this.originalArray=[];
-
+        this.selectedArray = [];
+        this.originalArray = [];
     }
 
     setObjectPosition() {
-        
         this.selectRandomPoints()
-
         const particleSpeed = 0.05;
         const position = this.object.geometry.getAttribute('position').array;
         const normal = this.object.geometry.getAttribute('normal').array
