@@ -530,6 +530,7 @@ html, body {
   	-webkit-backdrop-filter 0.3s, 
   	backdrop-filter 0.3s, opacity 0.3s, 
   	background-color 0.3s;
+	overflow:hidden;
 }
 
 #plastic-detail-wrapper.inactive {
@@ -537,6 +538,7 @@ html, body {
   	backdrop-filter: blur(0px);
   	background-color: transparent;
   	opacity: 0;
+	  overflow:hidden;
 }
 
 #plastic-detail-layer {
@@ -550,6 +552,7 @@ html, body {
 	height: 80%;
 	background-color: black;
     color: white;
+	overflow:hidden;
 	
 }
 
