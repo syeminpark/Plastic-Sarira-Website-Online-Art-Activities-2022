@@ -6,7 +6,6 @@ import {
     PLYLoader
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 export default class BasicThree {
-
     constructor() {
         this.object;
         this.originalArray
