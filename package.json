@@ -5,8 +5,6 @@
   "main": "app.js",
   "scripts": {
     "publish": "node forever.js",
-    "build": "webpack",
-    "watch": "webpack --watch",
     "start": "node forever.js",
     "dev": "node app.js"
   },
@@ -26,8 +24,6 @@
     "three": "^0.146.0"
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.0",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^4.10.0"
+    "html-webpack-plugin": "^5.5.0"
   }
 }
