@@ -57,14 +57,17 @@ export default class BasicThree {
 
     import(domElement, sourcePath,isSpread) {
         this.reset();
-
+        let modelLength;
         domElement.appendChild(this.renderer.domElement)
 
         const loader = new PLYLoader()
         loader.load(
             sourcePath,
             (geometry) => {
+              
                 geometry.computeVertexNormals()
+                geometry.computeBoundingBox()
+                modelLength = geometry.boundingBox.max.y
                 this.originalArray = new Array(geometry.attributes.position.count)
                 for (let i = 0; i < this.originalArray.length; i++) {
                     this.originalArray[i] = i;
@@ -73,6 +76,7 @@ export default class BasicThree {
                 this.scene.add(this.object)
                 this.updateSize()
                 this.animate(isSpread)
+                this.camera.position.set(0, 0, 100+ modelLength*5)
             },
             (xhr) => {
                 console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
