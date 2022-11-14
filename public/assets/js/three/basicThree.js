@@ -42,6 +42,11 @@ export default class BasicThree {
 
     import = (domElement, sourcePath, isSpread) => {
         this.spread= isSpread
+        if(isSpread){
+            //약간 멀미남
+            // this.controls.autoRotate=true;
+            // this.controls.autoRotateSpeed=0.1
+        }
         this.domElement=domElement;
 
         this.reset();
@@ -86,10 +91,9 @@ export default class BasicThree {
 
         if (this.spread) {
             this.setObjectPosition()
+            
         }
     }
-
-
 
     updateSize() {
         this.renderer.setSize(this.domElement.getBoundingClientRect().width,this.domElement.getBoundingClientRect().height)
@@ -131,7 +135,4 @@ export default class BasicThree {
             }
         }
     }
-
-
-
 }

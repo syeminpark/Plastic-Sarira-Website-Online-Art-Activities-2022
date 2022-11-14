@@ -14,7 +14,7 @@
                   "properties": {
                         "id": "BANG #1",
                         "img-src": "./assets/img/Bangameori/studio/1.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/1.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/1.png",
                         "index": 1,
                         "beach": "Bangameori"
                   },
@@ -31,7 +31,7 @@
                   "properties": {
                         "id": "BANG #2",
                         "img-src": "./assets/img/Bangameori/studio/2.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/2.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/2.png",
                         "index": 2,
                         "beach": "Bangameori"
                   },
@@ -48,7 +48,7 @@
                   "properties": {
                         "id": "BANG #3",
                         "img-src": "./assets/img/Bangameori/studio/3.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/3.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/3.png",
                         "index": 3,
                         "beach": "Bangameori"
                   },
@@ -65,7 +65,7 @@
                   "properties": {
                         "id": "BANG #4",
                         "img-src": "./assets/img/Bangameori/studio/4.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/4.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/4.png",
                         "index": 4,
                         "beach": "Bangameori"
                   },
@@ -82,7 +82,7 @@
                   "properties": {
                         "id": "BANG #5",
                         "img-src": "./assets/img/Bangameori/studio/5.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/5.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/5.png",
                         "index": 5,
                         "beach": "Bangameori"
                   },
@@ -99,7 +99,7 @@
                   "properties": {
                         "id": "BANG #6",
                         "img-src": "./assets/img/Bangameori/studio/6.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/6.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/6.png",
                         "index": 6,
                         "beach": "Bangameori"
                   },
@@ -116,7 +116,7 @@
                   "properties": {
                         "id": "BANG #7",
                         "img-src": "./assets/img/Bangameori/studio/7.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/7.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/7.png",
                         "index": 7,
                         "beach": "Bangameori"
                   },
@@ -133,7 +133,7 @@
                   "properties": {
                         "id": "BANG #8",
                         "img-src": "./assets/img/Bangameori/studio/8.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/8.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/8.png",
                         "index": 8,
                         "beach": "Bangameori"
                   },
@@ -150,7 +150,7 @@
                   "properties": {
                         "id": "BANG #9",
                         "img-src": "./assets/img/Bangameori/studio/9.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/9.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/9.png",
                         "index": 9,
                         "beach": "Bangameori"
                   },
@@ -167,7 +167,7 @@
                   "properties": {
                         "id": "BANG #10",
                         "img-src": "./assets/img/Bangameori/studio/10.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/10.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/10.png",
                         "index": 10,
                         "beach": "Bangameori"
                   },
@@ -184,7 +184,7 @@
                   "properties": {
                         "id": "BANG #11",
                         "img-src": "./assets/img/Bangameori/studio/11.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/11.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/11.png",
                         "index": 11,
                         "beach": "Bangameori"
                   },
@@ -201,7 +201,7 @@
                   "properties": {
                         "id": "BANG #12",
                         "img-src": "./assets/img/Bangameori/studio/12.png",
-                        "thumb-src": "./assets/img/Bangameori/on-site/12.png",
+                        "thumb-src": "./assets/img/Bangameori/onsite/12.png",
                         "index": 12,
                         "beach": "Bangameori"
                   },

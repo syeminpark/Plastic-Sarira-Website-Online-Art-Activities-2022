@@ -14,7 +14,7 @@
                   "properties": {
                         "id": "MA #1",
                         "img-src": "./assets/img/Masian/studio/1.png",
-                        "thumb-src": "./assets/img/Masian/on-site/1.png",
+                        "thumb-src": "./assets/img/Masian/onsite/1.png",
                         "index": 1,
                         "beach": "Masian"
                   },
@@ -31,7 +31,7 @@
                   "properties": {
                         "id": "MA #2",
                         "img-src": "./assets/img/Masian/studio/2.png",
-                        "thumb-src": "./assets/img/Masian/on-site/2.png",
+                        "thumb-src": "./assets/img/Masian/onsite/2.png",
                         "index": 2,
                         "beach": "Masian"
                   },
@@ -48,7 +48,7 @@
                   "properties": {
                         "id": "MA #3",
                         "img-src": "./assets/img/Masian/studio/3.png",
-                        "thumb-src": "./assets/img/Masian/on-site/3.png",
+                        "thumb-src": "./assets/img/Masian/onsite/3.png",
                         "index": 3,
                         "beach": "Masian"
                   },
@@ -65,7 +65,7 @@
                   "properties": {
                         "id": "MA #4",
                         "img-src": "./assets/img/Masian/studio/4.png",
-                        "thumb-src": "./assets/img/Masian/on-site/4.png",
+                        "thumb-src": "./assets/img/Masian/onsite/4.png",
                         "index": 4,
                         "beach": "Masian"
                   },
@@ -82,7 +82,7 @@
                   "properties": {
                         "id": "MA #5",
                         "img-src": "./assets/img/Masian/studio/5.png",
-                        "thumb-src": "./assets/img/Masian/on-site/5.png",
+                        "thumb-src": "./assets/img/Masian/onsite/5.png",
                         "index": 5,
                         "beach": "Masian"
                   },
@@ -99,7 +99,7 @@
                   "properties": {
                         "id": "MA #6",
                         "img-src": "./assets/img/Masian/studio/6.png",
-                        "thumb-src": "./assets/img/Masian/on-site/6.png",
+                        "thumb-src": "./assets/img/Masian/onsite/6.png",
                         "index": 6,
                         "beach": "Masian"
                   },
@@ -116,7 +116,7 @@
                   "properties": {
                         "id": "MA #7",
                         "img-src": "./assets/img/Masian/studio/7.png",
-                        "thumb-src": "./assets/img/Masian/on-site/7.png",
+                        "thumb-src": "./assets/img/Masian/onsite/7.png",
                         "index": 7,
                         "beach": "Masian"
                   },
@@ -133,7 +133,7 @@
                   "properties": {
                         "id": "MA #8",
                         "img-src": "./assets/img/Masian/studio/8.png",
-                        "thumb-src": "./assets/img/Masian/on-site/8.png",
+                        "thumb-src": "./assets/img/Masian/onsite/8.png",
                         "index": 8,
                         "beach": "Masian"
                   },
@@ -150,7 +150,7 @@
                   "properties": {
                         "id": "MA #9",
                         "img-src": "./assets/img/Masian/studio/9.png",
-                        "thumb-src": "./assets/img/Masian/on-site/9.png",
+                        "thumb-src": "./assets/img/Masian/onsite/9.png",
                         "index": 9,
                         "beach": "Masian"
                   },
@@ -167,7 +167,7 @@
                   "properties": {
                         "id": "MA #10",
                         "img-src": "./assets/img/Masian/studio/10.png",
-                        "thumb-src": "./assets/img/Masian/on-site/10.png",
+                        "thumb-src": "./assets/img/Masian/onsite/10.png",
                         "index": 10,
                         "beach": "Masian"
                   },
@@ -184,7 +184,7 @@
                   "properties": {
                         "id": "MA #11",
                         "img-src": "./assets/img/Masian/studio/11.png",
-                        "thumb-src": "./assets/img/Masian/on-site/11.png",
+                        "thumb-src": "./assets/img/Masian/onsite/11.png",
                         "index": 11,
                         "beach": "Masian"
                   },
@@ -201,7 +201,7 @@
                   "properties": {
                         "id": "MA #12",
                         "img-src": "./assets/img/Masian/studio/12.png",
-                        "thumb-src": "./assets/img/Masian/on-site/12.png",
+                        "thumb-src": "./assets/img/Masian/onsite/12.png",
                         "index": 12,
                         "beach": "Masian"
                   },

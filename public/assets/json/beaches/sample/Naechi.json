@@ -5,7 +5,7 @@
                         "index": 1,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/1.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/1.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/1.png",
                         "id": "NAE  #1"
                   },
                   "type": "Feature",
@@ -22,7 +22,7 @@
                         "index": 2,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/2.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/2.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/2.png",
                         "id": "NAE #2"
                   },
                   "type": "Feature",
@@ -39,7 +39,7 @@
                         "index": 3,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/3.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/3.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/3.png",
                         "id": "NAE #3"
                   },
                   "type": "Feature",
@@ -56,7 +56,7 @@
                         "index": 4,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/4.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/4.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/4.png",
                         "id": "NAE #4"
                   },
                   "type": "Feature",
@@ -73,7 +73,7 @@
                         "index": 5,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/5.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/5.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/5.png",
                         "id": "NAE #5"
                   },
                   "type": "Feature",
@@ -90,7 +90,7 @@
                         "index": 6,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/6.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/6.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/6.png",
                         "id": "NAE #6"
                   },
                   "type": "Feature",
@@ -107,7 +107,7 @@
                         "index": 7,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/7.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/7.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/7.png",
                         "id": "NAE #7"
                   },
                   "type": "Feature",
@@ -124,7 +124,7 @@
                         "index": 8,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/8.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/8.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/8.png",
                         "id": "NAE #8"
                   },
                   "type": "Feature",
@@ -141,7 +141,7 @@
                         "index": 9,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/9.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/9.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/9.png",
                         "id": "NAE #9"
                   },
                   "type": "Feature",
@@ -158,7 +158,7 @@
                         "index": 10,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/10.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/10.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/10.png",
                         "id": "NAE #10"
                   },
                   "type": "Feature",
@@ -175,7 +175,7 @@
                         "index": 11,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/11.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/11.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/11.png",
                         "id": "NAE #11"
                   },
                   "type": "Feature",
@@ -192,7 +192,7 @@
                         "index": 12,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/12.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/12.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/12.png",
                         "id": "NAE #12"
                   },
                   "type": "Feature",
@@ -209,7 +209,7 @@
                         "index": 13,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/13.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/13.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/13.png",
                         "id": "NAE #13"
                   },
                   "type": "Feature",
@@ -226,7 +226,7 @@
                         "index": 14,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/14.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/14.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/14.png",
                         "id": "NAE #14"
                   },
                   "type": "Feature",
@@ -243,7 +243,7 @@
                         "index": 15,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/15.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/15.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/15.png",
                         "id": "NAE #15"
                   },
                   "type": "Feature",
@@ -260,7 +260,7 @@
                         "index": 16,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/16.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/16.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/16.png",
                         "id": "NAE #16"
                   },
                   "type": "Feature",
@@ -277,7 +277,7 @@
                         "index": 17,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/17.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/17.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/17.png",
                         "id": "NAE #17"
                   },
                   "type": "Feature",
@@ -294,7 +294,7 @@
                         "index": 18,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/18.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/18.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/18.png",
                         "id": "NAE #18"
                   },
                   "type": "Feature",
@@ -311,7 +311,7 @@
                         "index": 19,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/19.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/19.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/19.png",
                         "id": "NAE #19"
                   },
                   "type": "Feature",
@@ -328,7 +328,7 @@
                         "index": 20,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/20.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/20.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/20.png",
                         "id": "NAE #20"
                   },
                   "type": "Feature",
@@ -345,7 +345,7 @@
                         "index": 21,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/21.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/21.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/21.png",
                         "id": "NAE #21"
                   },
                   "type": "Feature",
@@ -362,7 +362,7 @@
                         "index": 22,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/22.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/22.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/22.png",
                         "id": "NAE #22"
                   },
                   "type": "Feature",
@@ -379,7 +379,7 @@
                         "index": 23,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/23.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/23.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/23.png",
                         "id": "NAE #23"
                   },
                   "type": "Feature",
@@ -396,7 +396,7 @@
                         "index": 24,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/24.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/24.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/24.png",
                         "id": "NAE #24"
                   },
                   "type": "Feature",
@@ -413,7 +413,7 @@
                         "index": 25,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/25.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/25.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/25.png",
                         "id": "NAE #25"
                   },
                   "type": "Feature",
@@ -430,7 +430,7 @@
                         "index": 26,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/26.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/26.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/26.png",
                         "id": "NAE #26"
                   },
                   "type": "Feature",
@@ -447,7 +447,7 @@
                         "index": 27,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/27.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/27.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/27.png",
                         "id": "NAE #27"
                   },
                   "type": "Feature",
@@ -464,7 +464,7 @@
                         "index": 28,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/28.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/28.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/28.png",
                         "id": "NAE #28"
                   },
                   "type": "Feature",
@@ -481,7 +481,7 @@
                         "index": 29,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/29.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/29.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/29.png",
                         "id": "NAE #29"
                   },
                   "type": "Feature",
@@ -498,7 +498,7 @@
                         "index": 30,
                         "beach": "Naechi",
                         "img-src": "./assets/img/Naechi/studio/30.png",
-                        "thumb-src": "./assets/img/Naechi/on-site/30.png",
+                        "thumb-src": "./assets/img/Naechi/onsite/30.png",
                         "id": "NAE #30"
                   },
                   "type": "Feature",
