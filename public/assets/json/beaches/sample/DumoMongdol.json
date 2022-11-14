@@ -3,9 +3,9 @@
             {
                   "properties": {
                         "index": 1,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/1.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/1.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/1.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/1.png",
                         "id": "DU #1"
                   },
                   "type": "Feature",
@@ -20,9 +20,9 @@
             {
                   "properties": {
                         "index": 2,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/2.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/2.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/2.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/2.png",
                         "id": "DU #2"
                   },
                   "type": "Feature",
@@ -37,9 +37,9 @@
             {
                   "properties": {
                         "index": 3,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/3.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/3.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/3.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/3.png",
                         "id": "DU #3"
                   },
                   "type": "Feature",
@@ -54,9 +54,9 @@
             {
                   "properties": {
                         "index": 4,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/4.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/4.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/4.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/4.png",
                         "id": "DU #4"
                   },
                   "type": "Feature",
@@ -71,9 +71,9 @@
             {
                   "properties": {
                         "index": 5,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/5.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/5.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/5.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/5.png",
                         "id": "DU #5"
                   },
                   "type": "Feature",
@@ -88,9 +88,9 @@
             {
                   "properties": {
                         "index": 6,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/6.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/6.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/6.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/6.png",
                         "id": "DU #6"
                   },
                   "type": "Feature",
@@ -105,9 +105,9 @@
             {
                   "properties": {
                         "index": 7,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/7.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/7.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/7.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/7.png",
                         "id": "DU #7"
                   },
                   "type": "Feature",
@@ -122,9 +122,9 @@
             {
                   "properties": {
                         "index": 8,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/8.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/8.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/8.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/8.png",
                         "id": "DU #8"
                   },
                   "type": "Feature",
@@ -139,9 +139,9 @@
             {
                   "properties": {
                         "index": 9,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/9.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/9.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/9.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/9.png",
                         "id": "DU #9"
                   },
                   "type": "Feature",
@@ -156,9 +156,9 @@
             {
                   "properties": {
                         "index": 10,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/10.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/10.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/10.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/10.png",
                         "id": "DU #10"
                   },
                   "type": "Feature",
@@ -173,9 +173,9 @@
             {
                   "properties": {
                         "index": 11,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/11.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/11.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/11.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/11.png",
                         "id": "DU #11"
                   },
                   "type": "Feature",
@@ -190,9 +190,9 @@
             {
                   "properties": {
                         "index": 12,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/12.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/12.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/12.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/12.png",
                         "id": "DU #12"
                   },
                   "type": "Feature",
@@ -207,9 +207,9 @@
             {
                   "properties": {
                         "index": 13,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/13.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/13.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/13.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/13.png",
                         "id": "DU #13"
                   },
                   "type": "Feature",
@@ -224,9 +224,9 @@
             {
                   "properties": {
                         "index": 14,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/14.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/14.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/14.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/14.png",
                         "id": "DU #14"
                   },
                   "type": "Feature",
@@ -241,9 +241,9 @@
             {
                   "properties": {
                         "index": 15,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/15.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/15.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/15.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/15.png",
                         "id": "DU #15"
                   },
                   "type": "Feature",
@@ -258,9 +258,9 @@
             {
                   "properties": {
                         "index": 16,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/16.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/16.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/16.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/16.png",
                         "id": "DU #16"
                   },
                   "type": "Feature",
@@ -275,9 +275,9 @@
             {
                   "properties": {
                         "index": 17,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/17.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/17.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/17.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/17.png",
                         "id": "DU #17"
                   },
                   "type": "Feature",
@@ -292,9 +292,9 @@
             {
                   "properties": {
                         "index": 18,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/18.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/18.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/18.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/18.png",
                         "id": "DU #18"
                   },
                   "type": "Feature",
@@ -309,9 +309,9 @@
             {
                   "properties": {
                         "index": 19,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/19.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/19.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/19.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/19.png",
                         "id": "DU #19"
                   },
                   "type": "Feature",
@@ -326,9 +326,9 @@
             {
                   "properties": {
                         "index": 20,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/20.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/20.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/20.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/20.png",
                         "id": "DU #20"
                   },
                   "type": "Feature",
@@ -343,9 +343,9 @@
             {
                   "properties": {
                         "index": 21,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/21.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/21.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/21.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/21.png",
                         "id": "DU #21"
                   },
                   "type": "Feature",
@@ -360,9 +360,9 @@
             {
                   "properties": {
                         "index": 22,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/22.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/22.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/22.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/22.png",
                         "id": "DU #22"
                   },
                   "type": "Feature",
@@ -377,9 +377,9 @@
             {
                   "properties": {
                         "index": 23,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/23.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/23.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/23.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/23.png",
                         "id": "DU #23"
                   },
                   "type": "Feature",
@@ -394,9 +394,9 @@
             {
                   "properties": {
                         "index": 24,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/24.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/24.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/24.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/24.png",
                         "id": "DU #24"
                   },
                   "type": "Feature",
@@ -411,9 +411,9 @@
             {
                   "properties": {
                         "index": 25,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/25.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/25.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/25.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/25.png",
                         "id": "DU #25"
                   },
                   "type": "Feature",
@@ -428,9 +428,9 @@
             {
                   "properties": {
                         "index": 26,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/26.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/26.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/26.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/26.png",
                         "id": "DU #26"
                   },
                   "type": "Feature",
@@ -445,9 +445,9 @@
             {
                   "properties": {
                         "index": 27,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/27.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/27.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/27.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/27.png",
                         "id": "DU #27"
                   },
                   "type": "Feature",
@@ -462,9 +462,9 @@
             {
                   "properties": {
                         "index": 28,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/28.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/28.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/28.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/28.png",
                         "id": "DU #28"
                   },
                   "type": "Feature",
@@ -479,9 +479,9 @@
             {
                   "properties": {
                         "index": 29,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/29.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/29.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/29.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/29.png",
                         "id": "DU #29"
                   },
                   "type": "Feature",
@@ -496,9 +496,9 @@
             {
                   "properties": {
                         "index": 30,
-                        "beach": "DumoMongdol",
-                        "img-src": "./assets/img/DumoMongdol/studio/30.png",
-                        "thumb-src": "./assets/img/DumoMongdol/onsite/30.png",
+                        "beach": "Dumomongdol",
+                        "img-src": "./assets/img/Dumomongdol/studio/30.png",
+                        "thumb-src": "./assets/img/Dumomongdol/onsite/30.png",
                         "id": "DU #30"
                   },
                   "type": "Feature",
@@ -815,7 +815,7 @@
             }
       ],
       "name_KR": "\ub450\ubaa8 \ubabd\ub3cc \ud574\ubcc0",
-      "name_EN": "Dumo Mongdol Beach",
+      "name_EN": "Dumomongdol Beach",
       "address_KR": "\ub300\ud55c\ubbfc\uad6d \uacbd\ub0a8 \uac70\uc81c\uc2dc \uc7a5\ubaa9\uba74 \uad00\ud3ec\ub9ac",
       "address_EN": "Gwanpo-gil, Jangmok-myeon, Geoje-si, Gyeongsangnam-do, Republic of Korea",
       "type": "FeatureCollection"
