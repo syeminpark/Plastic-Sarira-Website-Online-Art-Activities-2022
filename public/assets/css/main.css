@@ -123,7 +123,7 @@ html, body {
 .header .language {
 	position: fixed;
 	top: var(--main-padding);
-	left: var(--main-padding);
+	right: var(--main-padding);
 	transition: opacity 0.3s;
 }
 
@@ -141,7 +141,17 @@ html, body {
 
 #navigation {
 	position: fixed;
-	right: var(--main-padding);
+	left: var(--main-padding);
+	top: 50%;
+	transform: translate(0,-50%);
+	width: var(--nav-bar);
+	min-height: var(--nav-bar);
+	background-color: white;
+	border-radius: var(--bevel-small);
+}
+#navigation2 {
+	position: fixed;
+	left: 4%;
 	top: 50%;
 	transform: translate(0,-50%);
 	width: var(--nav-bar);
@@ -154,7 +164,7 @@ html, body {
 	position: fixed;
 	min-width: var(--nav-bar);
 	height: var(--nav-bar);
-	left: var(--main-padding);
+	right: var(--main-padding);
 	bottom: var(--main-padding);
 	background-color: white;
 	border-radius: var(--bevel-small);
@@ -175,7 +185,7 @@ html, body {
 	position: fixed;
 	width: var(--nav-bar);
 	height: var(--nav-bar);
-	right: var(--main-padding);
+	left: var(--main-padding);
 	bottom: var(--main-padding);
 	background-color: white;
 	border-radius: 100%;
@@ -680,7 +690,7 @@ html, body {
 .world-popup {
 	position: fixed;
 	bottom: calc(var(--nav-bar) + calc(var(--main-padding) * 2));
-	left: var(--main-padding);
+	right: var(--main-padding);
 	min-width: calc(var(--nav-bar) * 3);
 	min-height: calc(var(--nav-bar) * 3);
 	background-color: white;
