@@ -7,8 +7,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #1",
-                        "img-src": "./assets/img/Yumjeon/studio/1.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/1.png",
+                        "img-src": "./assets/img/Yumjeon/studio/1.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/1.jpg",
                         "index": 1,
                         "beach": "Yumjeon"
                   },
@@ -24,8 +24,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #2",
-                        "img-src": "./assets/img/Yumjeon/studio/2.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/2.png",
+                        "img-src": "./assets/img/Yumjeon/studio/2.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/2.jpg",
                         "index": 2,
                         "beach": "Yumjeon"
                   },
@@ -41,8 +41,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #3",
-                        "img-src": "./assets/img/Yumjeon/studio/3.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/3.png",
+                        "img-src": "./assets/img/Yumjeon/studio/3.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/3.jpg",
                         "index": 3,
                         "beach": "Yumjeon"
                   },
@@ -58,8 +58,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #4",
-                        "img-src": "./assets/img/Yumjeon/studio/4.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/4.png",
+                        "img-src": "./assets/img/Yumjeon/studio/4.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/4.jpg",
                         "index": 4,
                         "beach": "Yumjeon"
                   },
@@ -75,8 +75,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #5",
-                        "img-src": "./assets/img/Yumjeon/studio/5.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/5.png",
+                        "img-src": "./assets/img/Yumjeon/studio/5.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/5.jpg",
                         "index": 5,
                         "beach": "Yumjeon"
                   },
@@ -92,8 +92,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #6",
-                        "img-src": "./assets/img/Yumjeon/studio/6.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/6.png",
+                        "img-src": "./assets/img/Yumjeon/studio/6.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/6.jpg",
                         "index": 6,
                         "beach": "Yumjeon"
                   },
@@ -109,8 +109,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #7",
-                        "img-src": "./assets/img/Yumjeon/studio/7.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/7.png",
+                        "img-src": "./assets/img/Yumjeon/studio/7.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/7.jpg",
                         "index": 7,
                         "beach": "Yumjeon"
                   },
@@ -126,8 +126,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #8",
-                        "img-src": "./assets/img/Yumjeon/studio/8.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/8.png",
+                        "img-src": "./assets/img/Yumjeon/studio/8.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/8.jpg",
                         "index": 8,
                         "beach": "Yumjeon"
                   },
@@ -143,8 +143,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #9",
-                        "img-src": "./assets/img/Yumjeon/studio/9.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/9.png",
+                        "img-src": "./assets/img/Yumjeon/studio/9.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/9.jpg",
                         "index": 9,
                         "beach": "Yumjeon"
                   },
@@ -160,8 +160,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #10",
-                        "img-src": "./assets/img/Yumjeon/studio/10.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/10.png",
+                        "img-src": "./assets/img/Yumjeon/studio/10.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/10.jpg",
                         "index": 10,
                         "beach": "Yumjeon"
                   },
@@ -177,8 +177,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #11",
-                        "img-src": "./assets/img/Yumjeon/studio/11.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/11.png",
+                        "img-src": "./assets/img/Yumjeon/studio/11.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/11.jpg",
                         "index": 11,
                         "beach": "Yumjeon"
                   },
@@ -194,8 +194,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #12",
-                        "img-src": "./assets/img/Yumjeon/studio/12.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/12.png",
+                        "img-src": "./assets/img/Yumjeon/studio/12.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/12.jpg",
                         "index": 12,
                         "beach": "Yumjeon"
                   },
@@ -211,8 +211,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #13",
-                        "img-src": "./assets/img/Yumjeon/studio/13.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/13.png",
+                        "img-src": "./assets/img/Yumjeon/studio/13.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/13.jpg",
                         "index": 13,
                         "beach": "Yumjeon"
                   },
@@ -228,8 +228,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #14",
-                        "img-src": "./assets/img/Yumjeon/studio/14.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/14.png",
+                        "img-src": "./assets/img/Yumjeon/studio/14.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/14.jpg",
                         "index": 14,
                         "beach": "Yumjeon"
                   },
@@ -245,8 +245,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #15",
-                        "img-src": "./assets/img/Yumjeon/studio/15.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/15.png",
+                        "img-src": "./assets/img/Yumjeon/studio/15.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/15.jpg",
                         "index": 15,
                         "beach": "Yumjeon"
                   },
@@ -262,8 +262,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #16",
-                        "img-src": "./assets/img/Yumjeon/studio/16.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/16.png",
+                        "img-src": "./assets/img/Yumjeon/studio/16.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/16.jpg",
                         "index": 16,
                         "beach": "Yumjeon"
                   },
@@ -279,8 +279,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #17",
-                        "img-src": "./assets/img/Yumjeon/studio/17.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/17.png",
+                        "img-src": "./assets/img/Yumjeon/studio/17.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/17.jpg",
                         "index": 17,
                         "beach": "Yumjeon"
                   },
@@ -296,8 +296,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #18",
-                        "img-src": "./assets/img/Yumjeon/studio/18.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/18.png",
+                        "img-src": "./assets/img/Yumjeon/studio/18.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/18.jpg",
                         "index": 18,
                         "beach": "Yumjeon"
                   },
@@ -313,8 +313,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #19",
-                        "img-src": "./assets/img/Yumjeon/studio/19.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/19.png",
+                        "img-src": "./assets/img/Yumjeon/studio/19.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/19.jpg",
                         "index": 19,
                         "beach": "Yumjeon"
                   },
@@ -330,8 +330,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #20",
-                        "img-src": "./assets/img/Yumjeon/studio/20.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/20.png",
+                        "img-src": "./assets/img/Yumjeon/studio/20.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/20.jpg",
                         "index": 20,
                         "beach": "Yumjeon"
                   },
@@ -347,8 +347,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #21",
-                        "img-src": "./assets/img/Yumjeon/studio/21.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/21.png",
+                        "img-src": "./assets/img/Yumjeon/studio/21.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/21.jpg",
                         "index": 21,
                         "beach": "Yumjeon"
                   },
@@ -364,8 +364,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #22",
-                        "img-src": "./assets/img/Yumjeon/studio/22.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/22.png",
+                        "img-src": "./assets/img/Yumjeon/studio/22.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/22.jpg",
                         "index": 22,
                         "beach": "Yumjeon"
                   },
@@ -381,8 +381,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #23",
-                        "img-src": "./assets/img/Yumjeon/studio/23.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/23.png",
+                        "img-src": "./assets/img/Yumjeon/studio/23.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/23.jpg",
                         "index": 23,
                         "beach": "Yumjeon"
                   },
@@ -398,8 +398,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #24",
-                        "img-src": "./assets/img/Yumjeon/studio/24.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/24.png",
+                        "img-src": "./assets/img/Yumjeon/studio/24.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/24.jpg",
                         "index": 24,
                         "beach": "Yumjeon"
                   },
@@ -415,8 +415,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #25",
-                        "img-src": "./assets/img/Yumjeon/studio/25.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/25.png",
+                        "img-src": "./assets/img/Yumjeon/studio/25.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/25.jpg",
                         "index": 25,
                         "beach": "Yumjeon"
                   },
@@ -432,8 +432,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #26",
-                        "img-src": "./assets/img/Yumjeon/studio/26.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/26.png",
+                        "img-src": "./assets/img/Yumjeon/studio/26.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/26.jpg",
                         "index": 26,
                         "beach": "Yumjeon"
                   },
@@ -449,8 +449,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #27",
-                        "img-src": "./assets/img/Yumjeon/studio/27.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/27.png",
+                        "img-src": "./assets/img/Yumjeon/studio/27.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/27.jpg",
                         "index": 27,
                         "beach": "Yumjeon"
                   },
@@ -466,8 +466,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #28",
-                        "img-src": "./assets/img/Yumjeon/studio/28.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/28.png",
+                        "img-src": "./assets/img/Yumjeon/studio/28.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/28.jpg",
                         "index": 28,
                         "beach": "Yumjeon"
                   },
@@ -483,8 +483,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #29",
-                        "img-src": "./assets/img/Yumjeon/studio/29.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/29.png",
+                        "img-src": "./assets/img/Yumjeon/studio/29.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/29.jpg",
                         "index": 29,
                         "beach": "Yumjeon"
                   },
@@ -500,8 +500,8 @@
                   "type": "Feature",
                   "properties": {
                         "id": "YUM #30",
-                        "img-src": "./assets/img/Yumjeon/studio/30.png",
-                        "thumb-src": "./assets/img/Yumjeon/onsite/30.png",
+                        "img-src": "./assets/img/Yumjeon/studio/30.jpg",
+                        "thumb-src": "./assets/img/Yumjeon/onsite/30.jpg",
                         "index": 30,
                         "beach": "Yumjeon"
                   },

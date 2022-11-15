@@ -4,8 +4,8 @@
                   "properties": {
                         "index": 1,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/1.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/1.png",
+                        "img-src": "./assets/img/Gamchu/studio/1.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/1.jpg",
                         "id": "GAM #1"
                   },
                   "type": "Feature",
@@ -21,8 +21,8 @@
                   "properties": {
                         "index": 2,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/2.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/2.png",
+                        "img-src": "./assets/img/Gamchu/studio/2.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/2.jpg",
                         "id": "GAM #2"
                   },
                   "type": "Feature",
@@ -38,8 +38,8 @@
                   "properties": {
                         "index": 3,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/3.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/3.png",
+                        "img-src": "./assets/img/Gamchu/studio/3.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/3.jpg",
                         "id": "GAM #3"
                   },
                   "type": "Feature",
@@ -55,8 +55,8 @@
                   "properties": {
                         "index": 4,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/4.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/4.png",
+                        "img-src": "./assets/img/Gamchu/studio/4.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/4.jpg",
                         "id": "GAM #4"
                   },
                   "type": "Feature",
@@ -72,8 +72,8 @@
                   "properties": {
                         "index": 5,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/5.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/5.png",
+                        "img-src": "./assets/img/Gamchu/studio/5.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/5.jpg",
                         "id": "GAM #5"
                   },
                   "type": "Feature",
@@ -89,8 +89,8 @@
                   "properties": {
                         "index": 6,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/6.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/6.png",
+                        "img-src": "./assets/img/Gamchu/studio/6.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/6.jpg",
                         "id": "GAM #6"
                   },
                   "type": "Feature",
@@ -106,8 +106,8 @@
                   "properties": {
                         "index": 7,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/7.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/7.png",
+                        "img-src": "./assets/img/Gamchu/studio/7.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/7.jpg",
                         "id": "GAM #7"
                   },
                   "type": "Feature",
@@ -123,8 +123,8 @@
                   "properties": {
                         "index": 8,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/8.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/8.png",
+                        "img-src": "./assets/img/Gamchu/studio/8.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/8.jpg",
                         "id": "GAM #8"
                   },
                   "type": "Feature",
@@ -140,8 +140,8 @@
                   "properties": {
                         "index": 9,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/9.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/9.png",
+                        "img-src": "./assets/img/Gamchu/studio/9.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/9.jpg",
                         "id": "GAM #9"
                   },
                   "type": "Feature",
@@ -157,8 +157,8 @@
                   "properties": {
                         "index": 10,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/10.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/10.png",
+                        "img-src": "./assets/img/Gamchu/studio/10.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/10.jpg",
                         "id": "GAM #10"
                   },
                   "type": "Feature",
@@ -174,8 +174,8 @@
                   "properties": {
                         "index": 11,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/11.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/11.png",
+                        "img-src": "./assets/img/Gamchu/studio/11.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/11.jpg",
                         "id": "GAM #11"
                   },
                   "type": "Feature",
@@ -191,8 +191,8 @@
                   "properties": {
                         "index": 12,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/12.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/12.png",
+                        "img-src": "./assets/img/Gamchu/studio/12.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/12.jpg",
                         "id": "GAM #12"
                   },
                   "type": "Feature",
@@ -208,8 +208,8 @@
                   "properties": {
                         "index": 13,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/13.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/13.png",
+                        "img-src": "./assets/img/Gamchu/studio/13.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/13.jpg",
                         "id": "GAM #13"
                   },
                   "type": "Feature",
@@ -225,8 +225,8 @@
                   "properties": {
                         "index": 14,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/14.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/14.png",
+                        "img-src": "./assets/img/Gamchu/studio/14.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/14.jpg",
                         "id": "GAM #14"
                   },
                   "type": "Feature",
@@ -242,8 +242,8 @@
                   "properties": {
                         "index": 15,
                         "beach": "Gamchu",
-                        "img-src": "./assets/img/Gamchu/studio/15.png",
-                        "thumb-src": "./assets/img/Gamchu/onsite/15.png",
+                        "img-src": "./assets/img/Gamchu/studio/15.jpg",
+                        "thumb-src": "./assets/img/Gamchu/onsite/15.jpg",
                         "id": "GAM #15"
                   },
                   "type": "Feature",
