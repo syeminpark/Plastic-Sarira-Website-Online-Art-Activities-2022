@@ -166,6 +166,7 @@ class PageLayer12345 {
 	}
 
 	toggleBtns(_btn) {
+
 		const nav_btns = document.getElementById("navigation").querySelectorAll(".btn");
 		for (let i = 0; i < nav_btns.length; i++) {
 			if (nav_btns[i] === _btn) {
@@ -173,8 +174,17 @@ class PageLayer12345 {
 			} else {
 				nav_btns[i].classList.remove("active");
 			}
+
 		}
+		if (_btn == document.getElementById("plastic-sarira-title")) {
+			document.getElementById("nav-home-btn").classList.add("active");
+		}
+		
 	}
+
+
+
+
 
 	async load(_btn, _lang, _no_preloader) {
 		//console.log(_btn);
@@ -212,6 +222,8 @@ class PageLayer12345 {
 
 			if (_btn.getAttribute("data-name") == "home") {
 				this.homepage.setup();
+
+
 			} else if (_btn.getAttribute("data-name") == "about") {
 				this.aboutpage.setup();
 			} else if (_btn.getAttribute("data-name") == "research") {
