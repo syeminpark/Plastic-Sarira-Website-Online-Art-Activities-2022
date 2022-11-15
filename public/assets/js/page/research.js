@@ -98,6 +98,7 @@ class Research12345 extends Page12345{
 	}
 
 	async loadData(_btn){
+		this.researchThree.reset()
 		this.list.reset();
 
 		const url = _btn.getAttribute('data-link');
