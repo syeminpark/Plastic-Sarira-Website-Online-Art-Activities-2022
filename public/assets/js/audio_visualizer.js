@@ -53,8 +53,8 @@ class AudioVisualizer12345{
 		this.animation = requestAnimationFrame(this.draw.bind(this));
 		if(this.analyser) this.analyser.getByteFrequencyData(this.data);
 		this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-		this.margin = this.container_bbox.width*0.15;
-		this.interval = 0.5*(this.canvas.width-this.margin*2)/this.data.length;
+		this.margin = this.container_bbox.widtrval = 0.5*(this.canvas.width-this.mah*0.15;
+		this.intergin*2)/this.data.length;
 		//console.log(this.interval * 0.6);
 		for(let i=0; i<this.data.length; i++){
 			this.data_pos[i] += (this.data[i] - this.data_pos[i])*0.1;
