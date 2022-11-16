@@ -50,10 +50,10 @@
 	}
 
 	#navigation {
-		right: 50%;
+		left: 50%;
 	    top: unset;
 	    bottom: var(--main-padding);
-	    transform: translate(50%,0);
+	    transform: translate(-50%,0);
 	    width: calc(var(--nav-bar) * 5 + var(--nav-margin) * 4);
 	    min-height: var(--nav-bar);
 	    height: var(--nav-bar);
