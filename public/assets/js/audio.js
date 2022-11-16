@@ -20,8 +20,11 @@ class Audio12345 {
 		this.visualizer = new AudioVisualizer12345(_visualizer);
 		this.clickSoundDOM = document.getElementById("click")
 		this.backgroundSoundDOM = document.getElementById("background")
-
+		this.assignClickEvents();
 		this.initAudio();
+	
+		
+
 	}
 
 	toggle() {
@@ -63,7 +66,8 @@ class Audio12345 {
 			background_gain.connect(this.analyserNode)
 			this.backgroundSource.start(0)
 
-			//this.assignClickEvents();
+			
+			
 
 		} catch (error) {
 			console.error(error);
@@ -95,11 +99,13 @@ class Audio12345 {
 
 	assignClickEvents() {
 		const buttons = document.querySelectorAll(".btn");
-
+		const title = document.getElementById("plastic-sarira-title")
+		
+		const array= [...buttons,title]
 		console.log(buttons)
-		for (let i = 0; i < buttons.length; i++) {
-			if (buttons[i].id != "sound-btn") {
-				buttons[i].addEventListener('mousedown', (event) => {
+		for (let i = 0; i < array.length; i++) {
+			if (array[i].id != "sound-btn") {
+				array[i].addEventListener('mousedown', (event) => {
 					console.log(this)
 					document.getElementById("click").play()
 					setTimeout(() => {
