@@ -79,10 +79,10 @@ export default class BasicThree {
             }
         )
         window.addEventListener('resize', () => this.updateSize(), false);
-        console.log(this.scene)
+       // console.log(this.scene)
     }
     animate = () => {
-        console.log("animating")
+      
         this.animationRequest = requestAnimationFrame(this.animate);
         this.controls.update()
         this.renderer.render(this.scene, this.camera)
