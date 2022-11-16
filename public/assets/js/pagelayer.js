@@ -100,7 +100,6 @@ class PageLayer12345 {
 			if (_pageLayer.popup_container) {
 				while (_pageLayer.popup_container.firstChild) {
 					_pageLayer.popup_container.removeChild(_pageLayer.popup_container.lastChild);
-
 				}
 			}
 		}
@@ -184,10 +183,6 @@ class PageLayer12345 {
 
 	}
 
-
-
-
-
 	async load(_btn, _lang, _no_preloader) {
 		//console.log(_btn);
 		const url = _btn.getAttribute('data-src');
@@ -222,7 +217,7 @@ class PageLayer12345 {
 
 		if (_btn.getAttribute("data-name") == "home") {
 			this.homepage.setup();
-
+		
 		} else if (_btn.getAttribute("data-name") == "about") {
 			this.aboutpage.setup();
 		} else if (_btn.getAttribute("data-name") == "research") {

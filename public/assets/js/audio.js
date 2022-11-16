@@ -48,39 +48,33 @@ class Audio12345 {
 
 		//background
 		this.backgroundSource = this.audioContext.createBufferSource()
-		const background_gain=this.audioContext.createGain();
-		this.analyserNode=this.audioContext.createAnalyser();
+		const background_gain = this.audioContext.createGain();
+		this.analyserNode = this.audioContext.createAnalyser();
 		this.analyserNode.fftSize = 32;
 		this.visualizer.setAnalyzer(this.analyserNode);
-	
+
 		try {
 			let response = await fetch("./assets/mp3/background.mp3")
-			let arrayBuffer= await response.arrayBuffer()
-		
-			this.backgroundSource.buffer =await this.audioContext.decodeAudioData(arrayBuffer)
-			this.backgroundSource.loop=true
+			let arrayBuffer = await response.arrayBuffer()
+
+			this.backgroundSource.buffer = await this.audioContext.decodeAudioData(arrayBuffer)
+			this.backgroundSource.loop = true
 			this.backgroundSource.connect(background_gain)
 			background_gain.connect(this.analyserNode)
 			this.backgroundSource.start(0)
+
+			//this.assignClickEvents();
 
 		} catch (error) {
 			console.error(error);
 		}
 
 
-		addEventListener('mousedown', (event) => {
-			if (this.is_audio_on) {
-			
-				setTimeout(() => {
-				
-				}, 100);
-			}
-		});
 	}
 
 	on() {
 		this.analyserNode.connect(this.audioContext.destination);
-		this.bufferStartTime=this.audioContext.currentTime
+		this.bufferStartTime = this.audioContext.currentTime
 		this.is_audio_on = true;
 		//console.log("audio on!");
 		this.button.classList.add("active");
@@ -97,6 +91,24 @@ class Audio12345 {
 		this.visualizer.hide();
 		if (this.gainNode)
 			this.gainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
+	}
+
+	assignClickEvents() {
+		const buttons = document.querySelectorAll(".btn");
+
+		console.log(buttons)
+		for (let i = 0; i < buttons.length; i++) {
+			if (buttons[i].id != "sound-btn") {
+				buttons[i].addEventListener('mousedown', (event) => {
+					console.log(this)
+					document.getElementById("click").play()
+					setTimeout(() => {
+						document.getElementById("click").pause();
+						document.getElementById("click").currentTime = 0
+					}, 100);
+				})
+			}
+		}
 	}
 }
 
