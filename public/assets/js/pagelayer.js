@@ -100,6 +100,7 @@ class PageLayer12345 {
 			if (_pageLayer.popup_container) {
 				while (_pageLayer.popup_container.firstChild) {
 					_pageLayer.popup_container.removeChild(_pageLayer.popup_container.lastChild);
+
 				}
 			}
 		}
@@ -111,6 +112,7 @@ class PageLayer12345 {
 		this.worldpage.unload();
 
 		this.toggleBtns();
+
 	}
 
 	assign_hide(_pageLayer) {
@@ -158,10 +160,10 @@ class PageLayer12345 {
 		}
 
 		if (!_no_preloader) this.preloader.reset();
-		setTimeout(() => {
+		setTimeout(async () => {
 			this.is_loading = true;
 
-			this.load(_btn, _lang, _no_preloader);
+			await this.load(_btn, _lang, _no_preloader);
 		}, 600);
 	}
 
@@ -179,7 +181,7 @@ class PageLayer12345 {
 		if (_btn == document.getElementById("plastic-sarira-title")) {
 			document.getElementById("nav-home-btn").classList.add("active");
 		}
-		
+
 	}
 
 
@@ -200,50 +202,47 @@ class PageLayer12345 {
 		}
 		let response;
 		let text;
-		try {
-			response = await fetch(url);
-			text = await response.text();
-		} catch (error) {
-			console.error(error)
-		} finally {
-			//console.log(text);
 
-			this.popup_container.innerHTML = text;
-			//console.log(_lang);
-			if (_lang) {
-				if (_lang.current_lang == "EN") {
-					_lang.EN();
-				} else if (_lang.current_lang == "KR") {
-					_lang.KR();
-				}
+		response = await fetch(url);
+		text = await response.text();
+
+		//console.log(text);
+
+		this.popup_container.innerHTML = text;
+		//console.log(_lang);
+		if (_lang) {
+			if (_lang.current_lang == "EN") {
+				_lang.EN();
+			} else if (_lang.current_lang == "KR") {
+				_lang.KR();
 			}
-
-			console.log("current Page: ", _btn.getAttribute("data-name"))
-
-			if (_btn.getAttribute("data-name") == "home") {
-				this.homepage.setup();
-
-
-			} else if (_btn.getAttribute("data-name") == "about") {
-				this.aboutpage.setup();
-			} else if (_btn.getAttribute("data-name") == "research") {
-				this.researchpage.setup();
-			} else if (_btn.getAttribute("data-name") == "sarira") {
-				this.sarirapage.setup();
-			} else if (_btn.getAttribute("data-name") == "world") {
-				this.worldpage.setup();
-			}
-
-			this.toggleBtns(_btn);
-
-			if (!_no_preloader) this.preloader.onLoad();
-
-			this.popup.classList.remove('inactive');
-			this.is_loading = false;
-			setTimeout(() => {
-				this.is_loading = false;
-			}, 300);
 		}
+
+		console.log("current Page: ", _btn.getAttribute("data-name"))
+
+		if (_btn.getAttribute("data-name") == "home") {
+			this.homepage.setup();
+
+		} else if (_btn.getAttribute("data-name") == "about") {
+			this.aboutpage.setup();
+		} else if (_btn.getAttribute("data-name") == "research") {
+			this.researchpage.setup();
+		} else if (_btn.getAttribute("data-name") == "sarira") {
+			this.sarirapage.setup();
+		} else if (_btn.getAttribute("data-name") == "world") {
+			this.worldpage.setup();
+		}
+
+		this.toggleBtns(_btn);
+
+		if (!_no_preloader) this.preloader.onLoad();
+
+		this.popup.classList.remove('inactive');
+		this.is_loading = false;
+		setTimeout(() => {
+			this.is_loading = false;
+		}, 300);
+
 	}
 }
 

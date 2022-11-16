@@ -41,6 +41,7 @@ export default class BasicThree {
     }
 
     import = (domElement, sourcePath, isSpread) => {
+      this.reset()
         this.spread= isSpread
         if(isSpread){
             //약간 멀미남
@@ -49,7 +50,6 @@ export default class BasicThree {
         }
         this.domElement=domElement;
 
-        this.reset();
         let modelLength;
         this.domElement.appendChild(this.renderer.domElement)
         this.renderer.setSize(this.domElement.getBoundingClientRect().width,this.domElement.getBoundingClientRect().height)
@@ -57,8 +57,6 @@ export default class BasicThree {
         loader.load(
             sourcePath,
             (geometry) => {
-
-          
                 geometry.computeBoundingBox()
                 modelLength = geometry.boundingBox.max.y
                 this.originalArray = new Array(geometry.attributes.position.count)
@@ -69,8 +67,7 @@ export default class BasicThree {
                 this.object = new THREE.Points(geometry, this.material);
                 this.scene.add(this.object)
                 this.updateSize()
-                
-               
+            
                 this.animate()
                 this.camera.position.set(0, 0, 150 + modelLength * 5)
             },
@@ -82,9 +79,10 @@ export default class BasicThree {
             }
         )
         window.addEventListener('resize', () => this.updateSize(), false);
+        console.log(this.scene)
     }
     animate = () => {
-
+        console.log("animating")
         this.animationRequest = requestAnimationFrame(this.animate);
         this.controls.update()
         this.renderer.render(this.scene, this.camera)
@@ -104,6 +102,7 @@ export default class BasicThree {
 
     reset() {
         this.scene.remove(this.object)
+        console.log("reset")
         this.object = undefined
         this.selectedArray = [];
         this.originalArray = [];

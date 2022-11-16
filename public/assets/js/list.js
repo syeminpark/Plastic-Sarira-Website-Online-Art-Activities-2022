@@ -64,7 +64,7 @@ class List12345 {
 			if (this.marker_data[i]["img-src"]) {
 				item.setAttribute('img-src', this.marker_data[i]["img-src"]);
 			}
-			console.log(item)
+			
 
 			this.list_items.push(item);
 			this.container.appendChild(item);

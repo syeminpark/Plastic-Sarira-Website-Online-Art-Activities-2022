@@ -43,6 +43,7 @@ class Research12345 extends Page12345{
 				}
 			}
 		}
+	
 
 		const map_container = this.pagelayer.popup.querySelector('#map-container');
 		if(map_container)
@@ -76,6 +77,10 @@ class Research12345 extends Page12345{
 		this.loadsvg();
 	}
 
+	reset_page(){
+		super.reset_page()
+	}
+
 	mobiletogglelist(){
 		if(this.mobile_list_toggle_target.classList.contains('m-inactive')){
 			this.mobile_list_toggle_target.classList.remove('m-inactive');
@@ -98,8 +103,8 @@ class Research12345 extends Page12345{
 	}
 
 	async loadData(_btn){
-		this.researchThree.reset()
 		this.list.reset();
+	
 
 		const url = _btn.getAttribute('data-link');
 		const response = await fetch(url);
@@ -139,6 +144,7 @@ class Research12345 extends Page12345{
 	}
 
 	loadList(_data){
+	
 		this.list_data = _data["features"].filter((d)=>{
 			return d.geometry.type === "Point";
 		});

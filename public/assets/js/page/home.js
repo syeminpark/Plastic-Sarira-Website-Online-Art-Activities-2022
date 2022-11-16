@@ -11,11 +11,11 @@ class Home12345 extends Page12345 {
     constructor(_pagelayer) {
         super();
         this.pagelayer = _pagelayer
-        this.homeThree= new BasicThree();
-        
+        this.homeThree
     }
 
     setup() {
+        this.homeThree= new BasicThree();
         const SPREAD= true
         this.homeThree.import(
             document.getElementById('home'), 
@@ -25,8 +25,7 @@ class Home12345 extends Page12345 {
     }
 
     reset_page() {
-        super.reset_page()
-        this.homeThree.reset();
+        super.reset_page();
     }
 
     getRandomSourcePath() {
