@@ -1,8 +1,8 @@
 import {Page12345} from './page.js';
-import {Preloader12345} from './../preloader.js';
-import {SVGLoader12345} from './../svgloader.js';
-import {Map12345} from './../map.js';
-import {List12345} from './../list.js';
+import {Preloader12345} from '../preloader.js';
+import {SVGLoader12345} from '../svgloader.js';
+import {Map12345} from '../map.js';
+import {List12345} from '../list.js';
 import BasicThree from '../three/basicThree.js';
 
 //리서치 페이지 

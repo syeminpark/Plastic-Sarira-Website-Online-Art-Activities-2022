@@ -425,8 +425,9 @@ class Map12345{
 	onMarkerClick(_marker){
 		if(this.list.scroller){
 			const target_id = _marker.getAttribute("data-id");
-			const list_target = this.list.scroller.querySelector('.list-item[data-id='+target_id+']');
-			//console.log(list_target);
+			console.log(this.list.scroller.querySelector('.list-item[data-id="NAE#1"]'))
+			const list_target = this.list.scroller.querySelector(`.list-item[data-id="${target_id.replace(/ /g,'')}"]`);
+			
 			this.list.scroller.scrollTop = list_target.offsetTop;
 		}
 	}
