@@ -671,7 +671,7 @@ html, body {
 #audio-visualizer {
 	position: fixed;
 	bottom: var(--main-padding);
-	right: calc(var(--nav-bar) + calc(var(--main-padding) * 2));
+	left: calc(var(--nav-bar) + calc(var(--main-padding) * 2));
 	width: calc(var(--nav-bar) * 4);
 	height: var(--nav-bar);
 	background-color: white;
@@ -680,7 +680,7 @@ html, body {
 }
 
 #audio-visualizer.inactive {
-	transform: translate(calc(100% + calc(var(--main-padding) * 3) + var(--nav-bar)), 0);
+	transform: translate(-200%);
 }
 
 .full-container.inactive {

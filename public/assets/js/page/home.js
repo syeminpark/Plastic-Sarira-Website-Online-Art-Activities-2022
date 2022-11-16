@@ -4,7 +4,7 @@ import {
 import BasicThree
  from '../three/basicThree.js';
  
- import  wastePlasticDataset from "../../parameter/waste_plastic_dataset.js";
+ import  wastePlasticDataset from "../waste_plastic_dataset.js";
 
    
 class Home12345 extends Page12345 {

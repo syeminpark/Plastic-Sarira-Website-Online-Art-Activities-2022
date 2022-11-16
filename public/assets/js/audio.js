@@ -8,18 +8,20 @@ import {
 class Audio12345 {
 	constructor(_button, _visualizer) {
 		this.button = _button;
+		this.analyserNode;
+		this.backgroundSource;
+		this.bufferStartTime
+		this.clickSoundVolume = 0.5
 
 		this.is_audio_on = false;
 		this.is_init = true;
-
-		this.volume = 0.1;
-
 		this.button.addEventListener('click', this.toggle.bind(this));
 
 		this.visualizer = new AudioVisualizer12345(_visualizer);
+		this.clickSoundDOM = document.getElementById("click")
+		this.backgroundSoundDOM = document.getElementById("background")
 
-	    this.initAudio();
-
+		this.initAudio();
 	}
 
 	toggle() {
@@ -30,46 +32,65 @@ class Audio12345 {
 		}
 	}
 
-	initAudio() {
 
-		this.audioCtx = new AudioContext() 
-		let unmuteHandle = unmute(this.audioCtx, false,false);
+	async initAudio() {
+		const AudioContext = window.AudioContext || window.webkitAudioContext;
+		this.audioContext = new AudioContext()
+		let unmuteHandle = unmute(this.audioContext, false, false);
 
-
-		this.oscillator = this.audioCtx.createOscillator();
-		this.oscillator.type = 'square';
-		//this.oscillator.frequency.setValueAtTime(140, this.audioCtx.currentTime);
-
-		setInterval(() => {
-			this.oscillator.frequency.setValueAtTime(
-				(Math.sin(Math.floor(this.audioCtx.currentTime)) * 0.5 + 0.5) * 600 + 140, this.audioCtx.currentTime);
-		}, 600);
-
-		this.gainNode = this.audioCtx.createGain();
-		this.oscillator.connect(this.gainNode);
-
-		this.analyserNode = this.audioCtx.createAnalyser();
-		this.analyserNode.fftSize = 64;
-		this.gainNode.connect(this.analyserNode);
+		//click
+		const click_audioElement = this.audioContext.createMediaElementSource(this.clickSoundDOM);
+		const click_gain = this.audioContext.createGain();
+		click_gain.gain.value = this.clickSoundVolume
+		click_audioElement.connect(click_gain)
+		click_gain.connect(this.audioContext.destination);
 
 
+		//background
+		this.backgroundSource = this.audioContext.createBufferSource()
+		const background_gain=this.audioContext.createGain();
+		this.analyserNode=this.audioContext.createAnalyser();
+		this.analyserNode.fftSize = 32;
 		this.visualizer.setAnalyzer(this.analyserNode);
-		this.oscillator.start();
+	
+		try {
+			let response = await fetch("./assets/mp3/background.mp3")
+			let arrayBuffer= await response.arrayBuffer()
+		
+			this.backgroundSource.buffer =await this.audioContext.decodeAudioData(arrayBuffer)
+			this.backgroundSource.loop=true
+			this.backgroundSource.connect(background_gain)
+			background_gain.connect(this.analyserNode)
+			this.backgroundSource.start(0)
+
+		} catch (error) {
+			console.error(error);
+		}
+
+
+		addEventListener('mousedown', (event) => {
+			if (this.is_audio_on) {
+			
+				setTimeout(() => {
+				
+				}, 100);
+			}
+		});
 	}
 
 	on() {
-		this.analyserNode.connect(this.audioCtx.destination);
+		this.analyserNode.connect(this.audioContext.destination);
+		this.bufferStartTime=this.audioContext.currentTime
 		this.is_audio_on = true;
 		//console.log("audio on!");
 		this.button.classList.add("active");
 		this.visualizer.show();
 		if (this.gainNode)
 			this.gainNode.gain.setValueAtTime(this.volume, this.audioCtx.currentTime);
-
 	}
 
 	off() {
-		this.analyserNode.disconnect(this.audioCtx.destination);
+		this.analyserNode.disconnect(this.audioContext.destination);
 		this.is_audio_on = false;
 		//console.log("audio off!");
 		this.button.classList.remove("active");
