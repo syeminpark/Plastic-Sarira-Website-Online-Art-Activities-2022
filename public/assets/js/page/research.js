@@ -9,16 +9,15 @@ import BasicThree from '../three/basicThree.js';
 class Research12345 extends Page12345{
 	constructor(_pagelayer){
 		super();
-
+		this.researchThree;
 		this.pagelayer = _pagelayer
 		this.map = new Map12345();
 		this.list = new List12345();
-		this.researchThree= new BasicThree();
+		
 	}
 
-	//
 	setup(){
-		
+		this.researchThree= new BasicThree(document.getElementById('plastic-detail-layer'),"RESEARCH");
 		//preloads the map
 		const mappreload_el = this.pagelayer.popup.querySelector('#map-preloader');
 		if(mappreload_el)
@@ -158,7 +157,8 @@ class Research12345 extends Page12345{
 			this.list_data[i]["img-src"] = this.list_data[i].properties["img-src"];
 		}
 		
-		this.list.load(this.list_data, this.researchThree.import)
+		this.list.load(this.list_data,this.researchThree.import)
+		
 	}
 }
 
