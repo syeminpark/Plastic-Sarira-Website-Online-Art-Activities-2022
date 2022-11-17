@@ -2,11 +2,12 @@
   "name": "plastic-sarira-website-online-art-activities-2022",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "publish": "node forever.js",
     "start": "node forever.js",
-    "dev": "node app.js"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,17 @@
   },
   "homepage": "https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022#readme",
   "dependencies": {
+    "@withvoid/make-validation": "^1.0.5",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "forever-monitor": "^3.0.3",
+    "http": "0.0.1-security",
+    "mongoose": "^6.7.2",
+    "morgan": "^1.10.0",
     "node": "^19.0.1",
-    "three": "^0.146.0"
+    "nodemon": "^2.0.20",
+    "three": "^0.146.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.5.0"

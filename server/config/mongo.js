@@ -1,0 +1,27 @@
+import mongoose from 'mongoose'
+import config from './index.js'
+
+//const CONNECTION_URL = `mongodb://${config.db.url}/${config.db.name}`
+const CONNECTION_URL=config.db.old_url;
+
+//mongoose to make a connection with the database with our Node/Express application.
+mongoose.connect(CONNECTION_URL, {
+//If it's set to true, we have to provide a database port in the CONNECTION_URL.)
+  useNewUrlParser: true,
+  //MongoDB driver's new connection management engine. 
+  useUnifiedTopology: true
+})
+
+mongoose.connection.on('connected', () => {
+  console.log('Mongo has connected succesfully')
+})
+mongoose.connection.on('reconnected', () => {
+  console.log('Mongo has reconnected')
+})
+mongoose.connection.on('error', error => {
+  console.log('Mongo connection has an error', error)
+  mongoose.disconnect()
+})
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongo connection is disconnected')
+})

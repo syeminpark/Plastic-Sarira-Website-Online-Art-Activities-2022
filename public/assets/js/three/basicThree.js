@@ -5,12 +5,20 @@ import {
 import {
     PLYLoader
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
+
 export default class BasicThree {
-    constructor() {
+
+    constructor(domElement, type) {
+
+        BasicThree.renderer = new THREE.WebGLRenderer()
+        BasicThree.renderer.outputEncoding = THREE.sRGBEncoding
+
         this.object;
-        this.originalArray
+        this.geometry
+        this.originalArray = []
         this.selectedArray = []
-        this.domElement;
+        this.domElement = domElement;
+        this.type = type
 
         //scene
         this.scene = new THREE.Scene()
@@ -24,78 +32,69 @@ export default class BasicThree {
         )
         this.camera.position.set(0, 0, 400)
 
-        //renderer
-        this.renderer = new THREE.WebGLRenderer()
-        this.renderer.outputEncoding = THREE.sRGBEncoding
-        //orbitControls
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-        this.controls.enableDamping = true
-        this.controls.maxDistance = 1000
-
-        //material
         this.material = new THREE.PointsMaterial({
             size: 3,
             vertexColors: true,
         });
-
-    }
-
-    import = (domElement, sourcePath, isSpread) => {
-      this.reset()
-        this.spread= isSpread
-        if(isSpread){
-            //약간 멀미남
-            // this.controls.autoRotate=true;
-            // this.controls.autoRotateSpeed=0.1
-        }
-        this.domElement=domElement;
-
-        let modelLength;
-        this.domElement.appendChild(this.renderer.domElement)
-        this.renderer.setSize(this.domElement.getBoundingClientRect().width,this.domElement.getBoundingClientRect().height)
-        const loader = new PLYLoader()
-        loader.load(
-            sourcePath,
-            (geometry) => {
-                geometry.computeBoundingBox()
-                modelLength = geometry.boundingBox.max.y
-                this.originalArray = new Array(geometry.attributes.position.count)
-                for (let i = 0; i < this.originalArray.length; i++) {
-                    this.originalArray[i] = i;
-                }
-                
-                this.object = new THREE.Points(geometry, this.material);
-                this.scene.add(this.object)
-                this.updateSize()
-            
-                this.animate()
-                this.camera.position.set(0, 0, 150 + modelLength * 5)
-            },
-            (xhr) => {
-                //console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-            },
-            (error) => {
-                // console.log(error)
-            }
-        )
+        //orbitControls
+        this.controls = new OrbitControls(this.camera, BasicThree.renderer.domElement)
+        this.controls.enableDamping = true
+        this.controls.maxDistance = 1000
         window.addEventListener('resize', () => this.updateSize(), false);
-       // console.log(this.scene)
     }
+
+    import = (data) => {
+
+        this.reset()
+        this.domElement.appendChild(BasicThree.renderer.domElement)
+        BasicThree.renderer.setSize(this.domElement.getBoundingClientRect().width, this.domElement.getBoundingClientRect().height)
+
+        switch (this.type) {
+            case "PLASTIC_SARIRA_ARCHIVE":
+                this.geometry = new THREE.BufferGeometry();
+                this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
+                this.geometry.computeBoundingBox()
+                this.material.vertexColors=false;
+                this.object = new THREE.Points(this.geometry, this.material);
+                this.scene.add(this.object)
+                this.camera.position.set(0, 0, 150 + this.geometry.boundingBox.max.y * 5)
+                this.updateSize()
+                this.animate()
+                break;
+
+            default:
+               
+                new PLYLoader().load(
+                    data, (geometry) => {
+                        geometry.computeBoundingBox()
+                        this.geometry = geometry
+                        this.originalArray = new Array(geometry.attributes.position.count)
+                        for (let i = 0; i < this.originalArray.length; i++) {
+                            this.originalArray[i] = i;
+                        }
+                        this.object = new THREE.Points(this.geometry, this.material);
+                        this.scene.add(this.object)
+                        this.camera.position.set(0, 0, 150 + this.geometry.boundingBox.max.y * 5)
+                        this.updateSize()
+                        this.animate()
+                    })
+                break;
+        }
+    }
+
     animate = () => {
-      
         this.animationRequest = requestAnimationFrame(this.animate);
         this.controls.update()
-        this.renderer.render(this.scene, this.camera)
+        BasicThree.renderer.render(this.scene, this.camera)
 
-        if (this.spread) {
+        if (this.type == "HOME") {
             this.setObjectPosition()
-            
         }
     }
 
     updateSize() {
-        this.renderer.setSize(this.domElement.getBoundingClientRect().width,this.domElement.getBoundingClientRect().height)
-        this.camera.aspect = this.renderer.domElement.width / this.renderer.domElement.height;
+        BasicThree.renderer.setSize(this.domElement.getBoundingClientRect().width, this.domElement.getBoundingClientRect().height)
+        this.camera.aspect = BasicThree.renderer.domElement.width / BasicThree.renderer.domElement.height;
         this.camera.updateProjectionMatrix();
 
     }
@@ -111,6 +110,7 @@ export default class BasicThree {
 
     setObjectPosition() {
         this.selectRandomPoints()
+
         const particleSpeed = 0.05;
         const position = this.object.geometry.getAttribute('position').array;
         const normal = this.object.geometry.getAttribute('normal').array

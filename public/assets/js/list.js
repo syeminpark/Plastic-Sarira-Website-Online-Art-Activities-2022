@@ -94,7 +94,7 @@ class List12345 {
 			}
 		}
 		if (lambda) {
-			lambda(document.getElementById('plastic-detail-layer'), `./assets/3dmodel/${_item.properties.beach}/${_item.properties.index}.ply`, false)
+			lambda( `./assets/3dmodel/${_item.properties.beach}/${_item.properties.index}.ply`)
 		}
 	}
 
