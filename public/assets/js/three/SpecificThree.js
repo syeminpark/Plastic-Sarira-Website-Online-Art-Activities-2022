@@ -2,7 +2,11 @@ import {
     PLYLoader
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-
+import {
+    createConvexMaterial,
+    createPointMaterial
+} from './material.js';
+import Convex from './Convex.js';
 import BasicThree from "./basicThree.js"
 
 export default class PointThree extends BasicThree {
@@ -81,16 +85,28 @@ export class SariraThree extends BasicThree {
     constructor(domElement, type, renderer) {
         super(domElement, type, renderer)
         this.virtualCanvas
+        this.convex
+
+        let ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff,5);
+        this.scene.add(ambientLight,  hemiLight, );
     }
 
     import(data) {
         this.geometry = new THREE.BufferGeometry();
         this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
         this.geometry.computeBoundingBox()
-
-        this.object = new THREE.Points(this.geometry, this.material);
+        this.object = new THREE.Points(this.geometry, createPointMaterial());
         this.scene.add(this.object)
-        this.camera.position.set(0, 0, 100)
+        if (data.length > 9) {
+            let object = {
+                scene: this.scene
+            }
+            this.convex = new Convex(object, createConvexMaterial())
+            this.convex.updateVertices(this.geometry, data.length)
+            this.convex.initializeMesh()
+        }
+        this.camera.position.set(0, 0, 10)
 
         this.updateSize()
         this.animate()
@@ -100,20 +116,12 @@ export class SariraThree extends BasicThree {
         this.element = element
     }
 
-    render = () => {
-        this.renderRequest = requestAnimationFrame(this.render)
-        if (document.getElementById("currentPage").innerHTML == this.type) {
-            this.renderer.scissorRender(scene)
-        }
-    }
-
     animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
         if (document.getElementById("currentPage").innerHTML == this.type) {
             this.update();
         }
     }
-
 
     reset() {
         console.log("hey!reset")
@@ -126,8 +134,8 @@ export class SariraThree extends BasicThree {
     getObject() {
         return {
             scene: this.scene,
-            element:this.element,
-            camera: this. camera
+            element: this.element,
+            camera: this.camera
         }
     }
 
