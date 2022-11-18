@@ -653,7 +653,7 @@ body {
 	height: 25vw;
 	/* background-color: black; */
 	display: inline-block;
-	/* border-radius: var(--bevel-large); */
+	border-radius: var(--bevel-large);
 	z-index: 1;
 }
 
@@ -1154,6 +1154,3 @@ body {
 	font-size: var(--font-citation);
 }
 
-#canvas {
-A
-}

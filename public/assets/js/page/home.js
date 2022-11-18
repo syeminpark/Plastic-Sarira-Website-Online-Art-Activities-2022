@@ -14,12 +14,13 @@ class Home12345 extends Page12345 {
     }
 
     setup() {
-        this.homeThree= new PointThree(document.getElementById('home'),"HOME");
+        this.homeThree= new PointThree(document.getElementById('home'),"home");
         this.homeThree.import(this.getRandomSourcePath());
     }
 
     reset_page() {
         super.reset_page();
+
     }
 
     getRandomSourcePath() {

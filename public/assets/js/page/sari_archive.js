@@ -12,7 +12,7 @@ import {
 } from './../list.js';
 import ServerClientCommunication from '../serverClientCommunication.js';
 
-import BasicThree from '../three/basicThree.js';
+import { SariraThree } from '../three/SpecificThree.js';
 
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
@@ -60,12 +60,11 @@ class SariArchive12345 extends Page12345 {
 		
 		let response = await this.ServerClientCommunication.getSarirasByRange("20")
 		for (let i = 0; i < 1; i++) {
-			let basic = new BasicThree(document.getElementById("full-container"),"PLASTIC_SARIRA_ARCHIVE")
+			let sariraThree = new SariraThree(document.getElementById("full-container"),'sarira')
 			// this.list.container.children[i].getBoundingClientRect()
-			basic.assignOffset(document.getElementById("main-container"))
-			basic.import(JSON.parse(response.allSariraData[i].message).vertices, this.list.container.children[i])
-			basic.assignOffset(document.getElementById("main-container"))
-			
+			sariraThree.import(JSON.parse(response.allSariraData[i].message).vertices)
+			sariraThree.setVirtualCanvas( this.list.container.children[i])
+			sariraThree.render()
 		}
 
 

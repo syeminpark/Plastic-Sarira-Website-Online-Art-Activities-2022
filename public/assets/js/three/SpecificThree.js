@@ -7,18 +7,18 @@ import BasicThree from "./basicThree.js"
 
 export default class PointThree extends BasicThree {
     constructor(domElement, type) {
-        super(domElement)
+        super(domElement,type)
         this.originalArray = []
         this.selectedArray = []
-        this.type = type
-        
+
+
     }
 
-    import =(path) =>{
+    import = (path) => {
         this.reset()
-        
+
         new PLYLoader().load(
-           path, (geometry) => {
+            path, (geometry) => {
                 geometry.computeBoundingBox()
                 this.geometry = geometry
                 this.originalArray = new Array(geometry.attributes.position.count)
@@ -33,11 +33,14 @@ export default class PointThree extends BasicThree {
                 this.render()
             })
     }
-    animate= ()=> {
-        this.update()
+    animate = () => {
+        if (document.getElementById("currentPage").innerHTML ==this.type) {
+            this.update()
 
-        if (this.type == "HOME") {
-            this.setObjectPosition()
+            if (this.type == "home") {
+                this.setObjectPosition()
+            }
+
         }
         this.animationRequest = requestAnimationFrame(this.animate);
     }
@@ -68,7 +71,7 @@ export default class PointThree extends BasicThree {
             }
         }
     }
-    reset(){
+    reset() {
         super.reset()
         this.selectedArray = [];
         this.originalArray = [];
@@ -77,16 +80,16 @@ export default class PointThree extends BasicThree {
     }
 }
 
-
-
 export class SariraThree extends BasicThree {
-    constructor() {
-        super()
+    constructor(domElement,type) {
+        super(domElement,type)
         this.scenes = []
+        this.virtualCanvas
+
     }
 
-    import(vritaulCanvas) {
-        super.reset();
+    import(data) {
+       
         this.geometry = new THREE.BufferGeometry();
         this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
         this.geometry.computeBoundingBox()
@@ -98,58 +101,67 @@ export class SariraThree extends BasicThree {
 
         this.updateSize()
         this.animate()
-        this.render()
+
 
     }
-    render() {
-        let width1 = this.domElement.clientWidth;
-        let height1 = this.domElement.clientHeight;
-        //    console.log(this.rect.children[0])
 
-        if (this.domElement.offsetWidth !== width1 || this.domElement.offsetHeight != height1) {
-            BasicThree.renderer.setSize(width1, height1, false);
-        }
-        BasicThree.renderer.setClearColor(0x000000, 0);
-        BasicThree.renderer.setScissorTest(false);
-        BasicThree.renderer.clear();
-        BasicThree.renderer.setClearColor(0x0000FF);
-        BasicThree.renderer.setScissorTest(true);
-
-
-        //     //scene.rotation.y = Date.now() * 0.001;
-        this.rect2 = this.rect.getBoundingClientRect()
-        if (this.rect2.bottom < 0 || this.rect2.top > BasicThree.renderer.domElement.clientHeight ||
-            this.rect2.right < 0 || this.rect2.left > BasicThree.renderer.domElement.clientWidth) {
-            console.log("bye")
-            return; // it's off screen
-        }
-
-        let width = this.rect2.right - this.rect2.left;
-        let height = this.rect2.bottom - this.rect2.top;
-        let left = this.rect2.left - this.domElement.getBoundingClientRect().left - document.getElementById("main-container").getBoundingClientRect().left
-
-
-        console.log()
-        let bottom = BasicThree.renderer.domElement.getBoundingClientRect().bottom - this.rect2.bottom
-
-
-        BasicThree.renderer.setViewport(left, bottom, width, height);
-        BasicThree.renderer.setScissor(left, bottom, width, height);
-        BasicThree.renderer.render(this.scene, this.camera)
+    setVirtualCanvas(virtualCanvas) {
+        this.virtualCanvas = virtualCanvas
     }
 
-    animate(){
-        super.update();
+    render = () => {
+        this.renderRequest = requestAnimationFrame(this.render)
+     
+        if (document.getElementById("currentPage").innerHTML ==this.type) {
+        
+            let width1 = this.domElement.clientWidth;
+            let height1 = this.domElement.clientHeight;
+            //    console.log(this.rect.children[0])
+
+            if (this.domElement.offsetWidth !== width1 || this.domElement.offsetHeight != height1) {
+                BasicThree.renderer.setSize(width1, height1, false);
+            }
+            BasicThree.renderer.setClearColor(0x000000, 0);
+            BasicThree.renderer.setScissorTest(false);
+            BasicThree.renderer.clear();
+            BasicThree.renderer.setClearColor(0x0000FF);
+            BasicThree.renderer.setScissorTest(true);
+
+
+            //     //scene.rotation.y = Date.now() * 0.001;
+            const virtualCanvasRect = this.virtualCanvas.getBoundingClientRect()
+            if (virtualCanvasRect.bottom < 0 || virtualCanvasRect.top > BasicThree.renderer.domElement.clientHeight ||
+                virtualCanvasRect.right < 0 || virtualCanvasRect.left > BasicThree.renderer.domElement.clientWidth) {
+                return; // it's off screen
+            }
+
+            let width = virtualCanvasRect.right - virtualCanvasRect.left;
+            let height = virtualCanvasRect.bottom - virtualCanvasRect.top;
+            let left = virtualCanvasRect.left - this.domElement.getBoundingClientRect().left - document.getElementById("main-container").getBoundingClientRect().left
+            let bottom = BasicThree.renderer.domElement.getBoundingClientRect().bottom - virtualCanvasRect.bottom
+
+
+             BasicThree.renderer.setViewport(left, bottom, width, height);
+            BasicThree.renderer.setScissor(left, bottom, width, height);
+            BasicThree.renderer.render(this.scene, this.camera)
+
+        }
+    }
+
+    animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
+        if (document.getElementById("currentPage").innerHTML == this.type) {
+            this.update();
+        }
     }
-    
-    assignOffset(main){
-        this.leftOffset= this.domElement.getBoundingClientRect().left - main.getBoundingClientRect().left
-        this.topOffset= this.domElement.getBoundingClientRect().top-main.getBoundingClientRect().top
-    }
-    reset(){
+
+
+    reset() {
+        console.log("hey!reset")
+        super.reset()
         cancelAnimationFrame(this.animationRequest)
         cancelAnimationFrame(this.renderRequest)
+       
     }
 
 }

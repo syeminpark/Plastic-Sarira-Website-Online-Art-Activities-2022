@@ -213,8 +213,11 @@ class PageLayer12345 {
 			}
 		}
 
-		console.log("current Page: ", _btn.getAttribute("data-name"))
-
+		let currentPage= _btn.getAttribute("data-name")
+		document.getElementById("currentPage").innerHTML=currentPage
+		
+		console.log("current Page: ", _btn.getAttribute("data-name") )
+		
 		if (_btn.getAttribute("data-name") == "home") {
 			this.homepage.setup();
 		
