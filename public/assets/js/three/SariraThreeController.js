@@ -43,7 +43,7 @@ export default class SariraThreeController {
 
                 if (rect.bottom < 0 || rect.top > +renderer.domElement.getBoundingClientRect().bottom ||
                     rect.right < 0 || rect.left > renderer.domElement.clientWidth) {
-                      console.log(rect.bottom)
+                    
                     return; // it's off screen
 
                 }

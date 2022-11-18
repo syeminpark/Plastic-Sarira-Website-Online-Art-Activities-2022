@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 export default class SingleRenderer {
-    constructor(a) {
-        console.log(a)
+    constructor() {
+
         this.renderer = new THREE.WebGLRenderer({
             alpha: true,
             premultipliedAlpha: false,
