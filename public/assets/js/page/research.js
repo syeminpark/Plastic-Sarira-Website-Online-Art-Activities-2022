@@ -13,7 +13,6 @@ class Research12345 extends Page12345{
 		this.pagelayer = _pagelayer
 		this.map = new Map12345();
 		this.list = new List12345();
-		
 	}
 
 	setup(){

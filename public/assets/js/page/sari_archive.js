@@ -57,12 +57,18 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	async loadAllSariras() {
+		
 		let response = await this.ServerClientCommunication.getSarirasByRange("20")
 		for (let i = 0; i < 1; i++) {
-			let basic = new BasicThree(this.list.container.children[i],"PLASTIC_SARIRA_ARCHIVE")
+			let basic = new BasicThree(document.getElementById("full-container"),"PLASTIC_SARIRA_ARCHIVE")
 			// this.list.container.children[i].getBoundingClientRect()
-			basic.import(JSON.parse(response.allSariraData[i].message).vertices)
+			basic.assignOffset(document.getElementById("main-container"))
+			basic.import(JSON.parse(response.allSariraData[i].message).vertices, this.list.container.children[i])
+	
+			
 		}
+
+
 	}
 
 	sliceData(_data, _chunk_size) {

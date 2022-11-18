@@ -15,7 +15,7 @@ class Home12345 extends Page12345 {
     }
 
     setup() {
-        this.homeThree= new BasicThree(document.getElementById('home'),"HOME");
+        this.homeThree= new BasicThree(document.getElemengtById('home'),"HOME");
         this.homeThree.import(this.getRandomSourcePath(),);
     }
 
