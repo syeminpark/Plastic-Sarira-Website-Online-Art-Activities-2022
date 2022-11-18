@@ -16,13 +16,14 @@ class Audio12345 {
 		this.clickSoundVolume = 0.5
 
 		this.is_audio_on = false;
+		this.hasBackgroundStarted = false
 		this.is_init = true;
 		this.button.addEventListener('click', this.toggle.bind(this));
 
 		this.visualizer = new AudioVisualizer12345(_visualizer);
 		this.clickSoundDOM = document.getElementById("click")
 		this.backgroundSoundDOM = document.getElementById("background")
-	
+
 		this.initAudio();
 	}
 
@@ -53,7 +54,7 @@ class Audio12345 {
 		this.analyserNode = this.audioContext.createAnalyser();
 		this.analyserNode.fftSize = 32;
 		this.visualizer.setAnalyzer(this.analyserNode);
-	
+
 		try {
 			let response = await fetch("./assets/mp3/background.mp3")
 			let arrayBuffer = await response.arrayBuffer()
@@ -62,7 +63,8 @@ class Audio12345 {
 			this.backgroundSource.loop = true
 			this.backgroundSource.connect(background_gain)
 			background_gain.connect(this.analyserNode)
-			this.backgroundSource.start(0)
+
+
 
 
 		} catch (error) {
@@ -71,7 +73,10 @@ class Audio12345 {
 	}
 
 	on() {
-
+		if (!this.hasBackgroundStarted) {
+			this.backgroundSource.start(0)
+			this.hasBackgroundStarted = true
+		}
 		this.analyserNode.connect(this.audioContext.destination);
 		this.bufferStartTime = this.audioContext.currentTime
 		this.is_audio_on = true;
@@ -95,13 +100,10 @@ class Audio12345 {
 	assignClickEvents() {
 		const buttons = document.querySelectorAll(".btn");
 		const title = document.getElementById("plastic-sarira-title")
-		
-		const array= [...buttons,title]
-
+		const array = [...buttons, title]
 		for (let i = 0; i < array.length; i++) {
 			if (array[i].id != "sound-btn") {
 				array[i].addEventListener('mousedown', (event) => {
-				
 					document.getElementById("click").play()
 					setTimeout(() => {
 						document.getElementById("click").pause();
@@ -110,6 +112,7 @@ class Audio12345 {
 				})
 			}
 		}
+		console.log("audioLoaded")
 	}
 }
 

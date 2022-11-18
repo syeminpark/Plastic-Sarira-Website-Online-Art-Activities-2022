@@ -59,9 +59,9 @@ class SariArchive12345 extends Page12345 {
 	async loadAllSariras() {
 		let num = 1
 		let response = await this.ServerClientCommunication.getSarirasByRange("20")
-
+		console.log(response)
 		let sariraThreeController = new SariraThreeController(document.getElementById("full-container"), 'sarira', this.pagelayer.singleRenderer)
-		sariraThreeController.create(10, response.allSariraData, this.list.container.children)
+		sariraThreeController.create(20, response.allSariraData, this.list.container.children)
 		sariraThreeController.render();
 
 

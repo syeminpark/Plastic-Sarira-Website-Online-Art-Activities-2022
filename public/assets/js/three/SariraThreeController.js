@@ -32,12 +32,13 @@ export default class SariraThreeController {
             renderer.setClearColor(0x000000, 0);
             renderer.setScissorTest(false);
             renderer.clear();
-            renderer.setClearColor(0x0000FF);
+            renderer.setClearColor(0x000000,);
             renderer.setScissorTest(true);
 
             let canvas = this.canvas
 
             this.sariraThreeList.forEach(function (scene) {
+                scene.scene.rotation.y = Date.now() * 0.001;
                 let element = scene.element;
                 let rect = element.getBoundingClientRect();
 

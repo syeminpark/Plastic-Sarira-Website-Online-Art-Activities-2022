@@ -5,6 +5,7 @@ export default class SingleRenderer {
         this.renderer = new THREE.WebGLRenderer({
             alpha: true,
             premultipliedAlpha: false,
+            antialias:true
         })
         this.renderer.outputEncoding = THREE.sRGBEncoding
 
