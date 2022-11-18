@@ -1,9 +1,8 @@
 import {
     Page12345
 } from './page.js';
-import BasicThree
- from '../three/basicThree.js';
- 
+
+import PointThree from '../three/SpecificThree.js';
  import  wastePlasticDataset from "../waste_plastic_dataset.js";
 
    
@@ -15,8 +14,8 @@ class Home12345 extends Page12345 {
     }
 
     setup() {
-        this.homeThree= new BasicThree(document.getElemengtById('home'),"HOME");
-        this.homeThree.import(this.getRandomSourcePath(),);
+        this.homeThree= new PointThree(document.getElementById('home'),"HOME");
+        this.homeThree.import(this.getRandomSourcePath());
     }
 
     reset_page() {

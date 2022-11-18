@@ -3,7 +3,7 @@ import {Preloader12345} from '../preloader.js';
 import {SVGLoader12345} from '../svgloader.js';
 import {Map12345} from '../map.js';
 import {List12345} from '../list.js';
-import BasicThree from '../three/basicThree.js';
+import PointThree from '../three/SpecificThree.js';
 
 //리서치 페이지 
 class Research12345 extends Page12345{
@@ -16,7 +16,7 @@ class Research12345 extends Page12345{
 	}
 
 	setup(){
-		this.researchThree= new BasicThree(document.getElementById('plastic-detail-layer'),"RESEARCH");
+		this.researchThree= new PointThree(document.getElementById('plastic-detail-layer'),"RESEARCH");
 		//preloads the map
 		const mappreload_el = this.pagelayer.popup.querySelector('#map-preloader');
 		if(mappreload_el)

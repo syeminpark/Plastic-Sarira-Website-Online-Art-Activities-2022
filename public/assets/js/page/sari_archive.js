@@ -64,7 +64,7 @@ class SariArchive12345 extends Page12345 {
 			// this.list.container.children[i].getBoundingClientRect()
 			basic.assignOffset(document.getElementById("main-container"))
 			basic.import(JSON.parse(response.allSariraData[i].message).vertices, this.list.container.children[i])
-	
+			basic.assignOffset(document.getElementById("main-container"))
 			
 		}
 
