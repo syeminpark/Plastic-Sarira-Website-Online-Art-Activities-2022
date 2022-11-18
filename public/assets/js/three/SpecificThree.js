@@ -6,12 +6,10 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import BasicThree from "./basicThree.js"
 
 export default class PointThree extends BasicThree {
-    constructor(domElement, type) {
-        super(domElement,type)
+    constructor(canvas, type, renderer) {
+        super(canvas, type, renderer)
         this.originalArray = []
         this.selectedArray = []
-
-
     }
 
     import = (path) => {
@@ -34,9 +32,8 @@ export default class PointThree extends BasicThree {
             })
     }
     animate = () => {
-        if (document.getElementById("currentPage").innerHTML ==this.type) {
+        if (document.getElementById("currentPage").innerHTML == this.type) {
             this.update()
-
             if (this.type == "home") {
                 this.setObjectPosition()
             }
@@ -81,70 +78,32 @@ export default class PointThree extends BasicThree {
 }
 
 export class SariraThree extends BasicThree {
-    constructor(domElement,type) {
-        super(domElement,type)
-        this.scenes = []
+    constructor(domElement, type, renderer) {
+        super(domElement, type, renderer)
         this.virtualCanvas
-
     }
 
     import(data) {
-       
         this.geometry = new THREE.BufferGeometry();
         this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
         this.geometry.computeBoundingBox()
 
         this.object = new THREE.Points(this.geometry, this.material);
         this.scene.add(this.object)
-        this.scenes.push(this.scene)
         this.camera.position.set(0, 0, 100)
 
         this.updateSize()
         this.animate()
-
-
     }
 
-    setVirtualCanvas(virtualCanvas) {
-        this.virtualCanvas = virtualCanvas
+    setElement(element) {
+        this.element = element
     }
 
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
-     
-        if (document.getElementById("currentPage").innerHTML ==this.type) {
-        
-            let width1 = this.domElement.clientWidth;
-            let height1 = this.domElement.clientHeight;
-            //    console.log(this.rect.children[0])
-
-            if (this.domElement.offsetWidth !== width1 || this.domElement.offsetHeight != height1) {
-                BasicThree.renderer.setSize(width1, height1, false);
-            }
-            BasicThree.renderer.setClearColor(0x000000, 0);
-            BasicThree.renderer.setScissorTest(false);
-            BasicThree.renderer.clear();
-            BasicThree.renderer.setClearColor(0x0000FF);
-            BasicThree.renderer.setScissorTest(true);
-
-
-            //     //scene.rotation.y = Date.now() * 0.001;
-            const virtualCanvasRect = this.virtualCanvas.getBoundingClientRect()
-            if (virtualCanvasRect.bottom < 0 || virtualCanvasRect.top > BasicThree.renderer.domElement.clientHeight ||
-                virtualCanvasRect.right < 0 || virtualCanvasRect.left > BasicThree.renderer.domElement.clientWidth) {
-                return; // it's off screen
-            }
-
-            let width = virtualCanvasRect.right - virtualCanvasRect.left;
-            let height = virtualCanvasRect.bottom - virtualCanvasRect.top;
-            let left = virtualCanvasRect.left - this.domElement.getBoundingClientRect().left - document.getElementById("main-container").getBoundingClientRect().left
-            let bottom = BasicThree.renderer.domElement.getBoundingClientRect().bottom - virtualCanvasRect.bottom
-
-
-             BasicThree.renderer.setViewport(left, bottom, width, height);
-            BasicThree.renderer.setScissor(left, bottom, width, height);
-            BasicThree.renderer.render(this.scene, this.camera)
-
+        if (document.getElementById("currentPage").innerHTML == this.type) {
+            this.renderer.scissorRender(scene)
         }
     }
 
@@ -161,7 +120,15 @@ export class SariraThree extends BasicThree {
         super.reset()
         cancelAnimationFrame(this.animationRequest)
         cancelAnimationFrame(this.renderRequest)
-       
+
+    }
+
+    getObject() {
+        return {
+            scene: this.scene,
+            element:this.element,
+            camera: this. camera
+        }
     }
 
 }

@@ -5,22 +5,17 @@ import {
 
 export default class BasicThree {
 
-    constructor(domElement, type) {
-        BasicThree.renderer = new THREE.WebGLRenderer({
-            alpha: true,
-            premultipliedAlpha: false,
-        })
-        BasicThree.renderer.outputEncoding = THREE.sRGBEncoding
-
+    constructor(canvas, type,renderer) {
+        this.canvas = canvas
         this.type = type
+        this.renderer=renderer
+
         this.animationRequest;
         this.renderRequest
 
         this.object;
         this.geometry
 
-        this.domElement = domElement;
-        this.domElement.appendChild(BasicThree.renderer.domElement)
 
         //scene
         this.scene = new THREE.Scene()
@@ -36,7 +31,8 @@ export default class BasicThree {
             // color:"#0000FF"
         });
 
-        this.controls = new OrbitControls(this.camera, BasicThree.renderer.domElement)
+        this.renderer.appendToCanvas(this.canvas)
+        this.controls = new OrbitControls(this.camera,this.renderer.getDomElement())
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         window.addEventListener('resize', () => this.updateSize(), false);
@@ -51,20 +47,20 @@ export default class BasicThree {
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
         if (document.getElementById("currentPage").innerHTML == this.type) {
-            BasicThree.renderer.render(this.scene, this.camera)
+            this.renderer.render(this.scene, this.camera)
         }
     }
 
     updateSize() {
-        BasicThree.renderer.setSize(this.domElement.getBoundingClientRect().width, this.domElement.getBoundingClientRect().height)
-        this.camera.aspect = BasicThree.renderer.domElement.width / BasicThree.renderer.domElement.height;
+        this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+        this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
         this.camera.updateProjectionMatrix();
     }
 
     reset() {
         this.scene.remove(this.object)
         this.object = undefined
-        BasicThree.renderer.clear();
+        this.renderer.clear();
     }
 
 }

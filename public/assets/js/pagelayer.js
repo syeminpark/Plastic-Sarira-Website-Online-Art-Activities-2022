@@ -22,6 +22,8 @@ import {
 	Length2D
 } from './util.js';
 
+import SingleRenderer from './three/SingleRenderer.js';
+
 class PageLayer12345 {
 	constructor(_popup, _popup_container, _preloader, _preloader_color, _close_on_outside_click) {
 		if (_popup instanceof Element && _popup_container instanceof Element &&
@@ -48,6 +50,7 @@ class PageLayer12345 {
 		this.researchpage = new Research12345(this);
 		this.sarirapage = new SariArchive12345(this);
 		this.worldpage = new World12345(this);
+		this.singleRenderer=new SingleRenderer(this)
 
 		this.is_hidden = true;
 		this.is_loading = false;
