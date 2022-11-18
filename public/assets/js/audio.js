@@ -7,6 +7,8 @@ import {
 
 class Audio12345 {
 	constructor(_button, _visualizer) {
+		this.assignClickEvents();
+
 		this.button = _button;
 		this.analyserNode;
 		this.backgroundSource;
@@ -22,9 +24,6 @@ class Audio12345 {
 		this.backgroundSoundDOM = document.getElementById("background")
 	
 		this.initAudio();
-	
-		
-
 	}
 
 	toggle() {
@@ -47,7 +46,6 @@ class Audio12345 {
 		click_gain.gain.value = this.clickSoundVolume
 		click_audioElement.connect(click_gain)
 		click_gain.connect(this.audioContext.destination);
-		this.assignClickEvents();
 
 		//background
 		this.backgroundSource = this.audioContext.createBufferSource()
@@ -55,8 +53,7 @@ class Audio12345 {
 		this.analyserNode = this.audioContext.createAnalyser();
 		this.analyserNode.fftSize = 32;
 		this.visualizer.setAnalyzer(this.analyserNode);
-			this.assignClickEvents();
-
+	
 		try {
 			let response = await fetch("./assets/mp3/background.mp3")
 			let arrayBuffer = await response.arrayBuffer()
@@ -100,11 +97,11 @@ class Audio12345 {
 		const title = document.getElementById("plastic-sarira-title")
 		
 		const array= [...buttons,title]
-		console.log(buttons)
+
 		for (let i = 0; i < array.length; i++) {
 			if (array[i].id != "sound-btn") {
 				array[i].addEventListener('mousedown', (event) => {
-					console.log(this)
+				
 					document.getElementById("click").play()
 					setTimeout(() => {
 						document.getElementById("click").pause();
