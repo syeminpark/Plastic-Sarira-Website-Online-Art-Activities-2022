@@ -25,6 +25,8 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	setup() {
+		this.sariraThreeController = new SariraThreeController(document.getElementById("full-container"), 'sarira', this.pagelayer.singleRenderer)
+		
 		const list_container = this.pagelayer.popup.querySelector("#sari-list");
 		const list_scroller = this.pagelayer.popup.querySelector(".scrollable");
 		const detail_layer = this.pagelayer.popup.querySelector("#sari-detail-layer");
@@ -60,9 +62,9 @@ class SariArchive12345 extends Page12345 {
 		let num = 1
 		let response = await this.ServerClientCommunication.getSarirasByRange("20")
 		console.log(response)
-		let sariraThreeController = new SariraThreeController(document.getElementById("full-container"), 'sarira', this.pagelayer.singleRenderer)
-		sariraThreeController.create(20, response.allSariraData, this.list.container.children)
-		sariraThreeController.render();
+	
+		this.sariraThreeController.create(20, response.allSariraData, this.list.container.children)
+		this.sariraThreeController.render();
 
 
 	}

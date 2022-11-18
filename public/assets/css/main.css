@@ -654,7 +654,7 @@ body {
 	/* background-color: black; */
 	display: inline-block;
 	border-radius: var(--bevel-large);
-	z-index: 1;
+	z-index: 0;
 }
 
 #sari-list .list-item .list-vert-caption,

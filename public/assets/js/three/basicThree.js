@@ -37,7 +37,6 @@ export default class BasicThree {
         this.controls.maxDistance = 1000
         window.addEventListener('resize', () => this.updateSize(), false);
 
-
     }
 
     update() {
@@ -52,6 +51,7 @@ export default class BasicThree {
     }
 
     updateSize() {
+      
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
         this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
         this.camera.updateProjectionMatrix();

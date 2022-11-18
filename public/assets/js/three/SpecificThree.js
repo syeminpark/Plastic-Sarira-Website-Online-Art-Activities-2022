@@ -30,6 +30,7 @@ export default class PointThree extends BasicThree {
                 this.object = new THREE.Points(this.geometry, this.material);
                 this.scene.add(this.object)
                 this.camera.position.set(0, 0, 150 + this.geometry.boundingBox.max.y * 5)
+            
                 this.updateSize()
                 this.animate()
                 this.render()
@@ -37,6 +38,7 @@ export default class PointThree extends BasicThree {
     }
     animate = () => {
         if (document.getElementById("currentPage").innerHTML == this.type) {
+          
             this.update()
             if (this.type == "home") {
                 this.setObjectPosition()
@@ -84,7 +86,6 @@ export default class PointThree extends BasicThree {
 export class SariraThree extends BasicThree {
     constructor(domElement, type, renderer) {
         super(domElement, type, renderer)
-        this.virtualCanvas
         this.convex
 
         let ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -93,6 +94,7 @@ export class SariraThree extends BasicThree {
     }
 
     import(data) {
+        this.reset()
         this.geometry = new THREE.BufferGeometry();
         this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
         this.geometry.computeBoundingBox()
@@ -106,7 +108,7 @@ export class SariraThree extends BasicThree {
             this.convex.updateVertices(this.geometry, data.length)
             this.convex.initializeMesh()
         }
-        this.camera.position.set(0, 0, 10)
+        this.camera.position.set(0, 0, 10 + this.geometry.boundingBox.max.y * 5)
 
         this.updateSize()
         this.animate()
@@ -114,6 +116,12 @@ export class SariraThree extends BasicThree {
 
     setElement(element) {
         this.element = element
+    }
+    updateSize(){
+        this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+        this.camera.aspect = 1
+        this.camera.updateProjectionMatrix();
+        
     }
 
     animate = () => {
@@ -124,7 +132,7 @@ export class SariraThree extends BasicThree {
     }
 
     reset() {
-        console.log("hey!reset")
+        
         super.reset()
         cancelAnimationFrame(this.animationRequest)
         cancelAnimationFrame(this.renderRequest)

@@ -8,37 +8,52 @@ export default class SariraThreeController {
         this.type = type
         this.sariraThreeList = []
         this.renderer = renderer
+        
 
     }
     create(num, data, element) {
+   
         for (let i = 0; i < num; i++) {
             let sariraThree = new SariraThree(this.canvas, this.type, this.renderer)
-            sariraThree.import(JSON.parse(data[i].message).vertices)
             sariraThree.setElement(element[i])
+
+            sariraThree.import(JSON.parse(data[i].message).vertices)
+
             this.sariraThreeList.push(sariraThree.getObject())
         }
+
     }
 
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
-        let renderer = this.renderer.getRenderer()
+        
         if (document.getElementById("currentPage").innerHTML == this.type) {
-            let width = this.canvas.clientWidth;
-            let height = this.canvas.clientHeight;
+            let renderer = this.renderer.getRenderer()
+            let width = renderer.domElement.clientWidth;
+            let height = renderer.domElement.clientHeight;
 
-            if (this.canvas.width !== width || this.canvas.height != height) {
+            if (renderer.domElement.width !== width || renderer.domElement.height != height) {
                 renderer.setSize(width, height, false);
+       
+      
             }
+
             renderer.setClearColor(0x000000, 0);
             renderer.setScissorTest(false);
-            renderer.clear();
+          
             renderer.setClearColor(0x000000,);
             renderer.setScissorTest(true);
 
             let canvas = this.canvas
 
+            
             this.sariraThreeList.forEach(function (scene) {
-                scene.scene.rotation.y = Date.now() * 0.001;
+
+                if(scene.element==undefined){
+                    window.location.reload();
+                }
+
+                scene.scene.rotation.y = Date.now() * 0.0001;
                 let element = scene.element;
                 let rect = element.getBoundingClientRect();
 

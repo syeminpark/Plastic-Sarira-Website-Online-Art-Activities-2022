@@ -104,15 +104,18 @@ class Audio12345 {
 		for (let i = 0; i < array.length; i++) {
 			if (array[i].id != "sound-btn") {
 				array[i].addEventListener('mousedown', (event) => {
+					event.preventDefault()
+					document.getElementById("click").currentTime = 0
 					document.getElementById("click").play()
 					setTimeout(() => {
 						document.getElementById("click").pause();
-						document.getElementById("click").currentTime = 0
-					}, 100);
+
+					}, 150);
 				})
 			}
 		}
-		console.log("audioLoaded")
+
+	
 	}
 }
 
