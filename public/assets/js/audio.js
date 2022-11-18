@@ -20,7 +20,7 @@ class Audio12345 {
 		this.visualizer = new AudioVisualizer12345(_visualizer);
 		this.clickSoundDOM = document.getElementById("click")
 		this.backgroundSoundDOM = document.getElementById("background")
-		this.assignClickEvents();
+	
 		this.initAudio();
 	
 		
@@ -47,7 +47,7 @@ class Audio12345 {
 		click_gain.gain.value = this.clickSoundVolume
 		click_audioElement.connect(click_gain)
 		click_gain.connect(this.audioContext.destination);
-
+		this.assignClickEvents();
 
 		//background
 		this.backgroundSource = this.audioContext.createBufferSource()
@@ -55,6 +55,7 @@ class Audio12345 {
 		this.analyserNode = this.audioContext.createAnalyser();
 		this.analyserNode.fftSize = 32;
 		this.visualizer.setAnalyzer(this.analyserNode);
+			this.assignClickEvents();
 
 		try {
 			let response = await fetch("./assets/mp3/background.mp3")
@@ -66,17 +67,14 @@ class Audio12345 {
 			background_gain.connect(this.analyserNode)
 			this.backgroundSource.start(0)
 
-			
-			
 
 		} catch (error) {
 			console.error(error);
 		}
-
-
 	}
 
 	on() {
+
 		this.analyserNode.connect(this.audioContext.destination);
 		this.bufferStartTime = this.audioContext.currentTime
 		this.is_audio_on = true;
