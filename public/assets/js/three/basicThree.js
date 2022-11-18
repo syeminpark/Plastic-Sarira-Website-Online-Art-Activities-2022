@@ -5,10 +5,14 @@ import {
 
 export default class BasicThree {
 
-    constructor(domElement) {
-        BasicThree.renderer = new THREE.WebGLRenderer({alpha: true,premultipliedAlpha: false,})
+    constructor(domElement, type) {
+        BasicThree.renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            premultipliedAlpha: false,
+        })
         BasicThree.renderer.outputEncoding = THREE.sRGBEncoding
 
+        this.type = type
         this.animationRequest;
         this.renderRequest
 
@@ -36,16 +40,19 @@ export default class BasicThree {
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         window.addEventListener('resize', () => this.updateSize(), false);
+
+
     }
 
-
-    update () {
+    update() {
         this.controls.update()
     }
 
     render = () => {
-        BasicThree.renderer.render(this.scene, this.camera)
-        this.renderRequest=requestAnimationFrame(this.render)
+        this.renderRequest = requestAnimationFrame(this.render)
+        if (document.getElementById("currentPage").innerHTML == this.type) {
+            BasicThree.renderer.render(this.scene, this.camera)
+        }
     }
 
     updateSize() {
@@ -57,6 +64,7 @@ export default class BasicThree {
     reset() {
         this.scene.remove(this.object)
         this.object = undefined
+        BasicThree.renderer.clear();
     }
-}
 
+}
