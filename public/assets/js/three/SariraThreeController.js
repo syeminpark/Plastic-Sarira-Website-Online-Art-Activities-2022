@@ -32,10 +32,9 @@ export default class SariraThreeController {
             let width = renderer.domElement.clientWidth;
             let height = renderer.domElement.clientHeight;
 
-            if (renderer.domElement.width !== width || renderer.domElement.height != height) {
-                renderer.setSize(width, height, false);
-       
-      
+            if (this.canvas.getBoundingClientRect().width !== width || this.canvas.getBoundingClientRect().height != height) {
+                renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height, false);
+                console.log(this.canvas.getBoundingClientRect().width,this.canvas.getBoundingClientRect().height)
             }
 
             renderer.setClearColor(0x000000, 0);

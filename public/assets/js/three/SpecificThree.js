@@ -14,6 +14,7 @@ export default class PointThree extends BasicThree {
         super(canvas, type, renderer)
         this.originalArray = []
         this.selectedArray = []
+        window.addEventListener('resize', () => this.updateSize(), false);
     }
 
     import = (path) => {
@@ -80,6 +81,12 @@ export default class PointThree extends BasicThree {
         this.originalArray = [];
         cancelAnimationFrame(this.animationRequest)
         cancelAnimationFrame(this.renderRequest)
+    }
+
+    updateSize =()=> {
+        this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+        this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
+        this.camera.updateProjectionMatrix();
     }
 }
 
