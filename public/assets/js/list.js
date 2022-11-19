@@ -102,10 +102,10 @@ class List12345 {
 			}
 		} else {
 			let sarira = new SariraThree(document.getElementById("sari"), this.pagelayer.singleRenderer, 'sarira', true)
-			sarira.import(JSON.parse(param[0].message).vertices) 
+			sarira.import(JSON.parse(_item.message).vertices) 
 			sarira.render();
 	
-			//sarira.import(JSON.parse(_item.vertices)) --> real version should be something like this 
+
 		}
 	}
 

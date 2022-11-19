@@ -70,22 +70,15 @@ class SariArchive12345 extends Page12345 {
 		let range = 20
 		//current code 
 		let res = await this.serverClientCommunication.getAllSarira()
-
-		/// original code 
-		const url = "./assets/json/sarira/sarira.json";
-		const response = await fetch(url);
-		const json = await response.json();
-		//console.log(json["sariras"]);
+		console.log(res)
 
 		//dynamically creating a bot_caption by its id 
-		for (let i = 0; i < json["sariras"].length; i++) {
-			json["sariras"][i]["bot_caption"] = json["sariras"][i]["id"];
+		for (let i = 0; i < res.allSariraData.length; i++) {
+			res.allSariraData[i].bot_caption= res.allSariraData[i].name
 		}
-
-
 		//--> split data at intervals of 20, and load first part.
-		this.sliceData(json["sariras"], range);
-		this.loadList(this.sliced_data[this.load_index], res.allSariraData)
+		this.sliceData(res.allSariraData, range);
+		this.loadList(this.sliced_data[this.load_index])
 
 
 
@@ -96,8 +89,8 @@ class SariArchive12345 extends Page12345 {
 		this.set_scrolls(this.pagelayer);
 	}
 
-	loadList(_data, lambda) {
-		this.list.load(_data, lambda);
+	loadList(_data) {
+		this.list.load(_data);
 	}
 }
 

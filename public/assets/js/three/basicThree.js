@@ -44,6 +44,7 @@ export default class BasicThree {
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
         if(this.valid()){
+
             this.renderer.render(this.scene, this.camera)
             
         }
