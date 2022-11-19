@@ -19,7 +19,7 @@ import SariraThreeController from '../three/SariraThreeController.js';
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
-		this.range=8
+		this.range=4
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
 		this.loadedSariras = [];
