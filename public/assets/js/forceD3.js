@@ -157,7 +157,7 @@ export default function forcedD3(data) {
 
             )
             .force("collide", d3.forceCollide().radius(30))
-            .force("charge", d3.forceManyBody().strength(-120)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+            .force("charge", d3.forceManyBody().strength(-100)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
             .force("center", d3.forceCenter(width / 2, height / 2)) // This force attracts nodes to the center of the svg area
             .on("tick", ticked);
 
@@ -210,25 +210,35 @@ export default function forcedD3(data) {
         .attr("transform", (d, i) => `translate(${width-50},${i * 20})`);
 
 
-
-
     svg.append("text")
         .attr("x", legend_g.attr("x") + width - 50 + 10)
         .attr("y", legend_g.attr("y") + 0 * 20 + 5)
-        .text("Waste Plastic")
+        .text("Waste Plastic ID")
+        // .attr("class", "EN")
+    // svg.append("text")
+    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
+    //     .attr("y", legend_g.attr("y") + 0 * 20 + 5)
+    //     .text("폐플라스틱 ID").attr("class", "KR")
 
-        svg.append("rect")
+
+    svg.append("rect")
         .attr("width", 10)
         .attr("height", 10)
         .attr("x", legend_g.attr("x") + width - 50 - 6)
-        .attr("y", legend_g.attr("y") + 0 * 20-5)
+        .attr("y", legend_g.attr("y") + 0 * 20 - 5)
         .attr("fill", "#ededed")
-        .attr("fill-opacity",1);
+        .attr("fill-opacity", 1);
 
     svg.append("text")
         .attr("x", legend_g.attr("x") + width - 50 + 10)
         .attr("y", legend_g.attr("y") + 1 * 20 + 5)
-        .text("Microbe")
+        .text("Microbe ID")
+        // .attr("class", "EN")
+    // svg.append("text")
+    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
+    //     .attr("y", legend_g.attr("y") + 1 * 20 + 5)
+    //     .text("미생물 ID")
+    //     .attr("class", "KR")
 
     svg.append("circle")
         .attr("r", 5)
@@ -237,10 +247,18 @@ export default function forcedD3(data) {
         .attr("fill", "#bfbfbf")
         .attr("fill-opacity", 1);
 
+
+
     svg.append("text")
         .attr("x", legend_g.attr("x") + width - 50 + 10)
         .attr("y", legend_g.attr("y") + 2 * 20 + 5)
-        .text("Herbivore")
+        .text("Herbivore ID")
+        // .attr("class", "EN")
+    // svg.append("text")
+    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
+    //     .attr("y", legend_g.attr("y") + 2 * 20 + 5)
+    //     .text("초식동물 ID")
+    //     .attr("class", "KR")
 
 
     svg.append("circle")
@@ -248,38 +266,57 @@ export default function forcedD3(data) {
         .attr("cx", legend_g.attr("x") + width - 50 - 1)
         .attr("cy", legend_g.attr("y") + 2 * 20)
         .attr("fill", "#757474")
-        .attr("fill-opacity",  1);
+        .attr("fill-opacity", 1);
 
     svg.append("text")
         .attr("x", legend_g.attr("x") + width - 50 + 10)
         .attr("y", legend_g.attr("y") + 3 * 20 + 5)
-        .text("Carnivore")
+        .text("Carnivore ID")
+        // .attr("class", "EN")
+    // svg.append("text")
+    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
+    //     .attr("y", legend_g.attr("y") + 3 * 20 + 5)
+    //     .text("육식동물 ID")
+    //     .attr("class", "KR")
 
     svg.append("circle")
         .attr("r", 5)
         .attr("cx", legend_g.attr("x") + width - 50 - 1)
         .attr("cy", legend_g.attr("y") + 3 * 20)
         .attr("fill", "#525050")
-        .attr("fill-opacity",  1);
+        .attr("fill-opacity", 1);
 
-        svg.append("text")
+
+    svg.append("text")
         .attr("x", legend_g.attr("x") + width - 50 + 10)
         .attr("y", legend_g.attr("y") + 4 * 20 + 5)
-        .text("Homo Sapiens")
+        .text("Homo Sapiens ID")
+        // .attr("class", "EN")
+
+    // svg.append("text")
+    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
+    //     .attr("y", legend_g.attr("y") + 4 * 20 + 5)
+    //     .text("인간 ID")
+    //     .attr("class", "KR")
 
     svg.append("circle")
         .attr("r", 5)
         .attr("cx", legend_g.attr("x") + width - 50 - 1)
-        .attr("cy", legend_g.attr("y") + 4* 20)
-        .attr("fill","#141414")
-        .attr("fill-opacity",  1);
-
+        .attr("cy", legend_g.attr("y") + 4 * 20)
+        .attr("fill", "#141414")
+        .attr("fill-opacity", 1);
 
 
     svg.append("text")
         .attr("x", legend_g.attr("x") + width - 50 + 10)
         .attr("y", legend_g.attr("y") + 5 * 20 + 5)
-        .text("Microplastic")
+        .text("Microplastic ID")
+        // .attr("class", "EN")
+    // svg.append("text")
+    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
+    //     .attr("y", legend_g.attr("y") + 5 * 20 + 5)
+    //     .text("미세플라스틱 ID")
+    //     .attr("class", "KR")
 
 
     svg.append("rect")
@@ -288,7 +325,6 @@ export default function forcedD3(data) {
         .attr("x", legend_g.attr("x") + width - 50 - 1)
         .attr("y", legend_g.attr("y") + 5 * 20 - 5)
         .attr("fill", "#999;")
-        .attr("fill-opacity",  0.6);
+        .attr("fill-opacity", 0.6);
 
 }
-
