@@ -38,14 +38,17 @@ export default class PointThree extends BasicThree {
             })
     }
     animate = () => {
+        this.animationRequest = requestAnimationFrame(this.animate);
         if (document.getElementById("currentPage").innerHTML == this.type) {
-            this.update()
-            if (this.type == "home") {
-                this.setObjectPosition()
+            if (this.valid()) {
+                this.update()
+                if (this.type == "home") {
+                    this.setObjectPosition()
+                }
             }
 
         }
-        this.animationRequest = requestAnimationFrame(this.animate);
+
     }
 
     setObjectPosition() {
@@ -79,8 +82,7 @@ export default class PointThree extends BasicThree {
         super.reset()
         this.selectedArray = [];
         this.originalArray = [];
-        cancelAnimationFrame(this.animationRequest)
-        cancelAnimationFrame(this.renderRequest)
+       
     }
 
     updateSize = () => {
@@ -115,7 +117,7 @@ export class SariraThree extends BasicThree {
             this.convex.updateVertices(this.geometry, data.length)
             this.convex.initializeMesh()
         }
-        this.camera.position.set(0, 0, 10 + this.geometry.boundingBox.max.y * 5)
+        this.camera.position.set(0, 0, 15 + this.geometry.boundingBox.max.y * 5)
 
         this.updateSize()
         this.animate()
@@ -127,26 +129,32 @@ export class SariraThree extends BasicThree {
     setCanvas(canvas) {
         this.canvas = canvas
     }
+    resetControls(){
+        this.camera.position.set(0, 0, 15 + this.geometry.boundingBox.max.y * 5)
+        this.camera.updateProjectionMatrix();
+       
+    }
     updateSize() {
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
         if (!document.getElementById("currentPage").classList.contains('detail_inactive')) {
-            this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
+            this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height
+            this.camera.updateProjectionMatrix();
         }
-        this.camera.updateProjectionMatrix();
+
     }
 
     animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
-        this.scene.rotation.y = Date.now() * 0.0001;
-        if (document.getElementById("currentPage").innerHTML == this.type) {
-            this.update();
+        if (this.valid()) {
+            this.scene.rotation.y = Date.now() * 0.0001;
+            if (document.getElementById("currentPage").innerHTML == this.type) {
+                this.update();
+            }
         }
     }
 
     reset() {
         super.reset()
-        cancelAnimationFrame(this.animationRequest)
-        cancelAnimationFrame(this.renderRequest)
     }
 
 

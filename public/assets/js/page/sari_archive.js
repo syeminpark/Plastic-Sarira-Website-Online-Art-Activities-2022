@@ -18,7 +18,7 @@ import SariraThreeController from '../three/SariraThreeController.js';
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
-
+		this.range=20
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
 		this.loadedSariras = [];
@@ -43,6 +43,7 @@ class SariArchive12345 extends Page12345 {
 				if (this.sliced_data.length - 1 > this.load_index) {
 					this.load_index++;
 					this.loadList(this.sliced_data[this.load_index]);
+					this.sariraThreeController.create(this.load_index,this.range, this.res.allSariraData, this.list.container.children)
 				} else {
 
 				}
@@ -65,24 +66,20 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	async loadData() {
-
-
-		let range = 20
+	
 		//current code 
-		let res = await this.serverClientCommunication.getAllSarira()
-		console.log(res)
+		this.res = await this.serverClientCommunication.getAllSarira()
+		console.log(this.res)
 
 		//dynamically creating a bot_caption by its id 
-		for (let i = 0; i < res.allSariraData.length; i++) {
-			res.allSariraData[i].bot_caption= res.allSariraData[i].name
+		for (let i = 0; i < this.res.allSariraData.length; i++) {
+			this.res.allSariraData[i].bot_caption=this.res.allSariraData[i].name
 		}
 		//--> split data at intervals of 20, and load first part.
-		this.sliceData(res.allSariraData, range);
+		this.sliceData(this.res.allSariraData, this.range);
 		this.loadList(this.sliced_data[this.load_index])
 
-
-
-		this.sariraThreeController.create(this.load_index,range, res.allSariraData, this.list.container.children)
+		this.sariraThreeController.create(this.load_index,this.range, this.res.allSariraData, this.list.container.children)
 		this.sariraThreeController.render();
 
 

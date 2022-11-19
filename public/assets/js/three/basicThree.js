@@ -20,7 +20,7 @@ export default class BasicThree {
         this.scene = new THREE.Scene()
         this.camera = new THREE.PerspectiveCamera(
             25,
-           1,
+            0.8,
             0.02,
             1300
         )
@@ -46,10 +46,12 @@ export default class BasicThree {
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
         if(this.valid()){
+
             this.renderer.render(this.scene, this.camera)
+            
         }
     }
-
+ 
     reset() {
         this.scene.remove(this.object)
         this.object = undefined

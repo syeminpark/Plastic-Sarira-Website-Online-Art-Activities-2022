@@ -7,21 +7,22 @@ export default class SariraThreeController {
         this.isDetail = isDetail
         this.type = type
         this.sariraThreeList = []
+        this.sariraObject =[]
         this.renderer = renderer
-        this.renderReques
-
+        this.renderRequest
+        window.addEventListener('resize', () => this.updateSize(), false);
     }
     setCanvas(canvas) {
         this.canvas = canvas
     }
     create(load_index, range, data, element) {
 
-        for (let i = load_index * range; i < load_index + 1 * range; i++) {
+        for (let i = load_index * range; i < (load_index + 1) * range; i++) {
             let sariraThree = new SariraThree(this.canvas, this.renderer, this.type, false)
             sariraThree.setElement(element[i])
             sariraThree.import(JSON.parse(data[i].message).vertices)
-
-            this.sariraThreeList.push(sariraThree.getObject())
+            this.sariraThreeList.push(sariraThree)
+            this.sariraObject.push(sariraThree.getObject())
         }
     }
 
@@ -40,7 +41,7 @@ export default class SariraThreeController {
 
             let canvas = this.canvas
 
-            this.sariraThreeList.forEach(function (scene) {
+            this.sariraObject.forEach(function (scene) {
 
                 if (scene.element == undefined) {
                     window.location.reload();
@@ -63,6 +64,7 @@ export default class SariraThreeController {
                 renderer.setViewport(left, bottom, width1, height1);
                 renderer.setScissor(left, bottom, width1, height1);
                 renderer.render(scene.scene, scene.camera)
+
             })
 
         }
@@ -78,9 +80,13 @@ export default class SariraThreeController {
         }
     }
     checkCanvas() {
-        if (this.renderer.getCurrentCanvas != this.canvas) {
+        if (this.renderer.getCurrentCanvas() != this.canvas) {
             this.renderer.appendToCanvas(this.canvas)
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+            for(let sariraThree of this.sariraThreeList){
+                sariraThree.resetControls()
+              console.log("reset")
+            }
         }
     }
 
