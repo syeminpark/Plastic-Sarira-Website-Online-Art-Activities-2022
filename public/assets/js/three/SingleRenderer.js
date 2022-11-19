@@ -5,16 +5,18 @@ export default class SingleRenderer {
         this.renderer = new THREE.WebGLRenderer({
             alpha: true,
             premultipliedAlpha: false,
-            antialias:true
+            antialias: true
         })
         this.renderer.outputEncoding = THREE.sRGBEncoding
 
+        this.currentCanvas;
     }
 
 
     appendToCanvas(canvas) {
         canvas.appendChild(this.renderer.domElement)
-       
+        this.currentCanvas = canvas
+        
     }
 
     getRenderer() {
@@ -35,6 +37,11 @@ export default class SingleRenderer {
     clear() {
         this.renderer.clear();
         this.renderer.setScissorTest(false);
-      
+        this.renderer.dispose()
+
+    }
+
+    getCurrentCanvas() {
+        return this.currentCanvas
     }
 }
