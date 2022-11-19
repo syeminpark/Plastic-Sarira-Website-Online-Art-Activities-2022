@@ -34,7 +34,7 @@ const background_controller = new PageLayer12345(
 	document.getElementById("bck-preloader"), 'white', false);
 background_controller.assign(document.getElementById("nav-home-btn"),language);
 background_controller.assign(document.getElementById("nav-world-btn"),language);
-background_controller.assign(document.getElementById("plastic-sarira-title"),language);
+background_controller.assign(document.getElementById("plastic-sarira-title"),language,false);
 
 background_controller.assign_hide(mainpopup_controller);
 mainpopup_controller.assign_hide(background_controller);
