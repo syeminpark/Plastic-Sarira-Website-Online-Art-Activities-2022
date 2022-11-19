@@ -1,4 +1,7 @@
 import { SariraThree } from "./three/SpecificThree.js";
+
+import forcedD3 from "./forceD3.js";
+
 class List12345 {
 	constructor(_pagelayer) {
 		this.pagelayer = _pagelayer
@@ -104,6 +107,7 @@ class List12345 {
 			let sarira = new SariraThree(document.getElementById("sari"), this.pagelayer.singleRenderer, 'sarira', true)
 			sarira.import(JSON.parse(_item.message).vertices) 
 			sarira.render();
+			forcedD3()
 	
 
 		}

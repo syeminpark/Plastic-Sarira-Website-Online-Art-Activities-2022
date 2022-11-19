@@ -119,7 +119,7 @@ body {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
-	
+
 }
 
 
@@ -1154,3 +1154,36 @@ body {
 	font-size: var(--font-citation);
 }
 
+
+/* D3 CSS  */
+
+
+.links line {
+	stroke: #999;
+	stroke-opacity: 0.6;
+	stroke-width: 1px;
+}
+
+.nodes circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+text {
+	pointer-events: none;
+
+	font-size: var(--font-citation);
+}
+
+
+#plane {
+	width:100%;
+	height: 100%;
+}
+
+.plane-caption{
+	font-size: var(--font-small);
+	display: flex;
+	justify-content: center;
+	transform: translate(0, -150%);
+}

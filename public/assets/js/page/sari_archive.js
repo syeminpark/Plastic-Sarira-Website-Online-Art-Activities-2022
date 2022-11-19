@@ -15,10 +15,11 @@ import ServerClientCommunication from '../serverClientCommunication.js';
 import SariraThreeController from '../three/SariraThreeController.js';
 
 
+
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
-		this.range=10
+		this.range=8
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
 		this.loadedSariras = [];

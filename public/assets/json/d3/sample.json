@@ -1,0 +1,49 @@
+{
+    "nodes":[
+
+        {"id":0, "category":"Homo Sapiens", "subcategory": "SYEMIN","uniqueID": "#1"},
+
+        {"id":1, "category": "Waste Plastic","subcategory": "BANG", "uniqueID":"#23"},
+        {"id": 2, "category":"Microbe", "subcategory": "MICROBE", "uniqueID":"#15"},
+        {"id":3,  "category":"Herbivore", "subcategory":"HERBIVORE", "uniqueID":"#349"},
+        {"id":4, "category": "Carnivore","subcategory": "CARNIVORE", "uniqueID":"#23"},
+        {"id":5, "category":"Homo Sapiens", "subcategory": "Paul","uniqueID": "#1"},
+
+        {"id":6, "category":"Waste Plastic", "subcategory": "NAE", "uniqueID":"#23"},
+        {"id":7, "category": "Carnivore","subcategory": "CARNIVORE", "uniqueID":"#7000"},
+
+        {"id":8, "category": "Waste Plastic", "subcategory": "NAE", "uniqueID":"#23"},
+        {"id":9,  "category":"Herbivore","subcategory":"HERBIVORE", "uniqueID":"#1"},
+
+        {"id":10, "category":"Waste Plastic","subcategory": "NAE", "uniqueID":"#23"},
+        {"id":11, "category":"Waste Plastic","subcategory": "NAE", "uniqueID":"#23"},
+        {"id":12, "category":"Waste Plastic","subcategory": "NAE", "uniqueID":"#23"},
+        {"id":13, "category":"Waste Plastic","subcategory": "NAE", "uniqueID":"#23"},
+        {"id":14, "category":"Waste Plastic","subcategory": "NAE", "uniqueID":"#23"},
+        {"id":15, "category":"Waste Plastic","subcategory": "NAE", "uniqueID":"#23"}
+ 
+    ],
+
+    "links":[ 
+
+        {"source":1,"target":2, "category": "Microplastic","subcategory": "MP", "uniqueID":"#1"},
+        {"source":2,"target":3,"category": "Microplastic","subcategory": "MP","uniqueID":"#1"},
+        {"source":3,"target":4,"category": "Microplastic","subcategory": "MP","uniqueID":"#1"},
+        {"source":4,"target":5,"category": "Microplastic","subcategory": "MP","uniqueID":"#1"},
+        {"source":5,"target":0,"category": "Microplastic","subcategory": "MP","uniqueID":"#1"},
+
+
+        {"source":6,"target":7, "category": "Microplastic","subcategory": "MP","uniqueID":"#23213"},
+        {"source":7,"target":0,"category": "Microplastic","subcategory": "MP","uniqueID":"#23213"},
+
+        {"source":8,"target":9,"category": "Microplastic","subcategory": "MP","uniqueID":"#12323"},
+        {"source":9,"target":0,"category": "Microplastic", "subcategory": "MP", "uniqueID":"#1223"},
+
+        {"source":10,"target":0, "category": "Microplastic","subcategory": "MP","uniqueID":"#988"},
+        {"source":11,"target":0, "category": "Microplastic","subcategory": "MP","uniqueID":"#18023"},
+        {"source":12,"target":0, "category": "Microplastic","subcategory": "MP","uniqueID":"#38"},
+        {"source":13,"target":0, "category": "Microplastic","subcategory": "MP","uniqueID":"#4912"},
+        {"source":14,"target":0, "category": "Microplastic","subcategory": "MP","uniqueID":"#7597"},
+        {"source":15,"target":0, "category": "Microplastic","subcategory": "MP","uniqueID":"#9487"}
+    ]
+}

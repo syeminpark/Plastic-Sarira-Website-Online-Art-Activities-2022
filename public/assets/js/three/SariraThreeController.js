@@ -9,7 +9,7 @@ export default class SariraThreeController {
         this.sariraThreeList = []
         this.sariraObject =[]
         this.renderer = renderer
-        window.addEventListener('resize', () => this.updateSize(), false);
+       
     }
     setCanvas(canvas) {
         this.canvas = canvas
