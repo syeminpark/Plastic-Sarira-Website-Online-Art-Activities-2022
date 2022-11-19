@@ -21,9 +21,9 @@ export default function forcedD3(data) {
         .range(['#ededed', '#bfbfbf', '#757474', '#525050', '#141414'])
     let aura = function (category) {
         if (category == "Homo Sapiens") {
-            return 15
+            return "2%"
         } else {
-            return 5
+            return "0.5%"
         }
     }
     svg.append('defs').append('marker')
@@ -37,7 +37,7 @@ export default function forcedD3(data) {
         .attr('xoverflow', 'visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
-        .attr('fill', '#999')
+        .attr('fill', '#FF3659')
         .attr('fill-opacity', 0.3)
         .style('stroke', 'none');
 
@@ -77,7 +77,7 @@ export default function forcedD3(data) {
             })
 
             .style("fill-opacity", 0.8)
-            .attr('fill', '#78924e');
+            .attr('fill', '#FF3659');
 
         edgelabels.append('textPath')
             .attr('xlink:href', function (d, i) {
@@ -86,7 +86,7 @@ export default function forcedD3(data) {
             .style("text-anchor", "middle")
             .style("pointer-events", "none")
             .attr("startOffset", "45%")
-            .attr('font-size', 8)
+            .attr('font-size', "var(--font-citation)")
             .text(d => {
                 return "MP " + d.uniqueID
             })
@@ -103,8 +103,8 @@ export default function forcedD3(data) {
                 d3.select(this).append("rect")
                     .attr("x", -10)
                     .attr("y", -10)
-                    .attr("width", 25)
-                    .attr("height", 25)
+                    .attr("width", "3%")
+                    .attr("height", "3%")
                     .style("fill", '#999')
 
                     .style("stroke", "grey")
@@ -113,7 +113,7 @@ export default function forcedD3(data) {
                     .style("fill", d => colorScale(d.category))
             } else {
                 d3.select(this).append("circle")
-                    .attr("r", 15)
+                    .attr("r", "2%")
 
                     .style("fill", '#999')
 
@@ -126,21 +126,18 @@ export default function forcedD3(data) {
 
         const lables = node.append("text")
             .text(function (d) {
-                return d.subcategory;
+                return d.subcategory + d.uniqueID;
             })
-            .attr("dy", -26)
-            .attr("dx", -15)
+            .attr("dy", "-3.5%")
+            .attr("dx", "-2%")
 
-        node.append("text")
-            .attr("dy", -16)
-            .attr("dx", -6)
-            .text(d => d.uniqueID);
 
 
         const drag_handler = d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
-            .on("end", dragended)
+            .on("end",dragended)
+         
 
 
         drag_handler(node);
@@ -153,12 +150,13 @@ export default function forcedD3(data) {
                     return d.id;
                 }) // This provide  the id of a node
                 .links(data.links) // and this the list of links
-                .distance(100)
+                .distance(
+                (document.getElementById('plane').offsetWidth*3)/ 20))
 
-            )
+            
             .force("collide", d3.forceCollide().radius(30))
-            .force("charge", d3.forceManyBody().strength(-100)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
-            .force("center", d3.forceCenter(width / 2, height / 2)) // This force attracts nodes to the center of the svg area
+            .force("charge", d3.forceManyBody().strength(-40)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+            .force("center", d3.forceCenter(width  / 2, height / 2)) // This force attracts nodes to the center of the svg area
             .on("tick", ticked);
 
 
@@ -211,29 +209,28 @@ export default function forcedD3(data) {
 
 
     svg.append("text")
-        .attr("x", legend_g.attr("x") + width - 50 + 10)
+        .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 0 * 20 + 5)
         .text("Waste Plastic ID")
-        // .attr("class", "EN")
+    // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
     //     .attr("y", legend_g.attr("y") + 0 * 20 + 5)
     //     .text("폐플라스틱 ID").attr("class", "KR")
 
-
-    svg.append("rect")
-        .attr("width", 10)
-        .attr("height", 10)
-        .attr("x", legend_g.attr("x") + width - 50 - 6)
-        .attr("y", legend_g.attr("y") + 0 * 20 - 5)
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", "2%")
+        .attr("cy", legend_g.attr("y") + 0 * 20)
         .attr("fill", "#ededed")
         .attr("fill-opacity", 1);
 
+
     svg.append("text")
-        .attr("x", legend_g.attr("x") + width - 50 + 10)
+        .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 1 * 20 + 5)
         .text("Microbe ID")
-        // .attr("class", "EN")
+    // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
     //     .attr("y", legend_g.attr("y") + 1 * 20 + 5)
@@ -242,7 +239,7 @@ export default function forcedD3(data) {
 
     svg.append("circle")
         .attr("r", 5)
-        .attr("cx", legend_g.attr("x") + width - 50 - 1)
+        .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 1 * 20)
         .attr("fill", "#bfbfbf")
         .attr("fill-opacity", 1);
@@ -250,10 +247,10 @@ export default function forcedD3(data) {
 
 
     svg.append("text")
-        .attr("x", legend_g.attr("x") + width - 50 + 10)
+        .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 2 * 20 + 5)
         .text("Herbivore ID")
-        // .attr("class", "EN")
+    // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
     //     .attr("y", legend_g.attr("y") + 2 * 20 + 5)
@@ -263,16 +260,16 @@ export default function forcedD3(data) {
 
     svg.append("circle")
         .attr("r", 5)
-        .attr("cx", legend_g.attr("x") + width - 50 - 1)
+        .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 2 * 20)
         .attr("fill", "#757474")
         .attr("fill-opacity", 1);
 
     svg.append("text")
-        .attr("x", legend_g.attr("x") + width - 50 + 10)
+        .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 3 * 20 + 5)
         .text("Carnivore ID")
-        // .attr("class", "EN")
+    // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
     //     .attr("y", legend_g.attr("y") + 3 * 20 + 5)
@@ -281,17 +278,17 @@ export default function forcedD3(data) {
 
     svg.append("circle")
         .attr("r", 5)
-        .attr("cx", legend_g.attr("x") + width - 50 - 1)
+        .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 3 * 20)
         .attr("fill", "#525050")
         .attr("fill-opacity", 1);
 
 
     svg.append("text")
-        .attr("x", legend_g.attr("x") + width - 50 + 10)
+        .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 4 * 20 + 5)
         .text("Homo Sapiens ID")
-        // .attr("class", "EN")
+    // .attr("class", "EN")
 
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
@@ -301,30 +298,30 @@ export default function forcedD3(data) {
 
     svg.append("circle")
         .attr("r", 5)
-        .attr("cx", legend_g.attr("x") + width - 50 - 1)
+        .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 4 * 20)
         .attr("fill", "#141414")
         .attr("fill-opacity", 1);
 
 
     svg.append("text")
-        .attr("x", legend_g.attr("x") + width - 50 + 10)
+        .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 5 * 20 + 5)
         .text("Microplastic ID")
-        // .attr("class", "EN")
+    // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
     //     .attr("y", legend_g.attr("y") + 5 * 20 + 5)
     //     .text("미세플라스틱 ID")
     //     .attr("class", "KR")
 
-
-    svg.append("rect")
-        .attr("width", 2)
-        .attr("height", 10)
-        .attr("x", legend_g.attr("x") + width - 50 - 1)
-        .attr("y", legend_g.attr("y") + 5 * 20 - 5)
-        .attr("fill", "#999;")
+    svg.append("circle")
+        .attr("r", 5)
+        .attr("cx", "2%")
+        .attr("cy", legend_g.attr("y") + 5 * 20)
+        .attr("fill", "#FF3659")
         .attr("fill-opacity", 0.6);
+
+
 
 }
