@@ -19,6 +19,7 @@ class List12345 {
 			detail_closer.addEventListener('click', () => {
 				this.detail_layer.classList.add('inactive');
 				document.getElementById('currentPage').classList.add('detail_inactive');
+				console.log(this.detail_layer.classList)
 			});
 		}
 	}
@@ -103,6 +104,7 @@ class List12345 {
 			let sarira = new SariraThree(document.getElementById("sari"), this.pagelayer.singleRenderer, 'sarira', true)
 			sarira.import(JSON.parse(param[0].message).vertices) 
 			sarira.render();
+	
 			//sarira.import(JSON.parse(_item.vertices)) --> real version should be something like this 
 		}
 	}

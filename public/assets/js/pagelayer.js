@@ -113,6 +113,8 @@ class PageLayer12345 {
 		this.researchpage.reset_page();
 		this.sarirapage.reset_page();
 		this.worldpage.unload();
+		document.getElementById('currentPage').classList.add('detail_inactive');
+		console.log("mesadfsaf")
 
 		this.toggleBtns();
 

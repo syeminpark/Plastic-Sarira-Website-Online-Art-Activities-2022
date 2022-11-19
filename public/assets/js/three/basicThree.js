@@ -13,11 +13,8 @@ export default class BasicThree {
 
         this.animationRequest;
         this.renderRequest
-
         this.object;
         this.geometry
-
-
 
         //scene
         this.scene = new THREE.Scene()
@@ -46,8 +43,9 @@ export default class BasicThree {
 
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
-        if(this.valid){
+        if(this.valid()){
             this.renderer.render(this.scene, this.camera)
+            
         }
     }
 
@@ -64,7 +62,6 @@ export default class BasicThree {
                     return true
                 }
             }
-
             else{
                 if(document.getElementById("currentPage").classList.contains('detail_inactive')){
                     return true;
