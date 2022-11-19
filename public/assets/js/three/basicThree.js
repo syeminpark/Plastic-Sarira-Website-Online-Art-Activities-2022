@@ -35,6 +35,8 @@ export default class BasicThree {
         this.controls = new OrbitControls(this.camera,this.renderer.getDomElement())
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
+
+        window.addEventListener('resize', () => this.updateSize(), false);
     }
 
     update() {
@@ -44,9 +46,7 @@ export default class BasicThree {
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
         if(this.valid()){
-
             this.renderer.render(this.scene, this.camera)
-            
         }
     }
 
