@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "publish": "node forever.js",
-    "start": "node forever.js",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "repository": {
