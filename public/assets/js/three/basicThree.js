@@ -21,7 +21,7 @@ export default class BasicThree {
         this.scene = new THREE.Scene()
         this.camera = new THREE.PerspectiveCamera(
             25,
-            window.innerWidth / window.innerHeight,
+           1,
             0.02,
             1300
         )
@@ -32,11 +32,10 @@ export default class BasicThree {
         });
 
         this.renderer.appendToCanvas(this.canvas)
+       
         this.controls = new OrbitControls(this.camera,this.renderer.getDomElement())
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
-        window.addEventListener('resize', () => this.updateSize(), false);
-
     }
 
     update() {
@@ -50,12 +49,6 @@ export default class BasicThree {
         }
     }
 
-    updateSize() {
-      
-        this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
-        this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
-        this.camera.updateProjectionMatrix();
-    }
 
     reset() {
         this.scene.remove(this.object)
