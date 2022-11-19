@@ -9,7 +9,6 @@ export default class SariraThreeController {
         this.sariraThreeList = []
         this.sariraObject =[]
         this.renderer = renderer
-        this.renderRequest
         window.addEventListener('resize', () => this.updateSize(), false);
     }
     setCanvas(canvas) {
@@ -27,7 +26,7 @@ export default class SariraThreeController {
     }
 
     render = () => {
-        this.renderRequest = requestAnimationFrame(this.render)
+        requestAnimationFrame(this.render)
         if (this.valid()) {
             this.checkCanvas()
             this.rendererResizeMobile();
@@ -36,25 +35,21 @@ export default class SariraThreeController {
             renderer.setClearColor(0x000000, 0);
             renderer.setScissorTest(false);
 
-            renderer.setClearColor(0x000000, );
+            renderer.setClearColor(0x000000,1 );
             renderer.setScissorTest(true);
 
             let canvas = this.canvas
 
             this.sariraObject.forEach(function (scene) {
-
                 if (scene.element == undefined) {
                     window.location.reload();
                 }
 
-                let element = scene.element;
-                let rect = element.getBoundingClientRect();
+                let rect = scene.element.getBoundingClientRect();
 
                 if (rect.bottom < 0 || rect.top > +renderer.domElement.getBoundingClientRect().bottom ||
                     rect.right < 0 || rect.left > renderer.domElement.clientWidth) {
-
                     return; // it's off screen
-
                 }
                 let width1 = rect.right - rect.left;
                 let height1 = rect.bottom - rect.top;
@@ -64,7 +59,6 @@ export default class SariraThreeController {
                 renderer.setViewport(left, bottom, width1, height1);
                 renderer.setScissor(left, bottom, width1, height1);
                 renderer.render(scene.scene, scene.camera)
-
             })
 
         }
