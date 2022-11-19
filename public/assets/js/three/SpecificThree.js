@@ -10,11 +10,11 @@ import Convex from './Convex.js';
 import BasicThree from "./basicThree.js"
 
 export default class PointThree extends BasicThree {
-    constructor(canvas,  renderer,type, isDetail) {
-        super(canvas, renderer,type, isDetail)
+    constructor(canvas, renderer, type, isDetail) {
+        super(canvas, renderer, type, isDetail)
         this.originalArray = []
         this.selectedArray = []
-        window.addEventListener('resize', () => this.updateSize(), false);
+
     }
 
     import = (path) => {
@@ -31,7 +31,7 @@ export default class PointThree extends BasicThree {
                 this.object = new THREE.Points(this.geometry, this.material);
                 this.scene.add(this.object)
                 this.camera.position.set(0, 0, 150 + this.geometry.boundingBox.max.y * 5)
-            
+
                 this.updateSize()
                 this.animate()
                 this.render()
@@ -83,7 +83,7 @@ export default class PointThree extends BasicThree {
         cancelAnimationFrame(this.renderRequest)
     }
 
-    updateSize =()=> {
+    updateSize = () => {
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
         this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
         this.camera.updateProjectionMatrix();
@@ -91,13 +91,13 @@ export default class PointThree extends BasicThree {
 }
 
 export class SariraThree extends BasicThree {
-    constructor(canvas,  renderer,type, isDetail) {
+    constructor(canvas, renderer, type, isDetail) {
         super(canvas, renderer, type, isDetail)
         this.convex
 
         let ambientLight = new THREE.AmbientLight(0xffffff, 1);
-        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff,5);
-        this.scene.add(ambientLight,  hemiLight, );
+        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 5);
+        this.scene.add(ambientLight, hemiLight, );
     }
 
     import(data) {
@@ -124,12 +124,14 @@ export class SariraThree extends BasicThree {
     setElement(element) {
         this.element = element
     }
-    setCanvas(canvas){
-        this.canvas=canvas
+    setCanvas(canvas) {
+        this.canvas = canvas
     }
-    updateSize(){
+    updateSize() {
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
-        this.camera.aspect = 1
+        if (!document.getElementById("currentPage").classList.contains('detail_inactive')) {
+            this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
+        }
         this.camera.updateProjectionMatrix();
     }
 
@@ -147,7 +149,7 @@ export class SariraThree extends BasicThree {
         cancelAnimationFrame(this.renderRequest)
     }
 
-  
+
     getObject() {
         return {
             scene: this.scene,
