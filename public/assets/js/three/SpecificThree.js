@@ -10,8 +10,8 @@ import Convex from './Convex.js';
 import BasicThree from "./basicThree.js"
 
 export default class PointThree extends BasicThree {
-    constructor(canvas, type, renderer) {
-        super(canvas, type, renderer)
+    constructor(canvas,  renderer,type, isDetail) {
+        super(canvas, renderer,type, isDetail)
         this.originalArray = []
         this.selectedArray = []
         window.addEventListener('resize', () => this.updateSize(), false);
@@ -39,7 +39,6 @@ export default class PointThree extends BasicThree {
     }
     animate = () => {
         if (document.getElementById("currentPage").innerHTML == this.type) {
-          
             this.update()
             if (this.type == "home") {
                 this.setObjectPosition()
@@ -75,6 +74,7 @@ export default class PointThree extends BasicThree {
             }
         }
     }
+
     reset() {
         super.reset()
         this.selectedArray = [];
@@ -91,8 +91,8 @@ export default class PointThree extends BasicThree {
 }
 
 export class SariraThree extends BasicThree {
-    constructor(domElement, type, renderer) {
-        super(domElement, type, renderer)
+    constructor(canvas,  renderer,type, isDetail) {
+        super(canvas, renderer, type, isDetail)
         this.convex
 
         let ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -124,28 +124,30 @@ export class SariraThree extends BasicThree {
     setElement(element) {
         this.element = element
     }
+    setCanvas(canvas){
+        this.canvas=canvas
+    }
     updateSize(){
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
         this.camera.aspect = 1
         this.camera.updateProjectionMatrix();
-        
     }
 
     animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
+        this.scene.rotation.y = Date.now() * 0.0001;
         if (document.getElementById("currentPage").innerHTML == this.type) {
             this.update();
         }
     }
 
     reset() {
-        
         super.reset()
         cancelAnimationFrame(this.animationRequest)
         cancelAnimationFrame(this.renderRequest)
-
     }
 
+  
     getObject() {
         return {
             scene: this.scene,

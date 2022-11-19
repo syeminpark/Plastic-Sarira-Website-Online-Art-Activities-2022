@@ -1,6 +1,7 @@
+import { SariraThree } from "./three/SpecificThree.js";
 class List12345 {
-	constructor() {
-
+	constructor(_pagelayer) {
+		this.pagelayer = _pagelayer
 	}
 
 	setup(_container, _scroller, _detail) {
@@ -17,6 +18,7 @@ class List12345 {
 			const detail_closer = this.detail_layer.querySelector('.closer');
 			detail_closer.addEventListener('click', () => {
 				this.detail_layer.classList.add('inactive');
+				document.getElementById('currentPage').classList.add('detail_inactive');
 			});
 		}
 	}
@@ -31,11 +33,8 @@ class List12345 {
 		}
 	}
 
-	empty() {
+	load(_data, param) {
 
-	}
-
-	load(_data, lambda) {
 		this.marker_data = _data;
 		//console.log(this.marker_data);
 		//this.reset();
@@ -58,20 +57,20 @@ class List12345 {
 			}
 
 			if (this.marker_data[i].id) {
-				item.setAttribute('data-id', this.marker_data[i].id.replace(/ /g,''));
+				item.setAttribute('data-id', this.marker_data[i].id.replace(/ /g, ''));
 			}
 
 			if (this.marker_data[i]["img-src"]) {
 				item.setAttribute('img-src', this.marker_data[i]["img-src"]);
 			}
-			
+
 
 			this.list_items.push(item);
 			this.container.appendChild(item);
 
 			if (this.detail_layer)
 				item.addEventListener('click', () => {
-					this.detailLoad(this.marker_data[i], lambda);
+					this.detailLoad(this.marker_data[i], param);
 				});
 		}
 
@@ -79,9 +78,11 @@ class List12345 {
 			this.onListScroll();
 	}
 
-	detailLoad(_item, lambda) {
+	detailLoad(_item, param) {
+		console.log("detailLoad", _item)
 		this.detail_layer.classList.remove('inactive');
-
+		document.getElementById('currentPage').classList.remove('detail_inactive');
+		console.log()
 		if (_item.vert_caption) {
 			if (this.detail_layer.querySelector('.detail-layer-caption-1')) {
 				this.detail_layer.querySelector('.detail-layer-caption-1').innerHTML = _item.vert_caption;
@@ -93,8 +94,16 @@ class List12345 {
 				this.detail_layer.querySelector('.detail-layer-caption-2').innerHTML = _item.bot_caption;
 			}
 		}
-		if (lambda) {
-			lambda( `./assets/3dmodel/${_item.properties.beach}/${_item.properties.index}.ply`)
+		// Research page detail
+		if (_item.properties != undefined) {
+			if (param) {
+				param(`./assets/3dmodel/${_item.properties.beach}/${_item.properties.index}.ply`)
+			}
+		} else {
+			let sarira = new SariraThree(document.getElementById("sari"), this.pagelayer.singleRenderer, 'sarira', true)
+			sarira.import(JSON.parse(param[0].message).vertices) 
+			sarira.render();
+			//sarira.import(JSON.parse(_item.vertices)) --> real version should be something like this 
 		}
 	}
 

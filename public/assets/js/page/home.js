@@ -14,7 +14,7 @@ class Home12345 extends Page12345 {
     }
 
     setup() {
-        this.homeThree= new PointThree(document.getElementById('home'),"home",this.pagelayer.singleRenderer);
+        this.homeThree= new PointThree(document.getElementById('home'),this.pagelayer.singleRenderer,"home",false);
         this.homeThree.import(this.getRandomSourcePath());
     }
 

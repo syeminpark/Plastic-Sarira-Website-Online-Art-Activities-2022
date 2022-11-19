@@ -14,19 +14,21 @@ import ServerClientCommunication from '../serverClientCommunication.js';
 
 import SariraThreeController from '../three/SariraThreeController.js';
 
+
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
 
 		this.pagelayer = _pagelayer
-		this.list = new List12345();
+		this.list = new List12345(_pagelayer);
 		this.loadedSariras = [];
-
+		this.sariraThreeController = new SariraThreeController(this.pagelayer.singleRenderer,'sarira', false)
+		this.serverClientCommunication = new ServerClientCommunication();
 	}
 
 	setup() {
-		this.sariraThreeController = new SariraThreeController(document.getElementById("full-container"), 'sarira', this.pagelayer.singleRenderer)
-		
+		this.sariraThreeController.setCanvas(document.getElementById("full-container"))
+
 		const list_container = this.pagelayer.popup.querySelector("#sari-list");
 		const list_scroller = this.pagelayer.popup.querySelector(".scrollable");
 		const detail_layer = this.pagelayer.popup.querySelector("#sari-detail-layer");
@@ -48,25 +50,11 @@ class SariArchive12345 extends Page12345 {
 		}
 
 		this.load_index = 0;
-		this.ServerClientCommunication = new ServerClientCommunication();
-
 		this.loadsvg();
-		this.loadAllSariras();
 	}
 
 	loadsvg() {
 		this.svgloader = new SVGLoader12345(".sari-svg[svg-src]", "svg-src");
-	}
-
-	async loadAllSariras() {
-		let num = 1
-		let response = await this.ServerClientCommunication.getSarirasByRange("20")
-		console.log(response)
-	
-		this.sariraThreeController.create(20, response.allSariraData, this.list.container.children)
-		this.sariraThreeController.render();
-
-
 	}
 
 	sliceData(_data, _chunk_size) {
@@ -77,24 +65,39 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	async loadData() {
+
+
+		let range = 20
+		//current code 
+		let res = await this.serverClientCommunication.getAllSarira()
+
+		/// original code 
 		const url = "./assets/json/sarira/sarira.json";
 		const response = await fetch(url);
 		const json = await response.json();
 		//console.log(json["sariras"]);
 
+		//dynamically creating a bot_caption by its id 
 		for (let i = 0; i < json["sariras"].length; i++) {
 			json["sariras"][i]["bot_caption"] = json["sariras"][i]["id"];
 		}
 
+
 		//--> split data at intervals of 20, and load first part.
-		this.sliceData(json["sariras"], 20);
-		this.loadList(this.sliced_data[this.load_index]);
+		this.sliceData(json["sariras"], range);
+		this.loadList(this.sliced_data[this.load_index], res.allSariraData)
+
+
+
+		this.sariraThreeController.create(this.load_index,range, res.allSariraData, this.list.container.children)
+		this.sariraThreeController.render();
+
 
 		this.set_scrolls(this.pagelayer);
 	}
 
-	loadList(_data) {
-		this.list.load(_data);
+	loadList(_data, lambda) {
+		this.list.load(_data, lambda);
 	}
 }
 

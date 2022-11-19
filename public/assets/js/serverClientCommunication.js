@@ -90,11 +90,11 @@ export default class ServerClientCommunication {
         }
     }
 
-    async getSarirasByRange(range) {
+    async getAllSarira() {
         try {
             let response = await $.get(`${this.url}/sarira`, {
                 page: "0",
-                limit: range
+                limit: "300"
             })
             return response
         } catch (error) {

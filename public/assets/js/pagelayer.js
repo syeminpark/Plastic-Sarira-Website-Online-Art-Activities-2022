@@ -44,13 +44,14 @@ class PageLayer12345 {
 		}
 
 		this.btns = [];
-
+		this.singleRenderer=new SingleRenderer(this)
+		
 		this.homepage = new Home12345(this);
 		this.aboutpage = new About12345(this);
 		this.researchpage = new Research12345(this);
 		this.sarirapage = new SariArchive12345(this);
 		this.worldpage = new World12345(this);
-		this.singleRenderer=new SingleRenderer(this)
+	
 
 		this.is_hidden = true;
 		this.is_loading = false;
@@ -142,6 +143,9 @@ class PageLayer12345 {
 
 	hide() {
 		this.is_hidden = true;
+		console.log("HIDEEE")
+	
+		document.getElementById('currentPage').classList.add('detail_inactive')
 		this.popup.classList.add("inactive");
 		this.unload(this);
 		const nav_btns = document.getElementById("navigation").querySelectorAll(".btn");

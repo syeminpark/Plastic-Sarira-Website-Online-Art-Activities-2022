@@ -16,7 +16,7 @@ class Research12345 extends Page12345{
 	}
 
 	setup(){
-		this.researchThree= new PointThree(document.getElementById('plastic-detail-layer'),"research",this.pagelayer.singleRenderer);
+		this.researchThree= new PointThree(document.getElementById('plastic-detail-layer'),this.pagelayer.singleRenderer,"research",true);
 		//preloads the map
 		const mappreload_el = this.pagelayer.popup.querySelector('#map-preloader');
 		if(mappreload_el)

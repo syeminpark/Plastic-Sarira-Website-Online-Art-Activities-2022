@@ -5,9 +5,10 @@ import {
 
 export default class BasicThree {
 
-    constructor(canvas, type,renderer) {
+    constructor(canvas,renderer, type,isDetail) {
         this.canvas = canvas
         this.type = type
+        this.isDetail=isDetail
         this.renderer=renderer
 
         this.animationRequest;
@@ -15,6 +16,7 @@ export default class BasicThree {
 
         this.object;
         this.geometry
+
 
 
         //scene
@@ -30,7 +32,7 @@ export default class BasicThree {
             vertexColors: true,
             // color:"#0000FF"
         });
-
+       
         this.renderer.appendToCanvas(this.canvas)
        
         this.controls = new OrbitControls(this.camera,this.renderer.getDomElement())
@@ -44,11 +46,10 @@ export default class BasicThree {
 
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
-        if (document.getElementById("currentPage").innerHTML == this.type) {
+        if(this.valid){
             this.renderer.render(this.scene, this.camera)
         }
     }
-
 
     reset() {
         this.scene.remove(this.object)
@@ -56,4 +57,19 @@ export default class BasicThree {
         this.renderer.clear();
     }
 
+    valid(){
+        if (document.getElementById("currentPage").innerHTML == this.type) {
+            if(this.isDetail){
+                if(!document.getElementById("currentPage").classList.contains('detail_inactive')){
+                    return true
+                }
+            }
+
+            else{
+                if(document.getElementById("currentPage").classList.contains('detail_inactive')){
+                    return true;
+                }
+            }
+        }
+    }
 }

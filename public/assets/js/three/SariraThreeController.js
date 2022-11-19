@@ -3,62 +3,55 @@ import {
 } from '../three/SpecificThree.js';
 
 export default class SariraThreeController {
-    constructor(canvas, type, renderer) {
-        this.canvas = canvas
+    constructor(renderer, type, isDetail) {
+        this.isDetail = isDetail
         this.type = type
         this.sariraThreeList = []
         this.renderer = renderer
-        
+        this.renderReques
 
     }
-    create(num, data, element) {
-   
-        for (let i = 0; i < num; i++) {
-            let sariraThree = new SariraThree(this.canvas, this.type, this.renderer)
-            sariraThree.setElement(element[i])
+    setCanvas(canvas) {
+        this.canvas = canvas
+    }
+    create(load_index, range, data, element) {
 
+        for (let i = load_index * range; i < load_index + 1 * range; i++) {
+            let sariraThree = new SariraThree(this.canvas, this.renderer, this.type, false)
+            sariraThree.setElement(element[i])
             sariraThree.import(JSON.parse(data[i].message).vertices)
 
             this.sariraThreeList.push(sariraThree.getObject())
         }
-
     }
 
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
-        
-        if (document.getElementById("currentPage").innerHTML == this.type) {
+        if (this.valid()) {
+            this.checkCanvas()
+            this.rendererResizeMobile();
+
             let renderer = this.renderer.getRenderer()
-            let width = renderer.domElement.clientWidth;
-            let height = renderer.domElement.clientHeight;
-
-            if (this.canvas.getBoundingClientRect().width !== width || this.canvas.getBoundingClientRect().height != height) {
-                renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height, false);
-                console.log(this.canvas.getBoundingClientRect().width,this.canvas.getBoundingClientRect().height)
-            }
-
             renderer.setClearColor(0x000000, 0);
             renderer.setScissorTest(false);
-          
-            renderer.setClearColor(0x000000,);
+
+            renderer.setClearColor(0x000000, );
             renderer.setScissorTest(true);
 
             let canvas = this.canvas
 
-            
             this.sariraThreeList.forEach(function (scene) {
 
-                if(scene.element==undefined){
+                if (scene.element == undefined) {
                     window.location.reload();
                 }
 
-                scene.scene.rotation.y = Date.now() * 0.0001;
                 let element = scene.element;
                 let rect = element.getBoundingClientRect();
 
                 if (rect.bottom < 0 || rect.top > +renderer.domElement.getBoundingClientRect().bottom ||
                     rect.right < 0 || rect.left > renderer.domElement.clientWidth) {
-                    
+
                     return; // it's off screen
 
                 }
@@ -71,6 +64,37 @@ export default class SariraThreeController {
                 renderer.setScissor(left, bottom, width1, height1);
                 renderer.render(scene.scene, scene.camera)
             })
+
+        }
+    }
+
+    rendererResizeMobile() {
+        let renderer = this.renderer.getRenderer()
+        let width = renderer.domElement.clientWidth;
+        let height = renderer.domElement.clientHeight;
+
+        if (this.canvas.getBoundingClientRect().width !== width || this.canvas.getBoundingClientRect().height != height) {
+            renderer.setSize(renderer.domElement.clientWidth, this.canvas.getBoundingClientRect().height, false);
+        }
+    }
+    checkCanvas() {
+        if (this.renderer.getCurrentCanvas != this.canvas) {
+            this.renderer.appendToCanvas(this.canvas)
+            this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+        }
+    }
+
+    valid() {
+        if (document.getElementById("currentPage").innerHTML == this.type) {
+            if (this.isDetail) {
+                if (!document.getElementById("currentPage").classList.contains('detail_inactive')) {
+                    return true
+                }
+            } else {
+                if (document.getElementById("currentPage").classList.contains('detail_inactive')) {
+                    return true;
+                }
+            }
         }
     }
 }
