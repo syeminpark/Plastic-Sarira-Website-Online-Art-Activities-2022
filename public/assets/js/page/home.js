@@ -19,8 +19,7 @@ class Home12345 extends Page12345 {
     }
 
     reset_page() {
-        super.reset_page();
-
+        super.reset_page()
     }
 
     getRandomSourcePath() {
