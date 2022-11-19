@@ -18,7 +18,7 @@ import SariraThreeController from '../three/SariraThreeController.js';
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
-		this.range=20
+		this.range=10
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
 		this.loadedSariras = [];
@@ -69,7 +69,6 @@ class SariArchive12345 extends Page12345 {
 	
 		//current code 
 		this.res = await this.serverClientCommunication.getAllSarira()
-		console.log(this.res)
 
 		//dynamically creating a bot_caption by its id 
 		for (let i = 0; i < this.res.allSariraData.length; i++) {
