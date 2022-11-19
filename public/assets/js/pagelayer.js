@@ -114,7 +114,6 @@ class PageLayer12345 {
 		this.sarirapage.reset_page();
 		this.worldpage.unload();
 		document.getElementById('currentPage').classList.add('detail_inactive');
-		console.log("mesadfsaf")
 
 		this.toggleBtns();
 
