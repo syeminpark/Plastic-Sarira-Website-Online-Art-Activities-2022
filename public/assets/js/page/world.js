@@ -9,9 +9,9 @@ import {Joystick12345} from './../joystick.js';
 import { WorldSystem } from '../world_source/WorldSystem.js';
 
 const test_img_srcs = [
-{img_src : "./assets/img/MA_00001.png", id : "MA#1", timestamp : "2006-09-07"},
-{img_src : "./assets/img/MA_00002.png", id : "MA#2", timestamp : "2007-11-10"},
-{img_src : "./assets/img/MA_00003.png", id : "MA#3", timestamp : "2012-01-17"}
+{img_src : "./assets/img/Naechi/studio/1.jpg", id : "NAE#1", timestamp : "2006-09-07"},
+{img_src : "./assets/img/Naechi/studio/2.jpg", id : "NAE#2", timestamp : "2007-11-10"},
+{img_src : "./assets/img/Naechi/studio/3.jpg", id : "NAE#3", timestamp : "2012-01-17"}
 ];
 
 class World12345 extends Page12345 {
@@ -155,7 +155,11 @@ class World12345 extends Page12345 {
 	}
 
 	worldEnd(){
-		//console.log("world ended");
+		//play death sound
+		if(document.getElementById('sound-btn').classList.contains('active')){
+			document.getElementById('death').play()
+		}
+
 		if(document.querySelector('#show-m-navigation').classList.contains('expanded')){
 			document.querySelector('#show-m-navigation').click();
 		}

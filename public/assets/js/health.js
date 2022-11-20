@@ -1,6 +1,6 @@
 class Health12345{
 	constructor(_world, _container, _bar){
-		this.value = 100;
+		this.value = 10000;
 		this.world = _world;
 		this.container = _container;
 		this.bar = _bar;
