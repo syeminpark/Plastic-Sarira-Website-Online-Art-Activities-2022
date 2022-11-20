@@ -107,6 +107,7 @@ class List12345 {
 			let sarira = new SariraThree(document.getElementById("sari"), this.pagelayer.singleRenderer, 'sarira', true)
 			sarira.import(JSON.parse(_item.message).vertices) 
 			sarira.render();
+			//forceD3(JSON.parse(_item.message).metadata)
 			forcedD3()
 	
 

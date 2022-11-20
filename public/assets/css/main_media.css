@@ -1,6 +1,7 @@
 @media only screen and (max-width: 800px) {
 	:root{
 		--main-padding: 4vw;
+		--padding: 4vw;
 		--font-large: 3.5vw;
 		--font-title: 4vw;
 		--font-small: 2.5vw;
@@ -610,11 +611,6 @@
 	}
 	
 	
-	#plane {
-		width:100%;
-		height: 100%;
-	}
-	
 	.plane-caption{
 		font-size: var(--font-small);
 		display: flex;
@@ -622,7 +618,6 @@
 		
 		transform: translate(0, -150%);
 		padding: 0 calc(var(--nav-margin) * 1.5) 0 calc(var(--nav-margin) * 1.5);
-		
 	}
 }
 

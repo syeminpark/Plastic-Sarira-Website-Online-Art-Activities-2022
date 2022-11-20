@@ -1,5 +1,6 @@
 :root {
 	--main-padding: 1vw;
+	--padding: 0.7vw;
 	--font-title: 1.5vw;
 	--font-large: 1.2vw;
 	--font-small: 0.75vw;
@@ -1036,7 +1037,7 @@ body {
 
 .world-popup-container .img-caption {
 	position: absolute;
-	bottom: var(--main-padding);
+	bottom: var(--padding);
 	left: 50%;
 	transform: translate(-50%, 0);
 	font-size: var(--font-small);

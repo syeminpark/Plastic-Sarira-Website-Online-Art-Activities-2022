@@ -2,7 +2,7 @@ import {Preloader12345} from './assets/js/preloader.js';
 import {SVGLoader12345} from './assets/js/svgloader.js';
 import {Language12345} from './assets/js/language.js';
 import {PageLayer12345} from './assets/js/pagelayer.js';
-import {Audio12345} from './assets/js/audio.js';
+import {Audio12345} from './assets/js/sound/audio.js';
 
 //Preloader가 사리 만드는 역할
 const preloader = new Preloader12345(

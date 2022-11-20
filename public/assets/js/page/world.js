@@ -8,9 +8,9 @@ import {Joystick12345} from './../joystick.js';
 
 
 const test_img_srcs = [
-{img_src : "./assets/img/MA_00001.png", id : "MA#1", timestamp : "2006-09-07"},
-{img_src : "./assets/img/MA_00002.png", id : "MA#2", timestamp : "2007-11-10"},
-{img_src : "./assets/img/MA_00003.png", id : "MA#3", timestamp : "2012-01-17"}
+{img_src : "./assets/img/Naechi/studio/1.jpg", id : "NAE#1", timestamp : "2006-09-07"},
+{img_src : "./assets/img/Naechi/studio/2.jpg", id : "NAE#2", timestamp : "2007-11-10"},
+{img_src : "./assets/img/Naechi/studio/3.jpg", id : "NAE#3", timestamp : "2012-01-17"}
 ];
 
 class World12345 extends Page12345 {
@@ -18,7 +18,7 @@ class World12345 extends Page12345 {
 		super();
 
 		this.time = 0;
-		this.time_limit = 30;
+		this.time_limit = 100;
 		this.pagelayer = _pagelayer;
 	}
 

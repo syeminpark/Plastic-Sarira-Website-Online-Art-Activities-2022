@@ -3,7 +3,7 @@ import {
 } from './audio_visualizer.js';
 import {
 	unmute
-} from './sound/unmute.js'
+} from './unmute.js'
 
 class Audio12345 {
 	constructor(_button, _visualizer) {
