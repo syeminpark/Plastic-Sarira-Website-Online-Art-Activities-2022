@@ -17,8 +17,8 @@ export default function forcedD3(data) {
 
     let colorScale = d3.scaleOrdinal()
         .domain(["Waste Plastic", "Microbe", "Herbivore", "Carnivore", "Homo Sapiens", ])
-        // .range(['#eee9e9 ', '#78924e', '#EE4B2B', '#dab768', '#DFBCFF'])
-        .range(['#ededed', '#bfbfbf', '#757474', '#525050', '#141414'])
+        .range(['#eee9e9 ',"#0000FF", '#78924e', '#EE4B2B', '#DFBCFF'])
+        // .range(['#ededed', '#bfbfbf', '#757474', '#525050', '#141414'])
     let aura = function (category) {
         if (category == "Homo Sapiens") {
             return "2%"
@@ -29,7 +29,7 @@ export default function forcedD3(data) {
     svg.append('defs').append('marker')
         .attr("id", 'arrowhead')
         .attr('viewBox', '-0 -5 10 10') //the bound of the SVG viewport for the current SVG fragment. defines a coordinate system 10 wide and 10 high starting on (0,-5)
-        .attr('refX', 23) // x coordinate for the reference point of the marker. If circle is bigger, this need to be bigger.
+        .attr('refX', "3%") // x coordinate for the reference point of the marker. If circle is bigger, this need to be bigger.
         .attr('refY', 0)
         .attr('orient', 'auto')
         .attr('markerWidth', 13)
@@ -132,12 +132,12 @@ export default function forcedD3(data) {
             .attr("dx", "-2%")
 
 
-
+         
         const drag_handler = d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
-            .on("end",dragended)
-         
+            // .on("end", dragended)
+
 
 
         drag_handler(node);
@@ -151,12 +151,12 @@ export default function forcedD3(data) {
                 }) // This provide  the id of a node
                 .links(data.links) // and this the list of links
                 .distance(
-                (document.getElementById('plane').offsetWidth*3)/ 20))
+                    (document.getElementById('plane').offsetWidth * 4) / 30))
 
-            
-            .force("collide", d3.forceCollide().radius(30))
-            .force("charge", d3.forceManyBody().strength(-40)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
-            .force("center", d3.forceCenter(width  / 2, height / 2)) // This force attracts nodes to the center of the svg area
+            .force("boundary", forceBoundary(0, 0, width, height))
+            .force("collide", d3.forceCollide().radius(20))
+            .force("charge", d3.forceManyBody().strength(-300)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+            .force("center", d3.forceCenter(width / 2, height / 2)) // This force attracts nodes to the center of the svg area
             .on("tick", ticked);
 
 
@@ -164,7 +164,7 @@ export default function forcedD3(data) {
         function ticked() {
             link
                 .attr("x1", function (d) {
-                    return d.source.x;
+                    return d.source.x
                 })
                 .attr("y1", function (d) {
                     return d.source.y;
@@ -175,6 +175,8 @@ export default function forcedD3(data) {
                 .attr("y2", function (d) {
                     return d.target.y;
                 });
+
+
             node
                 .attr("transform", function (d) {
                     return "translate(" + d.x + "," + d.y + ")";
@@ -222,7 +224,7 @@ export default function forcedD3(data) {
         .attr("r", 5)
         .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 0 * 20)
-        .attr("fill", "#ededed")
+        .attr("fill", "#eee9e9")
         .attr("fill-opacity", 1);
 
 
@@ -241,7 +243,7 @@ export default function forcedD3(data) {
         .attr("r", 5)
         .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 1 * 20)
-        .attr("fill", "#bfbfbf")
+        .attr("fill", "#0000FF")
         .attr("fill-opacity", 1);
 
 
@@ -262,7 +264,7 @@ export default function forcedD3(data) {
         .attr("r", 5)
         .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 2 * 20)
-        .attr("fill", "#757474")
+        .attr("fill", "#78924e")
         .attr("fill-opacity", 1);
 
     svg.append("text")
@@ -280,7 +282,7 @@ export default function forcedD3(data) {
         .attr("r", 5)
         .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 3 * 20)
-        .attr("fill", "#525050")
+        .attr("fill", "#EE4B2B")
         .attr("fill-opacity", 1);
 
 
@@ -300,7 +302,7 @@ export default function forcedD3(data) {
         .attr("r", 5)
         .attr("cx", "2%")
         .attr("cy", legend_g.attr("y") + 4 * 20)
-        .attr("fill", "#141414")
+        .attr("fill", "#DFBCFF")
         .attr("fill-opacity", 1);
 
 
@@ -322,6 +324,6 @@ export default function forcedD3(data) {
         .attr("fill", "#FF3659")
         .attr("fill-opacity", 0.6);
 
-
-
 }
+
+     

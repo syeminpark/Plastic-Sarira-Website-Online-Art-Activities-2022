@@ -78,7 +78,7 @@ export default class SariraThreeController {
             this.renderer.appendToCanvas(this.canvas)
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
             for(let sariraThree of this.sariraThreeList){
-                sariraThree.resetControls()
+                sariraThree.resetControls(15)
               console.log("reset")
             }
         }
