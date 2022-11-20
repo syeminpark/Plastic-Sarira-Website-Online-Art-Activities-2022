@@ -3,7 +3,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
  class ConvexGeometry extends THREE.BufferGeometry {
 
-    constructor(points, verticesList, normalsList) {
+    constructor(points, color) {
 
         super(); // buffers
 
@@ -32,6 +32,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
         } // build geometry
         this.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
         this.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+        this.setAttribute('color', new THREE.Float32BufferAttribute(color, 3));
 
     }
 

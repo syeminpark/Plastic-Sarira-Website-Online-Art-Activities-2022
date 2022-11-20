@@ -80,6 +80,7 @@ class World12345 extends Page12345 {
 
 		this.time = 0;
 		this.world_ended = false;
+		
 	}
 
 	unload(){
@@ -151,7 +152,11 @@ class World12345 extends Page12345 {
 	}
 
 	worldEnd(){
-		//console.log("world ended");
+		//play death sound
+		if(document.getElementById('sound-btn').classList.contains('active')){
+			document.getElementById('death').play()
+		}
+
 		if(document.querySelector('#show-m-navigation').classList.contains('expanded')){
 			document.querySelector('#show-m-navigation').click();
 		}

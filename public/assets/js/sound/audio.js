@@ -10,10 +10,10 @@ class Audio12345 {
 		this.assignClickEvents();
 
 		this.button = _button;
+		console.log(this.button)
 		this.analyserNode;
 		this.backgroundSource;
 		this.bufferStartTime
-		this.clickSoundVolume = 0.5
 
 		this.is_audio_on = false;
 		this.hasBackgroundStarted = false
@@ -21,8 +21,14 @@ class Audio12345 {
 		this.button.addEventListener('click', this.toggle.bind(this));
 
 		this.visualizer = new AudioVisualizer12345(_visualizer);
+
 		this.clickSoundDOM = document.getElementById("click")
-		this.backgroundSoundDOM = document.getElementById("background")
+		this.zInteractionDOM = document.getElementById('zInteraction')
+		this.deathDOM = document.getElementById('death')
+
+		this.clickSoundVolume = 0.5
+		this.backgroundVolume = 0.5
+		this.default = 1
 
 		this.initAudio();
 	}
@@ -42,11 +48,11 @@ class Audio12345 {
 		let unmuteHandle = unmute(this.audioContext, false, false);
 
 		//click
-		const click_audioElement = this.audioContext.createMediaElementSource(this.clickSoundDOM);
-		const click_gain = this.audioContext.createGain();
-		click_gain.gain.value = this.clickSoundVolume
-		click_audioElement.connect(click_gain)
-		click_gain.connect(this.audioContext.destination);
+		this.createAudioElement(this.clickSoundDOM, this.clickSoundVolume)
+		//zInteratcion
+		this.createAudioElement(this.zInteractionDOM, this.default)
+		death
+		this.createAudioElement(this.deathDOM, this.default)
 
 		//background
 		this.backgroundSource = this.audioContext.createBufferSource()
@@ -62,10 +68,8 @@ class Audio12345 {
 			this.backgroundSource.buffer = await this.audioContext.decodeAudioData(arrayBuffer)
 			this.backgroundSource.loop = true
 			this.backgroundSource.connect(background_gain)
+			background_gain.gain.value = this.backgroundVolume
 			background_gain.connect(this.analyserNode)
-
-
-
 
 		} catch (error) {
 			console.error(error);
@@ -80,17 +84,13 @@ class Audio12345 {
 		this.analyserNode.connect(this.audioContext.destination);
 		this.bufferStartTime = this.audioContext.currentTime
 		this.is_audio_on = true;
-		//console.log("audio on!");
 		this.button.classList.add("active");
 		this.visualizer.show();
-		if (this.gainNode)
-			this.gainNode.gain.setValueAtTime(this.volume, this.audioCtx.currentTime);
 	}
 
 	off() {
 		this.analyserNode.disconnect(this.audioContext.destination);
 		this.is_audio_on = false;
-		//console.log("audio off!");
 		this.button.classList.remove("active");
 		this.visualizer.hide();
 		if (this.gainNode)
@@ -98,6 +98,7 @@ class Audio12345 {
 	}
 
 	assignClickEvents() {
+		//clicksound
 		const buttons = document.querySelectorAll(".btn");
 		const title = document.getElementById("plastic-sarira-title")
 		const array = [...buttons, title]
@@ -105,17 +106,38 @@ class Audio12345 {
 			if (array[i].id != "sound-btn") {
 				array[i].addEventListener('mousedown', (event) => {
 					event.preventDefault()
-					document.getElementById("click").currentTime = 0
-					document.getElementById("click").play()
+					this.clickSoundDOM.currentTime = 0
+					this.clickSoundDOM.play()
 					setTimeout(() => {
-						document.getElementById("click").pause();
-
+						this.clickSoundDOM.pause();
 					}, 150);
 				})
 			}
 		}
 
-	
+		//zInteraction
+		document.addEventListener('keydown', (event) => {
+			if (event.key == 'z') {
+				if (this.is_audio_on) {
+					//if the game is playing
+					if (!document.getElementById('world-navigation').classList.contains('m-inactive')) {
+						this.zInteractionDOM.play()
+					}
+				}
+			}
+		})
+	}
+
+	//death
+	//world.js에서 구현해놓음 
+
+
+	createAudioElement(element, volume) {
+		const audioElement = this.audioContext.createMediaElementSource(element);
+		const gain = this.audioContext.createGain();
+		gain.gain.value = volume
+		audioElement.connect(gain)
+		gain.connect(this.audioContext.destination);
 	}
 }
 
