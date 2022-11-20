@@ -6,6 +6,7 @@ import {Health12345} from './../health.js';
 import {ImageSlide12345} from './../imageslide.js';
 import {Joystick12345} from './../joystick.js';
 
+import { WorldSystem } from '../world_source/WorldSystem.js';
 
 const test_img_srcs = [
 {img_src : "./assets/img/MA_00001.png", id : "MA#1", timestamp : "2006-09-07"},
@@ -48,8 +49,6 @@ class World12345 extends Page12345 {
 				this.closePopups();
 			});
 		}
-
-
 
 		this.l_joystick = new Joystick12345({
 			container: this.pagelayer.popup.querySelector('#world-joystick-left'),

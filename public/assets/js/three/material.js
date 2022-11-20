@@ -47,3 +47,39 @@ export function createStandardMaterial() {
         side: THREE.DoubleSide,
     });
 }
+
+export function createLifeMaterial(){
+    return new THREE.ShaderMaterial({
+        uniforms:
+        {
+            "c": { type: "f", value: 1.0 },
+            "p": { type: "f", value: 1.4 },
+            glowColor: { type: "c", value: new THREE.Color(0xffffff) },
+            viewVector: { type: "v3", value: threeSystemController.worldThreeSystem.camera.position }
+        },
+        vertexShader: lifeShader.vertexShader, 
+        fragmentShader: lifeShader.fragmentShader, 
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending
+    });
+}
+
+export function createLifeNoiseMaterial(count, gap){
+    return new THREE.ShaderMaterial({
+        uniforms: { 
+            // float initialized to 0
+            time: { type: "f", value: 0.0 },
+            noiseCount:{type: "f", value: count},
+            noiseGap:{type: "f", value: gap},
+
+            "c": { type: "f", value: 1.0 },
+            "p": { type: "f", value: 1.4 },
+            glowColor: { type: "c", value: new THREE.Color(0xffffff) },
+            viewVector: { type: "v3", value: threeSystemController.worldThreeSystem.camera.position }
+        },
+        vertexShader: lifeShader_noise.vertexShader, 
+        fragmentShader: lifeShader_noise.fragmentShader,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending
+    });
+}
