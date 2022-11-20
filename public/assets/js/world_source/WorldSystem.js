@@ -1,14 +1,22 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+
+import BasicThree from '../three/basicThree.js';
+
 import {MicroPlastic_D3js} from './../world_source/Particle/ParticleClass.js';
 import {Life_Genetic} from './../world_source/Life/Life_Genetic.js';
 import {Life_user} from './../world_source/Life/Life_user.js';
 
-import './../three/MyMath.js';
-import './../three/material.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
+import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
 
 //세계
-class WorldSystem {
-    constructor() {
+class WorldSystem extends BasicThree {
+    constructor(canvas,renderer, type) {
+        super(canvas,renderer, type, false);
+
+        this.group = new THREE.Group();
+        this.scene.add(this.group);
+
         this.worldSize = 300;
         this.maxParticleCount = 10000;
 
@@ -17,14 +25,44 @@ class WorldSystem {
 
         //파티클, 라이프 초기화
         this.createParticle();
-        this.createLife();
+        // this.createLife();
 
-        //파티클, 라이프 그리기
-        this.drawParticles();
+        // //파티클, 라이프 그리기
+        // this.drawParticles();
         
-        //플라스틱 넣기        
+        // //플라스틱 넣기        
         this.createPlastic();
     }
+
+    addObj(obj){
+        this.group.add(obj);
+    }
+
+    reset(){
+        this.group.children.forEach(child => {
+            let geometry = child.geometry;
+            let material = child.material;
+
+            geometry.dispose();
+            material.dispose();
+        });
+
+        this.scene.remove(this.object)
+        this.object = undefined
+        this.renderer.clear();
+    }
+
+    animate = () => {
+        this.animationRequest = requestAnimationFrame(this.animate);
+        if (this.valid()) {
+            if (document.getElementById("currentPage").innerHTML == this.type) {
+                //this.update();
+            }
+        }
+    }
+
+    //=====================================================================================
+    //=====================================================================================
 
     createParticle() {
         //생성
@@ -66,26 +104,16 @@ class WorldSystem {
         this.particlePositionAttributes = this.particleAppearence.geometry.getAttribute( 'position' ).array;
         this.particleColorAttributes = this.particleAppearence.geometry.getAttribute( 'color' ).array;
 
-        threeSystemController.addToWorldScene(this.particleAppearence);
+        this.scene.add(this.particleAppearence);
     }
 
     createLife() {
         //생물 개체수 시작값
-        // const minNum_p = Math.floor(this.worldSize / 20);
-        // const minNum_s = Math.floor(this.worldSize / 40);
-        // const minNum_t = Math.floor(this.worldSize / 50);
         const minNum = Math.floor(this.worldSize * 0.1);
 
         //생물 개체수 최댓값
-        // this.maxNum_p = minNum_p*2;
-        // this.maxNum_s = minNum_s*2;
-        // this.maxNum_t = minNum_t*2;
         this.maxNum = Math.floor(this.worldSize * 0.3);
 
-        // this.primaryNum = minNum_p;
-        // this.secondaryNum = minNum_s;
-        // this.tertiaryNum = minNum_t;
-        // this.lifeNum = 1 + this.primaryNum + this.secondaryNum + this.tertiaryNum;
         this.lifeNum = 1 + minNum;
 
         let options = {
@@ -99,19 +127,6 @@ class WorldSystem {
         this.life_user = new Life_user(options);
         this.lifes.push(this.life_user);
 
-        // for (let i = 1; i < this.lifeNum; i++) {
-        //     if (i < 1 + this.primaryNum) {
-        //         const l = new Life_primaryConsumer(i, options);
-        //         this.lifes.push(l);
-        //     } else if (i < 1 + this.primaryNum + this.secondaryNum && i >= 1 + this.primaryNum) {
-        //         const l = new Life_secondaryConsumer(i, options);
-        //         this.lifes.push(l);
-        //     } else {
-        //         const l = new Life_tertiaryConsumer(i, options);
-        //         this.lifes.push(l);
-        //     }
-        // }
-
         for (let i = 1; i < this.lifeNum; i++) {
             this.lifes.push(new Life_Genetic(i, options));
         }
@@ -119,7 +134,7 @@ class WorldSystem {
 
     createPlastic(){
         this.fileList = [];
-        this.fileList.push('../models/jsonTest.json');
+        this.fileList.push('assets/3dmodel/plasticTest.json');
 
         this.fileData;
 
@@ -127,9 +142,12 @@ class WorldSystem {
         this.fileLoaded = false;
 
         // ==========================
-
+        
+        this.plasticData;
         this.canAddPlastic = false;
 
+        // 폐 플라스틱 위치, 기울기 (world 랜덤한 곳에 랜덤한 각도로 배치될 수 있도록)
+        // 각각의 파티클들의 위치를 지정하는 것이기 때문에 한번에 위치, 각도 지정을 할 수 없어 값을 미리 생성해놓은 후 곱하는 식
         this.plasticOffsetPosition = new THREE.Vector3(
             MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4), 
             MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4), 
@@ -142,6 +160,7 @@ class WorldSystem {
 
         this.plasticScale = 3;
 
+        // 파티클 정보 배열
         this.plasticPositions = [];
         this.plasticColors = [];
         this.activableParticles = [];
@@ -157,6 +176,12 @@ class WorldSystem {
             this.fileData = JSON.parse(text);
             console.log(this.fileData);
             console.log("file loaded");
+
+            // 임시
+            this.plasticData = {
+                type : 'polyethylene',
+                area : 'Bangameori'
+            };
 
             var positions = new Float32Array(this.fileData.count);
             var colors = new Float32Array(this.fileData.count);
@@ -221,6 +246,7 @@ class WorldSystem {
                 this.activableParticles[i].isActive = true;
                 this.activableParticles[i].setPos(this.plasticPositions[i]);
                 this.activableParticles[i].setColor(this.plasticColors[i]);
+                this.activableParticles[i].setD3PlasticData(this.plasticData.type, this.plasticData.area, i);
             }
 
             this.plasticPositions = [];
@@ -231,8 +257,13 @@ class WorldSystem {
             this.fileLoaded = false;
         }
     }
+    
+    //=====================================================================================
+    //=====================================================================================
 
     update() {
+        super.update();
+
         if (this.fileLoaded == true){
             this.addPlastic();
         }
@@ -297,36 +328,10 @@ class WorldSystem {
 
             this.lifes[i].lifeGo();
 
-            if (this.lifes[i].isDead == true) {
-                // if (this.lifes[i].lifeName.includes('Plankton') == true) {
-                //     this.primaryNum--;
-                //     //console.log('primaryNum' + this.primaryNum);
-                // }
-                // if (this.lifes[i].lifeName.includes('Herbivores') == true) {
-                //     this.secondaryNum--;
-                //     //console.log('secondaryNum' + this.secondaryNum);
-                // }
-                // if (this.lifes[i].lifeName.includes('Carnivores') == true) {
-                //     this.tertiaryNum--;
-                //     //console.log('tertiaryNum' + this.tertiaryNum);
-                // }
-                
+            if (this.lifes[i].isDead == true) {              
                 this.lifes.splice(i, 1);
                 continue;
             }
-
-            // if (this.tertiaryNum < this.maxNum_t && this.lifes[i].lifeName.includes('Carnivores') == true) { 
-            //     this.lifes[i].division(this.lifes, this); 
-            //     continue; 
-            // } 
-            // if (this.secondaryNum < this.maxNum_s && this.lifes[i].lifeName.includes('Herbivores') == true) { 
-            //     this.lifes[i].division(this.lifes, this); 
-            //     continue; 
-            // } 
-            // if (this.primaryNum < this.maxNum_p && this.lifes[i].lifeName.includes('Plankton') == true) { 
-            //     this.lifes[i].division(this.lifes, this); 
-            //     continue; 
-            // } 
 
             if (this.lifes.length < this.maxNum && this.lifes[i].index != 0){
                 this.lifes[i].division(this.lifes, this); 
@@ -341,6 +346,23 @@ class WorldSystem {
             }
         }
     }
+}
+
+// json 읽는 메소드
+// https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript
+function readTextFile(file, callback, thisObj) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+          // .call 붙인 이유 - class에서 사용하는 this.를 콜백에선 다른 것으로 인식. 
+          // 때문에 this가 나타내는 객체를 지정해줌.
+          // class에서 사용하지 않을 경우 null
+            callback.call(thisObj, rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
 }
 
 export {WorldSystem}

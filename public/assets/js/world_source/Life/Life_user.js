@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Life_Genetic } from './Life_Genetic.js'
 import { BodySystem } from './../Sarira/BodySystem.js'
 
-import '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
 
 class Life_user extends Life_Genetic {
     constructor(options){

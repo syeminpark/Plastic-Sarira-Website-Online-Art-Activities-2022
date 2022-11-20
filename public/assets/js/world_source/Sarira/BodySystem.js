@@ -5,10 +5,12 @@ import { Microplastic } from './MicroPlastic.js';
 
 class BodySystem {
 
-    constructor(index = 0, isWorld = true) {
+    constructor(index = 0, worldSystem) {
         index == 0 ? this.isUser = true : this.isUser = false;
-        isWorld == true ? this.threeSystem = threeSystemController.worldThreeSystem : this.threeSystem = threeSystemController.sariraThreeSystem;
-        this.threeSystem.element == document.querySelector("#sarira") ? this.isWindow = true : this.isWindow = false
+        // isWorld == true ? this.threeSystem = threeSystemController.worldThreeSystem : this.threeSystem = threeSystemController.sariraThreeSystem;
+        // this.threeSystem.element == document.querySelector("#sarira") ? this.isWindow = true : this.isWindow = false
+
+        this.threeSystem = worldSystem;
 
         this.floatingPlasticsList = new Array(0);
 

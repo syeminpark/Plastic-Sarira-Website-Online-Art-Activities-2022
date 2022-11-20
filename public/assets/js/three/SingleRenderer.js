@@ -1,4 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+
+// 렌더러를 공유할수 있도록 함
+// 메뉴 바뀔 때 마다 비우고 다시 그림
 export default class SingleRenderer {
     constructor() {
 

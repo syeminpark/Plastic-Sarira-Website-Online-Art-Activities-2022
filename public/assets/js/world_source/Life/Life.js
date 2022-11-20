@@ -1,13 +1,14 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
 import '/assets/js/three/shader.js';
 import '/assets/js/three/material.js';
 
 class Life {
-    constructor(index, worldSize, setPos) {
+    constructor(index, world, setPos) {
         this.index = index;
-        this.worldSize = worldSize || 300;
+        this.worldSystem = world;
+        this.worldSize = world.worldSize || 300;
                 
         this.init();
 

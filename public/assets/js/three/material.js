@@ -48,6 +48,18 @@ export function createStandardMaterial() {
     });
 }
 
+export function createParticleMaterial(){
+    return new THREE.PointsMaterial({
+        color: 'white',
+        size: 0.4,
+        side: THREE.DoubleSide,
+        opacity: 1.,
+        transparent: true,
+        vertexColors: true,
+    });
+}
+
+// 이전 방식
 export function createLifeMaterial(){
     return new THREE.ShaderMaterial({
         uniforms:
@@ -64,6 +76,7 @@ export function createLifeMaterial(){
     });
 }
 
+// 노이즈 쉐이더
 export function createLifeNoiseMaterial(count, gap){
     return new THREE.ShaderMaterial({
         uniforms: { 

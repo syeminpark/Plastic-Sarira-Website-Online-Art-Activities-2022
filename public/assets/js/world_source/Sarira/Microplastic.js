@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
 
 class Microplastic {
 

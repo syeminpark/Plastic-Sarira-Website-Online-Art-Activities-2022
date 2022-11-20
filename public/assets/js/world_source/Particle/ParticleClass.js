@@ -1,8 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {D3Dataset} from './D3Dataset.js';
 
-import '/assets/js/three/MyMath.js';
-import '/assets/js/three/material.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
 
 class Particle {
   constructor(index, worldSize, pos) {
@@ -91,7 +90,7 @@ class Particle {
 }
 
 class MicroPlastic_D3js extends Particle {
-  constructor(index, worldSize, plasticPos, plasticData) {
+  constructor(index, worldSize, plasticPos) {
     super(index, worldSize, plasticPos);
 
     // if (plasticPos != null){
@@ -101,11 +100,18 @@ class MicroPlastic_D3js extends Particle {
     //     plasticPos.z);
     // }
 
-    this.d3Data = new D3Dataset(this.index);
-    this.d3Data.saveNode(plasticData.type, plasticData.area, `#${plasticData.index}`);
-
     this.isSarira = false;
     this.toxicity = false;
+
+    this.d3Data = new D3Dataset(this.index);
+  }
+
+  setD3PlasticData(plasticData){
+    this.d3Data.saveNode(plasticData.type, plasticData.area, `#${plasticData.index}`);
+  }
+
+  setD3Life(userData){
+    this.d3Data.solidify(userData);
   }
 }
 

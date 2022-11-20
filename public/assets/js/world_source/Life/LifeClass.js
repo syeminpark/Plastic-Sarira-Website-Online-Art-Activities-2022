@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Life } from './Life.js'
 import { BodySystem } from './../Sarira/BodySystem.js'
 
-import '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
 
 // 파티클 흡수하는 Life
 class Life_Absorb extends Life {
@@ -152,7 +152,7 @@ class Life_Sarira extends Life_Absorb {
     constructor(index, worldSize, Sarira_Material, Sarira_ConvexMaterial, setPos) {
         super(index, worldSize, setPos);
 
-        this.bodySystem = new BodySystem(this.index);
+        this.bodySystem = new BodySystem(this.index, this.world);
         this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
     }
 

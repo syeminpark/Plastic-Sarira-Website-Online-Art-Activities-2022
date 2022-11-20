@@ -19,7 +19,7 @@ class World12345 extends Page12345 {
 		super();
 
 		this.time = 0;
-		this.time_limit = 30;
+		this.time_limit = 500;
 		this.pagelayer = _pagelayer;
 	}
 
@@ -79,6 +79,9 @@ class World12345 extends Page12345 {
 
 		this.time = 0;
 		this.world_ended = false;
+
+		this.world = new WorldSystem(document.getElementById('world-scene'), this.pagelayer.singleRenderer, "world");
+		this.world.reset();
 	}
 
 	unload(){
@@ -132,6 +135,8 @@ class World12345 extends Page12345 {
 		
 
 		window.addEventListener('keyup', this.moveSari.bind(this));
+
+		//this.world.update();
 	}
 
 	moveSari(e){
@@ -161,6 +166,8 @@ class World12345 extends Page12345 {
 		this.closePopups();
 		this.world_ended = true;
 		window.removeEventListener('keyup', this.moveSari.bind(this));
+
+		this.world.reset();
 	}
 
 	closePopups(){

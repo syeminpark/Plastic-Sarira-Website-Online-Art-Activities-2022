@@ -27,7 +27,7 @@ mainpopup_controller.assign(document.getElementById("nav-about-btn"),language);
 mainpopup_controller.assign(document.getElementById("nav-plastic-btn"),language);
 mainpopup_controller.assign(document.getElementById("nav-sarira-btn"),language)
 
-// mainpopup_controller의 역할은 홈, 생태계, 그리고 제목 버튼의 열고, 닫기, 언어 관리
+// background_controller 역할은 홈, 생태계, 그리고 제목 버튼의 열고, 닫기, 언어 관리
 const background_controller = new PageLayer12345(
 	document.getElementById("background-container"),
 	document.getElementById("bck-container"),
