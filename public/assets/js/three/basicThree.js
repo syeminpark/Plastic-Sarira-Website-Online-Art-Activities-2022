@@ -5,18 +5,22 @@ import {
 
 export default class BasicThree {
 
-    constructor(canvas, renderer, type, isDetail) {
-        this.canvas = canvas
+    constructor(renderer, type, isDetail) {
+
+        this.object = undefined;
+        this.geometry = undefined
+        //scene
+
+
         this.type = type
         this.isDetail = isDetail
         this.renderer = renderer
+        this.material = new THREE.PointsMaterial({
+            size: 3,
+            vertexColors: true,
+            // color:"#0000FF"
+        });
 
-        this.animationRequest;
-        this.renderRequest
-        this.object;
-        this.geometry = undefined
-
-        //scene
         this.scene = new THREE.Scene()
         this.camera = new THREE.PerspectiveCamera(
             25,
@@ -24,19 +28,25 @@ export default class BasicThree {
             0.02,
             1300
         )
-        this.material = new THREE.PointsMaterial({
-            size: 3,
-            vertexColors: true,
-            // color:"#0000FF"
-        });
-
-        this.renderer.appendToCanvas(this.canvas)
 
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
 
         window.addEventListener('resize', () => this.updateSize(), false);
+    }
+
+    setup(canvas) {
+
+        this.canvas = canvas
+        this.renderer.appendToCanvas(this.canvas)
+
+        if (this.geometry != undefined) {
+            this.geometry.dispose()
+            console.log("dispose geo")
+        }
+        this.scene.remove(this.object)
+        this.renderer.clear();
     }
 
     update() {
@@ -46,9 +56,7 @@ export default class BasicThree {
     render = () => {
         this.renderRequest = requestAnimationFrame(this.render)
         if (this.valid()) {
-
             this.renderer.render(this.scene, this.camera)
-
         }
     }
 
@@ -58,12 +66,6 @@ export default class BasicThree {
             this.camera.updateProjectionMatrix();
         }
 
-    }
-
-    reset() {
-        this.scene.remove(this.object)
-        this.object = undefined
-        this.renderer.clear();
     }
 
     valid() {

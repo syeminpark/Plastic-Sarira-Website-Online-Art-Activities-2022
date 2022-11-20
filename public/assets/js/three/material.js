@@ -2,9 +2,9 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 export function createConvexMaterial() {
     return new THREE.MeshPhysicalMaterial({
-        transmission: 0.95,
+        transmission: 0.98,
         thickness: 1,
-        roughness: 0.3,
+        roughness: 0.2,
         clearcoat: 1,
         metalness: 0,
         clearcoatRoughness: 0,

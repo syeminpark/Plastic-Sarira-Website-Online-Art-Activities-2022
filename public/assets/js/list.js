@@ -1,10 +1,11 @@
-import { SariraThree } from "./three/SpecificThree.js";
 
-import forcedD3 from "./forceD3.js";
+
+import forcedD3 from "./forceD3.js"
 
 class List12345 {
 	constructor(_pagelayer) {
 		this.pagelayer = _pagelayer
+
 	}
 
 	setup(_container, _scroller, _detail) {
@@ -18,6 +19,7 @@ class List12345 {
 		}
 
 		if (this.detail_layer) {
+
 			const detail_closer = this.detail_layer.querySelector('.closer');
 			detail_closer.addEventListener('click', () => {
 				this.detail_layer.classList.add('inactive');
@@ -101,15 +103,15 @@ class List12345 {
 		// Research page detail
 		if (_item.properties != undefined) {
 			if (param) {
-				param(`./assets/3dmodel/${_item.properties.beach}/${_item.properties.index}.ply`)
+				param.setup(document.getElementById('plastic-detail-layer'))
+				param.import(`./assets/3dmodel/${_item.properties.beach}/${_item.properties.index}.ply`)
 			}
 		} else {
-			let sarira = new SariraThree(document.getElementById("sari"), this.pagelayer.singleRenderer, 'sarira', true)
-			sarira.import(JSON.parse(_item.message).vertices) 
-			sarira.render();
+			param.setup(document.getElementById("sari"))
+			param.import(JSON.parse(_item.message).vertices)
 			//forceD3(JSON.parse(_item.message).metadata)
 			forcedD3()
-	
+
 
 		}
 	}

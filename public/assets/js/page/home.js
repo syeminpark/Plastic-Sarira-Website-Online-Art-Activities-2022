@@ -3,18 +3,20 @@ import {
 } from './page.js';
 
 import PointThree from '../three/SpecificThree.js';
- import  wastePlasticDataset from "../waste_plastic_dataset.js";
+import wastePlasticDataset from "../waste_plastic_dataset.js";
 
-   
+
 class Home12345 extends Page12345 {
     constructor(_pagelayer) {
         super();
         this.pagelayer = _pagelayer
-        this.homeThree
+        this.homeThree = new PointThree( this.pagelayer.singleRenderer, "home", false);
+        this.homeThree.animate()
+        this.homeThree.render()
     }
 
     setup() {
-        this.homeThree= new PointThree(document.getElementById('home'),this.pagelayer.singleRenderer,"home",false);
+        this.homeThree.setup(document.getElementById('home') )
         this.homeThree.import(this.getRandomSourcePath());
     }
 
@@ -23,14 +25,14 @@ class Home12345 extends Page12345 {
     }
 
     getRandomSourcePath() {
-        const folderPath ="./assets/3dmodel"
+        const folderPath = "./assets/3dmodel"
         const randomBeachIndex = Math.floor(Math.random() * wastePlasticDataset.data.length)
-        const randomBeach=  wastePlasticDataset.data[randomBeachIndex].beachName
-        const randomWastePlasticIndex = Math.floor(Math.random() *  (wastePlasticDataset.data[randomBeachIndex].wastePlasticCount -1) +1)
-       
+        const randomBeach = wastePlasticDataset.data[randomBeachIndex].beachName
+        const randomWastePlasticIndex = Math.floor(Math.random() * (wastePlasticDataset.data[randomBeachIndex].wastePlasticCount - 1) + 1)
+
         const path = `${folderPath}/${randomBeach}/${randomWastePlasticIndex}.ply`
 
-        return path 
+        return path
     }
 }
 

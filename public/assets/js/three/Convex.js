@@ -1,6 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import ConvexGeometry from './ConvexGeometry.js';
-import lodash from 'https://cdn.skypack.dev/lodash';
 export default class Convex {
 
     constructor(threeSystem, material) {
@@ -13,7 +12,7 @@ export default class Convex {
         this.meshGeometry;
         this.convexMeshBack;
         this.convexMeshFront;
-        this.materialFront = lodash(this.materialBack)
+        this.materialFront = this.materialBack.clone()
 
 
     }
