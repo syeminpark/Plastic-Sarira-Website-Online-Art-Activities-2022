@@ -2,24 +2,22 @@ import {
     PLYLoader
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import {
-    createConvexMaterial,
-    createPointMaterial
-} from './material.js';
+
 import Convex from './Convex.js';
 import BasicThree from "./basicThree.js"
 
 export default class PointThree extends BasicThree {
-    constructor(canvas, renderer, type, isDetail) {
-        super(canvas, renderer, type, isDetail)
+    constructor(renderer, type, isDetail) {
+        super(renderer, type, isDetail)
+    }
+
+    setup(canvas, ) {
+        super.setup(canvas);
         this.originalArray = []
         this.selectedArray = []
-
     }
 
     import = (path) => {
-        this.reset()
-
         new PLYLoader().load(
             path, (geometry) => {
                 geometry.computeBoundingBox()
@@ -34,25 +32,24 @@ export default class PointThree extends BasicThree {
                 console.log(path)
 
                 this.updateSize()
-                this.animate()
-                this.render()
             })
+
     }
     animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
-        if (document.getElementById("currentPage").innerHTML == this.type) {
-            if (this.valid()) {
-                this.update()
-                if (this.type == "home") {
-                    this.setObjectPosition()
+        if (this.geometry != undefined) {
+            if (document.getElementById("currentPage").innerHTML == this.type) {
+                if (this.valid()) {
+                    this.update()
+                    if (this.type == "home") {
+                        this.setObjectPosition()
+                    }
                 }
-            }
 
+            }
         }
 
     }
-
-
 
     setObjectPosition() {
         this.selectRandomPoints()
@@ -81,62 +78,65 @@ export default class PointThree extends BasicThree {
         }
     }
 
-    reset() {
-        super.reset()
-        this.selectedArray = [];
-        this.originalArray = [];
-        this.resetControls(180)
-       
-    }
-
     updateSize = () => {
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
         this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
         this.camera.updateProjectionMatrix();
     }
 }
-
 export class SariraThree extends BasicThree {
-    constructor(canvas, renderer, type, isDetail) {
-        super(canvas, renderer, type, isDetail)
-        this.convex
+    constructor(renderer, type, isDetail) {
+        super(renderer, type, isDetail)
+        this.convex=undefined
 
         let ambientLight = new THREE.AmbientLight(0xffffff, 1);
         let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 10);
-        this.scene.add(ambientLight, hemiLight, );
+        this.scene.add(ambientLight, hemiLight);
+    }
+
+    setup(canvas ) {
+        super.setup(canvas);
+        if(this.convex!=undefined){
+            this.convex.clearObject();
+        }
+    }
+
+    setMaterial(pointMaterial, sariraMaterial) {
+        this.pointMaterial = pointMaterial
+        this.sariraMaterial = sariraMaterial
     }
 
     import(data) {
-        this.reset()
         this.geometry = new THREE.BufferGeometry();
         this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
         this.geometry.computeBoundingBox()
-        this.object = new THREE.Points(this.geometry, createPointMaterial());
+        this.object = new THREE.Points(this.geometry, this.pointMaterial);
         this.scene.add(this.object)
+
         if (data.length > 9) {
             let object = {
                 scene: this.scene
             }
-            this.convex = new Convex(object, createConvexMaterial())
+            this.convex = new Convex(object,this.sariraMaterial)
             this.convex.updateVertices(this.geometry, data.length)
             this.convex.initializeMesh()
         }
         this.camera.position.set(0, 0, 15 + this.geometry.boundingBox.max.y * 5)
 
         this.updateSize()
-        this.animate()
     }
 
     setElement(element) {
         this.element = element
     }
+
     setCanvas(canvas) {
         this.canvas = canvas
     }
-    resetControls(){
+
+    resetControls() {
         this.camera.position.set(0, 0, 15 + this.geometry.boundingBox.max.y * 5)
         this.camera.updateProjectionMatrix();
-       
     }
     updateSize() {
         this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
@@ -144,23 +144,19 @@ export class SariraThree extends BasicThree {
             this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height
             this.camera.updateProjectionMatrix();
         }
-
     }
 
     animate = () => {
         this.animationRequest = requestAnimationFrame(this.animate);
-        if (this.valid()) {
-            this.scene.rotation.y = Date.now() * 0.0001;
-            if (document.getElementById("currentPage").innerHTML == this.type) {
-                this.update();
+        if (this.geometry != undefined) {
+            if (this.valid()) {
+                this.scene.rotation.y = Date.now() * 0.0001;
+                if (document.getElementById("currentPage").innerHTML == this.type) {
+                    this.update();
+                }
             }
         }
     }
-
-    reset() {
-        super.reset()
-    }
-
 
     getObject() {
         return {

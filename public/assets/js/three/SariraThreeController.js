@@ -1,65 +1,92 @@
+``
 import {
     SariraThree
 } from '../three/SpecificThree.js';
+import {
+    createConvexMaterial,
+    createPointMaterial
+} from '../three/material.js';
 
 export default class SariraThreeController {
-    constructor(renderer, type, isDetail) {
+    constructor(renderer, type, isDetail, maer) {
         this.isDetail = isDetail
         this.type = type
-        this.sariraThreeList = []
-        this.sariraObject =[]
         this.renderer = renderer
-       
-    }
-    setCanvas(canvas) {
-        this.canvas = canvas
-    }
-    create(load_index, range, data, element) {
+        this.sariraObject = []
 
-        for (let i = load_index * range; i < (load_index + 1) * range; i++) {
-            let sariraThree = new SariraThree(this.canvas, this.renderer, this.type, false)
-            sariraThree.setElement(element[i])
-            sariraThree.import(JSON.parse(data[i].message).vertices)
+
+
+        this.max = 8
+        this.sariraThreeList = []
+
+        for (let i = 0; i < this.max; i++) {
+            let sariraThree = new SariraThree(this.renderer, this.type, false)
+
+            sariraThree.animate()
             this.sariraThreeList.push(sariraThree)
-            this.sariraObject.push(sariraThree.getObject())
+        }
+
+    }
+
+    setup(canvas, element) {
+        this.sariraObject = []
+        this.renderer.clear()
+        this.canvas = canvas
+        this.element = element
+        this.renderRequest
+
+        for (let i = 0; i < this.max; i++) {
+            this.sariraThreeList[i].setup(this.canvas)
+            this.sariraThreeList[i].setElement(element[i])
+            this.sariraObject.push(this.sariraThreeList[i].getObject())
+        }
+    }
+
+    setMaterial(pointMaterial, sariraMaterial) {
+       
+        for (let i = 0; i < this.max; i++)
+            this.sariraThreeList[i].setMaterial(pointMaterial, sariraMaterial)
+    }
+
+    create(load_index, range, data) {
+        for (let i = load_index * range; i < (load_index + 1) * range; i++) {
+            this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
         }
     }
 
     render = () => {
-        requestAnimationFrame(this.render)
-        if (this.valid()) {
-            this.checkCanvas()
-            this.rendererResizeMobile();
+        this.renderRequest = requestAnimationFrame(this.render)
+        if (this.sariraObject.length != 0) {
+            if (this.valid()) {
+                this.checkCanvas()
+                this.rendererResizeMobile();
 
-            let renderer = this.renderer.getRenderer()
-            renderer.setClearColor(0x000000, 0);
-            renderer.setScissorTest(false);
+                let renderer = this.renderer.getRenderer()
+                renderer.setClearColor(0x000000, 0);
+                renderer.setScissorTest(false);
 
-            renderer.setClearColor(0x000000,1 );
-            renderer.setScissorTest(true);
+                renderer.setClearColor(0x000000, 1);
+                renderer.setScissorTest(true);
 
-            let canvas = this.canvas
+                let canvas = this.canvas
 
-            this.sariraObject.forEach(function (scene) {
-                if (scene.element == undefined) {
-                    window.location.reload();
-                }
+                this.sariraObject.forEach(function (scene) {
+                    let rect = scene.element.getBoundingClientRect();
 
-                let rect = scene.element.getBoundingClientRect();
+                    if (rect.bottom < 0 || rect.top > +renderer.domElement.getBoundingClientRect().bottom ||
+                        rect.right < 0 || rect.left > renderer.domElement.clientWidth) {
+                        return; // it's off screen
+                    }
+                    let width1 = rect.right - rect.left;
+                    let height1 = rect.bottom - rect.top;
+                    let left = rect.left - canvas.getBoundingClientRect().left - document.getElementById("main-container").getBoundingClientRect().left
+                    let bottom = renderer.domElement.getBoundingClientRect().bottom - rect.bottom;
 
-                if (rect.bottom < 0 || rect.top > +renderer.domElement.getBoundingClientRect().bottom ||
-                    rect.right < 0 || rect.left > renderer.domElement.clientWidth) {
-                    return; // it's off screen
-                }
-                let width1 = rect.right - rect.left;
-                let height1 = rect.bottom - rect.top;
-                let left = rect.left - canvas.getBoundingClientRect().left - document.getElementById("main-container").getBoundingClientRect().left
-                let bottom = renderer.domElement.getBoundingClientRect().bottom - rect.bottom;
-
-                renderer.setViewport(left, bottom, width1, height1);
-                renderer.setScissor(left, bottom, width1, height1);
-                renderer.render(scene.scene, scene.camera)
-            })
+                    renderer.setViewport(left, bottom, width1, height1);
+                    renderer.setScissor(left, bottom, width1, height1);
+                    renderer.render(scene.scene, scene.camera)
+                })
+            }
 
         }
     }
@@ -77,9 +104,9 @@ export default class SariraThreeController {
         if (this.renderer.getCurrentCanvas() != this.canvas) {
             this.renderer.appendToCanvas(this.canvas)
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
-            for(let sariraThree of this.sariraThreeList){
+            for (let sariraThree of this.sariraThreeList) {
                 sariraThree.resetControls(15)
-              console.log("reset")
+                console.log("reset")
             }
         }
     }
