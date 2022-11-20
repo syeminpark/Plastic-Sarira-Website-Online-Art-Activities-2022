@@ -63,6 +63,7 @@ class SariArchive12345 extends Page12345 {
 				if (this.sliced_data.length - 1 > this.load_index) {
 					this.load_index++;
 					this.loadList(this.sliced_data[this.load_index]);
+					this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData,this.list.container.children)
 
 				} else {
 
@@ -98,8 +99,8 @@ class SariArchive12345 extends Page12345 {
 		this.sliceData(this.res.allSariraData, this.range);
 		this.loadList(this.sliced_data[this.load_index])
 
-		this.sariraThreeController.setup(document.getElementById("full-container"), this.list.container.children)
-		this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData)
+		this.sariraThreeController.setup(document.getElementById("full-container"))
+		this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData,this.list.container.children)
 		
 		this.set_scrolls(this.pagelayer);
 	}

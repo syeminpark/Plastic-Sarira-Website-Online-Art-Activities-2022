@@ -14,9 +14,7 @@ export default class SariraThreeController {
         this.renderer = renderer
         this.sariraObject = []
 
-
-
-        this.max = 8
+        this.max = 50
         this.sariraThreeList = []
 
         for (let i = 0; i < this.max; i++) {
@@ -28,17 +26,15 @@ export default class SariraThreeController {
 
     }
 
-    setup(canvas, element) {
+    setup(canvas) {
         this.sariraObject = []
         this.renderer.clear()
         this.canvas = canvas
-        this.element = element
         this.renderRequest
 
         for (let i = 0; i < this.max; i++) {
             this.sariraThreeList[i].setup(this.canvas)
-            this.sariraThreeList[i].setElement(element[i])
-            this.sariraObject.push(this.sariraThreeList[i].getObject())
+        
         }
     }
 
@@ -48,9 +44,12 @@ export default class SariraThreeController {
             this.sariraThreeList[i].setMaterial(pointMaterial, sariraMaterial)
     }
 
-    create(load_index, range, data) {
+    create(load_index, range, data,element) {
+     
         for (let i = load_index * range; i < (load_index + 1) * range; i++) {
+            this.sariraThreeList[i].setElement(element[i])
             this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
+            this.sariraObject.push(this.sariraThreeList[i].getObject())
         }
     }
 
