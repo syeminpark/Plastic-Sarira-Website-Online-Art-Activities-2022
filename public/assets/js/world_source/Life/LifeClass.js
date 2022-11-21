@@ -152,8 +152,8 @@ class Life_Sarira extends Life_Absorb {
     constructor(index, worldSize, Sarira_Material, Sarira_ConvexMaterial, setPos) {
         super(index, worldSize, setPos);
 
-        this.bodySystem = new BodySystem(this.index, this.world);
-        this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
+        // this.bodySystem = new BodySystem(this.index, this.world);
+        // this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
     }
 
     setSarira(microPlastic_Material, microPlastic_ConvexMaterial) {
@@ -178,8 +178,8 @@ class Life_Sarira extends Life_Absorb {
         this.add_MicroPlasticToSarira();
         this.sarira_position = _.cloneDeep(this.position);
         
-        this.bodySystem.update();
-        this.bodySystem.getLifePosition(this.sarira_position);
+        // this.bodySystem.update();
+        // this.bodySystem.getLifePosition(this.sarira_position);
     }
 
     add_MicroPlasticToSarira() {

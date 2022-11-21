@@ -1,8 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import {MyMath} from '/assets/js/three/MyMath.js';
-import '/assets/js/three/shader.js';
-import '/assets/js/three/material.js';
+import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
 
 class Life {
     constructor(index, world, setPos) {

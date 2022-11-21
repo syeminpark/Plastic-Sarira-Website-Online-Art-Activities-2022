@@ -2,6 +2,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Life_EatOther } from './Life_EatOther.js'
 
 import {MyMath} from '/assets/js/three/MyMath.js';
+import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
 
 class Life_Genetic extends Life_EatOther {
     constructor(index, options, geneCode, setPos){

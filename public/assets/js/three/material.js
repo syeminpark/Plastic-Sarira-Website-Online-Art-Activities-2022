@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import {lifeShader_noise} from './shader.js'
 
 export function createConvexMaterial() {
     return new THREE.MeshPhysicalMaterial({

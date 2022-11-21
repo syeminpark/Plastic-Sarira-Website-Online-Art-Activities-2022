@@ -80,8 +80,7 @@ class World12345 extends Page12345 {
 		this.time = 0;
 		this.world_ended = false;
 
-		this.world = new WorldSystem(document.getElementById('world-scene'), this.pagelayer.singleRenderer, "world");
-		this.world.reset();
+		this.world = new WorldSystem(this.pagelayer.singleRenderer);
 	}
 
 	unload(){
@@ -136,7 +135,7 @@ class World12345 extends Page12345 {
 
 		window.addEventListener('keyup', this.moveSari.bind(this));
 
-		//this.world.update();
+		this.world.animate();
 	}
 
 	moveSari(e){
