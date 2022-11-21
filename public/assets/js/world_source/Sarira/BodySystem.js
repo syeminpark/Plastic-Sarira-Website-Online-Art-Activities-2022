@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Buffer } from './Buffer.js';
 import { Sarira } from './Sarira.js';
-import { Microplastic } from './MicroPlastic.js';
+import { Microplastic } from './Microplastic.js';
 
 class BodySystem {
 
