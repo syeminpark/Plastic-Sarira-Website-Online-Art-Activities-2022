@@ -131,11 +131,10 @@ class World12345 extends Page12345 {
 				this.health.set(1-this.time/this.time_limit);
 			}
 		},600);
-		
-
-		window.addEventListener('keyup', this.moveSari.bind(this));
 
 		this.world.animate();
+		
+		window.addEventListener('keyup', this.moveSari.bind(this));
 	}
 
 	moveSari(e){

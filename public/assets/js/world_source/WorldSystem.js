@@ -14,8 +14,7 @@ import {createParticleMaterial, createPointMaterial, createConvexMaterial} from 
 class WorldSystem {
     constructor(renderer) {
         this.init(renderer);
-        this.reset();
-
+        
         this.scene.add(this.group);
         this.scene.add(new THREE.AxesHelper(5));
 
@@ -32,6 +31,8 @@ class WorldSystem {
     }
 
     init(renderer){
+        this.reset();
+
         this.canvas = document.getElementById('world-scene');
         this.singleRenderer = renderer;
         this.singleRenderer.appendToCanvas(this.canvas);
@@ -59,12 +60,15 @@ class WorldSystem {
             this.renderer.setSize(window.innerWidth, window.innerHeight);
             this.renderer.render(this.scene, this.camera);
         }, false);
+
+        this.renderer.render(this.scene, this.camera);
     }
 
     animate = () => {
         requestAnimationFrame(this.animate);
 
         this.update();
+        this.controls.update();
         this.renderer.render(this.scene, this.camera);
     }
 
@@ -85,13 +89,15 @@ class WorldSystem {
     }
 
     reset(){
-        for (let i = 0; i < this.group.children.length; i++) {
-            const child = this.group.children[i];
-            this.removeFromWorld(child);            
+        if (this.group != null){
+            for (let i = 0; i < this.group.children.length; i++) {
+                const child = this.group.children[i];
+                this.removeFromWorld(child);            
+            }
         }
 
-        this.scene.remove(this.group);
-        this.singleRenderer.clear();
+        this.scene?.remove(this.group);
+        this.singleRenderer?.clear();
     }
 
     //=====================================================================================
