@@ -328,6 +328,18 @@ class Life {
 
         this.arrowHelper.setDirection(this.velocity);
     }
+
+    getScreenPosition(){
+        let tempV = new THREE.Vector3().copy(this.position);
+        let orbitV = new THREE.Vector3();
+        orbitV = this.worldSystem.controls.object.position;
+        tempV.project(this.worldSystem.camera);
+
+        const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;
+        const y = (tempV.y * -.5 + .5) * this.canvas.clientHeight + this.canvas.getBoundingClientRect().top;
+
+        return {x:x, y:y};
+    }
 }
 
 export {Life}

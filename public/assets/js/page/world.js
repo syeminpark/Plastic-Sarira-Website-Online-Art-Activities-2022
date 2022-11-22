@@ -123,12 +123,17 @@ class World12345 extends Page12345 {
 		
 		this.lifecheck = setInterval(()=>{
 			this.time+=2;
-			if(this.time>this.time_limit){
+			// if(this.time>this.time_limit){
+			if (this.world.life_user.isDead == true) {
 				this.health.end();
 				this.worldEnd();
 				clearInterval(this.lifecheck);
 			}else{
-				this.health.set(1-this.time/this.time_limit);
+				// this.health.set(1-this.time/this.time_limit);
+				this.health.set(1 - this.world.life_user.age/this.world.life_user.lifespan);
+				
+				let lifePos = this.world.life_user.getScreenPosition(); 
+				this.health.setPos(lifePos.x, lifePos.y-10);
 			}
 		},600);
 
