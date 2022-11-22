@@ -4,17 +4,15 @@ import {D3Dataset} from './D3Dataset.js';
 import {MyMath} from '/assets/js/three/MyMath.js';
 
 class Particle {
-  constructor(index, worldSize, pos) {
+  constructor(index, worldSize) {
     this.index = index;
 
     this.worldSize = worldSize;
 
-    if (pos != null) {this.position = new THREE.Vector3(setPos.x, setPos.y, setPos.z);}
-    else {this.position = new THREE.Vector3(
+    this.position = new THREE.Vector3(
       MyMath.random(-this.worldSize, this.worldSize),
       MyMath.random(-this.worldSize, this.worldSize),
       MyMath.random(-this.worldSize, this.worldSize)); 
-    }
 
     if (this.position.length() > this.worldSize) {
       this.position.setLength(this.worldSize);
@@ -78,8 +76,8 @@ class Particle {
 }
 
 class MicroPlastic_D3js extends Particle {
-  constructor(index, worldSize, plasticPos) {
-    super(index, worldSize, plasticPos);
+  constructor(index, worldSize) {
+    super(index, worldSize);
 
     this.isSarira = false;
     this.toxicity = false;

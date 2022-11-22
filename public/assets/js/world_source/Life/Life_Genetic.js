@@ -122,20 +122,7 @@ class Life_Genetic extends Life_EatOther {
     setDisplay() {
         if (this.geneCode == null) return;
 
-        const noiseCount = MyMath.random(1., 100.);
-        
-        let geometry = new THREE.SphereGeometry(this.size, 32, 32);
-        let material = createLifeNoiseMaterial(noiseCount, this.noiseSize);
-        // let material = new THREE.MeshDepthMaterial({
-        //     transparent: true,
-        //     opacity: 0.5,
-        // });
-        material.transparent = true;
-
-        this.lifeMesh = new THREE.Mesh(geometry, material);
-        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-
-        this.worldSystem.addToWorld(this.lifeMesh);
+        super.setDisplay();
     }
 
     // ===============================================================================

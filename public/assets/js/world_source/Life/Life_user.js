@@ -85,7 +85,8 @@ class Life_user extends Life_Genetic {
     }
 
     lifeGo(){
-        super.lifeGo(deadAlert);
+        //super.lifeGo(deadAlert);
+        super.lifeGo();
     }
 
     stateMachine(){

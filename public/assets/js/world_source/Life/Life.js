@@ -207,7 +207,7 @@ class Life {
             this.worldSystem.removeFromWorld(this.lifeMesh);
 
             //make Dead alert if user 
-            callback!= undefined? callback() : null;
+            //callback!= undefined? callback() : null;
         }
     }
 
@@ -293,8 +293,7 @@ class Life {
     }
 
     initTestText(){
-        this.system = this.worldSystem;
-        this.canvas = document.querySelector("#world");
+        this.canvas = this.worldSystem.canvas;
 
         this.text = document.createElement('text');
         //this.text.style.backgroundColor = "rgba(0,0,0,0)"
@@ -318,8 +317,8 @@ class Life {
         //let tempV = _.cloneDeep(this.position);
         let tempV = new THREE.Vector3().copy(this.position);
         let orbitV = new THREE.Vector3();
-        orbitV = this.system.getControlsPosition();
-        tempV.project(this.system.getCamera());
+        orbitV = this.worldSystem.controls.object.position;
+        tempV.project(this.worldSystem.camera);
 
         this.text.style.fontSize = MyMath.map(Math.abs(this.position.distanceTo(orbitV)), 0, 600, 2, 0) + "vh";
         const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;

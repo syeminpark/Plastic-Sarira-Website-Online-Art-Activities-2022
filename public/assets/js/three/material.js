@@ -49,10 +49,10 @@ export function createStandardMaterial() {
     });
 }
 
-export function createParticleMaterial(){
+export function createParticleMaterial(size){
     return new THREE.PointsMaterial({
         color: 'white',
-        size: 0.4,
+        size: size,
         side: THREE.DoubleSide,
         opacity: 1.,
         transparent: true,
