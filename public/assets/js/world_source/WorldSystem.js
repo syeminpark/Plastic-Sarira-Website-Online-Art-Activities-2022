@@ -36,17 +36,18 @@ class WorldSystem {
 
         //this.canvas.appendChild(this.renderer.domElement);
         this.singleRenderer.appendToCanvas(this.canvas);
+        window.addEventListener('resize', () => this.resize(), false);
 
         // test 
-        // this.scene.background = new THREE.Color(0,0,1);
-        const geometry = new THREE.BoxGeometry( 10, 10, 10 );
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        const cube = new THREE.Mesh( geometry, material );
-        this.addToWorld( cube );
+        //this.scene.background = new THREE.Color(0,0,1);
+        // const geometry = new THREE.BoxGeometry( 10, 10, 10 );
+        // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        // const cube = new THREE.Mesh( geometry, material );
+        // this.addToWorld( cube );
         
-        //this.setWorld();
-        
-        window.addEventListener('resize', () => this.resize(), false);
+        this.setWorld();
+
+        console.log(this.group);
     }
 
     animate = () => {
@@ -106,7 +107,7 @@ class WorldSystem {
 
         //파티클, 라이프 초기화
         this.createParticle();
-        this.createLife();
+        //this.createLife();
 
         //파티클, 라이프 그리기
         this.drawParticles();
@@ -317,7 +318,7 @@ class WorldSystem {
             this.addPlastic();
         }
 
-        // this.updateParticles();
+        this.updateParticles();
         // this.updateLifes();
     }
 
@@ -342,13 +343,13 @@ class WorldSystem {
             this.particles[index].applyForce(flow);
             this.particles[index].wrap();
 
-            this.lifes.forEach(life => {
-               life.breath(this.particles[index]);
-                if (life.energy < life.hungryValue) life.eat(this.particles[index]);  
-            });
+            // this.lifes.forEach(life => {
+            //    life.breath(this.particles[index]);
+            //     if (life.energy < life.hungryValue) life.eat(this.particles[index]);  
+            // });
 
-            this.life_user.eat(this.particles[index]);
-            this.life_user.breath(this.particles[index]);
+            // this.life_user.eat(this.particles[index]);
+            // this.life_user.breath(this.particles[index]);
         }
         this.particleAppearence.geometry.attributes.position.needsUpdate = true; 
 
