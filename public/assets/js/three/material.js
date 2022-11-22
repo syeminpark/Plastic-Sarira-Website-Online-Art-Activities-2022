@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import {lifeShader_noise} from './shader.js'
 
 export function createConvexMaterial() {
     return new THREE.MeshPhysicalMaterial({
@@ -48,10 +49,10 @@ export function createStandardMaterial() {
     });
 }
 
-export function createParticleMaterial(){
+export function createParticleMaterial(size){
     return new THREE.PointsMaterial({
         color: 'white',
-        size: 0.4,
+        size: size,
         side: THREE.DoubleSide,
         opacity: 1.,
         transparent: true,
@@ -60,14 +61,14 @@ export function createParticleMaterial(){
 }
 
 // 이전 방식
-export function createLifeMaterial(){
+export function createLifeMaterial(camera){
     return new THREE.ShaderMaterial({
         uniforms:
         {
             "c": { type: "f", value: 1.0 },
             "p": { type: "f", value: 1.4 },
             glowColor: { type: "c", value: new THREE.Color(0xffffff) },
-            viewVector: { type: "v3", value: threeSystemController.worldThreeSystem.camera.position }
+            viewVector: { type: "v3", value: camera.position }
         },
         vertexShader: lifeShader.vertexShader, 
         fragmentShader: lifeShader.fragmentShader, 
@@ -77,7 +78,7 @@ export function createLifeMaterial(){
 }
 
 // 노이즈 쉐이더
-export function createLifeNoiseMaterial(count, gap){
+export function createLifeNoiseMaterial(camera, count, gap){
     return new THREE.ShaderMaterial({
         uniforms: { 
             // float initialized to 0
@@ -88,7 +89,7 @@ export function createLifeNoiseMaterial(count, gap){
             "c": { type: "f", value: 1.0 },
             "p": { type: "f", value: 1.4 },
             glowColor: { type: "c", value: new THREE.Color(0xffffff) },
-            viewVector: { type: "v3", value: threeSystemController.worldThreeSystem.camera.position }
+            viewVector: { type: "v3", value: camera.position }
         },
         vertexShader: lifeShader_noise.vertexShader, 
         fragmentShader: lifeShader_noise.fragmentShader,

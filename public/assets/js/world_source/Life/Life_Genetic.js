@@ -2,10 +2,11 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Life_EatOther } from './Life_EatOther.js'
 
 import {MyMath} from '/assets/js/three/MyMath.js';
+import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
 
 class Life_Genetic extends Life_EatOther {
     constructor(index, options, geneCode, setPos){
-        super(index, options.worldSize, options.Sarira_Material, options.Sarira_ConvexMaterial, setPos);
+        super(index, options.world, options.Sarira_Material, options.Sarira_ConvexMaterial, setPos);
         this.options = options;
 
         this.geneCode = geneCode || {
@@ -121,20 +122,7 @@ class Life_Genetic extends Life_EatOther {
     setDisplay() {
         if (this.geneCode == null) return;
 
-        const noiseCount = MyMath.random(1., 100.);
-        
-        let geometry = new THREE.SphereGeometry(this.size, 32, 32);
-        let material = createLifeNoiseMaterial(noiseCount, this.noiseSize);
-        // let material = new THREE.MeshDepthMaterial({
-        //     transparent: true,
-        //     opacity: 0.5,
-        // });
-        material.transparent = true;
-
-        this.lifeMesh = new THREE.Mesh(geometry, material);
-        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-
-        threeSystemController.addToWorldScene(this.lifeMesh);
+        super.setDisplay();
     }
 
     // ===============================================================================

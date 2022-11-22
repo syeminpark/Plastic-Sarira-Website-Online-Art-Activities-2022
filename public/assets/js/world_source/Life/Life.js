@@ -1,8 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import {MyMath} from '/assets/js/three/MyMath.js';
-import '/assets/js/three/shader.js';
-import '/assets/js/three/material.js';
+import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
 
 class Life {
     constructor(index, world, setPos) {
@@ -86,7 +85,7 @@ class Life {
         const noiseCount = MyMath.random(1., 100.);
         
         let geometry = new THREE.SphereGeometry(this.size, 32, 32);
-        let material = createLifeNoiseMaterial(noiseCount, this.noiseSize);
+        let material = createLifeNoiseMaterial(this.worldSystem.camera, noiseCount, this.noiseSize);
         // let material = new THREE.MeshDepthMaterial({
         //     transparent: true,
         //     opacity: 0.5,
@@ -96,7 +95,7 @@ class Life {
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
 
-        threeSystemController.addToWorldScene(this.lifeMesh);
+        this.worldSystem.addToWorld(this.lifeMesh);
     }
 
     updateShaderMat(){
@@ -106,12 +105,11 @@ class Life {
 
     updateGlow_3D(){
         this.lifeMesh.material.uniforms.viewVector.value = 
-			new THREE.Vector3().subVectors( threeSystemController.worldThreeSystem.camera.position, this.position );
+			new THREE.Vector3().subVectors( this.worldSystem.camera.position, this.position );
     }
 
     updateNoiseShader(){
         this.lifeMesh.material.uniforms.time.value = this.noiseSpeed * this.clock.getElapsedTime();
-        //this.lifeMesh.material.uniforms.viewVector.value = threeSystemController.worldThreeSystem.camera.position;
     }
 
     // ===============================================================================
@@ -206,14 +204,10 @@ class Life {
 
             this.contentsText = "";
 
-            let geometry = this.lifeMesh.geometry;
-            let material = this.lifeMesh.material;
-            threeSystemController.removeFromWorldScene(this.lifeMesh);
-            geometry.dispose();
-            material.dispose();
+            this.worldSystem.removeFromWorld(this.lifeMesh);
 
             //make Dead alert if user 
-            callback!= undefined? callback() : null;
+            //callback!= undefined? callback() : null;
         }
     }
 
@@ -299,8 +293,7 @@ class Life {
     }
 
     initTestText(){
-        this.system = threeSystemController.worldThreeSystem;
-        this.canvas = document.querySelector("#world");
+        this.canvas = this.worldSystem.canvas;
 
         this.text = document.createElement('text');
         //this.text.style.backgroundColor = "rgba(0,0,0,0)"
@@ -324,8 +317,8 @@ class Life {
         //let tempV = _.cloneDeep(this.position);
         let tempV = new THREE.Vector3().copy(this.position);
         let orbitV = new THREE.Vector3();
-        orbitV = this.system.getControlsPosition();
-        tempV.project(this.system.getCamera());
+        orbitV = this.worldSystem.controls.object.position;
+        tempV.project(this.worldSystem.camera);
 
         this.text.style.fontSize = MyMath.map(Math.abs(this.position.distanceTo(orbitV)), 0, 600, 2, 0) + "vh";
         const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;

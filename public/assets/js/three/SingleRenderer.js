@@ -4,7 +4,6 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 // 메뉴 바뀔 때 마다 비우고 다시 그림
 export default class SingleRenderer {
     constructor() {
-
         this.renderer = new THREE.WebGLRenderer({
             alpha: true,
             premultipliedAlpha: false,
@@ -19,6 +18,7 @@ export default class SingleRenderer {
     appendToCanvas(canvas) {
         canvas.appendChild(this.renderer.domElement)
         this.currentCanvas = canvas
+        console.log(this.renderer.info);
         console.log("current canvas:", this.currentCanvas)
     }
 

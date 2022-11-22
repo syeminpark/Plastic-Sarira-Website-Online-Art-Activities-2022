@@ -1,6 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import {OrbitControls} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
 
-import BasicThree from '../three/basicThree.js';
+// import BasicThree from '../three/basicThree.js';
 
 import {MicroPlastic_D3js} from './../world_source/Particle/ParticleClass.js';
 import {Life_Genetic} from './../world_source/Life/Life_Genetic.js';
@@ -10,13 +11,94 @@ import {MyMath} from '/assets/js/three/MyMath.js';
 import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
 
 //세계
-class WorldSystem extends BasicThree {
-    constructor(canvas,renderer, type) {
-        super(canvas,renderer, type, false);
+class WorldSystem {
+    constructor(renderer) {
+        this.canvas = document.getElementById('world-scene');
+        this.singleRenderer = renderer;
+        this.singleRenderer.appendToCanvas(this.canvas);
+        this.singleRenderer.clear();
+        this.renderer = this.singleRenderer.getRenderer();
+
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera( 
+            75,  									// vertical field of view
+            window.innerWidth / window.innerHeight, // aspect ratio
+            0.1, 									// near
+            1000 	
+        );
+        this.camera.position.z = 40;
 
         this.group = new THREE.Group();
         this.scene.add(this.group);
 
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.enableDamping = true;
+
+        //this.canvas.appendChild(this.renderer.domElement);
+        this.singleRenderer.appendToCanvas(this.canvas);
+        window.addEventListener('resize', () => this.resize(), false);
+
+        // test 
+        // this.scene.background = new THREE.Color(0,0,1);
+        // const geometry = new THREE.BoxGeometry( 10, 10, 10 );
+        // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        // const cube = new THREE.Mesh( geometry, material );
+        // this.addToWorld( cube );
+        
+        this.setWorld();
+
+        console.log(this.group);
+    }
+
+    animate = () => {
+        requestAnimationFrame(this.animate);
+
+        this.update();
+        this.controls.update();
+        this.singleRenderer.render(this.scene, this.camera);
+    }
+
+    resize() {
+        if (this.canvas != undefined){
+            this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height);
+            this.camera.aspect = this.canvas.getBoundingClientRect().width / this.canvas.getBoundingClientRect().height;
+            this.camera.updateProjectionMatrix();
+            this.singleRenderer.render(this.scene, this.camera);
+        }
+    }
+
+    //=====================================================================================
+
+    addToWorld(mesh){
+        this.group.add(mesh);
+    }
+
+    removeFromWorld(mesh){
+        let geometry = mesh.geometry;
+        let material = mesh.material;
+        
+        this.group.remove(mesh);
+
+        geometry.dispose();
+        material.dispose();
+    }
+
+    reset(){
+        if (this.group != null){
+            for (let i = 0; i < this.group.children.length; i++) {
+                const child = this.group.children[i];
+                this.removeFromWorld(child);            
+            }
+        }
+
+        this.scene?.remove(this.group);
+        this.singleRenderer?.clear();
+    }
+
+    //=====================================================================================
+    //=====================================================================================
+
+    setWorld(){
         this.worldSize = 300;
         this.maxParticleCount = 10000;
 
@@ -25,44 +107,14 @@ class WorldSystem extends BasicThree {
 
         //파티클, 라이프 초기화
         this.createParticle();
-        // this.createLife();
+        this.createLife();
 
-        // //파티클, 라이프 그리기
-        // this.drawParticles();
+        //파티클, 라이프 그리기
+        this.drawParticles();
         
-        // //플라스틱 넣기        
+        //플라스틱 넣기        
         this.createPlastic();
     }
-
-    addObj(obj){
-        this.group.add(obj);
-    }
-
-    reset(){
-        this.group.children.forEach(child => {
-            let geometry = child.geometry;
-            let material = child.material;
-
-            geometry.dispose();
-            material.dispose();
-        });
-
-        this.scene.remove(this.object)
-        this.object = undefined
-        this.renderer.clear();
-    }
-
-    animate = () => {
-        this.animationRequest = requestAnimationFrame(this.animate);
-        if (this.valid()) {
-            if (document.getElementById("currentPage").innerHTML == this.type) {
-                //this.update();
-            }
-        }
-    }
-
-    //=====================================================================================
-    //=====================================================================================
 
     createParticle() {
         //생성
@@ -86,7 +138,7 @@ class WorldSystem extends BasicThree {
     drawParticles() {
         // let geometry = new THREE.BufferGeometry();
         let geometry = new THREE.BufferGeometry().setFromPoints(this.particlePositions);
-        let material = createParticleMaterial();
+        let material = createParticleMaterial(0.7);
 
         // geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( this.maxParticleCount * 3 ), 3));
         geometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( this.maxParticleCount * 3 ), 3));
@@ -104,7 +156,7 @@ class WorldSystem extends BasicThree {
         this.particlePositionAttributes = this.particleAppearence.geometry.getAttribute( 'position' ).array;
         this.particleColorAttributes = this.particleAppearence.geometry.getAttribute( 'color' ).array;
 
-        this.scene.add(this.particleAppearence);
+        this.addToWorld(this.particleAppearence);
     }
 
     createLife() {
@@ -117,7 +169,7 @@ class WorldSystem extends BasicThree {
         this.lifeNum = 1 + minNum;
 
         let options = {
-            worldSize: this.worldSize, 
+            world: this, 
             Sarira_Material: createPointMaterial(), 
             Sarira_ConvexMaterial: createConvexMaterial()
         }
@@ -262,8 +314,6 @@ class WorldSystem extends BasicThree {
     //=====================================================================================
 
     update() {
-        super.update();
-
         if (this.fileLoaded == true){
             this.addPlastic();
         }

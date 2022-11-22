@@ -44,7 +44,7 @@ class Life_user extends Life_Genetic {
 
         this.angle = new THREE.Vector3(); 
 
-        this.SetWindowSarira();
+        // this.SetWindowSarira();
         // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial);
 
         this.lifeName = 'user';
@@ -76,16 +76,17 @@ class Life_user extends Life_Genetic {
         this.updateShaderMat();
         this.wrapParticles();
 
-        this.add_MicroPlasticToBodySystem();
-        this.sarira_position = new THREE.Vector3().copy(this.position);
+        // this.add_MicroPlasticToBodySystem();
+        // this.sarira_position = new THREE.Vector3().copy(this.position);
 
-        this.bodySystem.update();
-        this.bodySystem.getLifePosition(this.sarira_position);
-        this.bodySystemWindow.update();
+        // this.bodySystem.update();
+        // this.bodySystem.getLifePosition(this.sarira_position);
+        // this.bodySystemWindow.update();
     }
 
     lifeGo(){
-        super.lifeGo(deadAlert);
+        //super.lifeGo(deadAlert);
+        super.lifeGo();
     }
 
     stateMachine(){

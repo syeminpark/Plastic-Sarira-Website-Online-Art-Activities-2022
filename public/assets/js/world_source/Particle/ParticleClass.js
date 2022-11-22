@@ -4,17 +4,15 @@ import {D3Dataset} from './D3Dataset.js';
 import {MyMath} from '/assets/js/three/MyMath.js';
 
 class Particle {
-  constructor(index, worldSize, pos) {
+  constructor(index, worldSize) {
     this.index = index;
 
     this.worldSize = worldSize;
 
-    if (pos != null) {this.position = new THREE.Vector3(setPos.x, setPos.y, setPos.z);}
-    else {this.position = new THREE.Vector3(
+    this.position = new THREE.Vector3(
       MyMath.random(-this.worldSize, this.worldSize),
       MyMath.random(-this.worldSize, this.worldSize),
       MyMath.random(-this.worldSize, this.worldSize)); 
-    }
 
     if (this.position.length() > this.worldSize) {
       this.position.setLength(this.worldSize);
@@ -34,18 +32,6 @@ class Particle {
 
     this.isEaten = false;
     this.isActive = false;
-  }
-
-  // 안씀
-  initPos(pos){
-    // this.position = pos || new THREE.Vector3(
-    //   MyMath.random(-this.worldSize, this.worldSize),
-    //   MyMath.random(-this.worldSize, this.worldSize),
-    //   MyMath.random(-this.worldSize, this.worldSize));
-    // if (this.position.length > this.worldSize) this.position.setLength(this.worldSize);
-
-    // this.velocity = new THREE.Vector3(0, 0, 0);
-    // this.acceleration = new THREE.Vector3(0, 0, 0);
   }
 
   setPos(newPos){
@@ -90,28 +76,21 @@ class Particle {
 }
 
 class MicroPlastic_D3js extends Particle {
-  constructor(index, worldSize, plasticPos) {
-    super(index, worldSize, plasticPos);
-
-    // if (plasticPos != null){
-    //   this.position = new THREE.Vector3(
-    //     plasticPos.x,
-    //     plasticPos.y,
-    //     plasticPos.z);
-    // }
+  constructor(index, worldSize) {
+    super(index, worldSize);
 
     this.isSarira = false;
     this.toxicity = false;
 
-    this.d3Data = new D3Dataset(this.index);
+    //this.d3Data = new D3Dataset(this.index);
   }
 
   setD3PlasticData(plasticData){
-    this.d3Data.saveNode(plasticData.type, plasticData.area, `#${plasticData.index}`);
+    this.d3Data?.saveNode(plasticData.type, plasticData.area, `#${plasticData.index}`);
   }
 
   setD3Life(userData){
-    this.d3Data.solidify(userData);
+    this.d3Data?.solidify(userData);
   }
 }
 
