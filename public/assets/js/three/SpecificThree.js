@@ -91,9 +91,19 @@ export class SariraThree extends BasicThree {
         super(renderer, type, isDetail)
         this.convex=undefined
 
-        let ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        let ambientLight = new THREE.AmbientLight(0xffffff, 30);
         let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 10);
-        this.scene.add(ambientLight, hemiLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 10);
+        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 10);
+        directionalLight.position.set(-10, 0, 0);
+        directionalLight2.position.set(0, 10, 0);
+        directionalLight3.position.set(10, -10, 0);
+        directionalLight.target.position.set(0, 0, 0);
+        directionalLight2.target.position.set(0, 0, 0);
+        directionalLight3.target.position.set(0, 0, 0);
+        this.scene.add(ambientLight, hemiLight,directionalLight,directionalLight2,directionalLight3);
+        
     }
 
     setup(canvas ) {

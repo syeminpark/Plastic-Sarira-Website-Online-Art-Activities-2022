@@ -3,12 +3,12 @@ import {lifeShader_noise} from './shader.js'
 
 export function createConvexMaterial() {
     return new THREE.MeshPhysicalMaterial({
-        transmission: 0.98,
+        transmission: 0.99,
         thickness: 1,
         roughness: 0.2,
         clearcoat: 1,
         metalness: 0,
-        clearcoatRoughness: 0,
+        clearcoatRoughness: 1,
     })
 }
 
