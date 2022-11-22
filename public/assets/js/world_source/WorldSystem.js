@@ -39,15 +39,13 @@ class WorldSystem {
         window.addEventListener('resize', () => this.resize(), false);
 
         // test 
-        // this.scene.background = new THREE.Color(0,0,1);
+        this.scene.background = new THREE.Color(0,0,0.5);
         // const geometry = new THREE.BoxGeometry( 10, 10, 10 );
         // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         // const cube = new THREE.Mesh( geometry, material );
         // this.addToWorld( cube );
         
         this.setWorld();
-
-        console.log(this.group);
     }
 
     animate = () => {
