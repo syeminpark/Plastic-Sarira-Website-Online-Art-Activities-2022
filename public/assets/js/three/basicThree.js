@@ -32,6 +32,7 @@ export default class BasicThree {
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
+        this.controls.enablePan = false;
 
         window.addEventListener('resize', () => this.updateSize(), false);
     }
