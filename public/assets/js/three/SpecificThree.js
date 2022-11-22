@@ -11,7 +11,7 @@ export default class PointThree extends BasicThree {
         super(renderer, type, isDetail)
     }
 
-    setup(canvas, ) {
+    setup(canvas) {
         super.setup(canvas);
         this.originalArray = []
         this.selectedArray = []
@@ -78,10 +78,12 @@ export default class PointThree extends BasicThree {
         }
     }
 
-    updateSize = () => {
-        this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
-        this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
-        this.camera.updateProjectionMatrix();
+    updateSize() {
+        if (this.canvas != undefined){
+            this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+            this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
+            this.camera.updateProjectionMatrix();
+        }
     }
 }
 export class SariraThree extends BasicThree {
@@ -139,10 +141,12 @@ export class SariraThree extends BasicThree {
         this.camera.updateProjectionMatrix();
     }
     updateSize() {
-        this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
-        if (!document.getElementById("currentPage").classList.contains('detail_inactive')) {
-            this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height
-            this.camera.updateProjectionMatrix();
+        if (this.canvas != undefined){
+            this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+            if (!document.getElementById("currentPage").classList.contains('detail_inactive')) {
+                this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height
+                this.camera.updateProjectionMatrix();
+            }
         }
     }
 

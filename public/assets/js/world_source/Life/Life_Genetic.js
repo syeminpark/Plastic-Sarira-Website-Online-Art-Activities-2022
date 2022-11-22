@@ -6,7 +6,7 @@ import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
 
 class Life_Genetic extends Life_EatOther {
     constructor(index, options, geneCode, setPos){
-        super(index, options.worldSize, options.Sarira_Material, options.Sarira_ConvexMaterial, setPos);
+        super(index, options.world, options.Sarira_Material, options.Sarira_ConvexMaterial, setPos);
         this.options = options;
 
         this.geneCode = geneCode || {
@@ -135,7 +135,7 @@ class Life_Genetic extends Life_EatOther {
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
 
-        threeSystemController.addToWorldScene(this.lifeMesh);
+        this.worldSystem.addToWorld(this.lifeMesh);
     }
 
     // ===============================================================================

@@ -6,8 +6,8 @@ import {MyMath} from '/assets/js/three/MyMath.js';
 
 // 파티클 흡수하는 Life
 class Life_Absorb extends Life {
-    constructor(index, worldSize, setPos) {
-        super(index, worldSize, setPos);
+    constructor(index, world, setPos) {
+        super(index, world, setPos);
 
         this.setMicroPlastic();
     }
@@ -149,8 +149,8 @@ class Life_Absorb extends Life {
 
 // 사리 만드는 Life
 class Life_Sarira extends Life_Absorb {
-    constructor(index, worldSize, Sarira_Material, Sarira_ConvexMaterial, setPos) {
-        super(index, worldSize, setPos);
+    constructor(index, world, Sarira_Material, Sarira_ConvexMaterial, setPos) {
+        super(index, world, setPos);
 
         // this.bodySystem = new BodySystem(this.index, this.world);
         // this.setSarira(Sarira_Material, Sarira_ConvexMaterial);

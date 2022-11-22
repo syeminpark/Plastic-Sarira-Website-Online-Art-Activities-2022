@@ -61,14 +61,14 @@ export function createParticleMaterial(){
 }
 
 // 이전 방식
-export function createLifeMaterial(){
+export function createLifeMaterial(camera){
     return new THREE.ShaderMaterial({
         uniforms:
         {
             "c": { type: "f", value: 1.0 },
             "p": { type: "f", value: 1.4 },
             glowColor: { type: "c", value: new THREE.Color(0xffffff) },
-            viewVector: { type: "v3", value: threeSystemController.worldThreeSystem.camera.position }
+            viewVector: { type: "v3", value: camera.position }
         },
         vertexShader: lifeShader.vertexShader, 
         fragmentShader: lifeShader.fragmentShader, 
@@ -78,7 +78,7 @@ export function createLifeMaterial(){
 }
 
 // 노이즈 쉐이더
-export function createLifeNoiseMaterial(count, gap){
+export function createLifeNoiseMaterial(camera, count, gap){
     return new THREE.ShaderMaterial({
         uniforms: { 
             // float initialized to 0
@@ -89,7 +89,7 @@ export function createLifeNoiseMaterial(count, gap){
             "c": { type: "f", value: 1.0 },
             "p": { type: "f", value: 1.4 },
             glowColor: { type: "c", value: new THREE.Color(0xffffff) },
-            viewVector: { type: "v3", value: threeSystemController.worldThreeSystem.camera.position }
+            viewVector: { type: "v3", value: camera.position }
         },
         vertexShader: lifeShader_noise.vertexShader, 
         fragmentShader: lifeShader_noise.fragmentShader,

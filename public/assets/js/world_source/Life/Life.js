@@ -85,7 +85,7 @@ class Life {
         const noiseCount = MyMath.random(1., 100.);
         
         let geometry = new THREE.SphereGeometry(this.size, 32, 32);
-        let material = createLifeNoiseMaterial(noiseCount, this.noiseSize);
+        let material = createLifeNoiseMaterial(this.worldSystem.camera, noiseCount, this.noiseSize);
         // let material = new THREE.MeshDepthMaterial({
         //     transparent: true,
         //     opacity: 0.5,
@@ -95,7 +95,7 @@ class Life {
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
 
-        threeSystemController.addToWorldScene(this.lifeMesh);
+        this.worldSystem.addToWorld(this.lifeMesh);
     }
 
     updateShaderMat(){
@@ -105,12 +105,11 @@ class Life {
 
     updateGlow_3D(){
         this.lifeMesh.material.uniforms.viewVector.value = 
-			new THREE.Vector3().subVectors( threeSystemController.worldThreeSystem.camera.position, this.position );
+			new THREE.Vector3().subVectors( this.worldSystem.camera.position, this.position );
     }
 
     updateNoiseShader(){
         this.lifeMesh.material.uniforms.time.value = this.noiseSpeed * this.clock.getElapsedTime();
-        //this.lifeMesh.material.uniforms.viewVector.value = threeSystemController.worldThreeSystem.camera.position;
     }
 
     // ===============================================================================
@@ -205,11 +204,7 @@ class Life {
 
             this.contentsText = "";
 
-            let geometry = this.lifeMesh.geometry;
-            let material = this.lifeMesh.material;
-            threeSystemController.removeFromWorldScene(this.lifeMesh);
-            geometry.dispose();
-            material.dispose();
+            this.worldSystem.removeFromWorld(this.lifeMesh);
 
             //make Dead alert if user 
             callback!= undefined? callback() : null;
@@ -298,7 +293,7 @@ class Life {
     }
 
     initTestText(){
-        this.system = threeSystemController.worldThreeSystem;
+        this.system = this.worldSystem;
         this.canvas = document.querySelector("#world");
 
         this.text = document.createElement('text');

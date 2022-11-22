@@ -13,33 +13,14 @@ import {createParticleMaterial, createPointMaterial, createConvexMaterial} from 
 //세계
 class WorldSystem {
     constructor(renderer) {
-        this.init(renderer);
-        
-        this.scene.add(this.group);
-        this.scene.add(new THREE.AxesHelper(5));
-
-        const geometry = new THREE.BoxGeometry( 10, 10, 10 );
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        const cube = new THREE.Mesh( geometry, material );
-        this.group.add( cube );
-
-        console.log(this.scene);
-        console.log(this.canvas);
-        console.log(this.renderer.info);
-
-        this.setWorld();
-    }
-
-    init(renderer){
-        this.reset();
-
         this.canvas = document.getElementById('world-scene');
         this.singleRenderer = renderer;
         this.singleRenderer.appendToCanvas(this.canvas);
+        this.singleRenderer.clear();
         this.renderer = this.singleRenderer.getRenderer();
 
         this.scene = new THREE.Scene();
-        this.camera = new THREE.Camera( 
+        this.camera = new THREE.PerspectiveCamera( 
             75,  									// vertical field of view
             window.innerWidth / window.innerHeight, // aspect ratio
             0.1, 									// near
@@ -48,20 +29,24 @@ class WorldSystem {
         this.camera.position.z = 40;
 
         this.group = new THREE.Group();
+        this.scene.add(this.group);
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
 
-        this.canvas.appendChild(this.renderer.domElement);
+        //this.canvas.appendChild(this.renderer.domElement);
+        this.singleRenderer.appendToCanvas(this.canvas);
 
-        window.addEventListener('resize', () => {
-            this.camera.aspect = window.innerWidth / window.innerHeight;
-            this.camera.updateProjectionMatrix();
-            this.renderer.setSize(window.innerWidth, window.innerHeight);
-            this.renderer.render(this.scene, this.camera);
-        }, false);
-
-        this.renderer.render(this.scene, this.camera);
+        // test 
+        // this.scene.background = new THREE.Color(0,0,1);
+        const geometry = new THREE.BoxGeometry( 10, 10, 10 );
+        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const cube = new THREE.Mesh( geometry, material );
+        this.addToWorld( cube );
+        
+        //this.setWorld();
+        
+        window.addEventListener('resize', () => this.resize(), false);
     }
 
     animate = () => {
@@ -69,7 +54,16 @@ class WorldSystem {
 
         this.update();
         this.controls.update();
-        this.renderer.render(this.scene, this.camera);
+        this.singleRenderer.render(this.scene, this.camera);
+    }
+
+    resize() {
+        if (this.canvas != undefined){
+            this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height);
+            this.camera.aspect = this.canvas.getBoundingClientRect().width / this.canvas.getBoundingClientRect().height;
+            this.camera.updateProjectionMatrix();
+            this.singleRenderer.render(this.scene, this.camera);
+        }
     }
 
     //=====================================================================================
@@ -110,15 +104,15 @@ class WorldSystem {
         //흐름(속력+방향)
         this.velMin = 0.001;
 
-        // //파티클, 라이프 초기화
-        // this.createParticle();
-        // this.createLife();
+        //파티클, 라이프 초기화
+        this.createParticle();
+        this.createLife();
 
-        // // //파티클, 라이프 그리기
-        // this.drawParticles();
+        //파티클, 라이프 그리기
+        this.drawParticles();
         
-        // // //플라스틱 넣기        
-        // this.createPlastic();
+        //플라스틱 넣기        
+        this.createPlastic();
     }
 
     createParticle() {
@@ -174,7 +168,7 @@ class WorldSystem {
         this.lifeNum = 1 + minNum;
 
         let options = {
-            worldSize: this.worldSize, 
+            world: this, 
             Sarira_Material: createPointMaterial(), 
             Sarira_ConvexMaterial: createConvexMaterial()
         }
