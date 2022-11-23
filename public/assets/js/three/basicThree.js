@@ -84,8 +84,7 @@ export default class BasicThree {
 
         geometry.dispose();
         material.dispose();
-        console.log(this.renderer.getRenderer().info)
-
+      
         
     }
 }

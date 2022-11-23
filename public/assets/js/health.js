@@ -41,6 +41,7 @@ class Health12345{
 
 	set(_normalized_value){
 		this.value = 100*(_normalized_value);
+		console.log(this.value)
 	}
 
 	start(){
