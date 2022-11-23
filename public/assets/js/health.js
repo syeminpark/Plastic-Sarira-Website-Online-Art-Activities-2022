@@ -1,6 +1,6 @@
 class Health12345{
 	constructor(_world, _container, _bar){
-		this.value = 10000;
+		this.value = 100;
 		this.world = _world;
 		this.container = _container;
 		this.bar = _bar;
@@ -32,6 +32,11 @@ class Health12345{
 		this.pos.x+=_dx;
 		this.container.style.top = (this.pos.y) + '%';
 		this.container.style.left = (this.pos.x) + '%';
+	}
+
+	setPos(_dx, _dy){
+		this.bar.style.left = x + "px";
+        this.bar.style.top = y + 30 + "px";
 	}
 
 	set(_normalized_value){
