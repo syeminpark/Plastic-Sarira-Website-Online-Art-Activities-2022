@@ -8,6 +8,7 @@ import BasicThree from "./basicThree.js"
 import {
     OrbitControls
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
+import waste_plastic_dataset from "../waste_plastic_dataset.js";
 
 export default class PointThree extends BasicThree {
     constructor(renderer, type, isDetail) {
@@ -18,7 +19,7 @@ export default class PointThree extends BasicThree {
             vertexColors: true,
             // color:"#0000FF"
         })
-       
+
     }
 
     setup(canvas) {
@@ -26,14 +27,14 @@ export default class PointThree extends BasicThree {
         this.originalArray = []
         this.selectedArray = []
         this.object = undefined;
-        
+
     }
 
     import = (path) => {
         new PLYLoader().load(
             path, (geometry) => {
                 geometry.computeBoundingBox()
-   
+
                 this.originalArray = new Array(geometry.attributes.position.count)
                 for (let i = 0; i < this.originalArray.length; i++) {
                     this.originalArray[i] = i;
@@ -104,7 +105,7 @@ export class SariraThree extends BasicThree {
     constructor(renderer, type, isDetail) {
         super(renderer, type, isDetail)
         this.convex = undefined
-        this.object=undefined
+        this.object = undefined
 
         let ambientLight = new THREE.AmbientLight(0xffffff, 30);
         let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 10);
@@ -128,7 +129,7 @@ export class SariraThree extends BasicThree {
 
     import(data) {
         const geometry = new THREE.BufferGeometry();
-        let meshes =[]
+        let meshes = []
         geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
         geometry.computeBoundingBox()
         this.object = new THREE.Points(geometry, this.pointMaterial);
@@ -140,9 +141,9 @@ export class SariraThree extends BasicThree {
             }
             this.convex = new Convex(object, this.sariraMaterial)
             this.convex.updateVertices(geometry, data.length)
-            meshes=this.convex.initializeMesh()
+            meshes = this.convex.initializeMesh()
         }
-        for(let mesh of meshes){
+        for (let mesh of meshes) {
             this.group.add(mesh)
         }
 
@@ -201,40 +202,64 @@ export class SariraThree extends BasicThree {
 export class WorldThree extends BasicThree {
     constructor(renderer, type, isDetail) {
         super(renderer, type, isDetail);
-        this.camera = new THREE.PerspectiveCamera( 
-            75,  									// vertical field of view
+        this.camera = new THREE.PerspectiveCamera(
+            75, // vertical field of view
             window.innerWidth / window.innerHeight, // aspect ratio
-            0.1, 									// near
-            1000 	
+            0.1, // near
+            1000
         );
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
 
+
     }
 
     setCameraPosition(x, y, z) {
         this.camera.position.set(x, y, z)
     }
-    render = () =>{
+    render = () => {
         if (this.valid()) {
-            console.log("rendering")
+
             this.renderer.render(this.scene, this.camera)
-            
+
         }
     }
-    
+
     updateSize() {
         if (this.canvas != undefined) {
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
             this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
             this.camera.updateProjectionMatrix();
-            console.log("sizeUpdate")
+
         }
     }
 
-    
+    import (randomSource,lambda) {
+        new PLYLoader().load(
+            randomSource.path, function(bufferGeometry) {
+                lambda(randomSource.beach,randomSource.index,bufferGeometry)
+            })
+    }
+
+    getRandomSourcePath() {
+        const folderPath = "./assets/3dmodel"
+        const randomBeachIndex = Math.floor(Math.random() * waste_plastic_dataset.data.length)
+        const randomBeach = waste_plastic_dataset.data[randomBeachIndex].beachName
+        const randomWastePlasticIndex = Math.floor(Math.random() * (waste_plastic_dataset.data[randomBeachIndex].wastePlasticCount - 1) + 1)
+
+        const path = `${folderPath}/${randomBeach}/${randomWastePlasticIndex}.ply`
+
+        return {
+            beach: randomBeach,
+            index: randomWastePlasticIndex,
+            path: path
+        }
+    }
+
+
+
 
 
 }
