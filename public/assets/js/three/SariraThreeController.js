@@ -23,6 +23,7 @@ export default class SariraThreeController {
             sariraThree.animate()
             this.sariraThreeList.push(sariraThree)
         }
+        window.addEventListener('resize', () => this.updateSize(), false);
 
     }
 
@@ -58,7 +59,7 @@ export default class SariraThreeController {
         if (this.sariraObject.length != 0) {
             if (this.valid()) {
                 this.checkCanvas()
-                this.rendererResizeMobile();
+                // this.rendererResizeMobile();
 
                 let renderer = this.renderer.getRenderer()
                 renderer.setClearColor(0x000000, 0);

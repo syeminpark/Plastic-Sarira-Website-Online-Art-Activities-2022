@@ -89,6 +89,7 @@ export default class PointThree extends BasicThree {
     }
 }
 export class SariraThree extends BasicThree {
+    
     constructor(renderer, type, isDetail) {
         super(renderer, type, isDetail)
         this.convex=undefined
@@ -105,6 +106,7 @@ export class SariraThree extends BasicThree {
         directionalLight2.target.position.set(0, 0, 0);
         directionalLight3.target.position.set(0, 0, 0);
         this.scene.add(ambientLight, hemiLight,directionalLight,directionalLight2,directionalLight3);
+        window.addEventListener('resize', () => this.updateSize(), false);
         
     }
 
