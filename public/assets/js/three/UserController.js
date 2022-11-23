@@ -3,6 +3,8 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import KeyboardState from './KeyboardState.js';
 import {Health12345} from '/assets/js/health.js';
 
+import {MyMath} from '/assets/js/three/MyMath.js';
+
 var mouseHold = -1;
 var isMouseMoving = false;
 
@@ -24,18 +26,27 @@ function onMouseUp(event) {
 }
 
 class UserController {
-    constructor(world) {
-        this.user = world.life_user;
-        this.world = world;
-        this.worldSize = world.worldSize;
-
-        this.camDis = (this.user.mass) * 4;
-
-        this.scene = world.scene;
-        this.camera = world.camera;
-        this.orbitControl = world.controls;
-
+    constructor(worldPage) {
+        this.worldPage = worldPage;
         this.keyboard = new KeyboardState();
+    }
+
+    setup(world){
+        this.threeSystem = world.worldThree;
+        this.worldSize = world.worldSize;
+        
+        this.scene = this.threeSystem.scene;
+        this.camera = this.threeSystem.camera;
+        this.orbitControl = this.threeSystem.controls;
+
+        this.orbitControl.minDistance = 5;
+        this.orbitControl.maxDistance = this.worldSize; 
+
+        this.user = world.life_user;
+
+        this.camDis = this.user.mass * 4;
+
+        //=================================================================================
 
         this.isLifeFocusOn = true;
         this.isInWorld = true;
@@ -46,7 +57,7 @@ class UserController {
         this.checkFirst = 0;
 
         //=================================================================================
-        this.pointerLockControl = world.controls_pointerLock;
+        // this.pointerLockControl = world.controls_pointerLock;
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;
@@ -56,24 +67,18 @@ class UserController {
         this.velocity = new THREE.Vector3();
         this.direction = new THREE.Vector3();
 
-        this.camera_focusOn_init();
-        this.mouse_init();
+        // this.camera_focusOn_init();
+        // this.mouse_init();
 
         //=================================================================================
         //=================================================================================
 
+        this.healthbar = new Health12345(this.threeSystem, 
+            this.worldPage.pagelayer.popup.querySelector('#world-health-container'), 
+            this.worldPage.pagelayer.popup.querySelector('#world-health-bar'));
+        
         // this.userText = new UserText(threeSystemController.worldThreeSystem, document.querySelector("#world"));
         // this.userText.createLabel();
-        
-        this.healthbar = new Health12345(world, document.querySelector('#world-health-container'), document.querySelector('#world-health-bar'));
-    }
-
-    start(){
-        this.healthbar.start();
-    }
-
-    set(){
-        this.healthbar.set(1 - this.user.age/this.user.lifespan);
     }
 
     //=====================================================================================
@@ -88,40 +93,53 @@ class UserController {
         const x = (tempV.x * .5 + .5);
         const y = (tempV.y * -.5 + .5);
 
-        return {x:x, y:y, h: this.user.mass};
+        const distance = this.camera.position.distanceTo( this.orbitControl.target );
+        const dist = MyMath.map(distance, this.orbitControl.minDistance, this.orbitControl.maxDistance, -200, -45)
+
+        console.log(dist)
+
+        return {x:x, y:y, h: dist};
     }
 
     getUserCamDistance(){
-        const distance = this.camera.position.distanceTo( this.controls.target );
-        const maxDistance = this.controls.maxDistance * 0.75;
+        const distance = this.camera.position.distanceTo( this.orbitControl.target );
+        const maxDistance = this.orbitControl.maxDistance * 0.75;
 
         return {dis:distance, maxDis:maxDistance};
     }
 
+    //=====================================================================================
+    //=====================================================================================
+
+    start(){
+        this.healthbar.start();
+    }
+
+    healthbarActive(){
+        this.healthbar.set(1 - this.user.age/this.user.lifespan);
+    }
+
     update() {
-        this.key_check();
-        this.lerpLoad();
+        // this.key_check();
+        // this.lerpLoad();
 
-        if (this.isLifeFocusOn == true && this.user.isDead == false) {
-            this.camera_focusOn_update();
-                this.wrap();
-                if (this.isDuringLerp == false) {
-                    this.key_update();
-                    this.mouse_update();
-                }
-        } else {
-            if (this.user.isDead == true) {
-                this.orbitControl.enabled = false;
-                this.pointerLockControl.unlock();
-                this.pointerLockControl.isLocked = false;
-            }
-            else this.orbitControl.target = new THREE.Vector3(0, 0, 0);
-        }
+        // if (this.isLifeFocusOn == true && this.user.isDead == false) {
+        //     this.camera_focusOn_update();
+        //         this.wrap();
+        //         if (this.isDuringLerp == false) {
+        //             this.key_update();
+        //             this.mouse_update();
+        //         }
+        // } else {
+        //     if (this.user.isDead == true) {
+        //         this.orbitControl.enabled = false;
+        //     }
+        //     else this.orbitControl.target = new THREE.Vector3(0, 0, 0);
+        // }
 
-        this.user.shaderCalculate( this.camera.position );
-
+        // this.user.shaderCalculate( this.camera.position );
+        
         this.healthbar.updatePos(this.getUserScreenPosition());
-        // this.healthbar.updateHealth(this.user.lifespan - this.user.age);
         // this.userText.updateLabel(this.user.lifeMesh.position);
     }
 
@@ -136,6 +154,7 @@ class UserController {
             this.isLifeFocusOn = !this.isLifeFocusOn;
             //console.log('focus mode : ' + this.isLifeFocusOn);
             this.timer = 1;
+
             if (this.isLifeFocusOn == true) {
                 this.camera_focusOn_init();
             } else {
@@ -168,24 +187,26 @@ class UserController {
     }
 
     mouse_init(){
-        this.world.canvas.addEventListener('contextmenu', onContextMenu, false);
-        this.world.canvas.addEventListener('mousedown', onMouseDown, false);
-        this.world.canvas.addEventListener('mouseup', onMouseUp, false);
-        this.world.canvas.addEventListener('mousemove', onMouseMove, false);
+        this.threeSystem.canvas.addEventListener('contextmenu', onContextMenu, false);
+        this.threeSystem.canvas.addEventListener('mousedown', onMouseDown, false);
+        this.threeSystem.canvas.addEventListener('mouseup', onMouseUp, false);
+        this.threeSystem.canvas.addEventListener('mousemove', onMouseMove, false);
 
-        // this.world.canvas.addEventListener('touchstart', onMouseDown, false);
-        // this.world.canvas.addEventListener('touchend', onMouseUp, false);
-        // this.world.canvas.addEventListener('touchmove', onMouseMove, false);
+        // this.threeSystem.canvas.addEventListener('touchstart', onMouseDown, false);
+        // this.threeSystem.canvas.addEventListener('touchend', onMouseUp, false);
+        // this.threeSystem.canvas.addEventListener('touchmove', onMouseMove, false);
     }
 
     mouse_update(){
         switch(mouseHold) {
             case 1:
-                if (this.user.isDead == false) this.pointerLockControl.lock();
+                if (this.user.isDead == false) {
+                    // this.pointerLockControl.lock();
+                }
                 break;
             case -1:
-                this.pointerLockControl.unlock();
-                this.pointerLockControl.isLocked = false;
+                // this.pointerLockControl.unlock();
+                // this.pointerLockControl.isLocked = false;
                 break;
         }
     }
@@ -215,8 +236,8 @@ class UserController {
             if (this.checkFirst < 1) this.checkFirst += 0.01;
 
             if (this.isLifeFocusOn == true) {
-                //this.pointerLockControl.unlock();
-                this.pointerLockControl.isLocked = false;
+                // this.pointerLockControl.unlock();
+                // this.pointerLockControl.isLocked = false;
                 this.camera.lookAt(this.user.position.clone());
             } else {
                 this.orbitControl.enabled = false;
@@ -228,8 +249,8 @@ class UserController {
             this.isDuringLerp = false;
 
             if (this.isLifeFocusOn == true) {
-                //this.pointerLockControl.lock();
-                this.pointerLockControl.isLocked = true;
+                // this.pointerLockControl.lock();
+                // this.pointerLockControl.isLocked = true;
             } else {
                 this.orbitControl.enabled = true;
             }
@@ -241,7 +262,7 @@ class UserController {
         this.camera.lookAt(0, 0, 0);
         this.camLerpPos = this.camera.position.clone().setLength(this.worldSize * .5);
 
-        this.pointerLockControl.unlock();
+        // this.pointerLockControl.unlock();
 
         this.orbitControl.target = new THREE.Vector3(0, 0, 0);
         this.orbitControl.enablePan = true;
@@ -250,7 +271,7 @@ class UserController {
     }
 
     camera_focusOff_init2() {
-        const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
+        // const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
         const camDis = new THREE.Vector3().subVectors(this.user.position.clone(), this.camera.position.clone()).setLength(this.worldSize * 2);
 
         this.camera.lookAt(this.user.position.clone());
@@ -258,17 +279,18 @@ class UserController {
     }
 
     camera_focusOn_init() {
-        const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
+        // const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
         const camDis = new THREE.Vector3().subVectors(this.user.position.clone(), this.camera.position.clone()).setLength(this.camDis);
 
+        this.orbitControl.target = this.user.position;
         this.camera.lookAt(this.user.position.clone());
         this.camLerpPos = new THREE.Vector3().subVectors(this.user.position.clone(), camDis);
 
-        this.orbitControl.enabled = false;
+        // this.orbitControl.enabled = false;
     }
 
     camera_focusOn_update() {
-        const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
+        // const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
         const userPos = new THREE.Vector3().addVectors(this.camera.position.clone(), camDir);
         var lerpSpeed = .5;
 

@@ -220,8 +220,8 @@ class Life_Genetic extends Life_EatOther {
             lifes.push(child);
             this.isReadyToDivision = false;
 
-            console.log("create life_" + child.index);
-            //console.log(child.position)
+            // console.log("create life_" + child.index);
+            // console.log(child.position)
         }
     }
 

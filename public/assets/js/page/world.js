@@ -21,23 +21,27 @@ import {
 import {
 	WorldSystem
 } from '../world_source/WorldSystem.js';
+import { 
+	UserController 
+} from '/assets/js/three/UserController.js';
+
 import ServerClientCommunication from '../serverClientCommunication.js';
 
 const test_img_srcs = [{
-		img_src: "./assets/img/Naechi/studio/1.jpg",
-		id: "NAE#1",
-		timestamp: "2006-09-07"
-	},
-	{
-		img_src: "./assets/img/Naechi/studio/2.jpg",
-		id: "NAE#2",
-		timestamp: "2007-11-10"
-	},
-	{
-		img_src: "./assets/img/Naechi/studio/3.jpg",
-		id: "NAE#3",
-		timestamp: "2012-01-17"
-	}
+	img_src: "./assets/img/Naechi/studio/1.jpg",
+	id: "NAE#1",
+	timestamp: "2006-09-07"
+},
+{
+	img_src: "./assets/img/Naechi/studio/2.jpg",
+	id: "NAE#2",
+	timestamp: "2007-11-10"
+},
+{
+	img_src: "./assets/img/Naechi/studio/3.jpg",
+	id: "NAE#3",
+	timestamp: "2012-01-17"
+}
 ];
 
 class World12345 extends Page12345 {
@@ -49,16 +53,15 @@ class World12345 extends Page12345 {
 		this.pagelayer = _pagelayer;
 
 		this.world = new WorldSystem(this.pagelayer);
-		this.world.animate()
+		this.userController = new UserController(this);
+		
+		this.animate();
+		
 		this.ServerClientCommunication = new ServerClientCommunication()
-
 	}
 
 	setup() {
 		this.loadsvg();
-
-		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'));
-
 
 		//const audio_btn = this.pagelayer.popup.querySelector('#world-sound-btn');
 		//const audio_viz = this.pagelayer.popup.querySelector('#world-audio-visualizer');
@@ -68,9 +71,9 @@ class World12345 extends Page12345 {
 		this.enter_message = this.pagelayer.popup.querySelector('#world-enter');
 		enter_btn.addEventListener('click', this.enter.bind(this));
 
-		const health_container = this.pagelayer.popup.querySelector('#world-health-container');
-		const health_bar = this.pagelayer.popup.querySelector('#world-health-bar');
-		this.health = new Health12345(this, health_container, health_bar);
+		// const health_container = this.pagelayer.popup.querySelector('#world-health-container');
+		// const health_bar = this.pagelayer.popup.querySelector('#world-health-bar');
+		// this.health = new Health12345(this, health_container, health_bar);
 
 		this.end_message = this.pagelayer.popup.querySelector('#world-end');
 		const end_btn = this.pagelayer.popup.querySelector('#world-to-sarira');
@@ -115,7 +118,9 @@ class World12345 extends Page12345 {
 		this.time = 0;
 		this.world_ended = false;
 
-
+		this.dom = document.getElementById('world-navigation');
+		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'));
+		this.userController.setup(this.world);
 	}
 
 	unload() {
@@ -135,10 +140,12 @@ class World12345 extends Page12345 {
 				document.getElementById('world-navigation').classList.remove('m-inactive');
 				document.getElementById('world-joystick-left').classList.remove('m-inactive');
 				document.getElementById('world-joystick-right').classList.remove('m-inactive');
+				this.userController.start();
 
 				this.ServerClientCommunication.createUser(input.value)
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
 				this.any_world_btn_clicked = false;
+
 				for (let i = 0; i < world_btns.length; i++) {
 					const world_btn = world_btns[i];
 					world_btn.addEventListener('click', () => {
@@ -159,48 +166,52 @@ class World12345 extends Page12345 {
 					}, 3000 * i);
 				}
 
-				// this.lifecheck = setInterval(()=>{
-				// 	this.time+=2;
-				// 	// if(this.time>this.time_limit){
-				// 	if (this.world.life_user.isDead == true) {
-				// 		this.health.end();
-				// 		this.worldEnd();
-				// 		clearInterval(this.lifecheck);
-				// 	}else{
-				// 		// this.health.set(1-this.time/this.time_limit);
-				// 		this.health.set(1 - this.world.life_user.age/this.world.life_user.lifespan);
-				// 		console.log(1 - this.world.life_user.age/this.world.life_user.lifespan)
-				// 		let lifePos = this.world.life_user.getScreenPosition(); 
-				// 		this.health.setPos(lifePos.x, lifePos.y-10);
-				// 	}
-				// },600);
+				this.lifecheck = setInterval(()=>{
+					this.time+=2;
+					if(this.world.life_user.isDead == true){
+						this.worldEnd();
+						this.userController.end();
+						clearInterval(this.lifecheck);
+					}else{
+						this.userController.healthbarActive();
+					}
+				},600);
 
-				// this.lifecheck = setInterval(()=>{
-				// 	this.time+=2;
-				// 	if(this.time>this.time_limit){
-				// 		this.health.end();
-				// 		this.worldEnd();
-				// 		clearInterval(this.lifecheck);
-				// 	}else{
-				// 		this.health.set(1-this.time/this.time_limit);
-				// 	}
-				// },600);
 				window.addEventListener('keyup', this.moveSari.bind(this));
 			}
 		}
 	}
 
+	valid() {
+        //if user has clicked the enter button 
+        if (this.dom != undefined) {
+            if (this.dom.classList.contains('m-inactive')) {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
+
+	animate = () => {
+		requestAnimationFrame(this.animate);
+		if (this.valid()){
+			this.world.update();
+			this.userController.update();
+		}
+	}
+
 	moveSari(e) {
 		//console.log(e);
-		if(e.code === 'KeyW'){
+		if (e.code === 'KeyW') {
 			//this.health.move(0,-0.1);
-		}else if(e.code === 'KeyA'){
+		} else if (e.code === 'KeyA') {
 			//this.health.move(-0.1,0);
-		}else if(e.code === 'KeyS'){
+		} else if (e.code === 'KeyS') {
 			//this.health.move(0,0.1);
-		}else if(e.code === 'KeyD'){
+		} else if (e.code === 'KeyD') {
 			//this.health.move(0.1,0);
-		}else if(e.code === 'KeyZ'){
+		} else if (e.code === 'KeyZ') {
 
 		}
 	}

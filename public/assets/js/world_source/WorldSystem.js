@@ -1,12 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import {
-    OrbitControls
-} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
-import {
-    PointerLockControls
-} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/PointerLockControls.js';
-
-import BasicThree from '../three/basicThree.js';
+import { WorldThree } from '../three/SpecificThree.js';
 
 import {
     MicroPlastic_D3js
@@ -18,33 +11,21 @@ import {
     Life_user
 } from './../world_source/Life/Life_user.js';
 
-import {
-    UserController
-} from '/assets/js/three/UserController.js';
+import {MyMath} from '/assets/js/three/MyMath.js';
+import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
 
-import {
-    MyMath
-} from '/assets/js/three/MyMath.js';
-import {
-    createParticleMaterial,
-    createPointMaterial,
-    createConvexMaterial
-} from './../three/material.js';
-
-import {
-    WorldThree
-} from '../three/SpecificThree.js';
 //세계
 class WorldSystem {
     constructor(_pagelayer) {
         this.pagelayer = _pagelayer
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
+        // this.enterDom = undefined
 
         this.worldSize = 300;
         this.maxParticleCount = 10000;
+        
         //흐름(속력+방향)
         this.velMin = 0.001;
-        this.enterDom = undefined
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
@@ -55,12 +36,10 @@ class WorldSystem {
 
     //해당 페이지 재접속시 다시 실행
     setup(worldDom, enterDom) {
-
-
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(0, 0, 40)
         this.worldThree.updateSize()
-        this.enterDom = enterDom
+        // this.enterDom = enterDom
 
         //파티클, 라이프 초기화
         this.createParticle();
@@ -74,17 +53,15 @@ class WorldSystem {
 
 
 
-    animate = () => {
-        requestAnimationFrame(this.animate);
-        if (this.valid()) {
+    update() {
+        // if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
 
             this.updateParticles();
             this.updateLifes();
-        }
+        // }
     }
-
 
     valid() {
         //if user has clicked the enter button 
@@ -230,7 +207,6 @@ class WorldSystem {
 
     //=====================================================================================
     //=====================================================================================
-
 
     updateParticles() {
 

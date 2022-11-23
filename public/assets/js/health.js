@@ -1,7 +1,7 @@
 class Health12345{
 	constructor(_world, _container, _bar){
 		this.value = 100;
-		this.world = _world;
+		this.threeSystem = _world;
 		this.container = _container;
 		this.bar = _bar;
 
@@ -38,11 +38,12 @@ class Health12345{
 		this.container.style.left = (this.pos.x) + '%';
 	}
 
-	updatePos(x, y, h){
-		const dx = x * this.world.canvas.clientWidth + this.world.canvas.getBoundingClientRect().left;
-		const dy = y * this.world.canvas.clientHeight + this.world.canvas.getBoundingClientRect().top;
-		this.container.style.left = dx + "px";
-        this.container.style.top = dy + h + "px";
+	updatePos(d){
+		const dx = d.x * this.threeSystem.canvas.clientWidth + this.threeSystem.canvas.getBoundingClientRect().left;
+		const dy = d.y * this.threeSystem.canvas.clientHeight + this.threeSystem.canvas.getBoundingClientRect().top;
+
+		this.container.style.left = dx + 'px';
+        this.container.style.top = dy + d.h + 'px';
 	}
 
 	setSize(dis, maxDis){
@@ -53,7 +54,7 @@ class Health12345{
 
 	set(_normalized_value){
 		this.value = 100*(_normalized_value);
-		console.log(this.value)
+		// console.log(this.value)
 	}
 
 	start(){

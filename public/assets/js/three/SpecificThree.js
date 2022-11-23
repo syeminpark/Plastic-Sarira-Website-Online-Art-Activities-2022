@@ -58,7 +58,6 @@ export default class PointThree extends BasicThree {
                         this.setObjectPosition()
                     }
                 }
-
             }
         }
     }
@@ -212,8 +211,6 @@ export class WorldThree extends BasicThree {
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
-
-
     }
 
     setCameraPosition(x, y, z) {
@@ -257,9 +254,4 @@ export class WorldThree extends BasicThree {
             path: path
         }
     }
-
-
-
-
-
 }
