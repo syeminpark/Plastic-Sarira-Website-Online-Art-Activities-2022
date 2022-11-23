@@ -53,7 +53,7 @@ class WorldSystem {
 
         this.update();
         this.controls.update();
-        this.singleRenderer.render(this.scene, this.camera);
+        this.sinF
     }
 
     resize() {
