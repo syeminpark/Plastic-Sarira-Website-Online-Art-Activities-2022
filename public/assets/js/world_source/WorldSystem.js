@@ -21,9 +21,7 @@ import {
     createConvexMaterial
 } from './../three/material.js';
 
-import {
-    WorldThree
-} from '../three/SpecificThree.js';
+import { WorldThree } from '../three/SpecificThree.js';
 //세계
 class WorldSystem {
     constructor(_pagelayer) {
@@ -61,16 +59,17 @@ class WorldSystem {
         this.drawParticles();
 
         //   플라스틱 넣기        
-          this.createPlastic();
-
+        this.createPlastic();
 
     }
 
     animate = () => {
         requestAnimationFrame(this.animate);
-        if (this.isValid()) {
-
+        if (this.valid()) {
+            console.log( this.worldThree.render,this.worldThree)
+            this.worldThree.render()
             this.worldThree.update()
+            console.log("updating")
 
             if (this.fileLoaded == true) {
                 this.addPlastic();
@@ -80,12 +79,12 @@ class WorldSystem {
             this.updateLifes();
 
             //
-            this.worldThree.render()
+          
         }
     }
 
 
-    isValid() {
+    valid() {
         //if user has clicked the enter button 
         if (this.enterDom != undefined) {
             if (this.enterDom.classList.contains('m-inactive')) {
@@ -125,16 +124,16 @@ class WorldSystem {
 
         // geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( this.maxParticleCount * 3 ), 3));
         geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
-        geometry.setDrawRange(0, this.maxParticleCount);
+        // geometry.setDrawRange(0, this.maxParticleCount);
 
         this.particleAppearence = new THREE.Points(geometry, material);
         this.particleAppearence.position.set(0, 0, 0);
         //console.log(this.particleAppearence.geometry);
 
         // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
-        this.particleAppearence.traverse(function (object) {
-            object.frustumCulled = false;
-        });
+        // this.particleAppearence.traverse(function (object) {
+        //     object.frustumCulled = false;
+        // });
 
         this.particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
         this.particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;

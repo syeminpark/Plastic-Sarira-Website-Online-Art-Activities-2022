@@ -217,9 +217,11 @@ export class WorldThree extends BasicThree {
     setCameraPosition(x, y, z) {
         this.camera.position.set(x, y, z)
     }
-    render(){
+    render= () =>{
         if (this.valid()) {
+            console.log("rendering")
             this.renderer.render(this.scene, this.camera)
+            
         }
     }
     updateSize() {
@@ -227,6 +229,7 @@ export class WorldThree extends BasicThree {
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
             this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
             this.camera.updateProjectionMatrix();
+            console.log("sizeUpdate")
         }
     }
 

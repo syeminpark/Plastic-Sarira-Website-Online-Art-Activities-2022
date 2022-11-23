@@ -127,7 +127,7 @@ class World12345 extends Page12345 {
 	enter() {
 		let inputs = (document.querySelectorAll('input'))
 		for (let input of inputs) {
-			if (!input == "") {
+			if (!input.value == "") {
 				if (!document.querySelector('#show-m-navigation').classList.contains('expanded')) {
 					document.querySelector('#show-m-navigation').click();
 				}
@@ -137,10 +137,7 @@ class World12345 extends Page12345 {
 				document.getElementById('world-joystick-right').classList.remove('m-inactive');
 				this.health.start();
 
-				console.log(input)
-				this.ServerClientCommunication.createUser(input)
-
-
+				this.ServerClientCommunication.createUser(input.value)
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
 				this.any_world_btn_clicked = false;
 				for (let i = 0; i < world_btns.length; i++) {
