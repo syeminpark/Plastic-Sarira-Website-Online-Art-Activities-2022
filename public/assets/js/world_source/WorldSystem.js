@@ -1,6 +1,10 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import {OrbitControls} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
-import {PointerLockControls} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/PointerLockControls.js';
+import {
+    OrbitControls
+} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
+import {
+    PointerLockControls
+} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/PointerLockControls.js';
 
 import BasicThree from '../three/basicThree.js';
 
@@ -14,12 +18,22 @@ import {
     Life_user
 } from './../world_source/Life/Life_user.js';
 
-import { UserController } from '/assets/js/three/UserController.js';
+import {
+    UserController
+} from '/assets/js/three/UserController.js';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
-import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
+import {
+    MyMath
+} from '/assets/js/three/MyMath.js';
+import {
+    createParticleMaterial,
+    createPointMaterial,
+    createConvexMaterial
+} from './../three/material.js';
 
-import { WorldThree } from '../three/SpecificThree.js';
+import {
+    WorldThree
+} from '../three/SpecificThree.js';
 //세계
 class WorldSystem {
     constructor(_pagelayer) {
@@ -32,9 +46,11 @@ class WorldSystem {
         this.velMin = 0.001;
         this.enterDom = undefined
 
-        this.pointsMaterial=createPointMaterial()
-        this.convexMaterial=createConvexMaterial();
-        
+        this.pointsMaterial = createPointMaterial()
+        this.convexMaterial = createConvexMaterial();
+
+        this.initialWastePlasticCount = 10
+
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -48,26 +64,21 @@ class WorldSystem {
 
         //파티클, 라이프 초기화
         this.createParticle();
-
         this.createLife();
 
-        // 파티클, 라이프 그리기
-        this.drawParticles();
-
-        //   플라스틱 넣기        
-        this.createPlastic();
-
+        for (let i = 0; i < this.initialWastePlasticCount; i++) {
+            let randomSource = this.worldThree.getRandomSourcePath()
+            this.worldThree.import(randomSource, this.createPlastic)
+        }
     }
+
+
 
     animate = () => {
         requestAnimationFrame(this.animate);
         if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
-
-            if (this.fileLoaded == true) {
-                this.addPlastic();
-            }
 
             this.updateParticles();
             this.updateLifes();
@@ -88,49 +99,6 @@ class WorldSystem {
 
     //=====================================================================================
     //=====================================================================================
-
-    createParticle() {
-        //생성
-        this.particles = [];
-        this.particlePositions = [];
-
-        for (let i = 0; i < this.maxParticleCount; i++) {
-            let p = new MicroPlastic_D3js(i, this.worldSize);
-
-            // 랜덤 위치 파티클 생성
-            if (i < this.maxParticleCount * 0.1) {
-                p.setPos();
-                p.isActive = true;
-            }
-
-            this.particles.push(p);
-            this.particlePositions.push(p.position);
-        }
-    }
-
-    drawParticles() {
-        // let geometry = new THREE.BufferGeometry();
-        let geometry = new THREE.BufferGeometry().setFromPoints(this.particlePositions);
-        let material = createParticleMaterial(0.7);
-
-        // geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( this.maxParticleCount * 3 ), 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
-        // geometry.setDrawRange(0, this.maxParticleCount);
-
-        this.particleAppearence = new THREE.Points(geometry, material);
-        this.particleAppearence.position.set(0, 0, 0);
-        //console.log(this.particleAppearence.geometry);
-
-        // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
-        // this.particleAppearence.traverse(function (object) {
-        //     object.frustumCulled = false;
-        // });
-
-        this.particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
-        this.particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
-
-        this.worldThree.addToGroup(this.particleAppearence);
-    }
 
     createLife() {
         //생물 개체수 시작값
@@ -157,130 +125,107 @@ class WorldSystem {
         }
     }
 
-    createPlastic() {
-        this.fileList = [];
-        this.fileList.push('assets/3dmodel/plasticTest.json');
 
-        this.fileData;
+    createParticle() {
+        //생성
+        this.particles = [];
+        let particlePositions = [];
+        let material = createParticleMaterial(0.7);
 
-        this.fileIndex = 0;
-        this.fileLoaded = false;
+        for (let i = 0; i < this.maxParticleCount; i++) {
+            let p = new MicroPlastic_D3js(i, this.worldSize);
+            // 랜덤 위치 파티클 생성
+            // if (i < this.maxParticleCount * 0.1) {
+            //     p.setPos();
+            //     p.isActive = true;
+            // }
 
-        // ==========================
+            this.particles.push(p);
+            particlePositions.push(p.position);
+        }
 
-        this.plasticData;
-        this.canAddPlastic = false;
+        let geometry = new THREE.BufferGeometry().setFromPoints(particlePositions);
+        geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
+        geometry.setDrawRange(0, this.maxParticleCount);
 
-        // 폐 플라스틱 위치, 기울기 (world 랜덤한 곳에 랜덤한 각도로 배치될 수 있도록)
-        // 각각의 파티클들의 위치를 지정하는 것이기 때문에 한번에 위치, 각도 지정을 할 수 없어 값을 미리 생성해놓은 후 곱하는 식
-        this.plasticOffsetPosition = new THREE.Vector3(
+        this.particleAppearence = new THREE.Points(geometry, material);
+        this.particleAppearence.position.set(0, 0, 0);
+        // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
+        this.particleAppearence.traverse(function (object) {
+            object.frustumCulled = false;
+        });
+        this.worldThree.addToGroup(this.particleAppearence);
+    }
+
+    createPlastic = (beach, index, bufferGeometry) => {
+        let plasticScale = 3;
+        let finalPositions = [];
+        let finalColors = [];
+
+        let plasticOffsetPosition = new THREE.Vector3(
             MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4),
             MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4),
             MyMath.random(0, this.worldSize * 0.4));
 
-        this.plasticRotation = new THREE.Vector3(
+        let plasticRotation = new THREE.Vector3(
             Math.PI * MyMath.random(0, 2),
             Math.PI * MyMath.random(0, 2),
             Math.PI * MyMath.random(0, 2));
 
-        this.plasticScale = 3;
+        let positions = new Float32Array(bufferGeometry.attributes.position.count);
+        for (let i = 0; i < positions.length; i += 3) {
+            let newPos = new THREE.Vector3(
+                bufferGeometry.attributes.position.array[i + 0],
+                bufferGeometry.attributes.position.array[i + 1],
+                bufferGeometry.attributes.position.array[i + 2]);
 
-        // 파티클 정보 배열
-        this.plasticPositions = [];
-        this.plasticColors = [];
-        this.activableParticles = [];
+            newPos.multiplyScalar(plasticScale);
 
-        this.loadFile();
+            let quaternion = new THREE.Quaternion();
+            quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), plasticRotation.z);
+            newPos.applyQuaternion(quaternion);
+            newPos.add(plasticOffsetPosition);
+
+            finalPositions.push(newPos);
+        }
+
+        let colors = new Float32Array(bufferGeometry.attributes.color.count);
+        for (let i = 0; i < colors.length; i += 3) {
+            finalColors.push(
+                new THREE.Color(
+                    bufferGeometry.attributes.color.array[i + 0],
+                    bufferGeometry.attributes.color.array[i + 1],
+                    bufferGeometry.attributes.color.array[i + 2]));
+        }
+        let object = {
+            positions: finalPositions,
+            colors: finalColors,
+            beach: beach,
+            index: index
+        }
+        this.checkWorldForInput(object)
     }
 
-    loadFile() {
-        readTextFile(
-            this.fileList[this.fileIndex],
-
-            function (text) {
-                this.fileData = JSON.parse(text);
-                console.log(this.fileData);
-                console.log("file loaded");
-
-                // 임시
-                this.plasticData = {
-                    type: 'polyethylene',
-                    area: 'Bangameori'
-                };
-
-                var positions = new Float32Array(this.fileData.count);
-                var colors = new Float32Array(this.fileData.count);
-
-                for (let i = 0; i < positions.length; i += 3) {
-                    let newPos = new THREE.Vector3(
-                        this.fileData.position[i + 0],
-                        this.fileData.position[i + 1],
-                        this.fileData.position[i + 2]);
-                    //console.log(newPos);
-
-                    newPos.multiplyScalar(this.plasticScale);
-
-                    let quaternion = new THREE.Quaternion();
-                    quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), this.plasticRotation.z);
-                    newPos.applyQuaternion(quaternion);
-
-                    newPos.add(this.plasticOffsetPosition);
-                    //console.log(newPos);
-
-                    this.plasticPositions.push(newPos);
-                }
-                for (let i = 0; i < colors.length; i += 3) {
-                    this.plasticColors.push(
-                        new THREE.Color(
-                            this.fileData.color[i + 0],
-                            this.fileData.color[i + 1],
-                            this.fileData.color[i + 2]));
-                }
-
-                this.fileLoaded = true;
-                if (this.fileIndex < this.fileList.length) this.fileIndex++;
-            },
-
-            this
-        );
-    }
-
-    addPlastic() {
-        // 1. 파일 로드
-        // 2. 생성할 플라스틱 파티클 갯수 확인
-        // 3. isActive == false 인 파티클 갯수 확인
-        // 4. 2, 3번 비교하여 2번 < 3번 이면 isActive == false인 파티클에만 위치, 색상 적용
+    checkWorldForInput(object) {
+        let activableParticles = []
 
         for (let i = 0; i < this.particles.length; i++) {
             if (this.particles[i].isActive == false) {
-                this.activableParticles.push(this.particles[i]);
+                activableParticles.push(this.particles[i]);
+            }
+        }
+        if (activableParticles.length >= object.positions.length &&
+            activableParticles.length > 0 && object.positions.length > 0) {
+             
+            for (let i = 0; i < object.positions.length; i++) {
+                activableParticles[i].isActive = true;
+                activableParticles[i].setPos(object.positions[i]);
+                activableParticles[i].setColor(object.colors[i]);
+                activableParticles[i].setD3PlasticData(object.index, object.beach, i);
             }
         }
 
-        if (this.activableParticles.length >= this.plasticPositions.length &&
-            this.activableParticles.length > 0 && this.plasticPositions.length > 0) {
-
-            this.canAddPlastic = true;
-            console.log("activable Particle = " + this.activableParticles.length);
-            console.log("plastic Particle = " + this.plasticPositions.length);
-            console.log("add plastic");
-        }
-
-        if (this.canAddPlastic == true) {
-            for (let i = 0; i < this.plasticPositions.length; i++) {
-                this.activableParticles[i].isActive = true;
-                this.activableParticles[i].setPos(this.plasticPositions[i]);
-                this.activableParticles[i].setColor(this.plasticColors[i]);
-                this.activableParticles[i].setD3PlasticData(this.plasticData.type, this.plasticData.area, i);
-            }
-
-            this.plasticPositions = [];
-            this.plasticColors = [];
-            this.activableParticles = [];
-            this.canAddPlastic = false;
-
-            this.fileLoaded = false;
-        }
     }
 
     //=====================================================================================
@@ -288,12 +233,16 @@ class WorldSystem {
 
 
     updateParticles() {
-        for (let i = 0; i < this.particlePositionAttributes.length; i += 3) {
+
+        let particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
+        let particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
+
+        for (let i = 0; i < particlePositionAttributes.length; i += 3) {
             const index = i / 3;
 
-            this.particlePositionAttributes[i + 0] = this.particles[index].position.x;
-            this.particlePositionAttributes[i + 1] = this.particles[index].position.y;
-            this.particlePositionAttributes[i + 2] = this.particles[index].position.z;
+            particlePositionAttributes[i + 0] = this.particles[index].position.x;
+            particlePositionAttributes[i + 1] = this.particles[index].position.y;
+            particlePositionAttributes[i + 2] = this.particles[index].position.z;
 
             if (this.particles[index].isActive == false) {
                 this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
@@ -318,12 +267,14 @@ class WorldSystem {
         }
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;
 
-        for (let i = 0; i < this.particleColorAttributes.length; i += 3) {
+
+        for (let i = 0; i < particleColorAttributes.length; i += 3) {
             const index = i / 3;
 
-            this.particleColorAttributes[i + 0] = this.particles[index].color.r;
-            this.particleColorAttributes[i + 1] = this.particles[index].color.g;
-            this.particleColorAttributes[i + 2] = this.particles[index].color.b;
+            particleColorAttributes[i + 0] = this.particles[index].color.r;
+            particleColorAttributes[i + 1] = this.particles[index].color.g;
+            particleColorAttributes[i + 2] = this.particles[index].color.b;
+
 
             if (this.particles[index].isActive == false) {
                 this.particles[index].setColor(new THREE.Color(0, 0, 0));
