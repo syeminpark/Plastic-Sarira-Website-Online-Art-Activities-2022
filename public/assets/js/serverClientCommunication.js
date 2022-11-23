@@ -4,20 +4,19 @@ export default class ServerClientCommunication {
     constructor() {
         this.url = window.location.href.slice(0, -1)
     }
-    async createUser() {
+    async createUser(name) {
         try {
             let response = await $.post(`${this.url}/users`, {
-                name: this.dataOrganizer.getOwner(),
-                type: this.dataOrganizer.getType()
+                name: name,
+                type:"administrator"
             });
             console.log(JSON.stringify(response))
-            this.dataOrganizer.setId(response.user._id)
-            this.dataOrganizer.saveToSessionStorage()
 
         } catch (error) {
             console.log(error)
         }
     }
+
     async getUserById() {
         try {
             await $.get(`${this.url}/users/${this.dataOrganizer.getId()}`, response => {

@@ -10,7 +10,7 @@ class Audio12345 {
 		this.assignClickEvents();
 
 		this.button = _button;
-		console.log(this.button)
+
 		this.analyserNode;
 		this.backgroundSource;
 		this.bufferStartTime

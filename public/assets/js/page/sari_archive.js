@@ -29,7 +29,6 @@ class SariArchive12345 extends Page12345 {
 		super();
 		this.range = 8
 		this.pagelayer = _pagelayer
-		console.log(this.pagelayer)
 		this.list = new List12345(_pagelayer);
 
 		

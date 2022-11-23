@@ -1,118 +1,103 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import {OrbitControls} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
 
-// import BasicThree from '../three/basicThree.js';
+import BasicThree from '../three/basicThree.js';
 
-import {MicroPlastic_D3js} from './../world_source/Particle/ParticleClass.js';
-import {Life_Genetic} from './../world_source/Life/Life_Genetic.js';
-import {Life_user} from './../world_source/Life/Life_user.js';
+import {
+    MicroPlastic_D3js
+} from './../world_source/Particle/ParticleClass.js';
+import {
+    Life_Genetic
+} from './../world_source/Life/Life_Genetic.js';
+import {
+    Life_user
+} from './../world_source/Life/Life_user.js';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
-import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
+import {
+    MyMath
+} from '/assets/js/three/MyMath.js';
+import {
+    createParticleMaterial,
+    createPointMaterial,
+    createConvexMaterial
+} from './../three/material.js';
 
+import {
+    WorldThree
+} from '../three/SpecificThree.js';
 //세계
 class WorldSystem {
-    constructor(renderer) {
-        this.canvas = document.getElementById('world-scene');
-        this.singleRenderer = renderer;
-        this.singleRenderer.appendToCanvas(this.canvas);
-        this.singleRenderer.clear();
-        this.renderer = this.singleRenderer.getRenderer();
+    constructor(_pagelayer) {
+        this.pagelayer = _pagelayer
+        this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
 
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera( 
-            75,  									// vertical field of view
-            window.innerWidth / window.innerHeight, // aspect ratio
-            0.1, 									// near
-            1000 	
-        );
-        this.camera.position.z = 40;
+        this.worldSize = 300;
+        this.maxParticleCount = 10000;
+        //흐름(속력+방향)
+        this.velMin = 0.001;
+        this.enterDom = undefined
 
-        this.group = new THREE.Group();
-        this.scene.add(this.group);
-
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-        this.controls.enableDamping = true;
-
-        //this.canvas.appendChild(this.renderer.domElement);
-        this.singleRenderer.appendToCanvas(this.canvas);
-        window.addEventListener('resize', () => this.resize(), false);
-
-        // test 
-        //this.scene.background = new THREE.Color(0,0,0.5);
-        // const geometry = new THREE.BoxGeometry( 10, 10, 10 );
-        // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        // const cube = new THREE.Mesh( geometry, material );
-        // this.addToWorld( cube );
+        this.pointsMaterial=createPointMaterial()
+        this.convexMaterial=createConvexMaterial();
         
-        this.setWorld();
+    }
+
+    //해당 페이지 재접속시 다시 실행
+    setup(worldDom, enterDom) {
+
+
+        this.worldThree.setup(worldDom)
+        this.worldThree.setCameraPosition(0, 0, 40)
+        this.worldThree.updateSize()
+        this.enterDom = enterDom
+
+
+
+        //파티클, 라이프 초기화
+        this.createParticle();
+
+        this.createLife();
+
+        // 파티클, 라이프 그리기
+        this.drawParticles();
+
+        //   플라스틱 넣기        
+          this.createPlastic();
+
+
     }
 
     animate = () => {
         requestAnimationFrame(this.animate);
+        if (this.isValid()) {
 
-        this.update();
-        this.controls.update();
-        this.sinF
-    }
+            this.worldThree.update()
 
-    resize() {
-        if (this.canvas != undefined){
-            this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height);
-            this.camera.aspect = this.canvas.getBoundingClientRect().width / this.canvas.getBoundingClientRect().height;
-            this.camera.updateProjectionMatrix();
-            this.singleRenderer.render(this.scene, this.camera);
+            if (this.fileLoaded == true) {
+                this.addPlastic();
+            }
+
+            this.updateParticles();
+            this.updateLifes();
+
+            //
+            this.worldThree.render()
         }
     }
 
-    //=====================================================================================
 
-    addToWorld(mesh){
-        this.group.add(mesh);
-    }
-
-    removeFromWorld(mesh){
-        let geometry = mesh.geometry;
-        let material = mesh.material;
-        
-        this.group.remove(mesh);
-
-        geometry.dispose();
-        material.dispose();
-    }
-
-    reset(){
-        if (this.group != null){
-            for (let i = 0; i < this.group.children.length; i++) {
-                const child = this.group.children[i];
-                this.removeFromWorld(child);            
+    isValid() {
+        //if user has clicked the enter button 
+        if (this.enterDom != undefined) {
+            if (this.enterDom.classList.contains('m-inactive')) {
+                return false
+            } else {
+                return true
             }
         }
-
-        this.scene?.remove(this.group);
-        this.singleRenderer?.clear();
     }
 
     //=====================================================================================
     //=====================================================================================
-
-    setWorld(){
-        this.worldSize = 300;
-        this.maxParticleCount = 10000;
-
-        //흐름(속력+방향)
-        this.velMin = 0.001;
-
-        //파티클, 라이프 초기화
-        this.createParticle();
-        this.createLife();
-
-        //파티클, 라이프 그리기
-        this.drawParticles();
-        
-        //플라스틱 넣기        
-        this.createPlastic();
-    }
 
     createParticle() {
         //생성
@@ -123,7 +108,7 @@ class WorldSystem {
             let p = new MicroPlastic_D3js(i, this.worldSize);
 
             // 랜덤 위치 파티클 생성
-            if (i < this.maxParticleCount * 0.1){
+            if (i < this.maxParticleCount * 0.1) {
                 p.setPos();
                 p.isActive = true;
             }
@@ -139,7 +124,7 @@ class WorldSystem {
         let material = createParticleMaterial(0.7);
 
         // geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( this.maxParticleCount * 3 ), 3));
-        geometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array( this.maxParticleCount * 3 ), 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
         geometry.setDrawRange(0, this.maxParticleCount);
 
         this.particleAppearence = new THREE.Points(geometry, material);
@@ -147,14 +132,14 @@ class WorldSystem {
         //console.log(this.particleAppearence.geometry);
 
         // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
-        this.particleAppearence.traverse( function( object ) {
+        this.particleAppearence.traverse(function (object) {
             object.frustumCulled = false;
-        } );
+        });
 
-        this.particlePositionAttributes = this.particleAppearence.geometry.getAttribute( 'position' ).array;
-        this.particleColorAttributes = this.particleAppearence.geometry.getAttribute( 'color' ).array;
+        this.particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
+        this.particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
 
-        this.addToWorld(this.particleAppearence);
+        this.worldThree.addToGroup(this.particleAppearence);
     }
 
     createLife() {
@@ -167,9 +152,9 @@ class WorldSystem {
         this.lifeNum = 1 + minNum;
 
         let options = {
-            world: this, 
-            Sarira_Material: createPointMaterial(), 
-            Sarira_ConvexMaterial: createConvexMaterial()
+            world: this.worldThree,
+            Sarira_Material: this.pointsMaterial,
+            Sarira_ConvexMaterial: this.convexMaterial
         }
         //console.log(options);
 
@@ -182,7 +167,7 @@ class WorldSystem {
         }
     }
 
-    createPlastic(){
+    createPlastic() {
         this.fileList = [];
         this.fileList.push('assets/3dmodel/plasticTest.json');
 
@@ -192,20 +177,20 @@ class WorldSystem {
         this.fileLoaded = false;
 
         // ==========================
-        
+
         this.plasticData;
         this.canAddPlastic = false;
 
         // 폐 플라스틱 위치, 기울기 (world 랜덤한 곳에 랜덤한 각도로 배치될 수 있도록)
         // 각각의 파티클들의 위치를 지정하는 것이기 때문에 한번에 위치, 각도 지정을 할 수 없어 값을 미리 생성해놓은 후 곱하는 식
         this.plasticOffsetPosition = new THREE.Vector3(
-            MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4), 
-            MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4), 
+            MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4),
+            MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4),
             MyMath.random(0, this.worldSize * 0.4));
 
         this.plasticRotation = new THREE.Vector3(
-            Math.PI * MyMath.random(0, 2), 
-            Math.PI * MyMath.random(0, 2), 
+            Math.PI * MyMath.random(0, 2),
+            Math.PI * MyMath.random(0, 2),
             Math.PI * MyMath.random(0, 2));
 
         this.plasticScale = 3;
@@ -218,72 +203,72 @@ class WorldSystem {
         this.loadFile();
     }
 
-    loadFile(){
+    loadFile() {
         readTextFile(
-            this.fileList[this.fileIndex], 
+            this.fileList[this.fileIndex],
 
-            function(text){
-            this.fileData = JSON.parse(text);
-            console.log(this.fileData);
-            console.log("file loaded");
+            function (text) {
+                this.fileData = JSON.parse(text);
+                console.log(this.fileData);
+                console.log("file loaded");
 
-            // 임시
-            this.plasticData = {
-                type : 'polyethylene',
-                area : 'Bangameori'
-            };
+                // 임시
+                this.plasticData = {
+                    type: 'polyethylene',
+                    area: 'Bangameori'
+                };
 
-            var positions = new Float32Array(this.fileData.count);
-            var colors = new Float32Array(this.fileData.count);
-        
-            for (let i = 0; i < positions.length; i+=3) {
-                let newPos = new THREE.Vector3( 
-                    this.fileData.position[i + 0],
-                    this.fileData.position[i + 1],
-                    this.fileData.position[i + 2]);
-                //console.log(newPos);
+                var positions = new Float32Array(this.fileData.count);
+                var colors = new Float32Array(this.fileData.count);
 
-                newPos.multiplyScalar(this.plasticScale);
+                for (let i = 0; i < positions.length; i += 3) {
+                    let newPos = new THREE.Vector3(
+                        this.fileData.position[i + 0],
+                        this.fileData.position[i + 1],
+                        this.fileData.position[i + 2]);
+                    //console.log(newPos);
 
-                let quaternion = new THREE.Quaternion();
-                quaternion.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), this.plasticRotation.z );
-                newPos.applyQuaternion( quaternion );
+                    newPos.multiplyScalar(this.plasticScale);
 
-                newPos.add(this.plasticOffsetPosition);
-                //console.log(newPos);
+                    let quaternion = new THREE.Quaternion();
+                    quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), this.plasticRotation.z);
+                    newPos.applyQuaternion(quaternion);
 
-                this.plasticPositions.push(newPos);
-            }
-            for (let i = 0; i < colors.length; i+=3) {
-                this.plasticColors.push(
-                    new THREE.Color(
-                        this.fileData.color[i + 0], 
-                        this.fileData.color[i + 1], 
-                        this.fileData.color[i + 2]));
-            }
+                    newPos.add(this.plasticOffsetPosition);
+                    //console.log(newPos);
 
-            this.fileLoaded = true;
-            if (this.fileIndex < this.fileList.length) this.fileIndex++;
+                    this.plasticPositions.push(newPos);
+                }
+                for (let i = 0; i < colors.length; i += 3) {
+                    this.plasticColors.push(
+                        new THREE.Color(
+                            this.fileData.color[i + 0],
+                            this.fileData.color[i + 1],
+                            this.fileData.color[i + 2]));
+                }
+
+                this.fileLoaded = true;
+                if (this.fileIndex < this.fileList.length) this.fileIndex++;
             },
 
             this
         );
     }
 
-    addPlastic(){
+    addPlastic() {
         // 1. 파일 로드
         // 2. 생성할 플라스틱 파티클 갯수 확인
         // 3. isActive == false 인 파티클 갯수 확인
         // 4. 2, 3번 비교하여 2번 < 3번 이면 isActive == false인 파티클에만 위치, 색상 적용
-        
+
         for (let i = 0; i < this.particles.length; i++) {
-            if (this.particles[i].isActive == false){
+            if (this.particles[i].isActive == false) {
                 this.activableParticles.push(this.particles[i]);
             }
         }
 
-        if (this.activableParticles.length >= this.plasticPositions.length && 
-            this.activableParticles.length > 0 && this.plasticPositions.length > 0){
+        if (this.activableParticles.length >= this.plasticPositions.length &&
+            this.activableParticles.length > 0 && this.plasticPositions.length > 0) {
 
             this.canAddPlastic = true;
             console.log("activable Particle = " + this.activableParticles.length);
@@ -291,7 +276,7 @@ class WorldSystem {
             console.log("add plastic");
         }
 
-        if (this.canAddPlastic == true){
+        if (this.canAddPlastic == true) {
             for (let i = 0; i < this.plasticPositions.length; i++) {
                 this.activableParticles[i].isActive = true;
                 this.activableParticles[i].setPos(this.plasticPositions[i]);
@@ -307,18 +292,10 @@ class WorldSystem {
             this.fileLoaded = false;
         }
     }
-    
+
     //=====================================================================================
     //=====================================================================================
 
-    update() {
-        if (this.fileLoaded == true){
-            this.addPlastic();
-        }
-
-        this.updateParticles();
-        this.updateLifes();
-    }
 
     updateParticles() {
         for (let i = 0; i < this.particlePositionAttributes.length; i += 3) {
@@ -328,8 +305,8 @@ class WorldSystem {
             this.particlePositionAttributes[i + 1] = this.particles[index].position.y;
             this.particlePositionAttributes[i + 2] = this.particles[index].position.z;
 
-            if (this.particles[index].isActive == false){
-                this.particles[index].setPos( new THREE.Vector3(0,this.worldSize - 1,0) );
+            if (this.particles[index].isActive == false) {
+                this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
                 continue;
             }
 
@@ -342,14 +319,14 @@ class WorldSystem {
             this.particles[index].wrap();
 
             this.lifes.forEach(life => {
-               life.breath(this.particles[index]);
-                if (life.energy < life.hungryValue) life.eat(this.particles[index]);  
+                life.breath(this.particles[index]);
+                if (life.energy < life.hungryValue) life.eat(this.particles[index]);
             });
 
             this.life_user.eat(this.particles[index]);
             this.life_user.breath(this.particles[index]);
         }
-        this.particleAppearence.geometry.attributes.position.needsUpdate = true; 
+        this.particleAppearence.geometry.attributes.position.needsUpdate = true;
 
         for (let i = 0; i < this.particleColorAttributes.length; i += 3) {
             const index = i / 3;
@@ -358,14 +335,14 @@ class WorldSystem {
             this.particleColorAttributes[i + 1] = this.particles[index].color.g;
             this.particleColorAttributes[i + 2] = this.particles[index].color.b;
 
-            if (this.particles[index].isActive == false){
-                this.particles[index].setColor(new THREE.Color(0,0,0));
+            if (this.particles[index].isActive == false) {
+                this.particles[index].setColor(new THREE.Color(0, 0, 0));
                 continue;
             }
 
             //파티클이 사리가 됐으면 색을 검정색으로 바꿈 (안보이게)
-            
-        }        
+
+        }
         this.particleAppearence.geometry.attributes.color.needsUpdate = true;
 
         //console.log(this.particleAppearence.geometry);
@@ -376,19 +353,19 @@ class WorldSystem {
 
             this.lifes[i].lifeGo();
 
-            if (this.lifes[i].isDead == true) {              
+            if (this.lifes[i].isDead == true) {
                 this.lifes.splice(i, 1);
                 continue;
             }
 
-            if (this.lifes.length < this.maxNum && this.lifes[i].index != 0){
-                this.lifes[i].division(this.lifes, this); 
+            if (this.lifes.length < this.maxNum && this.lifes[i].index != 0) {
+                this.lifes[i].division(this.lifes, this);
             }
 
             this.lifes[i].update();
             this.lifes[i].updateTestText(); // 디버깅용
 
-            for (let j = 0; j < this.lifes.length; j++){
+            for (let j = 0; j < this.lifes.length; j++) {
                 this.lifes[i].stateMachine(this.lifes[j]);
                 this.lifes[i].pushOtherLife(this.lifes[j]);
             }
@@ -402,15 +379,17 @@ function readTextFile(file, callback, thisObj) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
+    rawFile.onreadystatechange = function () {
         if (rawFile.readyState === 4 && rawFile.status == "200") {
-          // .call 붙인 이유 - class에서 사용하는 this.를 콜백에선 다른 것으로 인식. 
-          // 때문에 this가 나타내는 객체를 지정해줌.
-          // class에서 사용하지 않을 경우 null
+            // .call 붙인 이유 - class에서 사용하는 this.를 콜백에선 다른 것으로 인식. 
+            // 때문에 this가 나타내는 객체를 지정해줌.
+            // class에서 사용하지 않을 경우 null
             callback.call(thisObj, rawFile.responseText);
         }
     }
     rawFile.send(null);
 }
 
-export {WorldSystem}
+export {
+    WorldSystem
+}

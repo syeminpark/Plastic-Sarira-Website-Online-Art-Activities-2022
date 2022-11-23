@@ -11,15 +11,14 @@ export default class SingleRenderer {
         })
         this.renderer.outputEncoding = THREE.sRGBEncoding
 
-        this.currentCanvas;
+        this.currentCanvas=undefined;
+     
     }
-
 
     appendToCanvas(canvas) {
         canvas.appendChild(this.renderer.domElement)
         this.currentCanvas = canvas
 
-      
     }
 
     getRenderer() {
@@ -42,7 +41,6 @@ export default class SingleRenderer {
         this.renderer.setScissorTest(false);
         this.renderer.dispose()
         this.renderer.renderLists.dispose();
-
     }
 
     getCurrentCanvas() {

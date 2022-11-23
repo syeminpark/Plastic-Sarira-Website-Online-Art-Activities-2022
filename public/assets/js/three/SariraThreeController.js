@@ -2,13 +2,9 @@
 import {
     SariraThree
 } from '../three/SpecificThree.js';
-import {
-    createConvexMaterial,
-    createPointMaterial
-} from '../three/material.js';
 
 export default class SariraThreeController {
-    constructor(renderer, type, isDetail,) {
+    constructor(renderer, type, isDetail, ) {
         this.isDetail = isDetail
         this.type = type
         this.renderer = renderer
@@ -23,7 +19,6 @@ export default class SariraThreeController {
             sariraThree.animate()
             this.sariraThreeList.push(sariraThree)
         }
-        window.addEventListener('resize', () => this.rendererResizeMobile(), false);
 
     }
 
@@ -31,11 +26,9 @@ export default class SariraThreeController {
         this.sariraObject = []
         this.renderer.clear()
         this.canvas = canvas
-        this.renderRequest
 
         for (let i = 0; i < this.max; i++) {
             this.sariraThreeList[i].setup(this.canvas)
-
         }
     }
 
@@ -55,11 +48,11 @@ export default class SariraThreeController {
     }
 
     render = () => {
-        this.renderRequest = requestAnimationFrame(this.render)
+        requestAnimationFrame(this.render)
         if (this.sariraObject.length != 0) {
             if (this.valid()) {
                 this.checkCanvas()
-                // this.rendererResizeMobile();
+                this.rendererResizeMobile();
 
                 let renderer = this.renderer.getRenderer()
                 renderer.setClearColor(0x000000, 0);
@@ -92,15 +85,12 @@ export default class SariraThreeController {
     }
 
     rendererResizeMobile() {
-        if (this.valid() && this.canvas!=undefined) {
-            let renderer = this.renderer.getRenderer()
-            let width = renderer.domElement.clientWidth;
-            let height = renderer.domElement.clientHeight;
-            
-            if (this.canvas.offsetWidth != width || this.canvas.offsetHeight != height) {
-                console.log("hi")
-                renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height+this.canvas.getBoundingClientRect().top, false);
-            }
+                let renderer = this.renderer.getRenderer()
+                let width = renderer.domElement.clientWidth;
+                let height = renderer.domElement.clientHeight;
+           
+                if (this.canvas.offsetWidth != width || this.canvas.offsetHeight != height) {
+                    renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight)
         }
     }
 
@@ -115,6 +105,7 @@ export default class SariraThreeController {
             }
         }
     }
+    
 
     valid() {
         if (document.getElementById("currentPage").innerHTML == this.type) {
