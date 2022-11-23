@@ -21,10 +21,18 @@ class World12345 extends Page12345 {
 		this.time = 0;
 		this.time_limit = 500;
 		this.pagelayer = _pagelayer;
+
+		this.world = new WorldSystem(this.pagelayer);
+		this.world.animate()
+		
 	}
 
 	setup(){
 		this.loadsvg();
+
+		this.world.setup(document.getElementById('world-scene'),document.getElementById('world-navigation'));
+
+
 		//const audio_btn = this.pagelayer.popup.querySelector('#world-sound-btn');
 		//const audio_viz = this.pagelayer.popup.querySelector('#world-audio-visualizer');
 		//this.audio_controller = new Audio12345(audio_btn, audio_viz);
@@ -80,7 +88,7 @@ class World12345 extends Page12345 {
 		this.time = 0;
 		this.world_ended = false;
 
-		this.world = new WorldSystem(this.pagelayer.singleRenderer);
+
 	}
 
 	unload(){
@@ -137,7 +145,7 @@ class World12345 extends Page12345 {
 			}
 		},600);
 
-		this.world.animate();
+
 		
 		window.addEventListener('keyup', this.moveSari.bind(this));
 	}
@@ -174,7 +182,7 @@ class World12345 extends Page12345 {
 		this.world_ended = true;
 		window.removeEventListener('keyup', this.moveSari.bind(this));
 
-		this.world.reset();
+
 	}
 
 	closePopups(){

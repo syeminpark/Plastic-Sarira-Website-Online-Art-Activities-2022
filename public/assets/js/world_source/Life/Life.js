@@ -6,7 +6,7 @@ import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
 class Life {
     constructor(index, world, setPos) {
         this.index = index;
-        this.worldSystem = world;
+        this.worldThree = world;
         this.worldSize = world.worldSize || 300;
                 
         this.init();
@@ -85,7 +85,7 @@ class Life {
         const noiseCount = MyMath.random(1., 100.);
         
         let geometry = new THREE.SphereGeometry(this.size, 32, 32);
-        let material = createLifeNoiseMaterial(this.worldSystem.camera, noiseCount, this.noiseSize);
+        let material = createLifeNoiseMaterial(this.worldThree.camera, noiseCount, this.noiseSize);
         // let material = new THREE.MeshDepthMaterial({
         //     transparent: true,
         //     opacity: 0.5,
@@ -95,7 +95,7 @@ class Life {
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
 
-        this.worldSystem.addToWorld(this.lifeMesh);
+        this.worldThree.addToGroup(this.lifeMesh);
     }
 
     updateShaderMat(){
@@ -105,7 +105,7 @@ class Life {
 
     updateGlow_3D(){
         this.lifeMesh.material.uniforms.viewVector.value = 
-			new THREE.Vector3().subVectors( this.worldSystem.camera.position, this.position );
+			new THREE.Vector3().subVectors( this.worldThree.camera.position, this.position );
     }
 
     updateNoiseShader(){
@@ -204,7 +204,7 @@ class Life {
 
             this.contentsText = "";
 
-            this.worldSystem.removeFromWorld(this.lifeMesh);
+            this.worldThree.removeFromGroup(this.lifeMesh);
 
             //make Dead alert if user 
             //callback!= undefined? callback() : null;
@@ -293,7 +293,7 @@ class Life {
     }
 
     initTestText(){
-        this.canvas = this.worldSystem.canvas;
+        this.canvas = this.worldThree.canvas;
 
         this.text = document.createElement('text');
         //this.text.style.backgroundColor = "rgba(0,0,0,0)"
@@ -317,8 +317,8 @@ class Life {
         //let tempV = _.cloneDeep(this.position);
         let tempV = new THREE.Vector3().copy(this.position);
         let orbitV = new THREE.Vector3();
-        orbitV = this.worldSystem.controls.object.position;
-        tempV.project(this.worldSystem.camera);
+        orbitV = this.worldThree.controls.object.position;
+        tempV.project(this.worldThree.camera);
 
         this.text.style.fontSize = MyMath.map(Math.abs(this.position.distanceTo(orbitV)), 0, 600, 2, 0) + "vh";
         const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;
@@ -332,8 +332,8 @@ class Life {
     getScreenPosition(){
         let tempV = new THREE.Vector3().copy(this.position);
         let orbitV = new THREE.Vector3();
-        orbitV = this.worldSystem.controls.object.position;
-        tempV.project(this.worldSystem.camera);
+        orbitV = this.worldThree.controls.object.position;
+        tempV.project(this.worldThree.camera);
 
         const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;
         const y = (tempV.y * -.5 + .5) * this.canvas.clientHeight + this.canvas.getBoundingClientRect().top;

@@ -35,8 +35,8 @@ class Health12345{
 	}
 
 	setPos(_dx, _dy){
-		this.bar.style.left = x + "px";
-        this.bar.style.top = y + 30 + "px";
+		this.bar.style.left = _dx + "px";
+        this.bar.style.top = _dy + 30 + "px";
 	}
 
 	set(_normalized_value){
