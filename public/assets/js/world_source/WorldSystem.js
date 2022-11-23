@@ -64,10 +64,8 @@ class WorldSystem {
     animate = () => {
         requestAnimationFrame(this.animate);
         if (this.valid()) {
-            console.log( this.worldThree.render,this.worldThree)
             this.worldThree.render()
             this.worldThree.update()
-            console.log("updating")
 
             if (this.fileLoaded == true) {
                 this.addPlastic();
@@ -75,9 +73,6 @@ class WorldSystem {
 
             this.updateParticles();
             this.updateLifes();
-
-            //
-          
         }
     }
 
