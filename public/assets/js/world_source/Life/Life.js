@@ -82,7 +82,7 @@ class Life {
     // ===============================================================================
 
     setDisplay() {
-        const noiseCount = MyMath.random(1., 100.);
+        const noiseCount = MyMath.random(1., 30.);
         
         let geometry = new THREE.SphereGeometry(this.size, 32, 32);
         let material = createLifeNoiseMaterial(this.worldThree.camera, noiseCount, this.noiseSize);
@@ -327,18 +327,6 @@ class Life {
         this.text.style.top=y+"px";
 
         this.arrowHelper.setDirection(this.velocity);
-    }
-
-    getScreenPosition(){
-        let tempV = new THREE.Vector3().copy(this.position);
-        let orbitV = new THREE.Vector3();
-        orbitV = this.worldThree.controls.object.position;
-        tempV.project(this.worldThree.camera);
-
-        const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;
-        const y = (tempV.y * -.5 + .5) * this.canvas.clientHeight + this.canvas.getBoundingClientRect().top;
-
-        return {x:x, y:y};
     }
 }
 

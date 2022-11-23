@@ -21,8 +21,12 @@ class Health12345{
 
 		this.pos = {
 			x: 50,
-			y: 50
+			y: 40
 		};
+
+		this.barY = this.container.getBoundingClientRect().top;
+		this.barSizeX = this.container.clientWidth;
+		this.barSizeY = this.container.clientHeight;
 
 		this.move(0,0);
 	}
@@ -34,9 +38,17 @@ class Health12345{
 		this.container.style.left = (this.pos.x) + '%';
 	}
 
-	setPos(_dx, _dy){
-		this.bar.style.left = _dx + "px";
-        this.bar.style.top = _dy + 30 + "px";
+	updatePos(x, y, h){
+		const dx = x * this.world.canvas.clientWidth + this.world.canvas.getBoundingClientRect().left;
+		const dy = y * this.world.canvas.clientHeight + this.world.canvas.getBoundingClientRect().top;
+		this.container.style.left = dx + "px";
+        this.container.style.top = dy + h + "px";
+	}
+
+	setSize(dis, maxDis){
+		this.container.style.width = this.barSizeX - (dis/maxDis) * 200;
+		this.container.style.height = this.barSizeY - (dis/maxDis) * 5;
+		this.container.style.top = this.barY - (1 - (dis/maxDis)) * 50;
 	}
 
 	set(_normalized_value){
