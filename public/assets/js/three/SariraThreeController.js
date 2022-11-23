@@ -34,18 +34,18 @@ export default class SariraThreeController {
 
         for (let i = 0; i < this.max; i++) {
             this.sariraThreeList[i].setup(this.canvas)
-        
+
         }
     }
 
     setMaterial(pointMaterial, sariraMaterial) {
-       
+
         for (let i = 0; i < this.max; i++)
             this.sariraThreeList[i].setMaterial(pointMaterial, sariraMaterial)
     }
 
-    create(load_index, range, data,element) {
-     
+    create(load_index, range, data, element) {
+
         for (let i = load_index * range; i < (load_index + 1) * range; i++) {
             this.sariraThreeList[i].setElement(element[i])
             this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
@@ -91,21 +91,25 @@ export default class SariraThreeController {
     }
 
     rendererResizeMobile() {
-        let renderer = this.renderer.getRenderer()
-        let width = renderer.domElement.clientWidth;
-        let height = renderer.domElement.clientHeight;
+        if (this.valid()) {
+            let renderer = this.renderer.getRenderer()
+            let width = renderer.domElement.clientWidth;
+            let height = renderer.domElement.clientHeight;
 
-        if (this.canvas.getBoundingClientRect().width !== width || this.canvas.getBoundingClientRect().height != height) {
-            renderer.setSize(renderer.domElement.clientWidth, this.canvas.getBoundingClientRect().height, false);
+            if (this.canvas.offsetWidth !== width || this.canvas.offsetHeight > height) {
+               
+                renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height, false);
+            }
         }
     }
     checkCanvas() {
+
         if (this.renderer.getCurrentCanvas() != this.canvas) {
-            this.renderer.appendToCanvas(this.canvas)
+      
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
+      
             for (let sariraThree of this.sariraThreeList) {
                 sariraThree.resetControls(15)
-                console.log("reset")
             }
         }
     }

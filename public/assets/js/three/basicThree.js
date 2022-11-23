@@ -34,7 +34,7 @@ export default class BasicThree {
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
 
-        window.addEventListener('resize', () => this.updateSize(), false);
+       
     }
 
     setup(canvas) {

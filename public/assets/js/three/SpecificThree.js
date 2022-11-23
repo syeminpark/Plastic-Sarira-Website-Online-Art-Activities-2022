@@ -9,6 +9,7 @@ import BasicThree from "./basicThree.js"
 export default class PointThree extends BasicThree {
     constructor(renderer, type, isDetail) {
         super(renderer, type, isDetail)
+        window.addEventListener('resize', () => this.updateSize(), false);
     }
 
     setup(canvas) {
@@ -50,6 +51,7 @@ export default class PointThree extends BasicThree {
         }
 
     }
+    
 
     setObjectPosition() {
         this.selectRandomPoints()
@@ -147,8 +149,10 @@ export class SariraThree extends BasicThree {
     }
 
     resetControls() {
+        if(this.geometry!=undefined){
         this.camera.position.set(0, 0, 15 + this.geometry.boundingBox.max.y * 5)
         this.camera.updateProjectionMatrix();
+        }
     }
     updateSize() {
         if (this.canvas != undefined){
