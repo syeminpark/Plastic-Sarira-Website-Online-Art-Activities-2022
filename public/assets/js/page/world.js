@@ -125,63 +125,75 @@ class World12345 extends Page12345 {
 	}
 
 	enter() {
-		if (!document.getElementById("name_input").value == "") {
-			if (!document.querySelector('#show-m-navigation').classList.contains('expanded')) {
-				document.querySelector('#show-m-navigation').click();
-			}
-			this.enter_message.classList.add("inactive");
-			document.getElementById('world-navigation').classList.remove('m-inactive');
-			document.getElementById('world-joystick-left').classList.remove('m-inactive');
-			document.getElementById('world-joystick-right').classList.remove('m-inactive');
-		this.world.userController.start();
-			let user_name = document.getElementById("name_input").value
-			console.log(user_name)
-			this.ServerClientCommunication.createUser(user_name)
-
-
-			const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
-			this.any_world_btn_clicked = false;
-			for (let i = 0; i < world_btns.length; i++) {
-				const world_btn = world_btns[i];
-				world_btn.addEventListener('click', () => {
-					this.any_world_btn_clicked = true;
-					this.togglePopup(world_btn);
-				});
-
-				setTimeout(() => {
-					if (!this.any_world_btn_clicked) {
-						this.togglePopup(world_btn);
-						if (i == world_btns.length - 1) {
-							setTimeout(() => {
-								if (!this.any_world_btn_clicked)
-									this.togglePopup(world_btn);
-							}, 6000 * i);
-						}
-					}
+		let inputs = (document.querySelectorAll('input'))
+		for (let input of inputs) {
+			if (!input.value == "") {
+				if (!document.querySelector('#show-m-navigation').classList.contains('expanded')) {
+					document.querySelector('#show-m-navigation').click();
 				}
-			}, 3000*i);
-		}
-		
-		this.lifecheck = setInterval(()=>{
-			this.time+=2;
-			// if(this.time>this.time_limit){
-			if (this.world.life_user.isDead == true) {
-				//this.health.end();
-				this.world.userController.end();
-				this.worldEnd();
-				clearInterval(this.lifecheck);
-			}else{
-				// this.health.set(1-this.time/this.time_limit);
-				// this.health.set(1 - this.world.life_user.age/this.world.life_user.lifespan);
-				this.world.userController.set();
+				this.enter_message.classList.add("inactive");
+				document.getElementById('world-navigation').classList.remove('m-inactive');
+				document.getElementById('world-joystick-left').classList.remove('m-inactive');
+				document.getElementById('world-joystick-right').classList.remove('m-inactive');
 
-			}
+				this.ServerClientCommunication.createUser(input.value)
+				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
+				this.any_world_btn_clicked = false;
+				for (let i = 0; i < world_btns.length; i++) {
+					const world_btn = world_btns[i];
+					world_btn.addEventListener('click', () => {
+						this.any_world_btn_clicked = true;
+						this.togglePopup(world_btn);
+					});
+
+					setTimeout(() => {
+						if (!this.any_world_btn_clicked) {
+							this.togglePopup(world_btn);
+							if (i == world_btns.length - 1) {
+								setTimeout(() => {
+									if (!this.any_world_btn_clicked)
+										this.togglePopup(world_btn);
+								}, 6000 * i);
+							}
+						}
+					}, 3000 * i);
+				}
 
 		if (this.world.life_user.isDead == false){
 			this.world.animate();
 		}
 		
 		window.addEventListener('keyup', this.moveSari.bind(this));
+				// this.lifecheck = setInterval(()=>{
+				// 	this.time+=2;
+				// 	// if(this.time>this.time_limit){
+				// 	if (this.world.life_user.isDead == true) {
+				// 		this.health.end();
+				// 		this.worldEnd();
+				// 		clearInterval(this.lifecheck);
+				// 	}else{
+				// 		// this.health.set(1-this.time/this.time_limit);
+				// 		this.health.set(1 - this.world.life_user.age/this.world.life_user.lifespan);
+				// 		console.log(1 - this.world.life_user.age/this.world.life_user.lifespan)
+				// 		let lifePos = this.world.life_user.getScreenPosition(); 
+				// 		this.health.setPos(lifePos.x, lifePos.y-10);
+				// 	}
+				// },600);
+
+				// this.lifecheck = setInterval(()=>{
+				// 	this.time+=2;
+				// 	if(this.time>this.time_limit){
+				// 		this.health.end();
+				// 		this.worldEnd();
+				// 		clearInterval(this.lifecheck);
+				// 	}else{
+				// 		this.health.set(1-this.time/this.time_limit);
+				// 	}
+				// },600);
+
+				window.addEventListener('keyup', this.moveSari.bind(this));
+			}
+		}
 	}
 
 	moveSari(e) {

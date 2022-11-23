@@ -56,7 +56,9 @@ export default class BasicThree {
                     return true
                 }
             } else {
+              
                 if (document.getElementById("currentPage").classList.contains('detail_inactive')) {
+                  
                     return true;
                 }
             }
