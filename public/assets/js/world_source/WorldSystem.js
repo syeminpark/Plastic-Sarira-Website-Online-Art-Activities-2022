@@ -48,8 +48,6 @@ class WorldSystem {
         this.worldThree.updateSize()
         this.enterDom = enterDom
 
-
-
         //파티클, 라이프 초기화
         this.createParticle();
 
