@@ -39,7 +39,6 @@ class WorldSystem {
         this.pointsMaterial=createPointMaterial()
         this.convexMaterial=createConvexMaterial();
         
-      
     }
 
     //해당 페이지 재접속시 다시 실행
