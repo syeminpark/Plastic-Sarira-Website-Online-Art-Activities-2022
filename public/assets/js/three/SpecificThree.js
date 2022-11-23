@@ -217,13 +217,14 @@ export class WorldThree extends BasicThree {
     setCameraPosition(x, y, z) {
         this.camera.position.set(x, y, z)
     }
-    render= () =>{
+    render = () =>{
         if (this.valid()) {
             console.log("rendering")
             this.renderer.render(this.scene, this.camera)
             
         }
     }
+    
     updateSize() {
         if (this.canvas != undefined) {
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)

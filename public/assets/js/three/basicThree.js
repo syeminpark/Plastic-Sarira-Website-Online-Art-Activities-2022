@@ -40,7 +40,7 @@ export default class BasicThree {
     }
 
     render = () => {
-         requestAnimationFrame(this.render)
+        requestAnimationFrame(this.render)
         if (this.valid()) {
             this.renderer.render(this.scene, this.camera)
         }
@@ -76,6 +76,7 @@ export default class BasicThree {
         this.group.clear()
         this.renderer.clear();
     }
+    //item=mesh 
     addToGroup(item){
         this.group.add(item)
     }
