@@ -8,7 +8,7 @@ import {
 } from '../three/material.js';
 
 export default class SariraThreeController {
-    constructor(renderer, type, isDetail, maer) {
+    constructor(renderer, type, isDetail,) {
         this.isDetail = isDetail
         this.type = type
         this.renderer = renderer
@@ -23,7 +23,7 @@ export default class SariraThreeController {
             sariraThree.animate()
             this.sariraThreeList.push(sariraThree)
         }
-        // window.addEventListener('resize', () => this.updateSize(), false);
+        window.addEventListener('resize', () => this.rendererResizeMobile(), false);
 
     }
 
@@ -92,23 +92,24 @@ export default class SariraThreeController {
     }
 
     rendererResizeMobile() {
+        if (this.valid() && this.canvas!=undefined) {
             let renderer = this.renderer.getRenderer()
             let width = renderer.domElement.clientWidth;
             let height = renderer.domElement.clientHeight;
-
+            
             if (this.canvas.offsetWidth != width || this.canvas.offsetHeight != height) {
-               
-                renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height, false);
-
+                console.log("hi")
+                renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height+this.canvas.getBoundingClientRect().top, false);
+            }
         }
     }
-    checkCanvas() {
 
+    checkCanvas() {
         if (this.renderer.getCurrentCanvas() != this.canvas) {
             console.log("chnagecanvas")
-          this.renderer.appendToCanvas(this.canvas)
+            this.renderer.appendToCanvas(this.canvas)
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
-      
+
             for (let sariraThree of this.sariraThreeList) {
                 sariraThree.resetControls(15)
             }
