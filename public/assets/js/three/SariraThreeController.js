@@ -23,7 +23,7 @@ export default class SariraThreeController {
             sariraThree.animate()
             this.sariraThreeList.push(sariraThree)
         }
-        window.addEventListener('resize', () => this.updateSize(), false);
+        // window.addEventListener('resize', () => this.updateSize(), false);
 
     }
 
@@ -92,21 +92,21 @@ export default class SariraThreeController {
     }
 
     rendererResizeMobile() {
-        if (this.valid()) {
             let renderer = this.renderer.getRenderer()
             let width = renderer.domElement.clientWidth;
             let height = renderer.domElement.clientHeight;
 
-            if (this.canvas.offsetWidth !== width || this.canvas.offsetHeight > height) {
+            if (this.canvas.offsetWidth != width || this.canvas.offsetHeight != height) {
                
                 renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height, false);
-            }
+
         }
     }
     checkCanvas() {
 
         if (this.renderer.getCurrentCanvas() != this.canvas) {
-      
+            console.log("chnagecanvas")
+          this.renderer.appendToCanvas(this.canvas)
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
       
             for (let sariraThree of this.sariraThreeList) {
