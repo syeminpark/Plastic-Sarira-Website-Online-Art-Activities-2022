@@ -1,4 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import {OrbitControls} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
+import {PointerLockControls} from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/PointerLockControls.js';
 
 import BasicThree from '../three/basicThree.js';
 
@@ -12,14 +14,10 @@ import {
     Life_user
 } from './../world_source/Life/Life_user.js';
 
-import {
-    MyMath
-} from '/assets/js/three/MyMath.js';
-import {
-    createParticleMaterial,
-    createPointMaterial,
-    createConvexMaterial
-} from './../three/material.js';
+import { UserController } from '/assets/js/three/UserController.js';
+
+import {MyMath} from '/assets/js/three/MyMath.js';
+import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
 
 import { WorldThree } from '../three/SpecificThree.js';
 //세계
@@ -64,10 +62,8 @@ class WorldSystem {
     animate = () => {
         requestAnimationFrame(this.animate);
         if (this.valid()) {
-            console.log( this.worldThree.render,this.worldThree)
             this.worldThree.render()
             this.worldThree.update()
-            console.log("updating")
 
             if (this.fileLoaded == true) {
                 this.addPlastic();
@@ -75,9 +71,6 @@ class WorldSystem {
 
             this.updateParticles();
             this.updateLifes();
-
-            //
-          
         }
     }
 

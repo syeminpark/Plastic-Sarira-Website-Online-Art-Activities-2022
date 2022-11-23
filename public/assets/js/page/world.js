@@ -70,7 +70,7 @@ class World12345 extends Page12345 {
 
 		const health_container = this.pagelayer.popup.querySelector('#world-health-container');
 		const health_bar = this.pagelayer.popup.querySelector('#world-health-bar');
-		this.health = new Health12345(this, health_container, health_bar);
+		//this.health = new Health12345(this, health_container, health_bar);
 
 		this.end_message = this.pagelayer.popup.querySelector('#world-end');
 		const end_btn = this.pagelayer.popup.querySelector('#world-to-sarira');
@@ -135,7 +135,6 @@ class World12345 extends Page12345 {
 				document.getElementById('world-navigation').classList.remove('m-inactive');
 				document.getElementById('world-joystick-left').classList.remove('m-inactive');
 				document.getElementById('world-joystick-right').classList.remove('m-inactive');
-				this.health.start();
 
 				this.ServerClientCommunication.createUser(input.value)
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
@@ -194,15 +193,15 @@ class World12345 extends Page12345 {
 
 	moveSari(e) {
 		//console.log(e);
-		if (e.code === 'KeyW') {
-			this.health.move(0, -0.1);
-		} else if (e.code === 'KeyA') {
-			this.health.move(-0.1, 0);
-		} else if (e.code === 'KeyS') {
-			this.health.move(0, 0.1);
-		} else if (e.code === 'KeyD') {
-			this.health.move(0.1, 0);
-		} else if (e.code === 'KeyZ') {
+		if(e.code === 'KeyW'){
+			//this.health.move(0,-0.1);
+		}else if(e.code === 'KeyA'){
+			//this.health.move(-0.1,0);
+		}else if(e.code === 'KeyS'){
+			//this.health.move(0,0.1);
+		}else if(e.code === 'KeyD'){
+			//this.health.move(0.1,0);
+		}else if(e.code === 'KeyZ'){
 
 		}
 	}
