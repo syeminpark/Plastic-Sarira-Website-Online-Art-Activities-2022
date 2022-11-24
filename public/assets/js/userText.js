@@ -5,23 +5,16 @@ class UserText{
         this.userName = _label;
 
         this.userName.style.position = "absolute";
-		this.userName.style.left = "calc(var(--border-width) * 2)";
-		this.userName.style.top = "0%";
-		this.userName.style.width = "calc(100% - calc(var(--border-width) * 4))";
-		this.userName.style.height = "calc(100% - calc(var(--border-width) * 4))";
+		// this.userName.style.left = "50%";
+		this.userName.style.top = "-320%";
 
 		this.userName.classList.add("user-name");
-
-        this.userName.textContent = "user name test"
-        console.log(_label.textContent)
     }
 
     setText(text){
+        this.userName.textContent = text;
 
-    }
-
-    updatePos(){
-
+        this.userName.style.left = (this.container.clientWidth * .5) - (this.userName.clientWidth * .5);
     }
 }
 

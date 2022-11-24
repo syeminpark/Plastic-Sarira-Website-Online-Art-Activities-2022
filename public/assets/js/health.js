@@ -53,6 +53,10 @@ class Health12345{
 		this.container.style.height = d.h ;
 	}
 
+	getPosition(){
+		return this.container.style.top;
+	}
+
 	set(_normalized_value){
 		this.value = 100*(_normalized_value);
 		// console.log(this.value)

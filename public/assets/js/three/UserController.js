@@ -77,8 +77,9 @@ class UserController {
         this.healthbar = new Health12345(this.threeSystem, 
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'), 
             this.worldPage.pagelayer.popup.querySelector('#world-health-bar'));
+        this.healthbar.updatePos(this.getUserScreenPosition());
         
-        this.userText = new UserText(this.threeSystem, 
+        this.userName = new UserText(this.threeSystem, 
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
     }
@@ -107,8 +108,9 @@ class UserController {
     //=====================================================================================
     //=====================================================================================
 
-    start(){
+    start(userName){
         this.healthbar.start();
+        this.userName.setText(userName);
     }
 
     healthbarActive(){
@@ -136,7 +138,6 @@ class UserController {
         // this.user.shaderCalculate( this.camera.position );
         
         this.healthbar.updatePos(this.getUserScreenPosition());
-        // this.userText.updateLabel(this.user.lifeMesh.position);
     }
 
     end(){

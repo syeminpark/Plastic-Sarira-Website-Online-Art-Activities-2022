@@ -140,7 +140,8 @@ class World12345 extends Page12345 {
 				document.getElementById('world-navigation').classList.remove('m-inactive');
 				document.getElementById('world-joystick-left').classList.remove('m-inactive');
 				document.getElementById('world-joystick-right').classList.remove('m-inactive');
-				this.userController.start();
+				
+				this.userController.start(input.value);
 
 				this.ServerClientCommunication.createUser(input.value)
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
@@ -195,8 +196,10 @@ class World12345 extends Page12345 {
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		this.world.animate();
-		// this.userController.update();
+		if (this.valid()){
+			this.world.animate();
+			this.userController.update();
+		}
 	}
 
 

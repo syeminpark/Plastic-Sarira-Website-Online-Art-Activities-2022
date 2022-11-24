@@ -44,9 +44,6 @@ class WorldSystem {
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
-        
-      
-
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -56,7 +53,6 @@ class WorldSystem {
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
         this.rejectedObject=[]
 
-        
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(0, 0, 40)
         this.worldThree.updateSize()
@@ -77,8 +73,6 @@ class WorldSystem {
         if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
-
-
 
             this.updateParticles();
             this.updateLifes();
