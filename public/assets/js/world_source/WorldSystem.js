@@ -45,10 +45,7 @@ class WorldSystem {
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
-<<<<<<< HEAD
         
-=======
->>>>>>> 8fc2376c2938930745e3c46aa9bf9474adf7fca9
     }
 
     //해당 페이지 재접속시 다시 실행
