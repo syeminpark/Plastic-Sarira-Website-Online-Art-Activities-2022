@@ -1,3 +1,5 @@
+import {MyMath} from '/assets/js/three/MyMath.js';
+
 class Health12345{
 	constructor(_world, _container, _bar){
 		this.value = 100;
@@ -38,16 +40,21 @@ class Health12345{
 	}
 
 	updatePos(d){
-		const dx = d.x * this.threeSystem.canvas.clientWidth + this.threeSystem.canvas.getBoundingClientRect().left;
-		const dy = d.y * this.threeSystem.canvas.clientHeight + this.threeSystem.canvas.getBoundingClientRect().top;
-
-		console.log(d.w, d.h);
+		const dx = d.x * this.threeSystem.canvas.clientWidth;
+		// + this.threeSystem.canvas.getBoundingClientRect().left;
+		const dy = d.y * this.threeSystem.canvas.clientHeight;
+		// + this.threeSystem.canvas.getBoundingClientRect().top;
+		const dyy = d.yy * this.threeSystem.canvas.clientHeight;
 
 		this.container.style.left = dx + 'px';
-        this.container.style.top = dy + d.yy + 'px';
+        this.container.style.top = dy - dyy + 'px';
 
-		this.container.style.width = this.barSizeX * d.w ;
-		this.container.style.height = this.barSizeY * d.h ;
+		this.container.style.width = d.w ;
+		this.container.style.height = d.h ;
+	}
+
+	getPosition(){
+		return this.container.style.top;
 	}
 
 	set(_normalized_value){

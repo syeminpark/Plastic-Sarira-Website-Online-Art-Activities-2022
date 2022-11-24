@@ -967,6 +967,10 @@ body {
 	border-radius: var(--bevel-large);
 }
 
+.user-name{
+	color: white;
+}
+
 .world-popup-container {
 	position: absolute;
 	top: var(--nav-bar);
