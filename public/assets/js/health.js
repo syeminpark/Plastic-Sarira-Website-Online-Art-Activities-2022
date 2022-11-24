@@ -24,7 +24,6 @@ class Health12345{
 			y: 40
 		};
 
-		this.barY = this.container.getBoundingClientRect().top;
 		this.barSizeX = this.container.clientWidth;
 		this.barSizeY = this.container.clientHeight;
 
@@ -42,14 +41,13 @@ class Health12345{
 		const dx = d.x * this.threeSystem.canvas.clientWidth + this.threeSystem.canvas.getBoundingClientRect().left;
 		const dy = d.y * this.threeSystem.canvas.clientHeight + this.threeSystem.canvas.getBoundingClientRect().top;
 
-		this.container.style.left = dx + 'px';
-        this.container.style.top = dy + d.h + 'px';
-	}
+		console.log(d.w, d.h);
 
-	setSize(dis, maxDis){
-		this.container.style.width = this.barSizeX - (dis/maxDis) * 200;
-		this.container.style.height = this.barSizeY - (dis/maxDis) * 5;
-		this.container.style.top = this.barY - (1 - (dis/maxDis)) * 50;
+		this.container.style.left = dx + 'px';
+        this.container.style.top = dy + d.yy + 'px';
+
+		this.container.style.width = this.barSizeX * d.w ;
+		this.container.style.height = this.barSizeY * d.h ;
 	}
 
 	set(_normalized_value){

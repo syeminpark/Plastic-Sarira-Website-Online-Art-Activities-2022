@@ -94,18 +94,12 @@ class UserController {
         const y = (tempV.y * -.5 + .5);
 
         const distance = this.camera.position.distanceTo( this.orbitControl.target );
-        const dist = MyMath.map(distance, this.orbitControl.minDistance, this.orbitControl.maxDistance, -200, -45)
+        const dist = -(2600/(distance + 5)) - 37;
 
-        console.log(dist)
+        const w = MyMath.map(dist, -300, -45, 1., 0.4);
+        const h = MyMath.map(dist, -300, -45, 1., 0.8);
 
-        return {x:x, y:y, h: dist};
-    }
-
-    getUserCamDistance(){
-        const distance = this.camera.position.distanceTo( this.orbitControl.target );
-        const maxDistance = this.orbitControl.maxDistance * 0.75;
-
-        return {dis:distance, maxDis:maxDistance};
+        return {x:x, y:y, yy: dist, w: w, h: h};
     }
 
     //=====================================================================================
