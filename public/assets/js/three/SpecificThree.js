@@ -237,8 +237,8 @@ export class WorldThree extends BasicThree {
     import (randomSource,lambda) {
         new PLYLoader().load(
             randomSource.path, function (bufferGeometry) {
-                // console.log(bufferGeometry.attributes.position.count)
                 lambda(randomSource.beach,randomSource.index,bufferGeometry)
+                bufferGeometry.dispose()
             })
     }
 

@@ -33,8 +33,8 @@ class WorldSystem {
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
 
         this.worldSize = 300;
-        this.maxParticleCount = 15000;
-        this.initialWastePlasticCount = 15
+        this.maxParticleCount = 10000;
+        this.initialWastePlasticCount = 10
         this.plasticScale = 1;
          this.offsetRange= 0.7
 
@@ -44,15 +44,19 @@ class WorldSystem {
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
-
-  
+        
+      
 
     }
 
     //해당 페이지 재접속시 다시 실행
     setup(worldDom, enterDom) {
 
+        //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
+        //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
+        this.rejectedObject=[]
 
+        
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(0, 0, 40)
         this.worldThree.updateSize()
@@ -64,16 +68,17 @@ class WorldSystem {
 
         for (let i = 0; i < this.initialWastePlasticCount; i++) {
             let randomSource = this.worldThree.getRandomSourcePath()
+            console.log(randomSource)
             this.worldThree.import(randomSource, this.createPlastic)
         }
     }
-
-
 
     animate = () => {
         if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
+
+
 
             this.updateParticles();
             this.updateLifes();
@@ -199,7 +204,8 @@ class WorldSystem {
             beach: beach,
             index: index
         }
-        this.checkWorldForInput(object)
+        
+        return this.checkWorldForInput(object)
     }
 
     checkWorldForInput(object) {
@@ -210,8 +216,7 @@ class WorldSystem {
                 activableParticles.push(this.particles[i]);
             }
         }
-        console.log(activableParticles.length)
-
+     
         if (activableParticles.length >= object.positions.length &&
             activableParticles.length > 0 && object.positions.length > 0) {
              
@@ -221,6 +226,12 @@ class WorldSystem {
                 activableParticles[i].setColor(object.colors[i]);
                 activableParticles[i].setD3PlasticData(object.index, object.beach, i);
             }
+            console.log("activableParticles.length",activableParticles.length)
+        }
+        
+        else{
+            this.rejectedObject.push(object)
+            console.log("rejected",this.rejectedObject.length)
         }
 
     }
