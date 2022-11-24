@@ -28,6 +28,7 @@ class Audio12345 {
 
 		this.clickSoundVolume = 0.5
 		this.backgroundVolume = 0.5
+		this.deathVolume=0.7
 		this.default = 1
 
 		this.initAudio();
@@ -52,7 +53,7 @@ class Audio12345 {
 		//zInteratcion
 		this.createAudioElement(this.zInteractionDOM, this.default)
 		death
-		this.createAudioElement(this.deathDOM, this.default)
+		this.createAudioElement(this.deathDOM, thisdeathVolume)
 
 		//background
 		this.backgroundSource = this.audioContext.createBufferSource()

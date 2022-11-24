@@ -5,13 +5,15 @@ import {
 
 export default class BasicThree {
     constructor(renderer, type, isDetail) {
-        this.group= new THREE.Group()
+        this.group = new THREE.Group()
+
+        
         //scene
 
         this.type = type
         this.isDetail = isDetail
         this.renderer = renderer
-    
+
         this.scene = new THREE.Scene()
         this.camera = new THREE.PerspectiveCamera(
             25,
@@ -24,7 +26,7 @@ export default class BasicThree {
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
-        
+
         this.scene.add(this.group)
         window.addEventListener('resize', () => this.updateSize(), false)
     }
@@ -46,8 +48,8 @@ export default class BasicThree {
         }
     }
 
-    updateSize(){}
-    animate(){}
+    updateSize() {}
+    animate() {}
 
     valid() {
         if (document.getElementById("currentPage").innerHTML == this.type) {
@@ -56,38 +58,46 @@ export default class BasicThree {
                     return true
                 }
             } else {
-              
+
                 if (document.getElementById("currentPage").classList.contains('detail_inactive')) {
-                  
+
                     return true;
                 }
             }
         }
     }
 
-    reset(){
-            for (let i = 0; i < this.group.children.length; i++) {
-                const child = this.group.children[i];
-                child.geometry.dispose()    
-                // child. material.dispose();
-                console.log("dispose", child)     
+    reset() {
+        this.scene.traverse((child) => {
+            if (child.type == 'Group') {
+                console.log
+                for (let i = 0; i < child.children.length; i++) {
+                    const mesh = child.children[i];
+                    mesh.geometry.dispose()
+                    mesh.material.dispose();
+                    this.scene.remove(mesh)
+                }
+                child.clear()
             }
-
-        this.group.clear()
+            if(child.name=="sari"){
+                this.scene.remove(child)
+            }
+            
+        })
         this.renderer.clear();
     }
     //item=mesh 
-    addToGroup(item){
+    addToGroup(item) {
         this.group.add(item)
     }
-    removeFromGroup(mesh){
+    removeFromGroup(mesh) {
         let geometry = mesh.geometry;
         let material = mesh.material;
         this.group.remove(mesh);
 
         geometry.dispose();
         material.dispose();
-      
-        
+
+
     }
 }

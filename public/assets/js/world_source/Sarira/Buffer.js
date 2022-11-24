@@ -29,7 +29,7 @@ class Buffer {
     }
 
     render(threeSystem) {
-        threeSystem.scene.add(this.point)
+        threeSystem.addToGroup(this.point)
     }
 
     getBufferGeometry(){

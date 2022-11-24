@@ -152,8 +152,12 @@ class Life_Sarira extends Life_Absorb {
     constructor(index, world, Sarira_Material, Sarira_ConvexMaterial, setPos) {
         super(index, world, setPos);
 
-        // this.bodySystem = new BodySystem(this.index, this.world);
-        // this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
+   
+        this.bodySystem = new BodySystem(this.index, this.worldThree);
+        this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
+
+        
+       
     }
 
     setSarira(microPlastic_Material, microPlastic_ConvexMaterial) {
@@ -175,26 +179,26 @@ class Life_Sarira extends Life_Absorb {
     update(){
         super.update();
 
-        this.add_MicroPlasticToSarira();
-        this.sarira_position = new THREE.Vector3().copy(this.position);
+        // this.add_MicroPlasticToSarira();
+        // this.sarira_position = new THREE.Vector3().copy(this.position);
         
         // this.bodySystem.update();
-        // this.bodySystem.getLifePosition(this.sarira_position);
+        // this.bodySystem.setPosition(this.sarira_position);
     }
 
     add_MicroPlasticToSarira() {
         if (this.isMakeSarira == true) {
             let data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
             let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticlesData.length - 1].position, this.position);
-
+       
             this.bodySystem.addFloatingPlastics(send_pos, data);
 
             this.isMakeSarira = false;
         }
-
         for (let j = 0; j < this.sariraParticles.length; j++) {
             this.sariraParticles[j].position = new THREE.Vector3().copy(this.position);
         }
+        
     }
 
     make_sarira() {

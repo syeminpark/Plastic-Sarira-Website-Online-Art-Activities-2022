@@ -195,8 +195,17 @@ class World12345 extends Page12345 {
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		this.world.animate();
-		// this.userController.update();
+		if(this.valid()){
+			this.world.animate();
+			// this.userController.update();
+		}
+		
+	}
+
+	valid(){
+		if (document.getElementById("currentPage").innerHTML == "world") {
+            return true
+		}
 	}
 
 

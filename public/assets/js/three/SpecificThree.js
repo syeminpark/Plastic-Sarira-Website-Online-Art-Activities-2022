@@ -141,11 +141,10 @@ export class SariraThree extends BasicThree {
             }
             this.convex = new Convex(object, this.sariraMaterial)
             this.convex.updateVertices(geometry, data.length)
-            meshes = this.convex.initializeMesh()
+            this.convex.initializeMesh()
         }
-        for (let mesh of meshes) {
-            this.group.add(mesh)
-        }
+
+
 
         this.camera.position.set(0, 0, 15 + geometry.boundingBox.max.y * 5)
         this.updateSize()
@@ -209,9 +208,13 @@ export class WorldThree extends BasicThree {
             1000
         );
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
-        this.controls.enableDamping = true
+        this.controls.enableDamping = true;
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
+
+        let ambientLight = new THREE.AmbientLight(0xffffff, 3);
+        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 3);
+        this.scene.add(ambientLight, hemiLight);
     }
 
     setCameraPosition(x, y, z) {
@@ -219,9 +222,7 @@ export class WorldThree extends BasicThree {
     }
     render = () => {
         if (this.valid()) {
-
             this.renderer.render(this.scene, this.camera)
-
         }
     }
 
@@ -230,14 +231,14 @@ export class WorldThree extends BasicThree {
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
             this.camera.aspect = this.renderer.getDomElement().width / this.renderer.getDomElement().height;
             this.camera.updateProjectionMatrix();
-
         }
     }
 
-    import (randomSource,lambda) {
+    import(randomSource, lambda) {
         new PLYLoader().load(
-            randomSource.path, function (bufferGeometry) {
-                lambda(randomSource.beach,randomSource.index,bufferGeometry)
+            randomSource.path,
+            function (bufferGeometry) {
+                lambda(randomSource.beach, randomSource.index, bufferGeometry)
                 bufferGeometry.dispose()
             })
     }

@@ -1,6 +1,7 @@
 import {Core} from './Core.js'
 
 import Convex from '/assets/js/three/Convex.js'
+import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 class Sarira {
     constructor(threeSystem,particleMaterial,convexMaterial,bufferGeometry) {
@@ -10,19 +11,18 @@ class Sarira {
         this.convex;
         this.convexMaterial=convexMaterial
         this.bufferGeometry=bufferGeometry
+
+        this.positionVector3 = new THREE.Vector3(0, 0, 0);
     }
 
-    initializeCore(corePostionList, isUser) {
+    initializeCore() {
         this.plasticList.push(new Core(this.threeSystem,this.particleMaterial))
-        this.plasticList[0].initialize(corePostionList)
-        isUser ? this.plasticList[0].initializePassDataList() : null
+        this.plasticList[0].initialize(this.positionVector3)
         this.plasticList[0].updateBuffer(this.bufferGeometry, this.plasticList.length);
     }
 
     initializeConvex() {
-
         if (this.convex == undefined && this.plasticList.length > 3) {
-    
             this.convex = new Convex(this.threeSystem,this.convexMaterial)
             this.convex.initializeBuffer(this.bufferGeometry)
             this.convex.initializeMesh()
@@ -31,16 +31,6 @@ class Sarira {
 
     addPlastics(micro) {
         this.plasticList.push(micro)
-    }
-
-    // Terminal 안씀
-    addMetaData(terminal) {
-        //iterate over every (new) plastic inside sarira. 
-        let plastic = this.plasticList[this.plasticList.length - 1]
-        //iterate over every metadata for plastic 
-        for (let [index, dataElement] of plastic.passDataList.entries()) {
-            terminal.metaDataList[index].push(dataElement)
-        }
     }
 
     setPosition() {

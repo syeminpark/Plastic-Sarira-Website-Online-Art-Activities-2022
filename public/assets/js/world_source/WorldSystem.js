@@ -31,6 +31,7 @@ class WorldSystem {
     constructor(_pagelayer) {
         this.pagelayer = _pagelayer
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
+        
 
         this.worldSize = 300;
         this.maxParticleCount = 10000;
@@ -45,8 +46,6 @@ class WorldSystem {
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
         
-      
-
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -58,7 +57,7 @@ class WorldSystem {
 
         
         this.worldThree.setup(worldDom)
-        this.worldThree.setCameraPosition(0, 0, 40)
+        this.worldThree.setCameraPosition(0, 0, 5)
         this.worldThree.updateSize()
         this.enterDom = enterDom
 
@@ -68,7 +67,7 @@ class WorldSystem {
 
         for (let i = 0; i < this.initialWastePlasticCount; i++) {
             let randomSource = this.worldThree.getRandomSourcePath()
-            console.log(randomSource)
+           
             this.worldThree.import(randomSource, this.createPlastic)
         }
     }
@@ -77,9 +76,6 @@ class WorldSystem {
         if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
-
-
-
             this.updateParticles();
             this.updateLifes();
         }
@@ -88,7 +84,7 @@ class WorldSystem {
 
     valid() {
         //if user has clicked the enter button 
-        if (this.enterDom != undefined) {
+        if (this.enterDom != undefined ) {
             if (this.enterDom.classList.contains('m-inactive')) {
                 return false
             } else {
@@ -117,7 +113,7 @@ class WorldSystem {
         //console.log(options);
 
         this.lifes = [];
-        this.life_user = new Life_user(options);
+        this.life_user = new Life_user(options,this.worldThree);
         this.lifes.push(this.life_user);
 
         for (let i = 1; i < this.lifeNum; i++) {

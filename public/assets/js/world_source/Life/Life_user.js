@@ -1,48 +1,52 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import { Life_Genetic } from './Life_Genetic.js'
-import { BodySystem } from './../Sarira/BodySystem.js'
+import {
+    Life_Genetic
+} from './Life_Genetic.js'
+import {
+    BodySystem
+} from './../Sarira/BodySystem.js'
 
-import {MyMath} from '/assets/js/three/MyMath.js';
+import {
+    MyMath
+} from '/assets/js/three/MyMath.js';
 
 class Life_user extends Life_Genetic {
-    constructor(options){
-        super(0, options, 
-            {
-                photosynthesis : 0, // 광합성
-                decomposer : 0, // 분해자(사체 분해)
+    constructor(options) {
+        super(0, options, {
+            photosynthesis: 0, // 광합성
+            decomposer: 0, // 분해자(사체 분해)
 
-                carnivore : 1, // 육식성
-                herbivore : 1, // 초식성 , 둘 다 1일 경우 잡식성
+            carnivore: 1, // 육식성
+            herbivore: 1, // 초식성 , 둘 다 1일 경우 잡식성
 
-                size : MyMath.random(.5, .6), // 크기
-                shape : MyMath.random(0, 1), // 노이즈 모양
+            size: MyMath.random(.5, .6), // 크기
+            shape: MyMath.random(0, 1), // 노이즈 모양
 
-                growValue : MyMath.random(.4, .5), // 시간당 자라는 양
-                growAge : MyMath.random(0, .2), // 성장이 멈추는 나이
-                
-                moveActivity : MyMath.random(.5, .6), // 1일 경우 활동적임 (움직임 많음 = 속도 빠름)
-                                                    // 노이즈 애니메이팅 효과에도 영향
-                                                    // 높을 수록 에너지 소모량 높음
-                metabolismActivity : MyMath.random(.4, .5), // 대사 활동. 에너지 소모와 동시에 획득
-                                                        // 동물의 경우 소화 속도, 식물의 경우 광합성시 에너지 획득량
-                                                        // 분열 속도에 영향
-                lifespan : MyMath.random(.6, .7),
+            growValue: MyMath.random(.4, .5), // 시간당 자라는 양
+            growAge: MyMath.random(0, .2), // 성장이 멈추는 나이
 
-                startNutrients : MyMath.random(0, 1), // 태어날 때 가지고 있는 양분
+            moveActivity: MyMath.random(.5, .6), // 1일 경우 활동적임 (움직임 많음 = 속도 빠름)
+            // 노이즈 애니메이팅 효과에도 영향
+            // 높을 수록 에너지 소모량 높음
+            metabolismActivity: MyMath.random(.4, .5), // 대사 활동. 에너지 소모와 동시에 획득
+            // 동물의 경우 소화 속도, 식물의 경우 광합성시 에너지 획득량
+            // 분열 속도에 영향
+            lifespan: MyMath.random(.6, .7),
 
-                divisionFreq : MyMath.random(.4, .5), // 번식(분열) 빈도
-                divisionEnergy : MyMath.random(.6, .7), // 번식(분열)에 드는 에너지
-                divisionAge : MyMath.random(.15, .2),
+            startNutrients: MyMath.random(0, 1), // 태어날 때 가지고 있는 양분
 
-                attack : MyMath.random(0, .3), // 공격력
-                defense : MyMath.random(0, .3), // 방어력
-            }
-            , new THREE.Vector3());
+            divisionFreq: MyMath.random(.4, .5), // 번식(분열) 빈도
+            divisionEnergy: MyMath.random(.6, .7), // 번식(분열)에 드는 에너지
+            divisionAge: MyMath.random(.15, .2),
 
-        this.velocity = new THREE.Vector3(); 
-        this.acceleration = new THREE.Vector3(); 
+            attack: MyMath.random(0, .3), // 공격력
+            defense: MyMath.random(0, .3), // 방어력
+        }, new THREE.Vector3());
 
-        this.angle = new THREE.Vector3(); 
+        this.velocity = new THREE.Vector3();
+        this.acceleration = new THREE.Vector3();
+
+        this.angle = new THREE.Vector3();
 
         // this.SetWindowSarira();
         // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial);
@@ -51,7 +55,7 @@ class Life_user extends Life_Genetic {
         this.lifespan = 500;
     }
 
-    init(){
+    init() {
         if (this.geneCode == null) return;
 
         this.velLimit = 1;
@@ -63,40 +67,40 @@ class Life_user extends Life_Genetic {
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, 0, this.lifespan);
-        this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
-                                     0, 1, 0.1, 5);
+        this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5,
+            0, 1, 0.1, 5);
 
-        this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
-                                      0, 1, 0.05, 0.15);
+        this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
+            0, 1, 0.05, 0.15);
     }
 
-    update(){
+    update() {
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
         this.updateShaderMat();
         this.wrapParticles();
 
-        // this.add_MicroPlasticToBodySystem();
-        // this.sarira_position = new THREE.Vector3().copy(this.position);
+        this.add_MicroPlasticToBodySystem();
+        this.sarira_position = new THREE.Vector3().copy(this.position);
 
-        // this.bodySystem.update();
-        // this.bodySystem.getLifePosition(this.sarira_position);
+        this.bodySystem.update();
+        this.bodySystem.setPosition(this.sarira_position);
         // this.bodySystemWindow.update();
     }
 
-    lifeGo(){
+    lifeGo() {
         //super.lifeGo(deadAlert);
         super.lifeGo();
     }
 
-    stateMachine(){
+    stateMachine() {
 
     }
 
-    shaderCalculate(camPos){
-        if (this.lifeMesh.material.uniforms.viewVector.value){
-            this.lifeMesh.material.uniforms.viewVector.value = 
-                new THREE.Vector3().subVectors( camPos, this.position );
+    shaderCalculate(camPos) {
+        if (this.lifeMesh.material.uniforms.viewVector.value) {
+            this.lifeMesh.material.uniforms.viewVector.value =
+                new THREE.Vector3().subVectors(camPos, this.position);
         }
     }
 
@@ -123,7 +127,7 @@ class Life_user extends Life_Genetic {
             newPositionArray[i] = originalPositionArray[i]
         }
 
-        let message={
+        let message = {
             vertices: newPositionArray,
             metaData: this.bodySystemWindow.terminal.metaDataList
         }
@@ -131,18 +135,28 @@ class Life_user extends Life_Genetic {
         return message;
     }
 
-    add_MicroPlasticToBodySystem(){
+    add_MicroPlasticToBodySystem() {
         //function map_range(value, low1, high1, low2, high2) {
         //    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
         //}
-        var age = 0 + (100-0) * (this.age - 0) / (this.lifespan - 0);
+        
+        //test for debugging
+        // if(MyMath.random(0,100)>80){
+        //     this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-10, 10),
+        //         MyMath.random(-10, 10), MyMath.random(-10, 10)))
+          
+        // }
+
+        var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
-            var data = this.sariraParticlesData[this.sariraParticlesData.length-1];
-            var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticlesData.length-1].position, this.position);
+            var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
+            var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticlesData.length - 1].position, this.position);
 
-            this.bodySystemWindow.addFloatingPlastics(send_pos, data);
-            this.bodySystem.addFloatingPlastics(send_pos, data);
+            // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
+            // this.bodySystem.addFloatingPlastics(send_pos, data);
 
+            //temp code to check if sarira generation works 
+     
             this.isMakeSarira = false;
         }
 
@@ -154,17 +168,19 @@ class Life_user extends Life_Genetic {
     // ===============================================================================
     // ===============================================================================
 
-    setFoodChain(){
+    setFoodChain() {
         let foodChainName = 'final Consumer';
 
         return foodChainName;
     }
 
-    setLifeType(){
+    setLifeType() {
         let type = 'Homo Sapiens';
-        
+
         return type;
     }
 }
 
-export {Life_user}
+export {
+    Life_user
+}
