@@ -21,27 +21,27 @@ import {
 import {
 	WorldSystem
 } from '../world_source/WorldSystem.js';
-import { 
-	UserController 
+import {
+	UserController
 } from '/assets/js/three/UserController.js';
 
 import ServerClientCommunication from '../serverClientCommunication.js';
 
 const test_img_srcs = [{
-	img_src: "./assets/img/Naechi/studio/1.jpg",
-	id: "NAE#1",
-	timestamp: "2006-09-07"
-},
-{
-	img_src: "./assets/img/Naechi/studio/2.jpg",
-	id: "NAE#2",
-	timestamp: "2007-11-10"
-},
-{
-	img_src: "./assets/img/Naechi/studio/3.jpg",
-	id: "NAE#3",
-	timestamp: "2012-01-17"
-}
+		img_src: "./assets/img/Naechi/studio/1.jpg",
+		id: "NAE#1",
+		timestamp: "2006-09-07"
+	},
+	{
+		img_src: "./assets/img/Naechi/studio/2.jpg",
+		id: "NAE#2",
+		timestamp: "2007-11-10"
+	},
+	{
+		img_src: "./assets/img/Naechi/studio/3.jpg",
+		id: "NAE#3",
+		timestamp: "2012-01-17"
+	}
 ];
 
 class World12345 extends Page12345 {
@@ -54,9 +54,9 @@ class World12345 extends Page12345 {
 
 		this.world = new WorldSystem(this.pagelayer);
 		this.userController = new UserController(this);
-		
+
 		this.animate();
-		
+
 		this.ServerClientCommunication = new ServerClientCommunication()
 	}
 
@@ -166,16 +166,16 @@ class World12345 extends Page12345 {
 					}, 3000 * i);
 				}
 
-				this.lifecheck = setInterval(()=>{
-					this.time+=2;
-					if(this.world.life_user.isDead == true){
+				this.lifecheck = setInterval(() => {
+					this.time += 2;
+					if (this.world.life_user.isDead == true) {
 						this.worldEnd();
 						this.userController.end();
 						clearInterval(this.lifecheck);
-					}else{
+					} else {
 						this.userController.healthbarActive();
 					}
-				},600);
+				}, 600);
 
 				window.addEventListener('keyup', this.moveSari.bind(this));
 			}
@@ -183,23 +183,22 @@ class World12345 extends Page12345 {
 	}
 
 	valid() {
-        //if user has clicked the enter button 
-        if (this.dom != undefined) {
-            if (this.dom.classList.contains('m-inactive')) {
-                return false
-            } else {
-                return true
-            }
-        }
-    }
+		//if user has clicked the enter button 
+		if (this.dom != undefined) {
+			if (this.dom.classList.contains('m-inactive')) {
+				return false
+			} else {
+				return true
+			}
+		}
+	}
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		if (this.valid()){
-			this.world.update();
-			this.userController.update();
-		}
+		this.world.animate();
+		// this.userController.update();
 	}
+
 
 	moveSari(e) {
 		//console.log(e);

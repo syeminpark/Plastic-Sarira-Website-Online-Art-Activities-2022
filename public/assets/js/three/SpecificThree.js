@@ -10,6 +10,7 @@ import {
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
 import waste_plastic_dataset from "../waste_plastic_dataset.js";
 
+
 export default class PointThree extends BasicThree {
     constructor(renderer, type, isDetail) {
         super(renderer, type, isDetail)
@@ -235,7 +236,8 @@ export class WorldThree extends BasicThree {
 
     import (randomSource,lambda) {
         new PLYLoader().load(
-            randomSource.path, function(bufferGeometry) {
+            randomSource.path, function (bufferGeometry) {
+                // console.log(bufferGeometry.attributes.position.count)
                 lambda(randomSource.beach,randomSource.index,bufferGeometry)
             })
     }

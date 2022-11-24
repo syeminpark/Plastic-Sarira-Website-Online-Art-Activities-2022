@@ -1,5 +1,4 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import { WorldThree } from '../three/SpecificThree.js';
 
 import {
     MicroPlastic_D3js
@@ -11,35 +10,53 @@ import {
     Life_user
 } from './../world_source/Life/Life_user.js';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
-import {createParticleMaterial, createPointMaterial, createConvexMaterial} from './../three/material.js';
+import {
+    UserController
+} from '/assets/js/three/UserController.js';
 
+import {
+    MyMath
+} from '/assets/js/three/MyMath.js';
+import {
+    createParticleMaterial,
+    createPointMaterial,
+    createConvexMaterial
+} from './../three/material.js';
+
+import {
+    WorldThree
+} from '../three/SpecificThree.js';
 //세계
 class WorldSystem {
     constructor(_pagelayer) {
         this.pagelayer = _pagelayer
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
-        // this.enterDom = undefined
 
         this.worldSize = 300;
-        this.maxParticleCount = 10000;
-        
+        this.maxParticleCount = 15000;
+        this.initialWastePlasticCount = 15
+        this.plasticScale = 1;
+         this.offsetRange= 0.7
+
         //흐름(속력+방향)
-        this.velMin = 0.001;
+        this.velMin = 0.003;
+        this.enterDom = undefined
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
 
-        this.initialWastePlasticCount = 10
+  
 
     }
 
     //해당 페이지 재접속시 다시 실행
     setup(worldDom, enterDom) {
+
+
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(0, 0, 40)
         this.worldThree.updateSize()
-        // this.enterDom = enterDom
+        this.enterDom = enterDom
 
         //파티클, 라이프 초기화
         this.createParticle();
@@ -53,15 +70,16 @@ class WorldSystem {
 
 
 
-    update() {
-        // if (this.valid()) {
+    animate = () => {
+        if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
 
             this.updateParticles();
             this.updateLifes();
-        // }
+        }
     }
+
 
     valid() {
         //if user has clicked the enter button 
@@ -136,14 +154,14 @@ class WorldSystem {
     }
 
     createPlastic = (beach, index, bufferGeometry) => {
-        let plasticScale = 3;
+   
         let finalPositions = [];
         let finalColors = [];
 
         let plasticOffsetPosition = new THREE.Vector3(
-            MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4),
-            MyMath.random(-this.worldSize * 0.4, this.worldSize * 0.4),
-            MyMath.random(0, this.worldSize * 0.4));
+            MyMath.random(-this.worldSize *this.offsetRange, this.worldSize *this.offsetRange),
+            MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange),
+            MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange));
 
         let plasticRotation = new THREE.Vector3(
             Math.PI * MyMath.random(0, 2),
@@ -151,13 +169,13 @@ class WorldSystem {
             Math.PI * MyMath.random(0, 2));
 
         let positions = new Float32Array(bufferGeometry.attributes.position.count);
-        for (let i = 0; i < positions.length; i += 3) {
+        for (let i = 0; i < positions.length*3; i += 3) {
             let newPos = new THREE.Vector3(
                 bufferGeometry.attributes.position.array[i + 0],
                 bufferGeometry.attributes.position.array[i + 1],
                 bufferGeometry.attributes.position.array[i + 2]);
 
-            newPos.multiplyScalar(plasticScale);
+            newPos.multiplyScalar(this.plasticScale);
 
             let quaternion = new THREE.Quaternion();
             quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), plasticRotation.z);
@@ -168,7 +186,7 @@ class WorldSystem {
         }
 
         let colors = new Float32Array(bufferGeometry.attributes.color.count);
-        for (let i = 0; i < colors.length; i += 3) {
+        for (let i = 0; i < colors.length*3; i += 3) {
             finalColors.push(
                 new THREE.Color(
                     bufferGeometry.attributes.color.array[i + 0],
@@ -192,6 +210,8 @@ class WorldSystem {
                 activableParticles.push(this.particles[i]);
             }
         }
+        console.log(activableParticles.length)
+
         if (activableParticles.length >= object.positions.length &&
             activableParticles.length > 0 && object.positions.length > 0) {
              
@@ -207,6 +227,7 @@ class WorldSystem {
 
     //=====================================================================================
     //=====================================================================================
+
 
     updateParticles() {
 
