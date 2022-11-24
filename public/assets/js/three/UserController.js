@@ -2,6 +2,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import KeyboardState from './KeyboardState.js';
 import {Health12345} from '/assets/js/health.js';
+import {UserText} from '/assets/js/userText.js';
 
 import {MyMath} from '/assets/js/three/MyMath.js';
 
@@ -77,17 +78,17 @@ class UserController {
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'), 
             this.worldPage.pagelayer.popup.querySelector('#world-health-bar'));
         
-        // this.userText = new UserText(threeSystemController.worldThreeSystem, document.querySelector("#world"));
-        // this.userText.createLabel();
+        this.userText = new UserText(this.threeSystem, 
+            this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
+            this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
     }
 
     //=====================================================================================
     //=====================================================================================
 
     getUserScreenPosition(){
-        let tempV = new THREE.Vector3().copy(this.user.position);
-        let orbitV = new THREE.Vector3();
-        orbitV = this.orbitControl.object.position;
+        // let tempV = new THREE.Vector3().copy(this.user.position);
+        let tempV = new THREE.Vector3();
         tempV.project(this.camera);
 
         const x = (tempV.x * .5 + .5);
@@ -95,11 +96,12 @@ class UserController {
 
         const distance = this.camera.position.distanceTo( this.orbitControl.target );
         const dist = -(2600/(distance + 5)) - 37;
+        const yy = MyMath.map(dist, -300, -45, 0.25, 0.05);
 
-        const w = MyMath.map(dist, -300, -45, 1., 0.4);
-        const h = MyMath.map(dist, -300, -45, 1., 0.8);
+        const w = MyMath.map(dist, -300, -45, 200, 120);
+        const h = MyMath.map(dist, -300, -45, 15, 10);
 
-        return {x:x, y:y, yy: dist, w: w, h: h};
+        return {x:x, y:y, yy: yy, w: w, h: h};
     }
 
     //=====================================================================================

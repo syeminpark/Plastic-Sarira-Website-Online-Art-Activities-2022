@@ -363,6 +363,11 @@
 		opacity: 0;
 	}
 
+	.user-name{
+		position: absolute;
+		color: white;
+	}
+
 	.joystick {
 		border: calc(var(--border-width) * 1.5) solid white;
 	    position: fixed;

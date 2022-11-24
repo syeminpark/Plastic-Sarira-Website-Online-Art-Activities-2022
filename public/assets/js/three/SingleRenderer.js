@@ -18,7 +18,6 @@ export default class SingleRenderer {
     appendToCanvas(canvas) {
         canvas.appendChild(this.renderer.domElement)
         this.currentCanvas = canvas
-
     }
 
     getRenderer() {
