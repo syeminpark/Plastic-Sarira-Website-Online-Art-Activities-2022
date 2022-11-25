@@ -34,7 +34,7 @@ class WorldSystem {
         
 
         this.worldSize = 300;
-        this.maxParticleCount = 10000;
+        this.maxParticleCount = 15000;
         this.initialWastePlasticCount = 10
         this.plasticScale = 1;
          this.offsetRange= 0.7
@@ -313,6 +313,9 @@ class WorldSystem {
                 this.lifes[i].pushOtherLife(this.lifes[j]);
             }
         }
+    }
+    getSariraData(){
+        return this.life_user.getSariraDataForServer()
     }
 }
 

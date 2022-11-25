@@ -94,8 +94,7 @@ class SariArchive12345 extends Page12345 {
 		//dynamically creating a bot_caption by its id 
 		for (let i = 0; i < this.res.allSariraData.length; i++) {
 			this.res.allSariraData[i].bot_caption = this.res.allSariraData[i].name
-			this.res.allSariraData[i].vert_caption = this.res.allSariraData[i].createdAt.split('T')[0]
-		}
+			this.res.allSariraData[i].vert_caption = this.res.allSariraData[i].createdAt.split('T')[0]		}
 		//--> split data at intervals of 20, and load first part.
 		this.sliceData(this.res.allSariraData, this.range);
 		this.loadList(this.sliced_data[this.load_index])

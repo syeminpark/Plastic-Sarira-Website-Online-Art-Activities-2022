@@ -3,13 +3,17 @@ import $ from 'https://cdn.skypack.dev/jquery';
 export default class ServerClientCommunication {
     constructor() {
         this.url = window.location.href.slice(0, -1)
+        this.name;
+        this.id
     }
     async createUser(name) {
+        this.name=name
         try {
             let response = await $.post(`${this.url}/users`, {
                 name: name,
                 type:"administrator"
             });
+            this.id=response.user._id 
             console.log(JSON.stringify(response))
 
         } catch (error) {
@@ -67,9 +71,9 @@ export default class ServerClientCommunication {
     //Sarira
     async postSariraById(object) {
         try {
-            let response = await $.post(`${this.url}/sarira/${this.dataOrganizer.getId()}`, {
-                name: this.dataOrganizer.getOwner(),
-                type: this.dataOrganizer.getType(),
+            let response = await $.post(`${this.url}/sarira/${this.id}`, {
+                name: this.name,
+                type:"administrator",
                 message: JSON.stringify(object)
 
             });

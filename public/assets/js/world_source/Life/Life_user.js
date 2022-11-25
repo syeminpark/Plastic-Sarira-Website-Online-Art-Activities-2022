@@ -125,7 +125,7 @@ class Life_user extends Life_Genetic {
         //user
         let newPositionArray = [];
         let indexLength = 0;
-        let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
+        let originalPositionArray = this.bodySystem.sariraBuffer.bufferGeometry.attributes.position.array;
 
         for (let i = 1; i < 300; i++) {
             if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
@@ -139,7 +139,7 @@ class Life_user extends Life_Genetic {
 
         let message = {
             vertices: newPositionArray,
-            metaData: this.bodySystemWindow.terminal.metaDataList
+            metaData: null
         }
         console.log(message);
         return message;

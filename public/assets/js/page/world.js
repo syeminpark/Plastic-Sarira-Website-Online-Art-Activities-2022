@@ -215,11 +215,16 @@ class World12345 extends Page12345 {
 		}
 	}
 
-	worldEnd() {
+	async worldEnd() {
 		//play death sound
 		if (document.getElementById('sound-btn').classList.contains('active')) {
 			document.getElementById('death').play()
 		}
+
+
+		//getSariraDataForServer
+		let data=this.world.getSariraData()
+		await this.ServerClientCommunication.postSariraById(data)
 
 		if (document.querySelector('#show-m-navigation').classList.contains('expanded')) {
 			document.querySelector('#show-m-navigation').click();
