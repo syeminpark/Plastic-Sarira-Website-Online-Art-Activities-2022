@@ -42,7 +42,7 @@ class List12345 {
 	load(_data, param) {
 
 		this.marker_data = _data;
-		//console.log(this.marker_data);
+		// console.log(this.marker_data);
 		//this.reset();
 		for (let i = 0; i < this.marker_data.length; i++) {
 			let item = document.createElement('div');

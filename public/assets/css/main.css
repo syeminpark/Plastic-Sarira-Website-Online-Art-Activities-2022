@@ -1093,11 +1093,22 @@ body {
 
 #sari-detail-layer .full-col .sari .vert-caption {
 	position: absolute;
+	top: calc(var(--main-padding) * 1.2);
+	right: calc(var(--main-padding) * 1.2);
+	transform: rotate(90deg) translate(50%, 0%);
+	font-size: var(--font-small);
+	color: white;
+
+}
+
+#sari-detail-layer .full-col .sari .bot-caption {
+	position: absolute;
 	bottom: calc(var(--main-padding) * 3);
-	left: 10%;
+	left: 12%;
 	font-size: var(--font-small);
 	color: white;
 }
+
 
 #sari-detail-layer .full-col .hierachy {
 	background-color: white;
