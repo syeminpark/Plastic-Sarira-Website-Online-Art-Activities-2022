@@ -145,7 +145,7 @@ class UserController {
 
     key_update() {
         if (this.keyboard.pressed("W") || this.keyboard.pressed("S") || this.keyboard.pressed("A") || this.keyboard.pressed("D")) {
-            let moveDistance = 0.1;
+            let moveDistance = 0.2;
             
             let fv = this.camera.getWorldDirection(this.user.position);
             let angle = 0;

@@ -28,20 +28,20 @@ import {
 import ServerClientCommunication from '../serverClientCommunication.js';
 
 const test_img_srcs = [{
-		img_src: "./assets/img/Naechi/studio/1.jpg",
-		id: "NAE#1",
-		timestamp: "2006-09-07"
-	},
-	{
-		img_src: "./assets/img/Naechi/studio/2.jpg",
-		id: "NAE#2",
-		timestamp: "2007-11-10"
-	},
-	{
-		img_src: "./assets/img/Naechi/studio/3.jpg",
-		id: "NAE#3",
-		timestamp: "2012-01-17"
-	}
+	img_src: "./assets/img/Naechi/studio/1.jpg",
+	id: "NAE#1",
+	timestamp: "2006-09-07"
+},
+{
+	img_src: "./assets/img/Naechi/studio/2.jpg",
+	id: "NAE#2",
+	timestamp: "2007-11-10"
+},
+{
+	img_src: "./assets/img/Naechi/studio/3.jpg",
+	id: "NAE#3",
+	timestamp: "2012-01-17"
+}
 ];
 
 class World12345 extends Page12345 {
@@ -140,7 +140,7 @@ class World12345 extends Page12345 {
 				document.getElementById('world-navigation').classList.remove('m-inactive');
 				document.getElementById('world-joystick-left').classList.remove('m-inactive');
 				document.getElementById('world-joystick-right').classList.remove('m-inactive');
-				
+
 				this.userController.start(input.value);
 
 				this.ServerClientCommunication.createUser(input.value)
@@ -187,9 +187,17 @@ class World12345 extends Page12345 {
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		this.world.animate();
-		this.userController.update();
-		
+		if (this.valid()) {
+			this.world.animate();
+			this.userController.update();
+		}
+
+	}
+
+	valid() {
+		if (document.getElementById("currentPage").innerHTML == "world") {
+			return true
+		}
 	}
 
 	moveSari(e) {

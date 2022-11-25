@@ -72,12 +72,12 @@ class WorldSystem {
     }
 
     animate = () => {
-        // if (this.valid()) {
+        if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
             this.updateParticles();
             this.updateLifes();
-        // }
+        }
     }
 
     valid() {
