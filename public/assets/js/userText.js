@@ -13,8 +13,14 @@ class UserText{
 
     setText(text){
         this.userName.textContent = text;
+    }
 
+    updatePos(){
         this.userName.style.left = (this.container.clientWidth * .5) - (this.userName.clientWidth * .5);
+    }
+
+    end(){
+        this.userName.textContent = "";
     }
 }
 

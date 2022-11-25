@@ -1,30 +1,10 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import KeyboardState from './KeyboardState.js';
-import {Health12345} from '/assets/js/health.js';
-import {UserText} from '/assets/js/userText.js';
+import { Health12345 } from '/assets/js/health.js';
+import { UserText } from '/assets/js/userText.js';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
-
-var mouseHold = -1;
-var isMouseMoving = false;
-
-function onContextMenu(event) { // Prevent right click
-    event.preventDefault();
-}
-
-function onMouseDown(event) {
-    mouseHold = event.which;
-}
-
-function onMouseMove(event) {
-    isMouseMoving = true;
-}
-
-function onMouseUp(event) {
-    mouseHold = -1;
-    isMouseMoving = false;
-}
+import { MyMath } from '/assets/js/three/MyMath.js';
 
 class UserController {
     constructor(worldPage) {
@@ -32,54 +12,39 @@ class UserController {
         this.keyboard = new KeyboardState();
     }
 
-    setup(world){
+    setup(world) {
         this.threeSystem = world.worldThree;
         this.worldSize = world.worldSize;
-        
+
         this.scene = this.threeSystem.scene;
         this.camera = this.threeSystem.camera;
         this.orbitControl = this.threeSystem.controls;
 
         this.orbitControl.minDistance = 5;
-        this.orbitControl.maxDistance = this.worldSize; 
+        this.orbitControl.maxDistance = this.worldSize;
 
+        //=================================================================================
+        
         this.user = world.life_user;
 
-        this.camDis = this.user.mass * 4;
-
-        //=================================================================================
+        this.camDis = this.user.mass * 3;
+        this.lerpSpeed = 0.1;
 
         this.isLifeFocusOn = true;
+        this.isfocusOffLerpDone = false;
+
         this.isInWorld = true;
 
-        this.isDuringLerp = false;
-
-        this.timer = 1;
-        this.checkFirst = 0;
-
         //=================================================================================
-        // this.pointerLockControl = world.controls_pointerLock;
-        this.moveForward = false;
-        this.moveBackward = false;
-        this.moveLeft = false;
-        this.moveRight = false;
+        
+        this.camera_focusOn_init();
 
-        this.prevTime = performance.now();
-        this.velocity = new THREE.Vector3();
-        this.direction = new THREE.Vector3();
-
-        // this.camera_focusOn_init();
-        // this.mouse_init();
-
-        //=================================================================================
-        //=================================================================================
-
-        this.healthbar = new Health12345(this.threeSystem, 
-            this.worldPage.pagelayer.popup.querySelector('#world-health-container'), 
+        this.healthbar = new Health12345(this.threeSystem,
+            this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-health-bar'));
         this.healthbar.updatePos(this.getUserScreenPosition());
-        
-        this.userName = new UserText(this.threeSystem, 
+
+        this.userName = new UserText(this.threeSystem,
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
     }
@@ -87,215 +52,181 @@ class UserController {
     //=====================================================================================
     //=====================================================================================
 
-    getUserScreenPosition(){
-        // let tempV = new THREE.Vector3().copy(this.user.position);
-        let tempV = new THREE.Vector3();
+    // 유저 위치 elements에 보내서 스크린에 맞춰 프로젝션 할 수 있도록 함.
+    getUserScreenPosition() {
+        let tempV = new THREE.Vector3().copy(this.user.position);
         tempV.project(this.camera);
 
         const x = (tempV.x * .5 + .5);
         const y = (tempV.y * -.5 + .5);
 
-        const distance = this.camera.position.distanceTo( this.orbitControl.target );
-        const dist = -(2600/(distance + 5)) - 37;
+        // zoom 정도에 따라 health bar 위치, 사이즈 변경되도록 함.
+        const distance = this.camera.position.distanceTo(this.user.position);
+        const dist = -(2600 / (distance + 5)) - 37;
+        
         const yy = MyMath.map(dist, -300, -45, 0.25, 0.05);
 
         const w = MyMath.map(dist, -300, -45, 200, 120);
         const h = MyMath.map(dist, -300, -45, 15, 10);
 
-        return {x:x, y:y, yy: yy, w: w, h: h};
+        return { x: x, y: y, yy: yy, w: w, h: h };
     }
 
     //=====================================================================================
     //=====================================================================================
 
-    start(userName){
+    start(userName) {
         this.healthbar.start();
         this.userName.setText(userName);
     }
 
-    healthbarActive(){
-        this.healthbar.set(1 - this.user.age/this.user.lifespan);
+    healthbarActive() {
+        this.healthbar.set(1 - this.user.age / this.user.lifespan);
     }
 
     update() {
-        // this.key_check();
-        // this.lerpLoad();
-
-        // if (this.isLifeFocusOn == true && this.user.isDead == false) {
-        //     this.camera_focusOn_update();
-        //         this.wrap();
-        //         if (this.isDuringLerp == false) {
-        //             this.key_update();
-        //             this.mouse_update();
-        //         }
-        // } else {
-        //     if (this.user.isDead == true) {
-        //         this.orbitControl.enabled = false;
-        //     }
-        //     else this.orbitControl.target = new THREE.Vector3(0, 0, 0);
-        // }
-
-        // this.user.shaderCalculate( this.camera.position );
+        this.key_ZCheck();
         
+        // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
+        if (this.isLifeFocusOn == true && this.user.isDead == false) {
+            
+            // 카메라 유저 따라다니기
+            this.camera_focusOn_update(); 
+            this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
+
+            // 유저가 world 밖으로 나가지 않도록 하는 함
+            this.wrap();
+
+            // 유저 3인칭 컨트롤용 키보드 인풋을 받음
+            this.key_update();
+        } 
+        else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false){
+            if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0){
+                
+                this.focusOffTimer -= 0.01;
+
+                this.orbitControl.target = new THREE.Vector3(0,0,0);
+
+                this.isfocusOffLerpDone = true;
+            } 
+            else {
+                this.camera.position.lerp(this.camLerpPos, 0.1);
+            }
+        }
+
         this.healthbar.updatePos(this.getUserScreenPosition());
+        this.userName.updatePos();
+
+        console.log(this.user.position, this.orbitControl.target)
     }
 
-    end(){
+    end() {
         this.healthbar.end();
+        this.userName.end();
     }
 
-    key_check() {
+    //=====================================================================================
+    //=====================================================================================
+
+    key_ZCheck() {
         this.keyboard.update();
 
+        // z 눌렸을 때 한번만 실행
         if (this.keyboard.down("Z")) {
             this.isLifeFocusOn = !this.isLifeFocusOn;
-            //console.log('focus mode : ' + this.isLifeFocusOn);
-            this.timer = 1;
 
             if (this.isLifeFocusOn == true) {
                 this.camera_focusOn_init();
             } else {
-                this.camera_focusOff_init2();
-                //console.log('orbit control on' + this.orbitControl.enabled);
+                this.camera_focusOff_init();
             }
         }
     }
 
     key_update() {
-        var moveDistance = 50 * this.user.clock.getDelta();
+        if (this.keyboard.pressed("W") || this.keyboard.pressed("S") || this.keyboard.pressed("A") || this.keyboard.pressed("D")) {
+            let moveDistance = 0.1;
+            
+            let fv = this.camera.getWorldDirection(this.user.position);
+            let angle = 0;
+            
+            if (this.keyboard.pressed("W")) {
+                angle = 0;
+            }
+            if (this.keyboard.pressed("S")) {
+                angle = -Math.PI;
+            }
+            if (this.keyboard.pressed("A")) {
+                angle = Math.PI/2;
+            }
+            if (this.keyboard.pressed("D")) {
+                angle = -Math.PI/2;
+            }
 
-        if (this.keyboard.pressed("W")) {
-            this.camera.translateZ(-moveDistance);
-        } else if (this.keyboard.pressed("S")) {
-            this.camera.translateZ(moveDistance);
-        } else if (this.keyboard.pressed("A")) {
-            this.camera.translateX(-moveDistance);
-        } else if (this.keyboard.pressed("D")) {
-            this.camera.translateX(moveDistance);
-        }
+            fv.applyAxisAngle(new THREE.Vector3(0, 1, 0), angle);
+            fv.normalize();
+            fv.multiplyScalar(moveDistance);
 
-        // if ( this.keyboard.pressed("Q") ){
-        //     this.user.lifeMesh.translateY( moveDistance );
-        // }
-
-        // if ( this.keyboard.pressed("E") ){
-        //     this.user.lifeMesh.translateY( -moveDistance );
-        // }
-    }
-
-    mouse_init(){
-        this.threeSystem.canvas.addEventListener('contextmenu', onContextMenu, false);
-        this.threeSystem.canvas.addEventListener('mousedown', onMouseDown, false);
-        this.threeSystem.canvas.addEventListener('mouseup', onMouseUp, false);
-        this.threeSystem.canvas.addEventListener('mousemove', onMouseMove, false);
-
-        // this.threeSystem.canvas.addEventListener('touchstart', onMouseDown, false);
-        // this.threeSystem.canvas.addEventListener('touchend', onMouseUp, false);
-        // this.threeSystem.canvas.addEventListener('touchmove', onMouseMove, false);
-    }
-
-    mouse_update(){
-        switch(mouseHold) {
-            case 1:
-                if (this.user.isDead == false) {
-                    // this.pointerLockControl.lock();
-                }
-                break;
-            case -1:
-                // this.pointerLockControl.unlock();
-                // this.pointerLockControl.isLocked = false;
-                break;
+            this.user.applyForce(fv);
         }
     }
+
+    //=====================================================================================
+    //=====================================================================================
+
+    camera_focusOff_init() {
+        this.orbitControl.enablePan = true;
+        this.orbitControl.enableZoom = true;
+
+        this.isfocusOffLerpDone = false;
+        this.focusOffTimer = 1;
+
+        this.camLerpPos = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.camera.position), 
+            new THREE.Vector3().copy(this.user.position)
+            ).setLength(this.worldSize*0.5);
+    }
+
+    camera_focusOn_init() {
+        this.orbitControl.enablePan = false;
+        this.orbitControl.enableZoom = false;
+
+        const userFollowCam_Pos = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position), 
+            new THREE.Vector3().copy(this.camera.position))
+            .setLength(this.camDis);
+        
+        this.camLerpPos = userFollowCam_Pos;
+    }
+
+    camera_focusOn_update() {
+        this.orbitControl.target.lerp(this.user.position, this.lerpSpeed);
+
+        const camDir = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position), 
+            new THREE.Vector3().copy(this.camera.position))
+            .setLength(this.camDis);
+        const userFollowCam_Pos = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position), 
+            camDir);
+        
+        this.camLerpPos = userFollowCam_Pos;
+    }
+
+    //=====================================================================================
+    //=====================================================================================
 
     wrap() {
         const distance = this.user.position.length();
         const wrapLength = this.worldSize - (this.camDis * 2);
 
-        // var newParticlePos = [];
-        // for (let i = 0; i < this.user.absorbedParticles.length; i++) {
-        //     newParticlePos.push(this.user.absorbedParticles[i].position.clone());
-        // }
-
-        if (distance > wrapLength){
+        if (distance > wrapLength) {
             this.isInWorld = false;
             this.camera.position.setLength(wrapLength);
         } else {
             this.isInWorld = true;
         }
     }
-
-    lerpLoad() {
-        if (this.timer > 0) {
-            this.isDuringLerp = true;
-            this.timer -= 0.01;
-
-            if (this.checkFirst < 1) this.checkFirst += 0.01;
-
-            if (this.isLifeFocusOn == true) {
-                // this.pointerLockControl.unlock();
-                // this.pointerLockControl.isLocked = false;
-                this.camera.lookAt(this.user.position.clone());
-            } else {
-                this.orbitControl.enabled = false;
-            }
-
-            //this.camera.position.lerp(this.camLerp, 0.05);
-            this.orbitControl.object.position.lerp(this.camLerpPos, 0.05);
-        } else {
-            this.isDuringLerp = false;
-
-            if (this.isLifeFocusOn == true) {
-                // this.pointerLockControl.lock();
-                // this.pointerLockControl.isLocked = true;
-            } else {
-                this.orbitControl.enabled = true;
-            }
-        }
-    }
-
-    camera_focusOff_init() {
-        //this.cam.position.set(50, 50, 200);
-        this.camera.lookAt(0, 0, 0);
-        this.camLerpPos = this.camera.position.clone().setLength(this.worldSize * .5);
-
-        // this.pointerLockControl.unlock();
-
-        this.orbitControl.target = new THREE.Vector3(0, 0, 0);
-        this.orbitControl.enablePan = true;
-        this.orbitControl.enableZoom = true;
-        this.orbitControl.enabled = true;
-    }
-
-    camera_focusOff_init2() {
-        // const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
-        const camDis = new THREE.Vector3().subVectors(this.user.position.clone(), this.camera.position.clone()).setLength(this.worldSize * 2);
-
-        this.camera.lookAt(this.user.position.clone());
-        this.camLerpPos = new THREE.Vector3().subVectors(this.user.position.clone(), camDis);
-    }
-
-    camera_focusOn_init() {
-        // const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
-        const camDis = new THREE.Vector3().subVectors(this.user.position.clone(), this.camera.position.clone()).setLength(this.camDis);
-
-        this.orbitControl.target = this.user.position;
-        this.camera.lookAt(this.user.position.clone());
-        this.camLerpPos = new THREE.Vector3().subVectors(this.user.position.clone(), camDis);
-
-        // this.orbitControl.enabled = false;
-    }
-
-    camera_focusOn_update() {
-        // const camDir = this.pointerLockControl.getDirection(this.camera.position.clone()).multiplyScalar(this.camDis);
-        const userPos = new THREE.Vector3().addVectors(this.camera.position.clone(), camDir);
-        var lerpSpeed = .5;
-
-        if (this.isDuringLerp == false) {
-            this.user.position.lerp(userPos, lerpSpeed);
-            // this.user.position = userPos;
-        }
-    }
 }
 
-export {UserController}
+export { UserController }

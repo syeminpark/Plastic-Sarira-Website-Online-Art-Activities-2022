@@ -152,12 +152,8 @@ class Life_Sarira extends Life_Absorb {
     constructor(index, world, Sarira_Material, Sarira_ConvexMaterial, setPos) {
         super(index, world, setPos);
 
-   
         this.bodySystem = new BodySystem(this.index, this.worldThree);
         this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
-
-        
-       
     }
 
     setSarira(microPlastic_Material, microPlastic_ConvexMaterial) {

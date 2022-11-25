@@ -72,14 +72,13 @@ class WorldSystem {
     }
 
     animate = () => {
-        if (this.valid()) {
+        // if (this.valid()) {
             this.worldThree.render()
             this.worldThree.update()
             this.updateParticles();
             this.updateLifes();
-        }
+        // }
     }
-
 
     valid() {
         //if user has clicked the enter button 
@@ -315,23 +314,6 @@ class WorldSystem {
             }
         }
     }
-}
-
-// json 읽는 메소드
-// https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript
-function readTextFile(file, callback, thisObj) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function () {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            // .call 붙인 이유 - class에서 사용하는 this.를 콜백에선 다른 것으로 인식. 
-            // 때문에 this가 나타내는 객체를 지정해줌.
-            // class에서 사용하지 않을 경우 null
-            callback.call(thisObj, rawFile.responseText);
-        }
-    }
-    rawFile.send(null);
 }
 
 export {

@@ -1,5 +1,3 @@
-import {MyMath} from '/assets/js/three/MyMath.js';
-
 class Health12345{
 	constructor(_world, _container, _bar){
 		this.value = 100;

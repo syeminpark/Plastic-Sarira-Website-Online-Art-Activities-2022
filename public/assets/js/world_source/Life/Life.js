@@ -116,7 +116,7 @@ class Life {
     // ===============================================================================
 
     update() {
-        ///this.randomWalk();
+        this.gravity();
 
         this.updateShaderMat();
         this.wrapLife();
@@ -137,6 +137,10 @@ class Life {
         if (this.age >= this.lifespan - 0.1){
             this.die(callback);
         }
+    }
+
+    gravity(){
+        this.velocity.multiplyScalar(0.99);
     }
 
     applyForce(force){
@@ -307,8 +311,8 @@ class Life {
         this.text.style.position = 'fixed';
         document.body.appendChild(this.text);
 
-        this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size, 0xffff00 );
-        this.lifeMesh.add( this.arrowHelper );
+        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size, 0xffff00 );
+        // this.lifeMesh.add( this.arrowHelper );
     }
 
     updateTestText(){
@@ -326,7 +330,7 @@ class Life {
         this.text.style.left = x+"px"//`translate(-50%, -50%) translate(${x}px,${y}px)`;
         this.text.style.top=y+"px";
 
-        this.arrowHelper.setDirection(this.velocity);
+        // this.arrowHelper.setDirection(this.velocity);
     }
 }
 

@@ -55,7 +55,7 @@ class World12345 extends Page12345 {
 		this.world = new WorldSystem(this.pagelayer);
 		this.userController = new UserController(this);
 
-		this.animate();
+		// this.animate();
 
 		this.ServerClientCommunication = new ServerClientCommunication()
 	}
@@ -178,37 +178,19 @@ class World12345 extends Page12345 {
 					}
 				}, 600);
 
-				window.addEventListener('keyup', this.moveSari.bind(this));
-			}
-		}
-	}
+				this.animate();
 
-	valid() {
-		//if user has clicked the enter button 
-		if (this.dom != undefined) {
-			if (this.dom.classList.contains('m-inactive')) {
-				return false
-			} else {
-				return true
+				// window.addEventListener('keyup', this.moveSari.bind(this));
 			}
 		}
 	}
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		if(this.valid()){
-			this.world.animate();
-			this.userController.update();
-		}
+		this.world.animate();
+		this.userController.update();
 		
 	}
-
-	valid(){
-		if (document.getElementById("currentPage").innerHTML == "world") {
-            return true
-		}
-	}
-
 
 	moveSari(e) {
 		//console.log(e);
