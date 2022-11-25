@@ -4,7 +4,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 class Microplastic {
 
     //later create size and color parameter
-    constructor(threeSystem) {
+    constructor(threeSystem, d3Dataset) {
         this.velocity = new THREE.Vector3(0, 0, 0)
         this.acceleration = new THREE.Vector3(0, 0, 0)
         this.positionVector3 = new THREE.Vector3(0, 0, 0)
@@ -14,10 +14,10 @@ class Microplastic {
         this.mass = 1
         // this.mass =  this.size *2
 
-        this.size = 0.1
+        this.size = 0.2
 
         this.threeSystem = threeSystem
-        this.difference
+        this.d3Dataset = d3Dataset
     }
 
     initialize(positionList) {
