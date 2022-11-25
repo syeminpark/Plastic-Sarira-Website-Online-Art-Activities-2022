@@ -126,6 +126,8 @@ class Life_user extends Life_Genetic {
         let newPositionArray = [];
         let indexLength = 0;
         let originalPositionArray = this.bodySystem.sariraBuffer.bufferGeometry.attributes.position.array;
+        let d3Dataset= this.bodySystem.sarira.getDataset()
+        
 
         for (let i = 1; i < 300; i++) {
             if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {

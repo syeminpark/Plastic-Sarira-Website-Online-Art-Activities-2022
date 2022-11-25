@@ -13,6 +13,7 @@ class Sarira {
         this.convex;
         this.convexMaterial = convexMaterial
         this.bufferGeometry = bufferGeometry
+        this.d3Dataset=[]
 
         this.positionVector3 = new THREE.Vector3(0, 0, 0);
     }
@@ -25,6 +26,7 @@ class Sarira {
     }
 
     initializeConvex() {
+        console.log(this.plasticList.length)
         if (this.convex == undefined && this.plasticList.length > 3) {
             this.convex = new Convex(this.threeSystem,this.convexMaterial)
             this.convex.initializeBuffer(this.bufferGeometry)
@@ -33,6 +35,9 @@ class Sarira {
     }
     addPlastics(micro) {
         this.plasticList.push(micro)
+        this.d3Dataset.push(micro.d3Dataset)
+        //add image to window
+
     }
 
     setPosition() {
@@ -50,15 +55,18 @@ class Sarira {
         return this.plasticList.length;
     }
 
-
+    //다 지우고 다시 그리는 방식
     updateConvexAll() {
         if (this.convex != undefined && this.plasticList.length > 3) {
             this.convex.clearObject()
             this.convex.updateVertices(this.bufferGeometry, this.plasticList.length)
             this.convex.initializeMesh()
+            
         }
     }
 
+    //vertices를 버퍼에 추가하고 메시를 지우고 다시 그린다.
+    //이미 만들어진 mesh에 vertices를 그냥 추가하
     updateConvex(micro) {
         if (this.convex != undefined) {
             this.convex.updateBuffer(micro)
@@ -70,6 +78,10 @@ class Sarira {
         for (let [index, plastic] of this.plasticList.entries()) {
             plastic.moveWithLife(positionList, this.bufferGeometry, index)
         }
+    }
+
+    getDataset(){
+        return this.d3Dataset
     }
 }
 

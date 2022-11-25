@@ -13,7 +13,7 @@ export default class Convex {
         this.materialFront = this.materialBack.clone()
         this.group = new THREE.Object3D
         this.groupName = 'sari'
-      
+
     }
 
     //must be at least three points. 
@@ -26,7 +26,7 @@ export default class Convex {
             this.vertices.push(vertex);
         }
         this.meshGeometry = new ConvexGeometry(this.vertices);
-        
+
     }
 
     updateBuffer(plastic) {
@@ -35,7 +35,10 @@ export default class Convex {
         this.meshGeometry = new ConvexGeometry(this.vertices);
     }
 
+
+
     updateVertices(bufferGeometry, sariraListlength) {
+        
         this.vertices = []
         const positionAttribute = bufferGeometry.getAttribute('position');
 
@@ -57,9 +60,9 @@ export default class Convex {
         this.convexMeshFront.renderOrder = 1
         this.group.add(this.convexMeshBack)
         this.group.add(this.convexMeshFront)
-        this.group.name=this.groupName
+        this.group.name = this.groupName
         this.threeSystem.scene.add(this.group)
-    
+
     }
 
     clearObject() {
