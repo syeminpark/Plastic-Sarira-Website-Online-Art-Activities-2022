@@ -10,9 +10,12 @@ class UserController {
     constructor(worldPage) {
         this.worldPage = worldPage;
         this.keyboard = new KeyboardState();
+        this.isEnter = false;
     }
 
     setup(world) {
+        this.isEnter = true;
+
         this.threeSystem = world.worldThree;
         this.worldSize = world.worldSize;
 
@@ -24,7 +27,7 @@ class UserController {
         this.orbitControl.maxDistance = this.worldSize;
 
         //=================================================================================
-        
+
         this.user = world.life_user;
 
         this.camDis = this.user.mass * 3;
@@ -36,7 +39,7 @@ class UserController {
         this.isInWorld = true;
 
         //=================================================================================
-        
+
         this.camera_focusOn_init();
 
         this.healthbar = new Health12345(this.threeSystem,
@@ -63,7 +66,7 @@ class UserController {
         // zoom 정도에 따라 health bar 위치, 사이즈 변경되도록 함.
         const distance = this.camera.position.distanceTo(this.user.position);
         const dist = -(2600 / (distance + 5)) - 37;
-        
+
         const yy = MyMath.map(dist, -300, -45, 0.25, 0.05);
 
         const w = MyMath.map(dist, -300, -45, 200, 120);
@@ -85,44 +88,45 @@ class UserController {
     }
 
     update() {
-        this.key_ZCheck();
-        
-        // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
-        if (this.isLifeFocusOn == true && this.user.isDead == false) {
-            
-            // 카메라 유저 따라다니기
-            this.camera_focusOn_update(); 
-            this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
+        if (this.isEnter == true) {
+            this.key_ZCheck();
 
-            // 유저가 world 밖으로 나가지 않도록 하는 함
-            this.wrap();
+            // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
+            if (this.isLifeFocusOn == true && this.user.isDead == false) {
 
-            // 유저 3인칭 컨트롤용 키보드 인풋을 받음
-            this.key_update();
-        } 
-        else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false){
-            if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0){
-                
-                this.focusOffTimer -= 0.01;
+                // 카메라 유저 따라다니기
+                this.camera_focusOn_update();
+                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
 
-                this.orbitControl.target = new THREE.Vector3(0,0,0);
+                // 유저가 world 밖으로 나가지 않도록 하는 함
+                this.wrap();
 
-                this.isfocusOffLerpDone = true;
-            } 
-            else {
-                this.camera.position.lerp(this.camLerpPos, 0.1);
+                // 유저 3인칭 컨트롤용 키보드 인풋을 받음
+                this.key_update();
             }
+            else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
+                if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0) {
+
+                    this.focusOffTimer -= 0.01;
+
+                    this.orbitControl.target = new THREE.Vector3(0, 0, 0);
+
+                    this.isfocusOffLerpDone = true;
+                }
+                else {
+                    this.camera.position.lerp(this.camLerpPos, 0.1);
+                }
+            }
+
+            this.healthbar.updatePos(this.getUserScreenPosition());
+            this.userName.updatePos();
         }
-
-        this.healthbar.updatePos(this.getUserScreenPosition());
-        this.userName.updatePos();
-
-        console.log(this.user.position, this.orbitControl.target)
     }
 
     end() {
         this.healthbar.end();
         this.userName.end();
+        this.isEnter = false;
     }
 
     //=====================================================================================
@@ -146,10 +150,10 @@ class UserController {
     key_update() {
         if (this.keyboard.pressed("W") || this.keyboard.pressed("S") || this.keyboard.pressed("A") || this.keyboard.pressed("D")) {
             let moveDistance = 0.2;
-            
+
             let fv = this.camera.getWorldDirection(this.user.position);
             let angle = 0;
-            
+
             if (this.keyboard.pressed("W")) {
                 angle = 0;
             }
@@ -157,10 +161,10 @@ class UserController {
                 angle = -Math.PI;
             }
             if (this.keyboard.pressed("A")) {
-                angle = Math.PI/2;
+                angle = Math.PI / 2;
             }
             if (this.keyboard.pressed("D")) {
-                angle = -Math.PI/2;
+                angle = -Math.PI / 2;
             }
 
             fv.applyAxisAngle(new THREE.Vector3(0, 1, 0), angle);
@@ -182,9 +186,9 @@ class UserController {
         this.focusOffTimer = 1;
 
         this.camLerpPos = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.camera.position), 
+            new THREE.Vector3().copy(this.camera.position),
             new THREE.Vector3().copy(this.user.position)
-            ).setLength(this.worldSize*0.5);
+        ).setLength(this.worldSize * 0.5);
     }
 
     camera_focusOn_init() {
@@ -192,10 +196,10 @@ class UserController {
         this.orbitControl.enableZoom = false;
 
         const userFollowCam_Pos = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.user.position), 
+            new THREE.Vector3().copy(this.user.position),
             new THREE.Vector3().copy(this.camera.position))
             .setLength(this.camDis);
-        
+
         this.camLerpPos = userFollowCam_Pos;
     }
 
@@ -203,13 +207,13 @@ class UserController {
         this.orbitControl.target.lerp(this.user.position, this.lerpSpeed);
 
         const camDir = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.user.position), 
+            new THREE.Vector3().copy(this.user.position),
             new THREE.Vector3().copy(this.camera.position))
             .setLength(this.camDis);
         const userFollowCam_Pos = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.user.position), 
+            new THREE.Vector3().copy(this.user.position),
             camDir);
-        
+
         this.camLerpPos = userFollowCam_Pos;
     }
 
