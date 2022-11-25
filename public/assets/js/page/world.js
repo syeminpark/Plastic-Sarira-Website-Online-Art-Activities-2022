@@ -55,7 +55,7 @@ class World12345 extends Page12345 {
 		this.world = new WorldSystem(this.pagelayer);
 		this.userController = new UserController(this);
 
-		// this.animate();
+		this.animate();
 
 		this.ServerClientCommunication = new ServerClientCommunication()
 	}
@@ -178,7 +178,7 @@ class World12345 extends Page12345 {
 					}
 				}, 600);
 
-				this.animate();
+				// this.animate();
 
 				// window.addEventListener('keyup', this.moveSari.bind(this));
 			}

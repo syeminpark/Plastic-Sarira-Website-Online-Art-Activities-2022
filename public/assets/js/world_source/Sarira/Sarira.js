@@ -1,19 +1,22 @@
-import {Core} from './Core.js'
+import {
+    Core
+} from './Core.js'
 
 import Convex from '/assets/js/three/Convex.js'
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 class Sarira {
-    constructor(threeSystem,particleMaterial,convexMaterial,bufferGeometry) {
+    constructor(threeSystem, particleMaterial, convexMaterial, bufferGeometry) {
         this.plasticList = []
         this.threeSystem = threeSystem
         this.particleMaterial = particleMaterial
         this.convex;
-        this.convexMaterial=convexMaterial
-        this.bufferGeometry=bufferGeometry
+        this.convexMaterial = convexMaterial
+        this.bufferGeometry = bufferGeometry
 
         this.positionVector3 = new THREE.Vector3(0, 0, 0);
     }
+
 
     initializeCore() {
         this.plasticList.push(new Core(this.threeSystem,this.particleMaterial))
@@ -28,22 +31,22 @@ class Sarira {
             this.convex.initializeMesh()
         }
     }
-
     addPlastics(micro) {
         this.plasticList.push(micro)
     }
 
     setPosition() {
         for (let [index, plastic] of this.plasticList.entries()) {
-            plastic.setPosition(this.bufferGeometry, index);
+            plastic.setPositionVector(this.bufferGeometry, index);
         }
     }
 
-    getPlasticList(){
+
+    getPlasticList() {
         return this.plasticList;
     }
 
-    getPlasticListLength(){
+    getPlasticListLength() {
         return this.plasticList.length;
     }
 
@@ -70,4 +73,6 @@ class Sarira {
     }
 }
 
-export {Sarira}
+export {
+    Sarira
+}

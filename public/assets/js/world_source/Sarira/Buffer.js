@@ -26,6 +26,7 @@ class Buffer {
         this.bufferGeometry.setDrawRange(0, 0);
 
         this.point = new THREE.Points(this.bufferGeometry, material);
+        this.point.frustumCulled = false
     }
 
     render(threeSystem) {
@@ -33,7 +34,7 @@ class Buffer {
     }
 
     getBufferGeometry(){
-        return this.bufferGeometry;
+        return this.bufferGeometry;ssssssssssssssssss
     }
 }
 

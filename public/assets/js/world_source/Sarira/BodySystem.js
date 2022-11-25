@@ -32,7 +32,7 @@ class BodySystem {
         this.floatingBuffer = new Buffer()
         this.particleMaterial = material;
         this.floatingBuffer.initialize(this.particleMaterial)
-        this.floatingBuffer.render(this.threeSystem)
+        // this.floatingBuffer.render(this.threeSystem)
 
         this.sariraBuffer = new Buffer()
         this.sariraBuffer.initialize(this.particleMaterial)
@@ -72,10 +72,9 @@ class BodySystem {
     updateSarira() {
         for (let [index, micro] of this.floatingPlasticsList.entries()) {
             if (micro.checkStuck(this.sarira.getPlasticList())) {
-                console.log(micro.getPositionVector())
                 this.sarira.addPlastics(micro)
                 
-                // micro.getPosition(this.floatingBuffer.bufferGeometry, index)
+                //micro.getPosition(this.floatingBuffer.bufferGeometry, index)
                 micro.updateBuffer(this.sariraBuffer.getBufferGeometry(), this.sarira.getPlasticListLength())
                 micro.switch(this.floatingBuffer.getBufferGeometry(), index, this.floatingPlasticsList)
 

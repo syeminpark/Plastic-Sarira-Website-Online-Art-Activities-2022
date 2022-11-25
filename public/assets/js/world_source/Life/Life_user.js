@@ -72,7 +72,15 @@ class Life_user extends Life_Genetic {
 
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.15);
-    }
+
+            document.addEventListener('keydown', (evenet)=>{
+                if(event.key=='1'){
+                              this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-3,3),
+                        MyMath.random(-3, 3), MyMath.random(-3, 3)))
+                }
+            })
+        }
+
 
     update() {
         super.gravity();
@@ -143,9 +151,10 @@ class Life_user extends Life_Genetic {
         //}
         
         //test for debugging
-        // if(MyMath.random(0,100)>80){
+        // if(MyMath.random(0,100)>90){
         //     this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-10, 10),
         //         MyMath.random(-10, 10), MyMath.random(-10, 10)))
+               
           
         // }
 
