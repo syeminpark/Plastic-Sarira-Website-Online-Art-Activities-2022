@@ -73,9 +73,10 @@ class Life_user extends Life_Genetic {
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.15);
 
-            document.addEventListener('keydown', (evenet)=>{
+        document.addEventListener('keydown', 
+            (evenet)=>{
                 if(event.key=='1'){
-                              this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-3,3),
+                    this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-3,3),
                         MyMath.random(-3, 3), MyMath.random(-3, 3)))
                 }
             })
@@ -83,8 +84,6 @@ class Life_user extends Life_Genetic {
 
 
     update() {
-        super.gravity();
-
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
         this.updateShaderMat();
@@ -98,20 +97,8 @@ class Life_user extends Life_Genetic {
         // this.bodySystemWindow.update();
     }
 
-    lifeGo() {
-        //super.lifeGo(deadAlert);
-        super.lifeGo();
-    }
-
     stateMachine() {
 
-    }
-
-    shaderCalculate(camPos) {
-        if (this.lifeMesh.material.uniforms.viewVector.value) {
-            this.lifeMesh.material.uniforms.viewVector.value =
-                new THREE.Vector3().subVectors(camPos, this.position);
-        }
     }
 
     SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial) {
