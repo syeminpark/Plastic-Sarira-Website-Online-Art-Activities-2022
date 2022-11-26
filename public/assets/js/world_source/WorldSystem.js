@@ -233,7 +233,7 @@ class WorldSystem {
       
         } else {
             this.rejectedObject.push(object)
-            console.log("rejected", this.rejectedObject.length)
+
         }
 
     }

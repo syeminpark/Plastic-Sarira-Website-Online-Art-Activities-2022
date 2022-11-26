@@ -43,8 +43,6 @@ export default class PointThree extends BasicThree {
                 this.object = new THREE.Points(geometry, this.material);
                 this.group.add(this.object)
                 this.camera.position.set(0, 0, 180 + geometry.boundingBox.max.y * 5)
-                console.log(path)
-
                 this.updateSize()
             })
 

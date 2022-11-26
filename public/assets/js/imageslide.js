@@ -106,7 +106,6 @@ class ImageSlide12345{
 	}
 
 	reposition_complete(){
-		console.log(this.id.innerHTML)
 		this.id.innerHTML = this.data[this.index].id;
 		//this.timestamp.innerHTML = this.data[this.index].timestamp;
 		this.slide_container.classList.add("no-transition");
