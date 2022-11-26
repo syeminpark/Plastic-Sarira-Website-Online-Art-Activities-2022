@@ -1,7 +1,7 @@
 ``
 import {
     SariraThree
-} from '../three/SpecificThree.js';
+} from '../rendering/SpecificThree.js';
 
 export default class SariraThreeController {
     constructor(renderer, type, isDetail, ) {

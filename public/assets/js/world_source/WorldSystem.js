@@ -1,5 +1,4 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-
 import {
     MicroPlastic_D3js
 } from './../world_source/Particle/ParticleClass.js';
@@ -9,50 +8,57 @@ import {
 import {
     Life_user
 } from './../world_source/Life/Life_user.js';
-
 import {
     MyMath
-} from '/assets/js/three/MyMath.js';
+} from '/assets/js/utils/MyMath.js';
 import {
     createParticleMaterial,
     createPointMaterial,
     createConvexMaterial
-} from './../three/material.js';
+} from '../rendering/material.js';
 
 import {
     WorldThree
-} from '../three/SpecificThree.js';
+} from '../rendering/SpecificThree.js';
+import config from '../utils/config.js';
+import Waste_plastic_dataset from '../utils/waste_plastic_dataset.js';
+
 //세계
 class WorldSystem {
     constructor(_pagelayer) {
         this.pagelayer = _pagelayer
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
-        
 
-        this.worldSize = 300;
-        this.maxParticleCount = 15000;
-        this.initialWastePlasticCount = 10
-        this.plasticScale = 1;
-         this.offsetRange= 0.7
+
+        this.worldSize = config.worldSize
+        this.maxParticleCount = config.maxParticleCount
+        this.initialWastePlasticCount = config.initialMaxPlasticCount
+        this.plasticScale = config.plasticScale
+        this.offsetRange = config.plasticOffsetRange
 
         //흐름(속력+방향)
-        this.velMin = 0.003;
+        this.velMin = config.velMin
         this.enterDom = undefined
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
-        
+
+        this.initialCameraPosition = [0, 0, 5]
+        this.particleAppearence = undefined
+
     }
 
     //해당 페이지 재접속시 다시 실행
-    setup(worldDom, enterDom) {
+    setup(worldDom, enterDom,addToslider,reorganize) {
+
+    
 
         //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
-        this.rejectedObject=[]
+        this.rejectedObject = []
 
         this.worldThree.setup(worldDom)
-        this.worldThree.setCameraPosition(0, 0, 5)
+        this.worldThree.setCameraPosition(...this.initialCameraPosition)
         this.worldThree.updateSize()
         this.enterDom = enterDom
 
@@ -60,25 +66,32 @@ class WorldSystem {
         this.createParticle();
         this.createLife();
 
+        let randomSource = Waste_plastic_dataset.getRandomBatchPLY(this.initialWastePlasticCount)
         for (let i = 0; i < this.initialWastePlasticCount; i++) {
-            let randomSource = this.worldThree.getRandomSourcePath()
-           
-            this.worldThree.import(randomSource, this.createPlastic)
+            this.worldThree.import(randomSource[i], this.createPlastic, addToslider,reorganize)
         }
     }
 
     animate = () => {
-        if (this.valid()) {
+        if (this.particleAppearence != undefined) {
             this.worldThree.render()
             this.worldThree.update()
+
             this.updateParticles();
+
+        }
+        if (this.valid()) {
+            // this.worldThree.render()
+            // this.worldThree.update()
+            // this.updateParticles();
+        
             this.updateLifes();
         }
     }
 
     valid() {
         //if user has clicked the enter button 
-        if (this.enterDom != undefined ) {
+        if (this.enterDom != undefined) {
             if (this.enterDom.classList.contains('m-inactive')) {
                 return false
             } else {
@@ -107,7 +120,7 @@ class WorldSystem {
         //console.log(options);
 
         this.lifes = [];
-        this.life_user = new Life_user(options,this.worldThree);
+        this.life_user = new Life_user(options, this.worldThree);
         this.lifes.push(this.life_user);
 
         for (let i = 1; i < this.lifeNum; i++) {
@@ -120,7 +133,7 @@ class WorldSystem {
         //생성
         this.particles = [];
         let particlePositions = [];
-        let material = createParticleMaterial(0.3);
+        let material = createParticleMaterial();
 
         for (let i = 0; i < this.maxParticleCount; i++) {
             let p = new MicroPlastic_D3js(i, this.worldSize);
@@ -149,12 +162,12 @@ class WorldSystem {
     }
 
     createPlastic = (beach, index, bufferGeometry) => {
-   
+
         let finalPositions = [];
         let finalColors = [];
 
         let plasticOffsetPosition = new THREE.Vector3(
-            MyMath.random(-this.worldSize *this.offsetRange, this.worldSize *this.offsetRange),
+            MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange),
             MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange),
             MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange));
 
@@ -164,7 +177,7 @@ class WorldSystem {
             Math.PI * MyMath.random(0, 2));
 
         let positions = new Float32Array(bufferGeometry.attributes.position.count);
-        for (let i = 0; i < positions.length*3; i += 3) {
+        for (let i = 0; i < positions.length * 3; i += 3) {
             let newPos = new THREE.Vector3(
                 bufferGeometry.attributes.position.array[i + 0],
                 bufferGeometry.attributes.position.array[i + 1],
@@ -181,7 +194,7 @@ class WorldSystem {
         }
 
         let colors = new Float32Array(bufferGeometry.attributes.color.count);
-        for (let i = 0; i < colors.length*3; i += 3) {
+        for (let i = 0; i < colors.length * 3; i += 3) {
             finalColors.push(
                 new THREE.Color(
                     bufferGeometry.attributes.color.array[i + 0],
@@ -194,7 +207,7 @@ class WorldSystem {
             beach: beach,
             index: index
         }
-        
+
         return this.checkWorldForInput(object)
     }
 
@@ -206,22 +219,20 @@ class WorldSystem {
                 activableParticles.push(this.particles[i]);
             }
         }
-     
+
         if (activableParticles.length >= object.positions.length &&
             activableParticles.length > 0 && object.positions.length > 0) {
-             
+
             for (let i = 0; i < object.positions.length; i++) {
                 activableParticles[i].isActive = true;
                 activableParticles[i].setPos(object.positions[i]);
                 activableParticles[i].setColor(object.colors[i]);
-                activableParticles[i].setD3PlasticData(object.index, object.beach, i);
+                activableParticles[i].setD3PlasticData({type:"Waste Plastic", type:object.beach, area:object.index});
             }
-            console.log("activableParticles.length",activableParticles.length)
-        }
-        
-        else{
+            return true
+      
+        } else {
             this.rejectedObject.push(object)
-            console.log("rejected",this.rejectedObject.length)
         }
 
     }
@@ -242,10 +253,12 @@ class WorldSystem {
             particlePositionAttributes[i + 1] = this.particles[index].position.y;
             particlePositionAttributes[i + 2] = this.particles[index].position.z;
 
+
             if (this.particles[index].isActive == false) {
                 this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
                 continue;
             }
+            if (this.valid()) {
 
             let flow = new THREE.Vector3(
                 MyMath.random(-this.velMin, this.velMin),
@@ -262,6 +275,7 @@ class WorldSystem {
 
             this.life_user.eat(this.particles[index]);
             this.life_user.breath(this.particles[index]);
+        }
         }
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;
 
@@ -310,7 +324,7 @@ class WorldSystem {
             }
         }
     }
-    getSariraData(){
+    getSariraData() {
         return this.life_user.getSariraDataForServer()
     }
 }

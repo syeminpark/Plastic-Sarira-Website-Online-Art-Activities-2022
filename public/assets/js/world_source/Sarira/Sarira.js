@@ -2,7 +2,7 @@ import {
     Core
 } from './Core.js'
 
-import Convex from '/assets/js/three/Convex.js'
+import Convex from '/assets/js/world_source/Sarira/Convex.js'
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 class Sarira {

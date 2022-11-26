@@ -1,8 +1,14 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import { Life } from './Life.js'
-import { BodySystem } from './../Sarira/BodySystem.js'
+import {
+    Life
+} from './Life.js'
+import {
+    BodySystem
+} from './../Sarira/BodySystem.js'
 
-import {MyMath} from '/assets/js/three/MyMath.js';
+import {
+    MyMath
+} from '/assets/js/utils/MyMath.js';
 
 // 파티클 흡수하는 Life
 class Life_Absorb extends Life {
@@ -19,8 +25,11 @@ class Life_Absorb extends Life {
 
         this.absorbPlasticNum = (this.size + this.noiseSize) * 100;
 
-        this.microPlastic_eat_maxAmount = Math.floor(MyMath.mapRange(this.mass, 0, 50, 30, 150));
+
+        this.microPlastic_eat_maxAmount = Math.floor(MyMath.mapRange(this.mass, 0, 50, 30, 150))
+
         this.microPlastic_breath_maxAmount = Math.floor(MyMath.mapRange(this.mass, 0, 50, 30, 100));
+
     }
 
     update() {
@@ -57,8 +66,9 @@ class Life_Absorb extends Life {
 
     eat(microPlastic) {
         if (microPlastic.isEaten == false &&
-            this.isDead == false && 
+            this.isDead == false &&
             this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
+
 
             const distance = this.position.distanceTo(microPlastic.position);
             const lifeSize = (this.size + this.noiseSize) * 1.5;
@@ -76,7 +86,7 @@ class Life_Absorb extends Life {
 
             //파티클 먹고 파티클 흡수 상태로 변경
             else if (distance <= this.size * 0.45) {
-                microPlastic.data.setAbsorbedBy(1);
+                // microPlastic.data.setAbsorbedBy(1);
                 this.absorbedParticles.push(microPlastic);
                 this.energy += 0.1;
                 microPlastic.isEaten = true;
@@ -86,8 +96,9 @@ class Life_Absorb extends Life {
 
     breath(microPlastic) {
         //아직 먹히지 않은 상태의 파티클 끌어당기기
+
         if (microPlastic.isEaten == false &&
-            this.isDead == false && 
+            this.isDead == false &&
             this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
 
             const distance = this.position.distanceTo(microPlastic.position);
@@ -103,7 +114,7 @@ class Life_Absorb extends Life {
 
             //파티클 먹고 파티클 흡수 상태로 변경
             else if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                microPlastic.data.setAbsorbedBy(1);
+                // microPlastic.data.setAbsorbedBy(1);
                 this.absorbedParticles.push(microPlastic);
                 microPlastic.isEaten = true;
             }
@@ -130,15 +141,17 @@ class Life_Absorb extends Life {
             if (distance > this.size) this.absorbedParticles[i].position = wrapPos;
 
             //그중에서 일정 확률로 몇몇 파티클이 사리가 되도록 함
-            if (MyMath.random(0, 5) < this.sariraSpeed && distance < sariraSpace &&
-                this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
+            // if (MyMath.random(0, 5) < this.sariraSpeed && distance < sariraSpace &&
+            //     this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
 
-                this.absorbedParticles[i].data.setPassBy('');
+            if ( distance < sariraSpace &&
+                this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
+                // this.absorbedParticles[i].data.setPassBy('');
 
                 this.absorbedParticles[i].isSarira = true;
 
                 this.sariraParticles.push(this.absorbedParticles[i]);
-                this.sariraParticlesData.push(this.absorbedParticles[i].data.getDataList());
+                // this.sariraParticlesData.push(this.absorbedParticles[i].data.getDataList());
 
                 //if (sariraSpace < this.size) sariraSpace += 0.01;
                 this.isMakeSarira = true;
@@ -172,29 +185,30 @@ class Life_Sarira extends Life_Absorb {
         this.bodySystem.createSarira(microPlastic_ConvexMaterial);
     }
 
-    update(){
+    update() {
         super.update();
 
-        // this.add_MicroPlasticToSarira();
-        // this.sarira_position = new THREE.Vector3().copy(this.position);
-        
-        // this.bodySystem.update();
-        // this.bodySystem.setPosition(this.sarira_position);
+        this.add_MicroPlasticToSarira();
+        this.sarira_position = new THREE.Vector3().copy(this.position);
+
+        this.bodySystem.update();
+        this.bodySystem.setPosition(this.sarira_position);
     }
 
     add_MicroPlasticToSarira() {
         if (this.isMakeSarira == true) {
             let data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-            let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticlesData.length - 1].position, this.position);
-       
-            this.bodySystem.addFloatingPlastics(send_pos, data);
+            let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
+
+            // this.bodySystem.addFloatingPlastics(send_pos, data);
+            this.bodySystem.addFloatingPlastics(send_pos);
 
             this.isMakeSarira = false;
         }
         for (let j = 0; j < this.sariraParticles.length; j++) {
             this.sariraParticles[j].position = new THREE.Vector3().copy(this.position);
         }
-        
+
     }
 
     make_sarira() {
@@ -227,4 +241,7 @@ class Life_Sarira extends Life_Absorb {
     }
 }
 
-export {Life_Absorb, Life_Sarira}
+export {
+    Life_Absorb,
+    Life_Sarira
+}

@@ -2,8 +2,8 @@ import {
     Page12345
 } from './page.js';
 
-import PointThree from '../three/SpecificThree.js';
-import wastePlasticDataset from "../waste_plastic_dataset.js";
+import PointThree from '../rendering/SpecificThree.js';
+import wastePlasticDataset from "../utils/waste_plastic_dataset.js";
 
 
 class Home12345 extends Page12345 {
@@ -17,23 +17,13 @@ class Home12345 extends Page12345 {
 
     setup() {
         this.homeThree.setup(document.getElementById('home') )
-        this.homeThree.import(this.getRandomSourcePath());
+        this.homeThree.import(wastePlasticDataset.getRandomPLY().path);
     }
 
     reset_page() {
         super.reset_page()
     }
 
-    getRandomSourcePath() {
-        const folderPath = "./assets/3dmodel"
-        const randomBeachIndex = Math.floor(Math.random() * wastePlasticDataset.data.length)
-        const randomBeach = wastePlasticDataset.data[randomBeachIndex].beachName
-        const randomWastePlasticIndex = Math.floor(Math.random() * (wastePlasticDataset.data[randomBeachIndex].wastePlasticCount - 1) + 1)
-
-        const path = `${folderPath}/${randomBeach}/${randomWastePlasticIndex}.ply`
-
-        return path
-    }
 }
 
 export {

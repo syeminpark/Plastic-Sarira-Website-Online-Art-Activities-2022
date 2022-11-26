@@ -3,12 +3,12 @@ import {
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import Convex from './Convex.js';
+import Convex from '../world_source/Sarira/Convex.js';
 import BasicThree from "./basicThree.js"
 import {
     OrbitControls
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
-import waste_plastic_dataset from "../waste_plastic_dataset.js";
+import waste_plastic_dataset from "../utils/waste_plastic_dataset.js";
 
 
 export default class PointThree extends BasicThree {
@@ -43,8 +43,6 @@ export default class PointThree extends BasicThree {
                 this.object = new THREE.Points(geometry, this.material);
                 this.group.add(this.object)
                 this.camera.position.set(0, 0, 180 + geometry.boundingBox.max.y * 5)
-                console.log(path)
-
                 this.updateSize()
             })
 
@@ -209,12 +207,7 @@ export class WorldThree extends BasicThree {
         );
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
         this.controls.enableDamping = true;
-        this.controls.maxDistance = 1000
         this.controls.enablePan = false;
-
-        let ambientLight = new THREE.AmbientLight(0xffffff, 3);
-        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 3);
-        this.scene.add(ambientLight, hemiLight);
     }
 
     setCameraPosition(x, y, z) {
@@ -234,27 +227,23 @@ export class WorldThree extends BasicThree {
         }
     }
 
-    import(randomSource, lambda) {
+    import(randomSource, lambda1, addToSlider, reorganize) {
         new PLYLoader().load(
             randomSource.path,
             function (bufferGeometry) {
-                lambda(randomSource.beach, randomSource.index, bufferGeometry)
+                //if the model has importe d 
+                if (lambda1(randomSource.beach, randomSource.index, bufferGeometry)) {
+                    //import 
+                 
+                    let object = {
+                        "img_src": waste_plastic_dataset.getImagePath(randomSource.beach, randomSource.index),
+                        "id":  waste_plastic_dataset.getID(randomSource.beach, randomSource.index)
+                    }
+
+                    addToSlider(object)
+                    reorganize()
+                }
                 bufferGeometry.dispose()
             })
-    }
-
-    getRandomSourcePath() {
-        const folderPath = "./assets/3dmodel"
-        const randomBeachIndex = Math.floor(Math.random() * waste_plastic_dataset.data.length)
-        const randomBeach = waste_plastic_dataset.data[randomBeachIndex].beachName
-        const randomWastePlasticIndex = Math.floor(Math.random() * (waste_plastic_dataset.data[randomBeachIndex].wastePlasticCount - 1) + 1)
-
-        const path = `${folderPath}/${randomBeach}/${randomWastePlasticIndex}.ply`
-
-        return {
-            beach: randomBeach,
-            index: randomWastePlasticIndex,
-            path: path
-        }
     }
 }

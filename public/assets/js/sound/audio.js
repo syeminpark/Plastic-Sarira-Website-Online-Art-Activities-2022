@@ -122,6 +122,7 @@ class Audio12345 {
 				if (this.is_audio_on) {
 					//if the game is playing
 					if (!document.getElementById('world-navigation').classList.contains('m-inactive')) {
+						this.zInteractionDOM.currentTime = 0
 						this.zInteractionDOM.play()
 					}
 				}

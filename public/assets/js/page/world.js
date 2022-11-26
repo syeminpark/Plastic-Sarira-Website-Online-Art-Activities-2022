@@ -8,9 +8,7 @@ import {
 	SVGLoader12345
 } from './../svgloader.js';
 //import {Audio12345} from './../audio.js';
-// import {
-// 	Health12345
-// } from './../health.js';
+
 import {
 	ImageSlide12345
 } from './../imageslide.js';
@@ -25,23 +23,23 @@ import {
 	UserController
 } from '/assets/js/utils/UserController.js';
 
-import ServerClientCommunication from '../serverClientCommunication.js';
+import ServerClientCommunication from '../utils/serverClientCommunication.js';
 
 const test_img_srcs = [{
-	img_src: "./assets/img/Naechi/studio/1.jpg",
-	id: "NAE#1",
-	timestamp: "2006-09-07"
-},
-{
-	img_src: "./assets/img/Naechi/studio/2.jpg",
-	id: "NAE#2",
-	timestamp: "2007-11-10"
-},
-{
-	img_src: "./assets/img/Naechi/studio/3.jpg",
-	id: "NAE#3",
-	timestamp: "2012-01-17"
-}
+		img_src: "./assets/img/Naechi/studio/1.jpg",
+		id: "NAE#1",
+		timestamp: "2006-09-07"
+	},
+	{
+		img_src: "./assets/img/Naechi/studio/2.jpg",
+		id: "NAE#2",
+		timestamp: "2007-11-10"
+	},
+	{
+		img_src: "./assets/img/Naechi/studio/3.jpg",
+		id: "NAE#3",
+		timestamp: "2012-01-17"
+	}
 ];
 
 class World12345 extends Page12345 {
@@ -63,17 +61,9 @@ class World12345 extends Page12345 {
 	setup() {
 		this.loadsvg();
 
-		//const audio_btn = this.pagelayer.popup.querySelector('#world-sound-btn');
-		//const audio_viz = this.pagelayer.popup.querySelector('#world-audio-visualizer');
-		//this.audio_controller = new Audio12345(audio_btn, audio_viz);
-
 		const enter_btn = this.pagelayer.popup.querySelector('#world-enter-btn');
 		this.enter_message = this.pagelayer.popup.querySelector('#world-enter');
 		enter_btn.addEventListener('click', this.enter.bind(this));
-
-		// const health_container = this.pagelayer.popup.querySelector('#world-health-container');
-		// const health_bar = this.pagelayer.popup.querySelector('#world-health-bar');
-		// this.health = new Health12345(this, health_container, health_bar);
 
 		this.end_message = this.pagelayer.popup.querySelector('#world-end');
 		const end_btn = this.pagelayer.popup.querySelector('#world-to-sarira');
@@ -110,16 +100,17 @@ class World12345 extends Page12345 {
 		);
 		//console.log(this.imageslider);
 
-		for (let i = 0; i < test_img_srcs.length; i++) {
-			this.imageslider.add_data(test_img_srcs[i]);
-		}
-		this.imageslider.reposition();
+		// for (let i = 0; i < test_img_srcs.length; i++) {
+		// 	this.imageslider.add_data(test_img_srcs[i]);
+		// }
+		// this.imageslider.reposition();
 
 		this.time = 0;
 		this.world_ended = false;
 
 		this.dom = document.getElementById('world-navigation');
-		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'));
+		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'), this.imageslider.add_data, this.imageslider.reposition);
+	
 		this.userController.setup(this.world);
 	}
 
@@ -130,6 +121,8 @@ class World12345 extends Page12345 {
 	}
 
 	enter() {
+		this.userController.resetKeyboardState();
+
 		let inputs = (document.querySelectorAll('input'))
 		for (let input of inputs) {
 			if (!input.value == "") {
@@ -170,9 +163,10 @@ class World12345 extends Page12345 {
 				this.lifecheck = setInterval(() => {
 					this.time += 2;
 					if (this.world.life_user.isDead == true) {
+						clearInterval(this.lifecheck);
 						this.worldEnd();
 						this.userController.end();
-						clearInterval(this.lifecheck);
+
 					} else {
 						this.userController.healthbarActive();
 					}
@@ -185,18 +179,31 @@ class World12345 extends Page12345 {
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		if (this.valid()) {
+		if (this.isWorldPage()) {
 			this.world.animate();
+		}
+		if (this.hasEnetered()) {
 			this.userController.update();
 		}
-
 	}
 
-	valid() {
+	isWorldPage() {
 		if (document.getElementById("currentPage").innerHTML == "world") {
 			return true
 		}
 	}
+	hasEnetered() {
+		if (document.getElementById("currentPage").innerHTML == "world") {
+			if (document.getElementById('world-navigation') != null) {
+				if (document.getElementById('world-navigation').classList.contains('m-inactive')) {
+					return false
+				} else {
+					return true
+				}
+			}
+		}
+	}
+
 
 	moveSari(e) {
 		//console.log(e);
@@ -208,9 +215,7 @@ class World12345 extends Page12345 {
 			//this.health.move(0,0.1);
 		} else if (e.code === 'KeyD') {
 			//this.health.move(0.1,0);
-		} else if (e.code === 'KeyZ') {
-
-		}
+		} else if (e.code === 'KeyZ') {}
 	}
 
 	async worldEnd() {
@@ -219,9 +224,8 @@ class World12345 extends Page12345 {
 			document.getElementById('death').play()
 		}
 
-
 		//getSariraDataForServer
-		let data=this.world.getSariraData()
+		let data = this.world.getSariraData()
 		await this.ServerClientCommunication.postSariraById(data)
 
 		if (document.querySelector('#show-m-navigation').classList.contains('expanded')) {
@@ -233,7 +237,7 @@ class World12345 extends Page12345 {
 		this.end_message.classList.remove("inactive");
 		this.closePopups();
 		this.world_ended = true;
-		// window.removeEventListener('keyup', this.moveSari.bind(this));
+		window.removeEventListener('keyup', this.moveSari.bind(this));
 	}
 
 	closePopups() {

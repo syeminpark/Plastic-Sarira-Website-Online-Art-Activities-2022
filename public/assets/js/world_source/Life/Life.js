@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
-import {createLifeNoiseMaterial} from '/assets/js/three/material.js';
+import {MyMath} from '/assets/js/utils/MyMath.js';
+import {createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
 
 class Life {
     constructor(index, world, setPos) {
@@ -48,8 +48,9 @@ class Life {
 
     init(){ //상속할 때 다형화 용
         this.size = MyMath.random(5, 20);
-        this.noiseSize = MyMath.random(5., 20.);
+        this.noiseSize = MyMath.random(5, 20);
         this.noiseSpeed = MyMath.random(0.05, 0.15);
+        
 
         this.moveTerm = this.mass * 500;
 
@@ -199,7 +200,7 @@ class Life {
         
         if (this.isDead == false && this.lifeMesh.scale.x <= 0.010){
             for (let i = 0; i < this.absorbedParticles.length; i++) {
-                this.absorbedParticles[i].data.setPassBy(this.lifeName);
+                // this.absorbedParticles[i].data.setPassBy(this.lifeName);
                 this.absorbedParticles[i].initWrap();
             }
 

@@ -302,6 +302,7 @@ body {
 	border-radius: var(--bevel-large);
 	transition: top 0.3s;
 	overflow: hidden;
+	
 }
 
 #main-popup-layer.inactive {

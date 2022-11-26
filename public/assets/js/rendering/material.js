@@ -1,5 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {lifeShader_noise} from './shader.js'
+import config from '../utils/config.js';
 
 export function createConvexMaterial() {
     return new THREE.MeshPhysicalMaterial({
@@ -29,7 +30,7 @@ export function createGlassMaterial() {
 export function createPointMaterial() {
     return new THREE.PointsMaterial({
         color: 'white',
-        size: 0.3,
+        size: config.particleSize,
         side: THREE.DoubleSide,
 
     });
@@ -49,10 +50,10 @@ export function createStandardMaterial() {
     });
 }
 
-export function createParticleMaterial(size){
+export function createParticleMaterial(){
     return new THREE.PointsMaterial({
         color: 'white',
-        size: size,
+        size: config.particleSize,
         side: THREE.DoubleSide,
         opacity: 1.,
         transparent: true,

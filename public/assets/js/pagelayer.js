@@ -22,7 +22,7 @@ import {
 	Length2D
 } from './util.js';
 
-import SingleRenderer from './three/SingleRenderer.js';
+import SingleRenderer from './rendering/SingleRenderer.js';
 
 class PageLayer12345 {
 	constructor(_popup, _popup_container, _preloader, _preloader_color, _close_on_outside_click) {

@@ -1,4 +1,5 @@
 import $ from 'https://cdn.skypack.dev/jquery';
+import config from './config.js';
 
 export default class ServerClientCommunication {
     constructor() {
@@ -11,7 +12,7 @@ export default class ServerClientCommunication {
         try {
             let response = await $.post(`${this.url}/users`, {
                 name: name,
-                type:"administrator"
+                type: config.type
             });
             this.id=response.user._id 
             console.log(JSON.stringify(response))
@@ -73,7 +74,7 @@ export default class ServerClientCommunication {
         try {
             let response = await $.post(`${this.url}/sarira/${this.id}`, {
                 name: this.name,
-                type:"administrator",
+                type: config.type,
                 message: JSON.stringify(object)
 
             });

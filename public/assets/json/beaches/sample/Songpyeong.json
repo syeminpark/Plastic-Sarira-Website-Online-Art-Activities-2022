@@ -6,7 +6,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/1.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/1.jpg",
-                        "id": "SONG #1"
+                        "id": "SONGPYEONGPYEONG #1" 
                   },
                   "type": "Feature",
                   "geometry": {
@@ -23,7 +23,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/2.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/2.jpg",
-                        "id": "SONG #2"
+                        "id": "SONGPYEONG #2"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -40,7 +40,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/3.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/3.jpg",
-                        "id": "SONG #3"
+                        "id": "SONGPYEONG #3"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -57,7 +57,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/4.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/4.jpg",
-                        "id": "SONG #4"
+                        "id": "SONGPYEONG #4"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -74,7 +74,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/5.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/5.jpg",
-                        "id": "SONG #5"
+                        "id": "SONGPYEONG #5"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -91,7 +91,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/6.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/6.jpg",
-                        "id": "SONG #6"
+                        "id": "SONGPYEONG #6"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -108,7 +108,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/7.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/7.jpg",
-                        "id": "SONG #7"
+                        "id": "SONGPYEONG #7"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -125,7 +125,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/8.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/8.jpg",
-                        "id": "SONG #8"
+                        "id": "SONGPYEONG #8"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -142,7 +142,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/9.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/9.jpg",
-                        "id": "SONG #9"
+                        "id": "SONGPYEONG #9"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -159,7 +159,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/10.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/10.jpg",
-                        "id": "SONG #10"
+                        "id": "SONGPYEONG #10"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -176,7 +176,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/11.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/11.jpg",
-                        "id": "SONG #11"
+                        "id": "SONGPYEONG #11"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -193,7 +193,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/12.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/12.jpg",
-                        "id": "SONG #12"
+                        "id": "SONGPYEONG #12"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -210,7 +210,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/13.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/13.jpg",
-                        "id": "SONG #13"
+                        "id": "SONGPYEONG #13"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -227,7 +227,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/14.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/14.jpg",
-                        "id": "SONG #14"
+                        "id": "SONGPYEONG #14"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -244,7 +244,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/15.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/15.jpg",
-                        "id": "SONG #15"
+                        "id": "SONGPYEONG #15"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -261,7 +261,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/16.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/16.jpg",
-                        "id": "SONG #16"
+                        "id": "SONGPYEONG #16"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -278,7 +278,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/17.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/17.jpg",
-                        "id": "SONG #17"
+                        "id": "SONGPYEONG #17"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -295,7 +295,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/18.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/18.jpg",
-                        "id": "SONG #18"
+                        "id": "SONGPYEONG #18"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -312,7 +312,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/19.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/19.jpg",
-                        "id": "SONG #19"
+                        "id": "SONGPYEONG #19"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -329,7 +329,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/20.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/20.jpg",
-                        "id": "SONG #20"
+                        "id": "SONGPYEONG #20"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -346,7 +346,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/21.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/21.jpg",
-                        "id": "SONG #21"
+                        "id": "SONGPYEONG #21"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -363,7 +363,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/22.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/22.jpg",
-                        "id": "SONG #22"
+                        "id": "SONGPYEONG #22"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -380,7 +380,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/23.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/23.jpg",
-                        "id": "SONG #23"
+                        "id": "SONGPYEONG #23"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -397,7 +397,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/24.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/24.jpg",
-                        "id": "SONG #24"
+                        "id": "SONGPYEONG #24"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -414,7 +414,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/25.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/25.jpg",
-                        "id": "SONG #25"
+                        "id": "SONGPYEONG #25"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -431,7 +431,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/26.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/26.jpg",
-                        "id": "SONG #26"
+                        "id": "SONGPYEONG #26"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -448,7 +448,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/27.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/27.jpg",
-                        "id": "SONG #27"
+                        "id": "SONGPYEONG #27"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -465,7 +465,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/28.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/28.jpg",
-                        "id": "SONG #28"
+                        "id": "SONGPYEONG #28"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -482,7 +482,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/29.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/29.jpg",
-                        "id": "SONG #29"
+                        "id": "SONGPYEONG #29"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -499,7 +499,7 @@
                         "beach": "Songpyeong",
                         "img-src": "./assets/img/Songpyeong/studio/30.jpg",
                         "thumb-src": "./assets/img/Songpyeong/onsite/30.jpg",
-                        "id": "SONG #30"
+                        "id": "SONGPYEONG #30"
                   },
                   "type": "Feature",
                   "geometry": {
