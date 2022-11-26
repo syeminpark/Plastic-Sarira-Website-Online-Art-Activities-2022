@@ -12,6 +12,8 @@ class Joystick12345{
 			this.is_pressed = false;
 			this.is_dragged = false;
 
+			this.isAnimationOn = false;
+
 			this.mpos = {x: 0, y: 0};
 			this.pan_pos = {x: 0, y: 0};
 			this.pan_tpos = {x: 0, y: 0};
@@ -45,6 +47,7 @@ class Joystick12345{
 		this.mpos = ReturnTouchPos(e);
 		this.setPan();
 
+		this.isAnimationOn = true;
 		// if(!this.animation) this.animate();
 	}
 
@@ -104,6 +107,18 @@ class Joystick12345{
 		// 		this.animation = null;
 		// 	}
 		// }
+	}
+
+	checkAnimate(){
+		if (this.isAnimationOn == false) return false;
+
+		// 애니메이션 끝남
+		if(	!this.is_pressed && !this.is_dragged &&
+			Length2D({x: this.pan_tpos.x - this.pan_pos.x, y: this.pan_tpos.y - this.pan_pos.y})<0.01){
+			this.isAnimationOn = false;
+			return false;
+		} 
+		return true;	
 	}
 }
 

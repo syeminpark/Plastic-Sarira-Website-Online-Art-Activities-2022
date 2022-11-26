@@ -79,29 +79,6 @@ class UserController {
     //=====================================================================================
     //=====================================================================================
 
-    // 유저 위치 elements에 보내서 스크린에 맞춰 프로젝션 할 수 있도록 함.
-    getUserScreenPosition() {
-        let tempV = new THREE.Vector3().copy(this.user.position);
-        tempV.project(this.camera);
-
-        const x = (tempV.x * .5 + .5);
-        const y = (tempV.y * -.5 + .5);
-
-        // zoom 정도에 따라 health bar 위치, 사이즈 변경되도록 함.
-        const distance = this.camera.position.distanceTo(this.user.position);
-        const dist = -(2600 / (distance + 5)) - 37;
-
-        const yy = MyMath.map(dist, -300, -45, 0.25, 0.05);
-
-        const w = MyMath.map(dist, -300, -45, 200, 120);
-        const h = MyMath.map(dist, -300, -45, 15, 10);
-
-        return { x: x, y: y, yy: yy, w: w, h: h };
-    }
-
-    //=====================================================================================
-    //=====================================================================================
-
     start(userName) {
         this.healthbar.start();
         this.userName.setText(userName);
@@ -125,15 +102,36 @@ class UserController {
                 // 유저가 world 밖으로 나가지 않도록 함
                 this.wrap();
 
-                // 유저 컨트롤용 키보드 인풋을 받음
+                // 모바일 구성인지 웹 구성인지 확인
                 if (this.isKey_down == true) {
+                    // 유저 컨트롤용 키보드 인풋을 받음
+                    if (this.control.enableRotate == false) this.control.enableRotate = true;
+                    if (this.control.enableZoom == false) this.control.enableZoom = true;
+
                     this.key_update();
                     this.updateUserPos();
                 }
                 else if (this.l_joystick.is_pressed == true) {
+                    if (this.control.enableRotate == true) this.control.enableRotate = false;
+                    if (this.control.enableZoom == true) this.control.enableZoom = false;
+
                     this.l_joystick.animate();
-                    this.joystick_update();
+                    this.joystick_update(this.l_joystick);
                     this.updateUserPos();
+                }
+                else if (this.r_joystick.is_pressed){
+                    if (this.control.enableRotate == true) this.control.enableRotate = false;
+                    if (this.control.enableZoom == true) this.control.enableZoom = false;
+
+                    this.r_joystick.animate();
+                    this.joystick_update(this.r_joystick);
+                    this.updateControlRotate();
+                }
+                else if (this.l_joystick.checkAnimate()){
+                    this.l_joystick.animate();
+                } 
+                else if (this.r_joystick.checkAnimate()){
+                    this.r_joystick.animate();
                 }
             }
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
@@ -158,6 +156,30 @@ class UserController {
         this.healthbar.end();
         this.userName.end();
         this.isEnter = false;
+    }
+
+    
+    //=====================================================================================
+    //=====================================================================================
+
+    // 유저 위치 elements에 보내서 스크린에 맞춰 프로젝션 할 수 있도록 함.
+    getUserScreenPosition() {
+        let tempV = new THREE.Vector3().copy(this.user.position);
+        tempV.project(this.camera);
+
+        const x = (tempV.x * .5 + .5);
+        const y = (tempV.y * -.5 + .5);
+
+        // zoom 정도에 따라 health bar 위치, 사이즈 변경되도록 함.
+        const distance = this.camera.position.distanceTo(this.user.position);
+        const dist = -(2600 / (distance + 5)) - 37;
+
+        const yy = MyMath.map(dist, -300, -45, 0.25, 0.05);
+
+        const w = MyMath.map(dist, -300, -45, 200, 120);
+        const h = MyMath.map(dist, -300, -45, 15, 10);
+
+        return { x: x, y: y, yy: yy, w: w, h: h };
     }
 
     //=====================================================================================
@@ -223,9 +245,9 @@ class UserController {
         }
     }
 
-    joystick_update() {
-        const forward = this.l_joystick.pan_pos.y;
-        const turn = this.l_joystick.pan_pos.x;
+    joystick_update(jstick) {
+        const forward = jstick.pan_pos.y;
+        const turn = jstick.pan_pos.x;
 
         if (forward > 5) {
             this.fValue = 0
@@ -295,6 +317,28 @@ class UserController {
 
     }
 
+    updateControlRotate(){
+        if (this.fValue > 0) {
+            this.camera.translateY(-0.05);
+            console.log("forward")
+        }
+
+        if (this.bValue > 0) {
+            this.camera.translateY(0.05);
+            console.log("backward")
+        }
+
+        if (this.lValue > 0) {
+            this.camera.translateX(0.05);
+            console.log("left")
+        }
+
+        if (this.rValue > 0) {
+            this.camera.translateX(-0.05);
+            console.log("right")
+        }
+    }
+
     //=====================================================================================
     //=====================================================================================
 
@@ -315,17 +359,6 @@ class UserController {
         this.control.enablePan = false;
         this.control.enableZoom = false;
 
-        const userFollowCam_Pos = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.user.position),
-            new THREE.Vector3().copy(this.camera.position))
-            .setLength(this.camDis);
-
-        this.camLerpPos = userFollowCam_Pos;
-    }
-
-    camera_focusOn_update() {
-        this.control.target.lerp(this.user.position, this.lerpSpeed);
-
         const camDir = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),
             new THREE.Vector3().copy(this.camera.position))
@@ -335,6 +368,22 @@ class UserController {
             camDir);
 
         this.camLerpPos = userFollowCam_Pos;
+    }
+
+    camera_focusOn_update() {
+        this.control.target.lerp(this.user.position, this.lerpSpeed);
+
+        if (this.camera.position.distanceTo(this.user.position) > this.camDis){
+            const camDir = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.user.position),
+                new THREE.Vector3().copy(this.camera.position))
+                .setLength(this.camDis);
+            const userFollowCam_Pos = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.user.position),
+                camDir);
+
+            this.camLerpPos = userFollowCam_Pos;
+        }
     }
 
     //=====================================================================================
