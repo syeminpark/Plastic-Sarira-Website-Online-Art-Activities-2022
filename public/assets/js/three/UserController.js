@@ -131,6 +131,7 @@ class UserController {
                     this.updateUserPos();
                 }
                 else if (this.l_joystick.is_pressed == true) {
+                    this.l_joystick.animate();
                     this.joystick_update();
                     this.updateUserPos();
                 }

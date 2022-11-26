@@ -45,7 +45,7 @@ class Joystick12345{
 		this.mpos = ReturnTouchPos(e);
 		this.setPan();
 
-		if(!this.animation) this.animate();
+		// if(!this.animation) this.animate();
 	}
 
 	stickDragging(e){
@@ -70,7 +70,7 @@ class Joystick12345{
 	}
 
 	animate(){
-		this.animation = requestAnimationFrame(this.animate.bind(this));
+		// this.animation = requestAnimationFrame(this.animate.bind(this));
 
 		this.container_bbox = this.container.getBoundingClientRect();
 
@@ -97,13 +97,13 @@ class Joystick12345{
 		this.stick.style.top = (50 + sposy) + '%';
 		this.stick.style.left = (50 + sposx) + '%';
 
-		if(	!this.is_pressed && !this.is_dragged &&
-			Length2D({x: this.pan_tpos.x - this.pan_pos.x, y: this.pan_tpos.y - this.pan_pos.y})<0.01){
-			if(this.animation){
-				cancelAnimationFrame(this.animation);
-				this.animation = null;
-			}
-		}
+		// if(	!this.is_pressed && !this.is_dragged &&
+		// 	Length2D({x: this.pan_tpos.x - this.pan_pos.x, y: this.pan_tpos.y - this.pan_pos.y})<0.01){
+		// 	if(this.animation){
+		// 		cancelAnimationFrame(this.animation);
+		// 		this.animation = null;
+		// 	}
+		// }
 	}
 }
 
