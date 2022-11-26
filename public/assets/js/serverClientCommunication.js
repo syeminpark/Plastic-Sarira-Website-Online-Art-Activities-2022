@@ -1,5 +1,5 @@
 import $ from 'https://cdn.skypack.dev/jquery';
-import config from './config';
+import config from './config.js';
 
 export default class ServerClientCommunication {
     constructor() {
