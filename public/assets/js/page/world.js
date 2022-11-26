@@ -23,7 +23,7 @@ import {
 } from '../world_source/WorldSystem.js';
 import {
 	UserController
-} from '/assets/js/three/UserController.js';
+} from '/assets/js/utils/UserController.js';
 
 import ServerClientCommunication from '../serverClientCommunication.js';
 

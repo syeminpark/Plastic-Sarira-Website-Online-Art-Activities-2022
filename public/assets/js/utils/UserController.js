@@ -1,10 +1,10 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import KeyboardState from './KeyboardState.js';
+import KeyboardState from '../three/KeyboardState.js';
 import { UserText } from '/assets/js/userText.js';
 
 import { Health12345 } from '/assets/js/health.js';
-import { Joystick12345 } from './../joystick.js';
+import { Joystick12345 } from '../joystick.js';
 
 import { MyMath } from '/assets/js/three/MyMath.js';
 

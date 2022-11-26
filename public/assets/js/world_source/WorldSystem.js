@@ -11,10 +11,6 @@ import {
 } from './../world_source/Life/Life_user.js';
 
 import {
-    UserController
-} from '/assets/js/three/UserController.js';
-
-import {
     MyMath
 } from '/assets/js/three/MyMath.js';
 import {
