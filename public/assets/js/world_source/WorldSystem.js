@@ -21,6 +21,7 @@ import {
     WorldThree
 } from '../rendering/SpecificThree.js';
 import config from '../utils/config.js';
+import Waste_plastic_dataset from '../utils/waste_plastic_dataset.js';
 
 //세계
 class WorldSystem {
@@ -48,7 +49,7 @@ class WorldSystem {
     }
 
     //해당 페이지 재접속시 다시 실행
-    setup(worldDom, enterDom) {
+    setup(worldDom, enterDom,addToslider,reorganize) {
 
     
 
@@ -65,10 +66,9 @@ class WorldSystem {
         this.createParticle();
         this.createLife();
 
+        let randomSource = Waste_plastic_dataset.getRandomBatchPLY(this.initialWastePlasticCount)
         for (let i = 0; i < this.initialWastePlasticCount; i++) {
-            let randomSource = this.worldThree.getRandomSourcePath()
-
-            this.worldThree.import(randomSource, this.createPlastic)
+            this.worldThree.import(randomSource[i], this.createPlastic, addToslider,reorganize)
         }
     }
 
@@ -229,7 +229,8 @@ class WorldSystem {
                 activableParticles[i].setColor(object.colors[i]);
                 activableParticles[i].setD3PlasticData(object.index, object.beach, i);
             }
-            console.log("activableParticles.length", activableParticles.length)
+            return true
+      
         } else {
             this.rejectedObject.push(object)
             console.log("rejected", this.rejectedObject.length)
