@@ -234,27 +234,23 @@ export class WorldThree extends BasicThree {
         }
     }
 
-    import(randomSource, lambda) {
+    import(randomSource, lambda1, addToSlider, reorganize) {
         new PLYLoader().load(
             randomSource.path,
             function (bufferGeometry) {
-                lambda(randomSource.beach, randomSource.index, bufferGeometry)
+                //if the model has importe d 
+                if (lambda1(randomSource.beach, randomSource.index, bufferGeometry)) {
+                    //import 
+                 
+                    let object = {
+                        "img_src": waste_plastic_dataset.getImagePath(randomSource.beach, randomSource.index),
+                        "id":  waste_plastic_dataset.getID(randomSource.beach, randomSource.index)
+                    }
+
+                    addToSlider(object)
+                    reorganize()
+                }
                 bufferGeometry.dispose()
             })
-    }
-
-    getRandomSourcePath() {
-        const folderPath = "./assets/3dmodel"
-        const randomBeachIndex = Math.floor(Math.random() * waste_plastic_dataset.data.length)
-        const randomBeach = waste_plastic_dataset.data[randomBeachIndex].beachName
-        const randomWastePlasticIndex = Math.floor(Math.random() * (waste_plastic_dataset.data[randomBeachIndex].wastePlasticCount - 1) + 1)
-
-        const path = `${folderPath}/${randomBeach}/${randomWastePlasticIndex}.ply`
-
-        return {
-            beach: randomBeach,
-            index: randomWastePlasticIndex,
-            path: path
-        }
     }
 }

@@ -20,7 +20,7 @@ class ImageSlide12345{
 		this.next_btn.addEventListener('click',this.next.bind(this));
 	}
 
-	add_data(_img_path){
+	add_data =(_img_path) =>{
 		this.data.push(_img_path);
 	}
 
@@ -42,9 +42,9 @@ class ImageSlide12345{
 		!this.slide_container.classList.contains("going-next"))){
 			this.move_index(1);
 			this.slide_container.classList.add("going-next");
-			setTimeout(()=>{
+			// setTimeout(()=>{
 				this.reposition();
-			},500);
+			// },500);
 		}
 	}
 
@@ -54,13 +54,13 @@ class ImageSlide12345{
 		!this.slide_container.classList.contains("going-next"))){
 			this.move_index(-1);
 			this.slide_container.classList.add("going-prev");
-			setTimeout(()=>{
+			// setTimeout(()=>{
 				this.reposition();
-			},500);
+			// },500);
 		}
 	}
 
-	reposition(){
+	reposition =() =>{
 		const prev_img = new Image();
 		const curr_img = new Image();
 		const next_img = new Image();

@@ -100,16 +100,17 @@ class World12345 extends Page12345 {
 		);
 		//console.log(this.imageslider);
 
-		for (let i = 0; i < test_img_srcs.length; i++) {
-			this.imageslider.add_data(test_img_srcs[i]);
-		}
-		this.imageslider.reposition();
+		// for (let i = 0; i < test_img_srcs.length; i++) {
+		// 	this.imageslider.add_data(test_img_srcs[i]);
+		// }
+		// this.imageslider.reposition();
 
 		this.time = 0;
 		this.world_ended = false;
 
 		this.dom = document.getElementById('world-navigation');
-		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'));
+		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'), this.imageslider.add_data, this.imageslider.reposition);
+	
 		this.userController.setup(this.world);
 	}
 

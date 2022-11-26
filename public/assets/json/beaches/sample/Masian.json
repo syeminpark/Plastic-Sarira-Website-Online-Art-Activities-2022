@@ -12,7 +12,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #1",
+                        "id": "MASIAN #1",
                         "img-src": "./assets/img/Masian/studio/1.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/1.jpg",
                         "index": 1,
@@ -29,7 +29,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #2",
+                        "id": "MASIAN #2",
                         "img-src": "./assets/img/Masian/studio/2.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/2.jpg",
                         "index": 2,
@@ -46,7 +46,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #3",
+                        "id": "MASIAN #3",
                         "img-src": "./assets/img/Masian/studio/3.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/3.jpg",
                         "index": 3,
@@ -63,7 +63,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #4",
+                        "id": "MASIAN #4",
                         "img-src": "./assets/img/Masian/studio/4.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/4.jpg",
                         "index": 4,
@@ -80,7 +80,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #5",
+                        "id": "MASIAN #5",
                         "img-src": "./assets/img/Masian/studio/5.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/5.jpg",
                         "index": 5,
@@ -97,7 +97,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #6",
+                        "id": "MASIAN #6",
                         "img-src": "./assets/img/Masian/studio/6.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/6.jpg",
                         "index": 6,
@@ -114,7 +114,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #7",
+                        "id": "MASIAN #7",
                         "img-src": "./assets/img/Masian/studio/7.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/7.jpg",
                         "index": 7,
@@ -131,7 +131,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #8",
+                        "id": "MASIAN #8",
                         "img-src": "./assets/img/Masian/studio/8.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/8.jpg",
                         "index": 8,
@@ -148,7 +148,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #9",
+                        "id": "MASIAN #9",
                         "img-src": "./assets/img/Masian/studio/9.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/9.jpg",
                         "index": 9,
@@ -165,7 +165,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #10",
+                        "id": "MASIAN #10",
                         "img-src": "./assets/img/Masian/studio/10.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/10.jpg",
                         "index": 10,
@@ -182,7 +182,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #11",
+                        "id": "MASIAN #11",
                         "img-src": "./assets/img/Masian/studio/11.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/11.jpg",
                         "index": 11,
@@ -199,7 +199,7 @@
                         "type": "Point"
                   },
                   "properties": {
-                        "id": "MA #12",
+                        "id": "MASIAN #12",
                         "img-src": "./assets/img/Masian/studio/12.jpg",
                         "thumb-src": "./assets/img/Masian/onsite/12.jpg",
                         "index": 12,

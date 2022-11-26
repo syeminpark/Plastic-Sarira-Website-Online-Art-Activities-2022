@@ -3,10 +3,10 @@
             {
                   "properties": {
                         "index": 1,
-                        "beach": "Guryeongpo",
+                        "beach": "Guryeongpo", 
                         "img-src": "./assets/img/Guryeongpo/studio/1.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/1.jpg",
-                        "id": "GU #1"
+                        "id": "GURYEONGPO #1"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -23,7 +23,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/2.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/2.jpg",
-                        "id": "GU #2"
+                        "id": "GURYEONGPO #2"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -40,7 +40,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/3.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/3.jpg",
-                        "id": "GU #3"
+                        "id": "GURYEONGPO #3"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -57,7 +57,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/4.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/4.jpg",
-                        "id": "GU #4"
+                        "id": "GURYEONGPO #4"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -74,7 +74,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/5.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/5.jpg",
-                        "id": "GU #5"
+                        "id": "GURYEONGPO #5"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -91,7 +91,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/6.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/6.jpg",
-                        "id": "GU #6"
+                        "id": "GURYEONGPO #6"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -108,7 +108,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/7.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/7.jpg",
-                        "id": "GU #7"
+                        "id": "GURYEONGPO #7"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -125,7 +125,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/8.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/8.jpg",
-                        "id": "GU #8"
+                        "id": "GURYEONGPO #8"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -142,7 +142,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/9.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/9.jpg",
-                        "id": "GU #9"
+                        "id": "GURYEONGPO #9"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -159,7 +159,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/10.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/10.jpg",
-                        "id": "GU #10"
+                        "id": "GURYEONGPO #10"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -176,7 +176,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/11.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/11.jpg",
-                        "id": "GU #11"
+                        "id": "GURYEONGPO #11"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -193,7 +193,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/12.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/12.jpg",
-                        "id": "GU #12"
+                        "id": "GURYEONGPO #12"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -210,7 +210,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/13.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/13.jpg",
-                        "id": "GU #13"
+                        "id": "GURYEONGPO #13"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -227,7 +227,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/14.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/14.jpg",
-                        "id": "GU #14"
+                        "id": "GURYEONGPO #14"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -244,7 +244,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/15.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/15.jpg",
-                        "id": "GU #15"
+                        "id": "GURYEONGPO #15"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -261,7 +261,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/16.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/16.jpg",
-                        "id": "GU #16"
+                        "id": "GURYEONGPO #16"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -278,7 +278,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/17.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/17.jpg",
-                        "id": "GU #17"
+                        "id": "GURYEONGPO #17"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -295,7 +295,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/18.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/18.jpg",
-                        "id": "GU #18"
+                        "id": "GURYEONGPO #18"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -312,7 +312,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/19.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/19.jpg",
-                        "id": "GU #19"
+                        "id": "GURYEONGPO #19"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -329,7 +329,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/20.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/20.jpg",
-                        "id": "GU #20"
+                        "id": "GURYEONGPO #20"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -346,7 +346,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/21.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/21.jpg",
-                        "id": "GU #21"
+                        "id": "GURYEONGPO #21"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -363,7 +363,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/22.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/22.jpg",
-                        "id": "GU #22"
+                        "id": "GURYEONGPO #22"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -380,7 +380,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/23.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/23.jpg",
-                        "id": "GU #23"
+                        "id": "GURYEONGPO #23"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -397,7 +397,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/24.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/24.jpg",
-                        "id": "GU #24"
+                        "id": "GURYEONGPO #24"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -414,7 +414,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/25.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/25.jpg",
-                        "id": "GU #25"
+                        "id": "GURYEONGPO #25"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -431,7 +431,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/26.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/26.jpg",
-                        "id": "GU #26"
+                        "id": "GURYEONGPO #26"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -448,7 +448,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/27.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/27.jpg",
-                        "id": "GU #27"
+                        "id": "GURYEONGPO #27"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -465,7 +465,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/28.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/28.jpg",
-                        "id": "GU #28"
+                        "id": "GURYEONGPO #28"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -482,7 +482,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/29.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/29.jpg",
-                        "id": "GU #29"
+                        "id": "GURYEONGPO #29"
                   },
                   "type": "Feature",
                   "geometry": {
@@ -499,7 +499,7 @@
                         "beach": "Guryeongpo",
                         "img-src": "./assets/img/Guryeongpo/studio/30.jpg",
                         "thumb-src": "./assets/img/Guryeongpo/onsite/30.jpg",
-                        "id": "GU #30"
+                        "id": "GURYEONGPO #30"
                   },
                   "type": "Feature",
                   "geometry": {
