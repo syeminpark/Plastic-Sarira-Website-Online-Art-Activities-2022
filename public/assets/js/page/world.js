@@ -28,20 +28,20 @@ import {
 import ServerClientCommunication from '../serverClientCommunication.js';
 
 const test_img_srcs = [{
-	img_src: "./assets/img/Naechi/studio/1.jpg",
-	id: "NAE#1",
-	timestamp: "2006-09-07"
-},
-{
-	img_src: "./assets/img/Naechi/studio/2.jpg",
-	id: "NAE#2",
-	timestamp: "2007-11-10"
-},
-{
-	img_src: "./assets/img/Naechi/studio/3.jpg",
-	id: "NAE#3",
-	timestamp: "2012-01-17"
-}
+		img_src: "./assets/img/Naechi/studio/1.jpg",
+		id: "NAE#1",
+		timestamp: "2006-09-07"
+	},
+	{
+		img_src: "./assets/img/Naechi/studio/2.jpg",
+		id: "NAE#2",
+		timestamp: "2007-11-10"
+	},
+	{
+		img_src: "./assets/img/Naechi/studio/3.jpg",
+		id: "NAE#3",
+		timestamp: "2012-01-17"
+	}
 ];
 
 class World12345 extends Page12345 {
@@ -130,6 +130,8 @@ class World12345 extends Page12345 {
 	}
 
 	enter() {
+
+		
 		let inputs = (document.querySelectorAll('input'))
 		for (let input of inputs) {
 			if (!input.value == "") {
@@ -170,9 +172,10 @@ class World12345 extends Page12345 {
 				this.lifecheck = setInterval(() => {
 					this.time += 2;
 					if (this.world.life_user.isDead == true) {
+						clearInterval(this.lifecheck);
 						this.worldEnd();
 						this.userController.end();
-						clearInterval(this.lifecheck);
+
 					} else {
 						this.userController.healthbarActive();
 					}
@@ -187,16 +190,27 @@ class World12345 extends Page12345 {
 
 	animate = () => {
 		requestAnimationFrame(this.animate);
-		if (this.valid()) {
+		if (this.isWorldPage()) {
 			this.world.animate();
 			this.userController.update();
 		}
 
 	}
 
-	valid() {
+	isWorldPage() {
 		if (document.getElementById("currentPage").innerHTML == "world") {
 			return true
+
+		}
+	}
+
+	hasEnetered() {
+		if (document.getElementById("currentPage").innerHTML == "world") {
+			if (document.getElementById('world-navigation').classList.contains('m-inactive')) {
+				return false
+			} else {
+				return true
+			}
 		}
 	}
 
@@ -223,7 +237,7 @@ class World12345 extends Page12345 {
 
 
 		//getSariraDataForServer
-		let data=this.world.getSariraData()
+		let data = this.world.getSariraData()
 		await this.ServerClientCommunication.postSariraById(data)
 
 		if (document.querySelector('#show-m-navigation').classList.contains('expanded')) {

@@ -1,10 +1,16 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import KeyboardState from './KeyboardState.js';
-import { Health12345 } from '/assets/js/health.js';
-import { UserText } from '/assets/js/userText.js';
+import {
+    Health12345
+} from '/assets/js/health.js';
+import {
+    UserText
+} from '/assets/js/userText.js';
 
-import { MyMath } from '/assets/js/three/MyMath.js';
+import {
+    MyMath
+} from '/assets/js/three/MyMath.js';
 
 class UserController {
     constructor(worldPage) {
@@ -15,7 +21,6 @@ class UserController {
 
     setup(world) {
         this.isEnter = true;
-
         this.threeSystem = world.worldThree;
         this.worldSize = world.worldSize;
 
@@ -51,6 +56,7 @@ class UserController {
         this.userName = new UserText(this.threeSystem,
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
+
     }
 
     //=====================================================================================
@@ -73,7 +79,13 @@ class UserController {
         const w = MyMath.map(dist, -300, -45, 200, 120);
         const h = MyMath.map(dist, -300, -45, 15, 10);
 
-        return { x: x, y: y, yy: yy, w: w, h: h };
+        return {
+            x: x,
+            y: y,
+            yy: yy,
+            w: w,
+            h: h
+        };
     }
 
     //=====================================================================================
@@ -89,7 +101,7 @@ class UserController {
     }
 
     update() {
-        if (this.isEnter == true) {
+        if (this.valid() && this.isEnter == true) {
             this.key_ZCheck();
 
             // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
@@ -104,8 +116,7 @@ class UserController {
 
                 // 유저 3인칭 컨트롤용 키보드 인풋을 받음
                 this.key_update();
-            }
-            else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
+            } else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
                 if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0) {
 
                     this.focusOffTimer -= 0.01;
@@ -113,17 +124,24 @@ class UserController {
                     this.control.target = new THREE.Vector3(0, 0, 0);
 
                     this.isfocusOffLerpDone = true;
-                }
-                else {
+                } else {
                     this.camera.position.lerp(this.camLerpPos, 0.1);
                 }
             }
+
 
             this.healthbar.updatePos(this.getUserScreenPosition());
             this.userName.updatePos();
 
             // console.log(this.user.position, this.camera.position)
         }
+
+        if (!this.valid()) {
+            //delete all input while entering name 
+            KeyboardState.status = {}
+       
+        }
+
     }
 
     end() {
@@ -132,12 +150,22 @@ class UserController {
         this.isEnter = false;
     }
 
+
+    valid() {
+        if (document.getElementById("currentPage").innerHTML == "world") {
+            if (document.getElementById('world-navigation').classList.contains('m-inactive')) {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
+
     //=====================================================================================
     //=====================================================================================
 
     key_ZCheck() {
         this.keyboard.update();
-
         // z 눌렸을 때 한번만 실행
         if (this.keyboard.down("Z")) {
             this.isLifeFocusOn = !this.isLifeFocusOn;
@@ -152,9 +180,9 @@ class UserController {
 
     key_update() {
         // velocity 초기화
-        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D") 
-        ||  this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")){
-            
+        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D") ||
+            this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")) {
+
             this.velocity.multiplyScalar(0);
         }
 
@@ -182,21 +210,21 @@ class UserController {
             this.user.position.add(this.velocity);
         }
 
-        if (this.keyboard.pressed("A") || this.keyboard.pressed("D")){
-            
+        if (this.keyboard.pressed("A") || this.keyboard.pressed("D")) {
+
             let fv = new THREE.Vector3().subVectors(
                 new THREE.Vector3().copy(this.camera.position),
                 new THREE.Vector3().copy(this.user.position));
-            
-            fv.cross(new THREE.Vector3(0,1,0));
-                    
+
+            fv.cross(new THREE.Vector3(0, 1, 0));
+
             if (this.keyboard.pressed("A")) {
                 fv.multiplyScalar(1);
             }
             if (this.keyboard.pressed("D")) {
                 fv.multiplyScalar(-1);
             }
-            
+
             fv.normalize();
             fv.multiplyScalar(0.02);
             this.velocity.add(fv);
@@ -227,8 +255,8 @@ class UserController {
         this.control.enableZoom = false;
 
         const userFollowCam_Pos = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.user.position),
-            new THREE.Vector3().copy(this.camera.position))
+                new THREE.Vector3().copy(this.user.position),
+                new THREE.Vector3().copy(this.camera.position))
             .setLength(this.camDis);
 
         this.camLerpPos = userFollowCam_Pos;
@@ -238,8 +266,8 @@ class UserController {
         this.control.target.lerp(this.user.position, this.lerpSpeed);
 
         const camDir = new THREE.Vector3().subVectors(
-            new THREE.Vector3().copy(this.user.position),
-            new THREE.Vector3().copy(this.camera.position))
+                new THREE.Vector3().copy(this.user.position),
+                new THREE.Vector3().copy(this.camera.position))
             .setLength(this.camDis);
         const userFollowCam_Pos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),
@@ -264,4 +292,6 @@ class UserController {
     }
 }
 
-export { UserController }
+export {
+    UserController
+}

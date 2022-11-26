@@ -35,6 +35,7 @@ export default class BasicThree {
         this.canvas = canvas
         this.renderer.appendToCanvas(this.canvas)
         this.reset()
+        this.controls.reset()
     }
 
     update() {

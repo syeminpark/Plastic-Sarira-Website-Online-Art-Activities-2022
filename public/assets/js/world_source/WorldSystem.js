@@ -27,13 +27,13 @@ class WorldSystem {
     constructor(_pagelayer) {
         this.pagelayer = _pagelayer
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
-        
+
 
         this.worldSize = config.worldSize
         this.maxParticleCount = config.maxParticleCount
         this.initialWastePlasticCount = config.initialMaxPlasticCount
         this.plasticScale = config.plasticScale
-        this.offsetRange=  config.plasticOffsetRange
+        this.offsetRange = config.plasticOffsetRange
 
         //흐름(속력+방향)
         this.velMin = config.velMin
@@ -42,16 +42,19 @@ class WorldSystem {
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
 
-        this.initialCameraPosition=[0,0,5]
-        
+        this.initialCameraPosition = [0, 0, 5]
+        this.particleAppearence = undefined
+
     }
 
     //해당 페이지 재접속시 다시 실행
     setup(worldDom, enterDom) {
 
+    
+
         //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
-        this.rejectedObject=[]
+        this.rejectedObject = []
 
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(...this.initialCameraPosition)
@@ -64,23 +67,31 @@ class WorldSystem {
 
         for (let i = 0; i < this.initialWastePlasticCount; i++) {
             let randomSource = this.worldThree.getRandomSourcePath()
-           
+
             this.worldThree.import(randomSource, this.createPlastic)
         }
     }
 
     animate = () => {
-        if (this.valid()) {
+        if (this.particleAppearence != undefined) {
             this.worldThree.render()
             this.worldThree.update()
+
             this.updateParticles();
+
+        }
+        if (this.valid()) {
+            // this.worldThree.render()
+            // this.worldThree.update()
+            // this.updateParticles();
+        
             this.updateLifes();
         }
     }
 
     valid() {
         //if user has clicked the enter button 
-        if (this.enterDom != undefined ) {
+        if (this.enterDom != undefined) {
             if (this.enterDom.classList.contains('m-inactive')) {
                 return false
             } else {
@@ -109,7 +120,7 @@ class WorldSystem {
         //console.log(options);
 
         this.lifes = [];
-        this.life_user = new Life_user(options,this.worldThree);
+        this.life_user = new Life_user(options, this.worldThree);
         this.lifes.push(this.life_user);
 
         for (let i = 1; i < this.lifeNum; i++) {
@@ -151,12 +162,12 @@ class WorldSystem {
     }
 
     createPlastic = (beach, index, bufferGeometry) => {
-   
+
         let finalPositions = [];
         let finalColors = [];
 
         let plasticOffsetPosition = new THREE.Vector3(
-            MyMath.random(-this.worldSize *this.offsetRange, this.worldSize *this.offsetRange),
+            MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange),
             MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange),
             MyMath.random(-this.worldSize * this.offsetRange, this.worldSize * this.offsetRange));
 
@@ -166,7 +177,7 @@ class WorldSystem {
             Math.PI * MyMath.random(0, 2));
 
         let positions = new Float32Array(bufferGeometry.attributes.position.count);
-        for (let i = 0; i < positions.length*3; i += 3) {
+        for (let i = 0; i < positions.length * 3; i += 3) {
             let newPos = new THREE.Vector3(
                 bufferGeometry.attributes.position.array[i + 0],
                 bufferGeometry.attributes.position.array[i + 1],
@@ -183,7 +194,7 @@ class WorldSystem {
         }
 
         let colors = new Float32Array(bufferGeometry.attributes.color.count);
-        for (let i = 0; i < colors.length*3; i += 3) {
+        for (let i = 0; i < colors.length * 3; i += 3) {
             finalColors.push(
                 new THREE.Color(
                     bufferGeometry.attributes.color.array[i + 0],
@@ -196,7 +207,7 @@ class WorldSystem {
             beach: beach,
             index: index
         }
-        
+
         return this.checkWorldForInput(object)
     }
 
@@ -208,22 +219,20 @@ class WorldSystem {
                 activableParticles.push(this.particles[i]);
             }
         }
-     
+
         if (activableParticles.length >= object.positions.length &&
             activableParticles.length > 0 && object.positions.length > 0) {
-             
+
             for (let i = 0; i < object.positions.length; i++) {
                 activableParticles[i].isActive = true;
                 activableParticles[i].setPos(object.positions[i]);
                 activableParticles[i].setColor(object.colors[i]);
                 activableParticles[i].setD3PlasticData(object.index, object.beach, i);
             }
-            console.log("activableParticles.length",activableParticles.length)
-        }
-        
-        else{
+            console.log("activableParticles.length", activableParticles.length)
+        } else {
             this.rejectedObject.push(object)
-            console.log("rejected",this.rejectedObject.length)
+            console.log("rejected", this.rejectedObject.length)
         }
 
     }
@@ -244,10 +253,12 @@ class WorldSystem {
             particlePositionAttributes[i + 1] = this.particles[index].position.y;
             particlePositionAttributes[i + 2] = this.particles[index].position.z;
 
+
             if (this.particles[index].isActive == false) {
                 this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
                 continue;
             }
+            if (this.valid()) {
 
             let flow = new THREE.Vector3(
                 MyMath.random(-this.velMin, this.velMin),
@@ -264,6 +275,7 @@ class WorldSystem {
 
             this.life_user.eat(this.particles[index]);
             this.life_user.breath(this.particles[index]);
+        }
         }
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;
 
@@ -312,7 +324,7 @@ class WorldSystem {
             }
         }
     }
-    getSariraData(){
+    getSariraData() {
         return this.life_user.getSariraDataForServer()
     }
 }
