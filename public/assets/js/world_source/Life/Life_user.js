@@ -9,6 +9,7 @@ import {
 import {
     MyMath
 } from '/assets/js/three/MyMath.js';
+import config from '../../config.js';
 
 class Life_user extends Life_Genetic {
     constructor(options) {
@@ -52,7 +53,9 @@ class Life_user extends Life_Genetic {
         // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial);
 
         this.lifeName = 'user';
-        this.lifespan = 100;
+
+        //라이프에도영향을 줌 
+        this.lifespan = config.lifespan
     }
 
     init() {

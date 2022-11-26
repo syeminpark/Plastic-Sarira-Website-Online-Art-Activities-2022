@@ -10,6 +10,7 @@ export default class SingleRenderer {
             antialias: true
         })
         this.renderer.outputEncoding = THREE.sRGBEncoding
+        // this.renderer.setPixelRatio(window.devicePixelRatio)
 
         this.currentCanvas=undefined;
      

@@ -1,5 +1,4 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-
 import {
     MicroPlastic_D3js
 } from './../world_source/Particle/ParticleClass.js';
@@ -9,11 +8,6 @@ import {
 import {
     Life_user
 } from './../world_source/Life/Life_user.js';
-
-import {
-    UserController
-} from '/assets/js/three/UserController.js';
-
 import {
     MyMath
 } from '/assets/js/three/MyMath.js';
@@ -26,6 +20,8 @@ import {
 import {
     WorldThree
 } from '../three/SpecificThree.js';
+import config from '../config.js';
+
 //세계
 class WorldSystem {
     constructor(_pagelayer) {
@@ -33,18 +29,20 @@ class WorldSystem {
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
         
 
-        this.worldSize = 300;
-        this.maxParticleCount = 15000;
-        this.initialWastePlasticCount = 10
-        this.plasticScale = 1;
-         this.offsetRange= 0.7
+        this.worldSize = config.worldSize
+        this.maxParticleCount = config.maxParticleCount
+        this.initialWastePlasticCount = config.maxParticleCount
+        this.plasticScale = config.plasticScale
+        this.offsetRange=  config.plasticOffsetRange
 
         //흐름(속력+방향)
-        this.velMin = 0.003;
+        this.velMin = config.velMin
         this.enterDom = undefined
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
+
+        this.initialCameraPosition=[0,0,5]
         
     }
 
@@ -56,7 +54,7 @@ class WorldSystem {
         this.rejectedObject=[]
 
         this.worldThree.setup(worldDom)
-        this.worldThree.setCameraPosition(0, 0, 5)
+        this.worldThree.setCameraPosition(...this.initialCameraPosition)
         this.worldThree.updateSize()
         this.enterDom = enterDom
 
@@ -124,7 +122,7 @@ class WorldSystem {
         //생성
         this.particles = [];
         let particlePositions = [];
-        let material = createParticleMaterial(0.3);
+        let material = createParticleMaterial();
 
         for (let i = 0; i < this.maxParticleCount; i++) {
             let p = new MicroPlastic_D3js(i, this.worldSize);
