@@ -41,7 +41,7 @@ class UserController {
 
         this.isInWorld = true;
 
-        this.isKey_down = false;
+        this.isKey_down = true;
 
         //=================================================================================
 
@@ -102,7 +102,8 @@ class UserController {
                 // 유저가 world 밖으로 나가지 않도록 함
                 this.wrap();
 
-                // 모바일 구성인지 웹 구성인지 확인
+                // 모바일 / 웹 확인
+                // 웹
                 if (this.isKey_down == true) {
                     // 유저 컨트롤용 키보드 인풋을 받음
                     if (this.control.enableRotate == false) this.control.enableRotate = true;
@@ -111,6 +112,7 @@ class UserController {
                     this.key_update();
                     this.updateUserPos();
                 }
+                // 모바일
                 else if (this.l_joystick.is_pressed == true) {
                     if (this.control.enableRotate == true) this.control.enableRotate = false;
                     if (this.control.enableZoom == true) this.control.enableZoom = false;
@@ -134,15 +136,19 @@ class UserController {
                     this.r_joystick.animate();
                 }
             }
+            // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
-                if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0) {
+                // 카메라가 일정 거리에 도달하면 애니메이션을 중지함
+                if (this.camera.position.length() > this.worldSize * .495) {
 
-                    this.focusOffTimer -= 0.01;
-                    this.control.target = new THREE.Vector3(0, 0, 0);
+                    // this.control.target = new THREE.Vector3(0, 0, 0);
                     this.isfocusOffLerpDone = true;
+
+                    // 이후 오빗컨트롤 조작 가능케 함
+                    this.control.enabled = true;
                 }
                 else {
-                    this.camera.position.lerp(this.camLerpPos, 0.1);
+                    this.camera.position.lerp(this.camLerpPos, 0.05);
                 }
             }
 
@@ -343,11 +349,12 @@ class UserController {
     //=====================================================================================
 
     camera_focusOff_init() {
+        this.isfocusOffLerpDone = false;
+
         this.control.enablePan = true;
         this.control.enableZoom = true;
-
-        this.isfocusOffLerpDone = false;
-        this.focusOffTimer = 1;
+        
+        this.control.enabled = false;
 
         this.camLerpPos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.camera.position),
@@ -356,6 +363,7 @@ class UserController {
     }
 
     camera_focusOn_init() {
+        this.control.enabled = true;
         this.control.enablePan = false;
         this.control.enableZoom = false;
 
@@ -373,17 +381,15 @@ class UserController {
     camera_focusOn_update() {
         this.control.target.lerp(this.user.position, this.lerpSpeed);
 
-        if (this.camera.position.distanceTo(this.user.position) > this.camDis){
-            const camDir = new THREE.Vector3().subVectors(
-                new THREE.Vector3().copy(this.user.position),
-                new THREE.Vector3().copy(this.camera.position))
-                .setLength(this.camDis);
-            const userFollowCam_Pos = new THREE.Vector3().subVectors(
-                new THREE.Vector3().copy(this.user.position),
-                camDir);
+        const camDir = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position),
+            new THREE.Vector3().copy(this.camera.position))
+            .setLength(this.camDis);
+        const userFollowCam_Pos = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position),
+            camDir);
 
-            this.camLerpPos = userFollowCam_Pos;
-        }
+        this.camLerpPos = userFollowCam_Pos;
     }
 
     //=====================================================================================
