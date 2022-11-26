@@ -1,12 +1,12 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import KeyboardState from '../three/KeyboardState.js';
+import KeyboardState from '/assets/js/utils/KeyboardState.js';
+
 import { UserText } from '/assets/js/userText.js';
-
 import { Health12345 } from '/assets/js/health.js';
-import { Joystick12345 } from '../joystick.js';
+import { Joystick12345 } from '/assets/js/joystick.js';
 
-import { MyMath } from '/assets/js/three/MyMath.js';
+import { MyMath } from '/assets/js/utils/MyMath.js';
 
 class UserController {
     constructor(worldPage) {
@@ -78,6 +78,10 @@ class UserController {
 
     //=====================================================================================
     //=====================================================================================
+
+    resetKeyboardState(){
+        KeyboardState.status = {}
+    }
 
     start(userName) {
         this.healthbar.start();

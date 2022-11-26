@@ -12,10 +12,6 @@ import {
 import {
 	ImageSlide12345
 } from './../imageslide.js';
-// import {
-// 	Joystick12345
-// } from './../joystick.js';
-
 import {
 	WorldSystem
 } from '../world_source/WorldSystem.js';
