@@ -301,9 +301,9 @@ class WorldSystem {
                 continue;
             }
 
-            if (this.lifes.length < this.maxNum && this.lifes[i].index != 0) {
-                this.lifes[i].division(this.lifes, this);
-            }
+            // if (this.lifes.length < this.maxNum && this.lifes[i].index != 0) {
+            //     this.lifes[i].division(this.lifes, this);
+            // }
 
             this.lifes[i].update();
             this.lifes[i].updateTestText(); // 디버깅용
