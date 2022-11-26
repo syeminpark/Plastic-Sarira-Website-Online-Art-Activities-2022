@@ -31,7 +31,7 @@ class WorldSystem {
 
         this.worldSize = config.worldSize
         this.maxParticleCount = config.maxParticleCount
-        this.initialWastePlasticCount = config.maxParticleCount
+        this.initialWastePlasticCount = config.initialMaxPlasticCount
         this.plasticScale = config.plasticScale
         this.offsetRange=  config.plasticOffsetRange
 
