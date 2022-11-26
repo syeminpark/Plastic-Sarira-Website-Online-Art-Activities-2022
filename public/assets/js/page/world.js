@@ -63,6 +63,7 @@ class World12345 extends Page12345 {
 	setup() {
 		this.loadsvg();
 
+
 		//const audio_btn = this.pagelayer.popup.querySelector('#world-sound-btn');
 		//const audio_viz = this.pagelayer.popup.querySelector('#world-audio-visualizer');
 		//this.audio_controller = new Audio12345(audio_btn, audio_viz);
@@ -130,8 +131,8 @@ class World12345 extends Page12345 {
 	}
 
 	enter() {
+		this.userController.resetKeyboardState();
 
-		
 		let inputs = (document.querySelectorAll('input'))
 		for (let input of inputs) {
 			if (!input.value == "") {
@@ -192,27 +193,29 @@ class World12345 extends Page12345 {
 		requestAnimationFrame(this.animate);
 		if (this.isWorldPage()) {
 			this.world.animate();
+		}
+		if (this.hasEnetered()) {
 			this.userController.update();
 		}
-
 	}
 
 	isWorldPage() {
 		if (document.getElementById("currentPage").innerHTML == "world") {
 			return true
-
 		}
 	}
-
 	hasEnetered() {
 		if (document.getElementById("currentPage").innerHTML == "world") {
-			if (document.getElementById('world-navigation').classList.contains('m-inactive')) {
-				return false
-			} else {
-				return true
+			if (document.getElementById('world-navigation') != null) {
+				if (document.getElementById('world-navigation').classList.contains('m-inactive')) {
+					return false
+				} else {
+					return true
+				}
 			}
 		}
 	}
+
 
 	moveSari(e) {
 		//console.log(e);
@@ -224,9 +227,7 @@ class World12345 extends Page12345 {
 			//this.health.move(0,0.1);
 		} else if (e.code === 'KeyD') {
 			//this.health.move(0.1,0);
-		} else if (e.code === 'KeyZ') {
-
-		}
+		} else if (e.code === 'KeyZ') {}
 	}
 
 	async worldEnd() {
@@ -234,7 +235,6 @@ class World12345 extends Page12345 {
 		if (document.getElementById('sound-btn').classList.contains('active')) {
 			document.getElementById('death').play()
 		}
-
 
 		//getSariraDataForServer
 		let data = this.world.getSariraData()
@@ -250,8 +250,6 @@ class World12345 extends Page12345 {
 		this.closePopups();
 		this.world_ended = true;
 		window.removeEventListener('keyup', this.moveSari.bind(this));
-
-
 	}
 
 	closePopups() {

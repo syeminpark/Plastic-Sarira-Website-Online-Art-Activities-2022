@@ -101,7 +101,7 @@ class UserController {
     }
 
     update() {
-        if (this.valid() && this.isEnter == true) {
+        if (this.isEnter == true) {
             this.key_ZCheck();
 
             // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
@@ -135,30 +135,15 @@ class UserController {
 
             // console.log(this.user.position, this.camera.position)
         }
-
-        if (!this.valid()) {
-            //delete all input while entering name 
-            KeyboardState.status = {}
-       
-        }
-
+    }
+    resetKeyboardState(){
+        KeyboardState.status = {}
     }
 
     end() {
         this.healthbar.end();
         this.userName.end();
         this.isEnter = false;
-    }
-
-
-    valid() {
-        if (document.getElementById("currentPage").innerHTML == "world") {
-            if (document.getElementById('world-navigation').classList.contains('m-inactive')) {
-                return false
-            } else {
-                return true
-            }
-        }
     }
 
     //=====================================================================================
