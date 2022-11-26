@@ -207,12 +207,7 @@ export class WorldThree extends BasicThree {
         );
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
         this.controls.enableDamping = true;
-        this.controls.maxDistance = 1000
         this.controls.enablePan = false;
-
-        let ambientLight = new THREE.AmbientLight(0xffffff, 3);
-        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 3);
-        this.scene.add(ambientLight, hemiLight);
     }
 
     setCameraPosition(x, y, z) {

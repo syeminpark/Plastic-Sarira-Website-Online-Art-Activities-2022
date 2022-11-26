@@ -227,13 +227,12 @@ class WorldSystem {
                 activableParticles[i].isActive = true;
                 activableParticles[i].setPos(object.positions[i]);
                 activableParticles[i].setColor(object.colors[i]);
-                activableParticles[i].setD3PlasticData(object.index, object.beach, i);
+                activableParticles[i].setD3PlasticData({type:"Waste Plastic", type:object.beach, area:object.index});
             }
             return true
       
         } else {
             this.rejectedObject.push(object)
-
         }
 
     }

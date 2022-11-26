@@ -59,13 +59,14 @@ class Life_user extends Life_Genetic {
     }
 
     init() {
+        
         if (this.geneCode == null) return;
 
         this.velLimit = 1;
 
         this.size = MyMath.random(1, 3);
         this.noiseSize = MyMath.random(0, this.size * 0.5);
-
+        this.mass = this.size + this.noiseSize;
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
@@ -76,13 +77,14 @@ class Life_user extends Life_Genetic {
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.15);
 
-        document.addEventListener('keydown', 
-            (evenet)=>{
-                if(event.key=='1'){
-                    this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-3,3),
-                        MyMath.random(-3, 3), MyMath.random(-3, 3)))
-                }
-            })
+        // document.addEventListener('keydown', 
+        //     (evenet)=>{
+        //         if(event.key=='1'){
+        //             this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-3,3),
+        //                 MyMath.random(-3, 3), MyMath.random(-3, 3)))
+        //         }
+        //     })
+
         }
 
 
@@ -146,19 +148,18 @@ class Life_user extends Life_Genetic {
         // if(MyMath.random(0,100)>90){
         //     this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-10, 10),
         //         MyMath.random(-10, 10), MyMath.random(-10, 10)))
-               
-          
         // }
 
         var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
-            var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-            var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticlesData.length - 1].position, this.position);
+            // var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
+         
+            var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
             // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
+           
             // this.bodySystem.addFloatingPlastics(send_pos, data);
-
-            //temp code to check if sarira generation works 
+            this.bodySystem.addFloatingPlastics(send_pos);
      
             this.isMakeSarira = false;
         }
