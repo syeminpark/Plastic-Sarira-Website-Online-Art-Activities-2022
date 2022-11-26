@@ -21,14 +21,15 @@ class UserController {
 
         this.scene = this.threeSystem.scene;
         this.camera = this.threeSystem.camera;
-        this.orbitControl = this.threeSystem.controls;
+        this.control = this.threeSystem.controls;
 
-        this.orbitControl.minDistance = 5;
-        this.orbitControl.maxDistance = this.worldSize;
+        this.control.minDistance = 5;
+        this.control.maxDistance = this.worldSize;
 
         //=================================================================================
 
         this.user = world.life_user;
+        this.velocity = new THREE.Vector3();
 
         this.camDis = this.user.mass * 3;
         this.lerpSpeed = 0.1;
@@ -98,7 +99,7 @@ class UserController {
                 this.camera_focusOn_update();
                 this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
 
-                // 유저가 world 밖으로 나가지 않도록 하는 함
+                // 유저가 world 밖으로 나가지 않도록 함
                 this.wrap();
 
                 // 유저 3인칭 컨트롤용 키보드 인풋을 받음
@@ -109,7 +110,7 @@ class UserController {
 
                     this.focusOffTimer -= 0.01;
 
-                    this.orbitControl.target = new THREE.Vector3(0, 0, 0);
+                    this.control.target = new THREE.Vector3(0, 0, 0);
 
                     this.isfocusOffLerpDone = true;
                 }
@@ -120,6 +121,8 @@ class UserController {
 
             this.healthbar.updatePos(this.getUserScreenPosition());
             this.userName.updatePos();
+
+            // console.log(this.user.position, this.camera.position)
         }
     }
 
@@ -148,30 +151,58 @@ class UserController {
     }
 
     key_update() {
-        if (this.keyboard.pressed("W") || this.keyboard.pressed("S") || this.keyboard.pressed("A") || this.keyboard.pressed("D")) {
-            let moveDistance = 0.2;
+        // velocity 초기화
+        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D") 
+        ||  this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")){
+            
+            this.velocity.multiplyScalar(0);
+        }
 
-            let fv = this.camera.getWorldDirection(this.user.position);
-            let angle = 0;
+        if (this.keyboard.pressed("W") || this.keyboard.pressed("S")) {
+
+            let fv = new THREE.Vector3();
 
             if (this.keyboard.pressed("W")) {
-                angle = 0;
+                fv.subVectors(
+                    new THREE.Vector3().copy(this.user.position),
+                    new THREE.Vector3().copy(this.camera.position));
             }
             if (this.keyboard.pressed("S")) {
-                angle = -Math.PI;
+                fv.subVectors(
+                    new THREE.Vector3().copy(this.camera.position),
+                    new THREE.Vector3().copy(this.user.position));
             }
+
+            fv.normalize();
+            fv.multiplyScalar(0.05);
+
+            this.velocity.add(fv);
+            if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
+
+            this.user.position.add(this.velocity);
+        }
+
+        if (this.keyboard.pressed("A") || this.keyboard.pressed("D")){
+            
+            let fv = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.camera.position),
+                new THREE.Vector3().copy(this.user.position));
+            
+            fv.cross(new THREE.Vector3(0,1,0));
+                    
             if (this.keyboard.pressed("A")) {
-                angle = Math.PI / 2;
+                fv.multiplyScalar(1);
             }
             if (this.keyboard.pressed("D")) {
-                angle = -Math.PI / 2;
+                fv.multiplyScalar(-1);
             }
-
-            fv.applyAxisAngle(new THREE.Vector3(0, 1, 0), angle);
+            
             fv.normalize();
-            fv.multiplyScalar(moveDistance);
+            fv.multiplyScalar(0.02);
+            this.velocity.add(fv);
+            if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
 
-            this.user.applyForce(fv);
+            this.user.position.add(this.velocity);
         }
     }
 
@@ -179,8 +210,8 @@ class UserController {
     //=====================================================================================
 
     camera_focusOff_init() {
-        this.orbitControl.enablePan = true;
-        this.orbitControl.enableZoom = true;
+        this.control.enablePan = true;
+        this.control.enableZoom = true;
 
         this.isfocusOffLerpDone = false;
         this.focusOffTimer = 1;
@@ -192,8 +223,8 @@ class UserController {
     }
 
     camera_focusOn_init() {
-        this.orbitControl.enablePan = false;
-        this.orbitControl.enableZoom = false;
+        this.control.enablePan = false;
+        this.control.enableZoom = false;
 
         const userFollowCam_Pos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),
@@ -204,7 +235,7 @@ class UserController {
     }
 
     camera_focusOn_update() {
-        this.orbitControl.target.lerp(this.user.position, this.lerpSpeed);
+        this.control.target.lerp(this.user.position, this.lerpSpeed);
 
         const camDir = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),
