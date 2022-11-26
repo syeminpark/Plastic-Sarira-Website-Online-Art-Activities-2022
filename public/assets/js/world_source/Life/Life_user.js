@@ -8,8 +8,8 @@ import {
 
 import {
     MyMath
-} from '/assets/js/three/MyMath.js';
-import config from '../../config.js';
+} from '/assets/js/utils/MyMath.js';
+import config from '../../utils/config.js';
 
 class Life_user extends Life_Genetic {
     constructor(options) {

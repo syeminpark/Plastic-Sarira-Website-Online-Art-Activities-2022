@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {D3Dataset} from './D3Dataset.js';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/utils/MyMath.js';
 
 class Particle {
   constructor(index, worldSize) {

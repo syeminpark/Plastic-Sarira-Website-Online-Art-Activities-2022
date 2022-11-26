@@ -10,17 +10,17 @@ import {
 } from './../world_source/Life/Life_user.js';
 import {
     MyMath
-} from '/assets/js/three/MyMath.js';
+} from '/assets/js/utils/MyMath.js';
 import {
     createParticleMaterial,
     createPointMaterial,
     createConvexMaterial
-} from './../three/material.js';
+} from '../rendering/material.js';
 
 import {
     WorldThree
-} from '../three/SpecificThree.js';
-import config from '../config.js';
+} from '../rendering/SpecificThree.js';
+import config from '../utils/config.js';
 
 //세계
 class WorldSystem {

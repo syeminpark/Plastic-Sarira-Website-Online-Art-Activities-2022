@@ -1,7 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Microplastic } from './Microplastic.js';
 
-import {MyMath} from '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/utils/MyMath.js';
 
 class Core extends Microplastic {
     constructor(threeSystem,particleMaterial) {

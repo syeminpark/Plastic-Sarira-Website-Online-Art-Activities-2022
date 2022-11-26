@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import { Life } from './Life.js'
 import { BodySystem } from './../Sarira/BodySystem.js'
 
-import {MyMath} from '/assets/js/three/MyMath.js';
+import {MyMath} from '/assets/js/utils/MyMath.js';
 
 // 파티클 흡수하는 Life
 class Life_Absorb extends Life {

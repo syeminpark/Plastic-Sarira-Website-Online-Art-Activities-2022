@@ -10,7 +10,7 @@ import {
 
 import {
     MyMath
-} from '/assets/js/three/MyMath.js';
+} from '/assets/js/utils/MyMath.js';
 
 class UserController {
     constructor(worldPage) {

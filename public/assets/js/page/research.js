@@ -13,7 +13,7 @@ import {
 import {
 	List12345
 } from '../list.js';
-import PointThree from '../three/SpecificThree.js';
+import PointThree from '../rendering/SpecificThree.js';
 
 //리서치 페이지 
 class Research12345 extends Page12345 {

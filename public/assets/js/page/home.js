@@ -2,8 +2,8 @@ import {
     Page12345
 } from './page.js';
 
-import PointThree from '../three/SpecificThree.js';
-import wastePlasticDataset from "../waste_plastic_dataset.js";
+import PointThree from '../rendering/SpecificThree.js';
+import wastePlasticDataset from "../utils/waste_plastic_dataset.js";
 
 
 class Home12345 extends Page12345 {

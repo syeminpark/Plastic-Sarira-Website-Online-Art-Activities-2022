@@ -13,16 +13,16 @@ import {
 
 import {
     SariraThree
-} from '../three/SpecificThree.js';
-import ServerClientCommunication from '../serverClientCommunication.js';
+} from '../rendering/SpecificThree.js';
+import ServerClientCommunication from '../utils/serverClientCommunication.js';
 
-import SariraThreeController from '../three/SariraThreeController.js';
+import SariraThreeController from '../rendering/SariraThreeController.js';
 
 
 import {
     createConvexMaterial,
     createPointMaterial
-} from'../three/material.js';
+} from'../rendering/material.js';
 
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {

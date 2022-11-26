@@ -3,12 +3,12 @@ import {
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import Convex from './Convex.js';
+import Convex from '../world_source/Sarira/Convex.js';
 import BasicThree from "./basicThree.js"
 import {
     OrbitControls
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
-import waste_plastic_dataset from "../waste_plastic_dataset.js";
+import waste_plastic_dataset from "../utils/waste_plastic_dataset.js";
 
 
 export default class PointThree extends BasicThree {

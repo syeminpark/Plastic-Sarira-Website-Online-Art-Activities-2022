@@ -8,9 +8,7 @@ import {
 	SVGLoader12345
 } from './../svgloader.js';
 //import {Audio12345} from './../audio.js';
-import {
-	Health12345
-} from './../health.js';
+
 import {
 	ImageSlide12345
 } from './../imageslide.js';
@@ -23,9 +21,9 @@ import {
 } from '../world_source/WorldSystem.js';
 import {
 	UserController
-} from '/assets/js/three/UserController.js';
+} from '/assets/js/utils/UserController.js';
 
-import ServerClientCommunication from '../serverClientCommunication.js';
+import ServerClientCommunication from '../utils/serverClientCommunication.js';
 
 const test_img_srcs = [{
 		img_src: "./assets/img/Naechi/studio/1.jpg",
@@ -63,18 +61,9 @@ class World12345 extends Page12345 {
 	setup() {
 		this.loadsvg();
 
-
-		//const audio_btn = this.pagelayer.popup.querySelector('#world-sound-btn');
-		//const audio_viz = this.pagelayer.popup.querySelector('#world-audio-visualizer');
-		//this.audio_controller = new Audio12345(audio_btn, audio_viz);
-
 		const enter_btn = this.pagelayer.popup.querySelector('#world-enter-btn');
 		this.enter_message = this.pagelayer.popup.querySelector('#world-enter');
 		enter_btn.addEventListener('click', this.enter.bind(this));
-
-		// const health_container = this.pagelayer.popup.querySelector('#world-health-container');
-		// const health_bar = this.pagelayer.popup.querySelector('#world-health-bar');
-		// this.health = new Health12345(this, health_container, health_bar);
 
 		this.end_message = this.pagelayer.popup.querySelector('#world-end');
 		const end_btn = this.pagelayer.popup.querySelector('#world-to-sarira');
@@ -181,8 +170,6 @@ class World12345 extends Page12345 {
 						this.userController.healthbarActive();
 					}
 				}, 600);
-
-				// this.animate();
 
 				// window.addEventListener('keyup', this.moveSari.bind(this));
 			}
