@@ -52,7 +52,7 @@ class Life_user extends Life_Genetic {
         // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial);
 
         this.lifeName = 'user';
-        this.lifespan = 500;
+        this.lifespan = 100;
     }
 
     init() {

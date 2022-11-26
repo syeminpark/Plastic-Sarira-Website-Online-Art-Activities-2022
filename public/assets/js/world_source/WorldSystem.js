@@ -124,7 +124,7 @@ class WorldSystem {
         //생성
         this.particles = [];
         let particlePositions = [];
-        let material = createParticleMaterial(0.7);
+        let material = createParticleMaterial(0.3);
 
         for (let i = 0; i < this.maxParticleCount; i++) {
             let p = new MicroPlastic_D3js(i, this.worldSize);
