@@ -35,8 +35,7 @@ class Life_EatOther extends Life_Sarira {
     }
 
     stateMachine(otherLife){
-        // super.setTestText(
-        //     `Life ${this.index}`);
+        if (otherLife.index == 0) return;
 
         // 유한 상태 기계
         switch (this.state) {

@@ -102,7 +102,7 @@ class Life_user extends Life_Genetic {
         // this.bodySystemWindow.update();
     }
 
-    stateMachine() {
+    stateMachine(otherLife) {
 
     }
 
