@@ -8,15 +8,15 @@ import {
 	SVGLoader12345
 } from './../svgloader.js';
 //import {Audio12345} from './../audio.js';
-import {
-	Health12345
-} from './../health.js';
+// import {
+// 	Health12345
+// } from './../health.js';
 import {
 	ImageSlide12345
 } from './../imageslide.js';
-import {
-	Joystick12345
-} from './../joystick.js';
+// import {
+// 	Joystick12345
+// } from './../joystick.js';
 
 import {
 	WorldSystem
@@ -88,15 +88,15 @@ class World12345 extends Page12345 {
 			});
 		}
 
-		this.l_joystick = new Joystick12345({
-			container: this.pagelayer.popup.querySelector('#world-joystick-left'),
-			stick: this.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
+		// this.l_joystick = new Joystick12345({
+		// 	container: this.pagelayer.popup.querySelector('#world-joystick-left'),
+		// 	stick: this.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
 
-		});
-		this.r_joystick = new Joystick12345({
-			container: this.pagelayer.popup.querySelector('#world-joystick-right'),
-			stick: this.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
-		});
+		// });
+		// this.r_joystick = new Joystick12345({
+		// 	container: this.pagelayer.popup.querySelector('#world-joystick-right'),
+		// 	stick: this.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
+		// });
 
 		this.imageslider = new ImageSlide12345(
 			this.pagelayer.popup.querySelector('#history-img-slide'),
@@ -178,8 +178,6 @@ class World12345 extends Page12345 {
 					}
 				}, 600);
 
-				// this.animate();
-
 				// window.addEventListener('keyup', this.moveSari.bind(this));
 			}
 		}
@@ -235,9 +233,7 @@ class World12345 extends Page12345 {
 		this.end_message.classList.remove("inactive");
 		this.closePopups();
 		this.world_ended = true;
-		window.removeEventListener('keyup', this.moveSari.bind(this));
-
-
+		// window.removeEventListener('keyup', this.moveSari.bind(this));
 	}
 
 	closePopups() {

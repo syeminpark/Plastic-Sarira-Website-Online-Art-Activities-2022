@@ -37,13 +37,14 @@ class Joystick12345{
 		this.pan_tpos.x = this.mpos.x - (this.container_bbox.left + this.container_bbox.width * 0.5);
 		this.pan_tpos.y = this.mpos.y - (this.container_bbox.top + this.container_bbox.height * 0.5);
 	
-		console.log(this.container_bbox, this.pan_tpos, this.mpos);
+		// console.log(this.container_bbox, this.pan_tpos, this.mpos);
 	}
 
 	stickPressed(e){
 		this.is_pressed = true;
 		this.mpos = ReturnTouchPos(e);
 		this.setPan();
+
 		if(!this.animation) this.animate();
 	}
 

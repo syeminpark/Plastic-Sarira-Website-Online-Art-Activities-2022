@@ -1,8 +1,10 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import KeyboardState from './KeyboardState.js';
-import { Health12345 } from '/assets/js/health.js';
 import { UserText } from '/assets/js/userText.js';
+
+import { Health12345 } from '/assets/js/health.js';
+import { Joystick12345 } from './../joystick.js';
 
 import { MyMath } from '/assets/js/three/MyMath.js';
 
@@ -39,9 +41,18 @@ class UserController {
 
         this.isInWorld = true;
 
+        this.isKey_down = false;
+
         //=================================================================================
 
-        this.camera_focusOn_init();
+        this.fValue = 0;
+        this.bValue = 0;
+        this.rValue = 0;
+        this.lValue = 0;
+        this.moveVector = new THREE.Vector3();
+        this.upVector = new THREE.Vector3(0, 1, 0);
+
+        //=================================================================================
 
         this.healthbar = new Health12345(this.threeSystem,
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
@@ -51,6 +62,18 @@ class UserController {
         this.userName = new UserText(this.threeSystem,
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
+
+        this.l_joystick = new Joystick12345({
+            container: this.worldPage.pagelayer.popup.querySelector('#world-joystick-left'),
+            stick: this.worldPage.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
+
+        });
+        this.r_joystick = new Joystick12345({
+            container: this.worldPage.pagelayer.popup.querySelector('#world-joystick-right'),
+            stick: this.worldPage.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
+        });
+
+        this.camera_focusOn_init();
     }
 
     //=====================================================================================
@@ -90,7 +113,7 @@ class UserController {
 
     update() {
         if (this.isEnter == true) {
-            this.key_ZCheck();
+            this.key_Check();
 
             // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
             if (this.isLifeFocusOn == true && this.user.isDead == false) {
@@ -102,16 +125,21 @@ class UserController {
                 // 유저가 world 밖으로 나가지 않도록 함
                 this.wrap();
 
-                // 유저 3인칭 컨트롤용 키보드 인풋을 받음
-                this.key_update();
+                // 유저 컨트롤용 키보드 인풋을 받음
+                if (this.isKey_down == true) {
+                    this.key_update();
+                    this.updateUserPos();
+                }
+                else if (this.l_joystick.is_pressed == true) {
+                    this.joystick_update();
+                    this.updateUserPos();
+                }
             }
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
                 if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0) {
 
                     this.focusOffTimer -= 0.01;
-
                     this.control.target = new THREE.Vector3(0, 0, 0);
-
                     this.isfocusOffLerpDone = true;
                 }
                 else {
@@ -122,7 +150,6 @@ class UserController {
             this.healthbar.updatePos(this.getUserScreenPosition());
             this.userName.updatePos();
 
-            // console.log(this.user.position, this.camera.position)
         }
     }
 
@@ -135,12 +162,13 @@ class UserController {
     //=====================================================================================
     //=====================================================================================
 
-    key_ZCheck() {
+    key_Check() {
         this.keyboard.update();
 
         // z 눌렸을 때 한번만 실행
         if (this.keyboard.down("Z")) {
             this.isLifeFocusOn = !this.isLifeFocusOn;
+            this.isKey_down = true;
 
             if (this.isLifeFocusOn == true) {
                 this.camera_focusOn_init();
@@ -148,62 +176,122 @@ class UserController {
                 this.camera_focusOff_init();
             }
         }
+
+        // 키 눌렀는지 체크
+        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D")) {
+
+            this.isKey_down = true;
+        }
+
+        // velocity 초기화
+        if (this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")) {
+
+            this.isKey_down = false;
+            this.velocity.set(0,0,0);
+            this.fValue = 0;
+            this.bValue = 0;
+            this.lValue = 0;
+            this.rValue = 0;
+        }
+
+        if (this.l_joystick.is_pressed == false){
+            this.velocity.set(0,0,0);
+            this.fValue = 0;
+            this.bValue = 0;
+            this.lValue = 0;
+            this.rValue = 0;
+        }
     }
 
     key_update() {
-        // velocity 초기화
-        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D") 
-        ||  this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")){
+        if (this.keyboard.pressed("W")) {
+                
+            if (this.fValue < 0.15) this.fValue += 0.05;
+        }
+        if (this.keyboard.pressed("S")) {
             
-            this.velocity.multiplyScalar(0);
+            if (this.bValue < 0.15) this.bValue += 0.05;
+        }
+        if (this.keyboard.pressed("A")) {
+
+            if (this.lValue < 0.15) this.lValue += 0.05;
+        }
+        if (this.keyboard.pressed("D")) {
+
+            if (this.rValue < 0.15) this.rValue += 0.05;
+        }
+    }
+
+    joystick_update() {
+        const forward = this.l_joystick.pan_pos.y;
+        const turn = this.l_joystick.pan_pos.x;
+
+        if (forward > 5) {
+            this.fValue = 0
+            this.bValue = MyMath.map(Math.abs(forward), 0, 50, 0.04, 0.1);
+        } else if (forward < -5) {
+            this.fValue = MyMath.map(Math.abs(forward), 0, 50, 0.04, 0.1);
+            this.bValue = 0
+        }
+  
+        if (turn > 5) {
+            this.lValue = 0
+            this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+        } else if (turn < -5) {
+            this.lValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+            this.rValue = 0
+        }
+    }
+
+    //=====================================================================================
+
+    updateUserPos() {
+        let fv = new THREE.Vector3();
+
+        if (this.fValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.user.position),
+                new THREE.Vector3().copy(this.camera.position));
+            temp.setLength(this.fValue);
+            fv.add(temp);
         }
 
-        if (this.keyboard.pressed("W") || this.keyboard.pressed("S")) {
-
-            let fv = new THREE.Vector3();
-
-            if (this.keyboard.pressed("W")) {
-                fv.subVectors(
-                    new THREE.Vector3().copy(this.user.position),
-                    new THREE.Vector3().copy(this.camera.position));
-            }
-            if (this.keyboard.pressed("S")) {
-                fv.subVectors(
-                    new THREE.Vector3().copy(this.camera.position),
-                    new THREE.Vector3().copy(this.user.position));
-            }
-
-            fv.normalize();
-            fv.multiplyScalar(0.05);
-
-            this.velocity.add(fv);
-            if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
-
-            this.user.position.add(this.velocity);
-        }
-
-        if (this.keyboard.pressed("A") || this.keyboard.pressed("D")){
-            
-            let fv = new THREE.Vector3().subVectors(
+        if (this.bValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
                 new THREE.Vector3().copy(this.camera.position),
                 new THREE.Vector3().copy(this.user.position));
-            
-            fv.cross(new THREE.Vector3(0,1,0));
-                    
-            if (this.keyboard.pressed("A")) {
-                fv.multiplyScalar(1);
-            }
-            if (this.keyboard.pressed("D")) {
-                fv.multiplyScalar(-1);
-            }
-            
-            fv.normalize();
-            fv.multiplyScalar(0.02);
-            this.velocity.add(fv);
-            if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
-
-            this.user.position.add(this.velocity);
+            temp.setLength(this.bValue);
+            fv.add(temp);
         }
+
+        if (this.lValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.camera.position),
+                new THREE.Vector3().copy(this.user.position));
+
+            temp.cross(new THREE.Vector3(0, 1, 0));
+            temp.multiplyScalar(1);
+            temp.setLength(this.lValue);
+            fv.add(temp);
+        }
+
+        if (this.rValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.camera.position),
+                new THREE.Vector3().copy(this.user.position));
+
+            temp.cross(new THREE.Vector3(0, 1, 0));
+            temp.multiplyScalar(-1);
+            temp.setLength(this.rValue);
+            fv.add(temp);
+        }
+
+        this.velocity.add(fv);
+        if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
+
+        this.user.position.add(this.velocity);
+        this.user.position.add(fv);
+
     }
 
     //=====================================================================================
