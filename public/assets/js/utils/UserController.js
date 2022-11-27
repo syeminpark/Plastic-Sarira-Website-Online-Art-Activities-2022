@@ -8,6 +8,8 @@ import { Joystick12345 } from '/assets/js/joystick.js';
 
 import { MyMath } from '/assets/js/utils/MyMath.js';
 
+import config from './config.js';
+
 class UserController {
     constructor(worldPage) {
         this.worldPage = worldPage;
@@ -34,7 +36,7 @@ class UserController {
         this.velocity = new THREE.Vector3();
 
         this.camDis = this.user.mass * 3;
-        this.lerpSpeed = 0.1;
+        this.lerpSpeed = config.lerpSpeed
 
         this.isLifeFocusOn = true;
         this.isfocusOffLerpDone = false;
@@ -152,7 +154,7 @@ class UserController {
                     this.control.enabled = true;
                 }
                 else {
-                    this.camera.position.lerp(this.camLerpPos, 0.05);
+                    this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
                 }
             }
 

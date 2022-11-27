@@ -144,7 +144,10 @@ class Life_Absorb extends Life {
             // if (MyMath.random(0, 5) < this.sariraSpeed && distance < sariraSpace &&
             //     this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
 
-            if ( distance < sariraSpace &&
+            
+            //sariraSpeed가 nan이다 지금
+    
+            if ( MyMath.random(0, 100) > 99 && distance < sariraSpace &&
                 this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
                 // this.absorbedParticles[i].data.setPassBy('');
 

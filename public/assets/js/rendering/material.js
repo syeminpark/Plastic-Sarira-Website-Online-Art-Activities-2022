@@ -55,8 +55,6 @@ export function createParticleMaterial(){
         color: 'white',
         size: config.particleSize,
         side: THREE.DoubleSide,
-        opacity: 1.,
-        transparent: true,
         vertexColors: true,
     });
 }
