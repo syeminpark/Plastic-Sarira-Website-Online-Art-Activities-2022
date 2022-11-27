@@ -95,11 +95,11 @@ export default class ServerClientCommunication {
         }
     }
 
-    async getAllSarira() {
+    async getSariraByRange(range) {
         try {
             let response = await $.get(`${this.url}/sarira`, {
                 page: "0",
-                limit: "300"
+                limit: range
             })
             return response
         } catch (error) {

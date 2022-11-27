@@ -32,6 +32,7 @@ export default{
 
      ///////////////////////////////////////////////////
     //server
-    type:"administrator"
+    type:"administrator",
+    sariraArchiveMax:30
 
 }

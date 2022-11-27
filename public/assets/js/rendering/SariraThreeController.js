@@ -2,6 +2,7 @@
 import {
     SariraThree
 } from '../rendering/SpecificThree.js';
+import config from '../utils/config.js';
 
 export default class SariraThreeController {
     constructor(renderer, type, isDetail, ) {
@@ -10,7 +11,7 @@ export default class SariraThreeController {
         this.renderer = renderer
         this.sariraObject = []
 
-        this.max = 50
+        this.max = config.sariraArchiveMax
         this.sariraThreeList = []
 
         for (let i = 0; i < this.max; i++) {

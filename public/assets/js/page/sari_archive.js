@@ -59,7 +59,8 @@ class SariArchive12345 extends Page12345 {
 		const load_more_btn = this.pagelayer.popup.querySelector('#load-more-btn');
 		if (load_more_btn) {
 			load_more_btn.addEventListener('click', () => {
-				if (this.sliced_data.length - 1 > this.load_index) {
+				console.log((this.load_index+1)*this.range,this.sariraThreeController.max)
+				if (this.sliced_data.length - 1 > this.load_index ) {
 					this.load_index++;
 					this.loadList(this.sliced_data[this.load_index]);
 					this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData,this.list.container.children)
@@ -88,7 +89,7 @@ class SariArchive12345 extends Page12345 {
 	async loadData() {
 
 		//current code 
-		this.res = await this.serverClientCommunication.getAllSarira()
+		this.res = await this.serverClientCommunication.getSariraByRange(this.sariraThreeController.max)
 		console.log(this.res)
 
 		//dynamically creating a bot_caption by its id 
@@ -98,11 +99,12 @@ class SariArchive12345 extends Page12345 {
 		//--> split data at intervals of 20, and load first part.
 		this.sliceData(this.res.allSariraData, this.range);
 		this.loadList(this.sliced_data[this.load_index])
+		this.set_scrolls(this.pagelayer);
 
 		this.sariraThreeController.setup(document.getElementById("full-container"))
 		this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData,this.list.container.children)
 		
-		this.set_scrolls(this.pagelayer);
+		// this.set_scrolls(this.pagelayer);
 	}
 
 	loadList(_data) {
