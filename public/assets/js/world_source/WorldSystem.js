@@ -29,7 +29,6 @@ class WorldSystem {
         this.pagelayer = _pagelayer
         this.worldThree = new WorldThree(this.pagelayer.singleRenderer, 'world', false);
 
-
         this.worldSize = config.worldSize
         this.maxParticleCount = config.maxParticleCount
         this.initialWastePlasticCount = config.initialMaxPlasticCount
@@ -45,13 +44,10 @@ class WorldSystem {
 
         this.initialCameraPosition = [0, 0, 5]
         this.particleAppearence = undefined
-
     }
 
     //해당 페이지 재접속시 다시 실행
     setup(worldDom, enterDom,miniSariraThree ) {
-
-    
 
         //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
@@ -65,7 +61,6 @@ class WorldSystem {
         //파티클, 라이프 초기화
         this.createParticle();
         this.createLife(miniSariraThree);
-
     }
 
     importPLY(addToslider,reorganize){

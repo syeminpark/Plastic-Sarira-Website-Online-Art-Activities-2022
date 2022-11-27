@@ -52,8 +52,12 @@ var IsIPhone = function(){
     return (/iPhone|iPod/.test(navigator.platform));
 }
 
+function IsMobile() {
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 export { 
     ReturnTouchPos, ReturnMultiTouchPos, 
     Length2D, IsPointerAvailable,
-    IsIOS, IsIPhone 
+    IsIOS, IsIPhone, IsMobile
 };

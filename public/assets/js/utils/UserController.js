@@ -7,6 +7,7 @@ import { Health12345 } from '/assets/js/health.js';
 import { Joystick12345 } from '/assets/js/joystick.js';
 
 import { MyMath } from '/assets/js/utils/MyMath.js';
+import { IsMobile } from '/assets/js/util.js';
 
 import config from './config.js';
 
@@ -15,6 +16,7 @@ class UserController {
         this.worldPage = worldPage;
         this.keyboard = new KeyboardState();
         this.isEnter = false;
+        this.isMobile = IsMobile();
     }
 
     setup(world) {
@@ -35,7 +37,7 @@ class UserController {
         this.user = world.life_user;
         this.velocity = new THREE.Vector3();
 
-        this.camDis = this.user.mass * 3;
+        this.camDis = (this.user.size + this.user.noiseSize) * 5;
         this.lerpSpeed = config.lerpSpeed
 
         this.isLifeFocusOn = true;
@@ -81,7 +83,7 @@ class UserController {
     //=====================================================================================
     //=====================================================================================
 
-    resetKeyboardState(){
+    resetKeyboardState() {
         KeyboardState.status = {}
     }
 
@@ -110,7 +112,7 @@ class UserController {
 
                 // 모바일 / 웹 확인
                 // 웹
-                if (this.isKey_down == true) {
+                if (this.isMobile == false) {
                     // 유저 컨트롤용 키보드 인풋을 받음
                     if (this.control.enableRotate == false) this.control.enableRotate = true;
                     if (this.control.enableZoom == false) this.control.enableZoom = true;
@@ -119,27 +121,28 @@ class UserController {
                     this.updateUserPos();
                 }
                 // 모바일
-                else if (this.l_joystick.is_pressed == true) {
+                else {
                     if (this.control.enableRotate == true) this.control.enableRotate = false;
                     if (this.control.enableZoom == true) this.control.enableZoom = false;
+                    
+                    if (this.l_joystick.is_pressed == true) {
+                        
+                        this.l_joystick.animate();
+                        this.joystick_update(this.l_joystick);
+                        this.updateUserPos();
+                    }
+                    else if (this.r_joystick.is_pressed) {
 
-                    this.l_joystick.animate();
-                    this.joystick_update(this.l_joystick);
-                    this.updateUserPos();
-                }
-                else if (this.r_joystick.is_pressed){
-                    if (this.control.enableRotate == true) this.control.enableRotate = false;
-                    if (this.control.enableZoom == true) this.control.enableZoom = false;
-
-                    this.r_joystick.animate();
-                    this.joystick_update(this.r_joystick);
-                    this.updateControlRotate();
-                }
-                else if (this.l_joystick.checkAnimate()){
-                    this.l_joystick.animate();
-                } 
-                else if (this.r_joystick.checkAnimate()){
-                    this.r_joystick.animate();
+                        this.r_joystick.animate();
+                        this.joystick_update(this.r_joystick);
+                        this.updateControlRotate();
+                    }
+                    else if (this.l_joystick.checkAnimate()) {
+                        this.l_joystick.animate();
+                    }
+                    else if (this.r_joystick.checkAnimate()) {
+                        this.r_joystick.animate();
+                    }
                 }
             }
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
@@ -170,7 +173,7 @@ class UserController {
         this.isEnter = false;
     }
 
-    
+
     //=====================================================================================
     //=====================================================================================
 
@@ -222,15 +225,15 @@ class UserController {
         if (this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")) {
 
             this.isKey_down = false;
-            this.velocity.set(0,0,0);
+            this.velocity.set(0, 0, 0);
             this.fValue = 0;
             this.bValue = 0;
             this.lValue = 0;
             this.rValue = 0;
         }
 
-        if (this.l_joystick.is_pressed == false){
-            this.velocity.set(0,0,0);
+        if (this.l_joystick.is_pressed == false) {
+            this.velocity.set(0, 0, 0);
             this.fValue = 0;
             this.bValue = 0;
             this.lValue = 0;
@@ -240,11 +243,11 @@ class UserController {
 
     key_update() {
         if (this.keyboard.pressed("W")) {
-                
+
             if (this.fValue < 0.15) this.fValue += 0.05;
         }
         if (this.keyboard.pressed("S")) {
-            
+
             if (this.bValue < 0.15) this.bValue += 0.05;
         }
         if (this.keyboard.pressed("A")) {
@@ -268,7 +271,7 @@ class UserController {
             this.fValue = MyMath.map(Math.abs(forward), 0, 50, 0.04, 0.1);
             this.bValue = 0
         }
-  
+
         if (turn > 5) {
             this.lValue = 0
             this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
@@ -329,25 +332,21 @@ class UserController {
 
     }
 
-    updateControlRotate(){
+    updateControlRotate() {
         if (this.fValue > 0) {
             this.camera.translateY(-0.05);
-            console.log("forward")
         }
 
         if (this.bValue > 0) {
             this.camera.translateY(0.05);
-            console.log("backward")
         }
 
         if (this.lValue > 0) {
             this.camera.translateX(0.05);
-            console.log("left")
         }
 
         if (this.rValue > 0) {
             this.camera.translateX(-0.05);
-            console.log("right")
         }
     }
 
@@ -359,7 +358,7 @@ class UserController {
 
         this.control.enablePan = true;
         this.control.enableZoom = true;
-        
+
         this.control.enabled = false;
 
         this.camLerpPos = new THREE.Vector3().subVectors(
@@ -372,6 +371,8 @@ class UserController {
         this.control.enabled = true;
         this.control.enablePan = false;
         this.control.enableZoom = false;
+
+        this.camDis = (this.user.size + this.user.noiseSize) * 5;
 
         const camDir = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),
