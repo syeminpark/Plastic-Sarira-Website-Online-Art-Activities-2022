@@ -20,15 +20,12 @@ export default class PointThree extends BasicThree {
             vertexColors: true,
             // color:"#0000FF"
         })
-
     }
-
     setup(canvas) {
         super.setup(canvas);
         this.originalArray = []
         this.selectedArray = []
         this.object = undefined;
-
     }
 
     import = (path) => {
@@ -142,8 +139,6 @@ export class SariraThree extends BasicThree {
             this.convex.initializeMesh()
         }
 
-
-
         this.camera.position.set(0, 0, 15 + geometry.boundingBox.max.y * 5)
         this.updateSize()
     }
@@ -246,4 +241,15 @@ export class WorldThree extends BasicThree {
                 bufferGeometry.dispose()
             })
     }
+
+}
+
+export class miniSariraThree extends BasicThree {
+    constructor(renderer, type, isDetail) {
+        super(renderer,type,isDetail)
+    }
+    
+    updateSize() {}
+    animate() {}
+
 }
