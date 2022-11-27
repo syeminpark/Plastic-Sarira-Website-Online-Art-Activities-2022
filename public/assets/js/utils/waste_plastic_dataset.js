@@ -111,7 +111,6 @@ export default class Waste_plastic_dataset {
             })
            }
         }
-        console.log(result)
         return result 
 
     }

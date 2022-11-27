@@ -26,7 +26,6 @@ class Sarira {
     }
 
     initializeConvex() {
-        console.log(this.plasticList.length)
         if (this.convex == undefined && this.plasticList.length > 3) {
             this.convex = new Convex(this.threeSystem,this.convexMaterial)
             this.convex.initializeBuffer(this.bufferGeometry)
