@@ -34,8 +34,8 @@ export default{
 
      ///////////////////////////////////////////////////
     //server
-    type:"administrator",
-    sariraArchiveMax:30
+    type:"audience",
+    sariraArchiveMax:300
 }
 
 
@@ -78,8 +78,8 @@ export default{
 
      ///////////////////////////////////////////////////
     //server
-    type:"administrator",
-    sariraArchiveMax:30
+       type:"audience",
+    sariraArchiveMax:300
 
 }
 */

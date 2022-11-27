@@ -42,7 +42,8 @@ export default class SariraThreeController {
     create(load_index, range, data, element) {
 
         for (let i = load_index * range; i < (load_index + 1) * range; i++) {
-            if (this.sariraThreeList[i] != undefined) {
+            if (this.sariraThreeList[i] != undefined && data[i]!=undefined) {
+                
                 this.sariraThreeList[i].setElement(element[i])
                 this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
                 this.sariraObject.push(this.sariraThreeList[i].getObject())
