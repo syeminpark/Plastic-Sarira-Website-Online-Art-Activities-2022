@@ -1,5 +1,5 @@
 <div id="world-scene" class="full-container" style="display: flex; align-items: center; justify-content: center;">
-	
+
 	<div id="world-health-container" class="inactive">
 		<div id="world-user-name"> </div>
 		<div id="world-health-bar"></div>
@@ -9,8 +9,8 @@
 		<span class="EN">CREATE YOUR AVATAR </span>
 		<span class="KR">아바타 생성하기 </span>
 
-		<input class ="KR" id= "name_input" type="text" placeholder="이름">
-		<input class ="EN" id= "name_input" type="text" placeholder="NAME">
+		<input class="KR" id="name_input" type="text" placeholder="이름">
+		<input class="EN" id="name_input" type="text" placeholder="NAME">
 		<span id="world-enter-btn" class="txt-btn">
 			<span class="EN">ENTER VIRTUAL ECOSYSTEM</span>
 			<span class="KR">가상 생태계 입장</span>
@@ -37,129 +37,132 @@
 		<div class="world-popup-header">
 			<span class="EN world-popup-title">YOUR SARIRA</span>
 			<span class="KR world-popup-title">당신의 사리</span>
-			 <span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
+			<span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
 		<div class="world-popup-container">
-			<div class="sari-profile"></div>
+			<div class="sari-profile" id="sari-profile-container"></div>
 		</div>
 	</div>
-	<div id="world-history" class="world-popup inactive">
-		<div class="world-popup-header">
-			<span class="EN world-popup-title">PLASTICS IN THIS WORLD</span> 
-			<span class="KR world-popup-title">생태계의 잔존 플라스틱</span> 
-			<spanv class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
-		<div class="world-popup-container">
-			<span class="world-svg btn prev z3" id="history-img-slide-prev-btn"
-				svg-src="./assets/svg/arrow2.svg"></span>
-			<span class="world-svg btn next z3" id="history-img-slide-next-btn"
-				svg-src="./assets/svg/arrow2.svg"></span>
-			<div class="img-caption z3">
-				<div class="img-caption-id" id="img-caption-id"></div>
-				<!-- <div class="img-caption-datetime" id="img-caption-timestamp">2006-08-09</div> -->
-			</div>
-			<div class="img-slide" id="history-img-slide">
-				<div class="prev" id="history-img-slide-prev"></div>
-				<div class="curr" id="history-img-slide-curr"></div>
-				<div class="next" id="history-img-slide-next"></div>
-			</div>
+
+
+</div>
+</div>
+<div id="world-history" class="world-popup inactive">
+	<div class="world-popup-header">
+		<span class="EN world-popup-title">PLASTICS IN THIS WORLD</span>
+		<span class="KR world-popup-title">생태계의 잔존 플라스틱</span>
+		<spanv class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span>
+	</div>
+	<div class="world-popup-container">
+		<span class="world-svg btn prev z3" id="history-img-slide-prev-btn" svg-src="./assets/svg/arrow2.svg"></span>
+		<span class="world-svg btn next z3" id="history-img-slide-next-btn" svg-src="./assets/svg/arrow2.svg"></span>
+		<div class="img-caption z3">
+			<div class="img-caption-id" id="img-caption-id"></div>
+			<!-- <div class="img-caption-datetime" id="img-caption-timestamp">2006-08-09</div> -->
+		</div>
+		<div class="img-slide" id="history-img-slide">
+			<div class="prev" id="history-img-slide-prev"></div>
+			<div class="curr" id="history-img-slide-curr"></div>
+			<div class="next" id="history-img-slide-next"></div>
 		</div>
 	</div>
-	<div id="world-help" class="world-popup inactive">
-		<div class="world-popup-header">
-			<span class="EN world-popup-title">CONTROLS</span>
-		     <span class="KR world-popup-title">조작법</span>
-			 <span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
-		<div class="world-popup-container">
-			<div class="display-pc full-container main-padd">
-				<div class="col-5-12 full-col">
-					<div class="block empty"></div>
-					<div class="block">W</div>
-					<div class="block empty"></div>
+</div>
+<div id="world-help" class="world-popup inactive">
+	<div class="world-popup-header">
+		<span class="EN world-popup-title">CONTROLS</span>
+		<span class="KR world-popup-title">조작법</span>
+		<span class="world-svg closer btn" svg-src="./assets/svg/minus.svg"></span></div>
+	<div class="world-popup-container">
+		<div class="display-pc full-container main-padd">
+			<div class="col-5-12 full-col">
+				<div class="block empty"></div>
+				<div class="block">W</div>
+				<div class="block empty"></div>
 
-					<div class="block">A</div>
-					<div class="block">S</div>
-					<div class="block">D</div>
+				<div class="block">A</div>
+				<div class="block">S</div>
+				<div class="block">D</div>
 
-					<div class="block empty"></div>
-					<div class="block">Z</div>
-					<div class="block empty"></div>
-				</div>
-				<div class="EN col-7-12 full-col col-b-l main-padd">
-					<div class="col-3-12">W</div>
-					<div class="col-9-12">FOWARD</div>
-					<div class="col-3-12">A</div>
-					<div class="col-9-12">LEFT</div>
-					<div class="col-3-12">S</div>
-					<div class="col-9-12">BACK</div>
-					<div class="col-3-12">D</div>
-					<div class="col-9-12">RIGHT</div>
-					<div class="col-3-12">Z</div>
-					<div class="col-9-12">CHANGE VIEW</div>
-					
-					<div class="col-12-12"><br></div>
-					
-	
-					<div class="col-12-12">&nbsp;&nbsp;<span id="boot-icon" class="bi bi-mouse"
+				<div class="block empty"></div>
+				<div class="block">Z</div>
+				<div class="block empty"></div>
+			</div>
+			<div class="EN col-7-12 full-col col-b-l main-padd">
+				<div class="col-3-12">W</div>
+				<div class="col-9-12">FOWARD</div>
+				<div class="col-3-12">A</div>
+				<div class="col-9-12">LEFT</div>
+				<div class="col-3-12">S</div>
+				<div class="col-9-12">BACK</div>
+				<div class="col-3-12">D</div>
+				<div class="col-9-12">RIGHT</div>
+				<div class="col-3-12">Z</div>
+				<div class="col-9-12">CHANGE VIEW</div>
+
+				<div class="col-12-12"><br></div>
+
+
+				<div class="col-12-12">&nbsp;&nbsp;<span id="boot-icon" class="bi bi-mouse"
 						style="font-size: 150%"></span></div>
-					<div class="col-3-12">DRAG</div>
-					<div class="col-9-12">ROTATE</div>
+				<div class="col-3-12">DRAG</div>
+				<div class="col-9-12">ROTATE</div>
 
-				</div>
-				<div class="KR col-7-12 full-col col-b-l main-padd">
-					<div class="col-3-12">W</div>
-					<div class="col-9-12">앞쪽</div>
-					<div class="col-3-12">A</div>
-					<div class="col-9-12">왼쪽</div>
-					<div class="col-3-12">S</div>
-					<div class="col-9-12">뒤쪽</div>
-					<div class="col-3-12">D</div>
-					<div class="col-9-12">오른쪽</div>
-					<div class="col-3-12">Z</div>
-					<div class="col-9-12">시점 변경</div>
-					<div class="col-12-12"><br></div>
-
-					<div class="col-12-12">&nbsp;&nbsp;<span id="boot-icon" class="bi bi-mouse"
-						style="font-size: 150%"></span></div>
-					<div class="col-3-12">드래그</div>
-					<div class="col-9-12">회전</div>
-
-				</div>
 			</div>
-			<div class="display-m full-container">
-				<div class="col-m-6-12 full-col">
-					<div class="help-joystick">
-						<span class="world-svg up-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-						<span class="world-svg left-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-						<span class="world-svg right-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-						<span class="world-svg down-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-					</div>
-					<div class="help-joystick-caption">MOVE</div>
+			<div class="KR col-7-12 full-col col-b-l main-padd">
+				<div class="col-3-12">W</div>
+				<div class="col-9-12">앞쪽</div>
+				<div class="col-3-12">A</div>
+				<div class="col-9-12">왼쪽</div>
+				<div class="col-3-12">S</div>
+				<div class="col-9-12">뒤쪽</div>
+				<div class="col-3-12">D</div>
+				<div class="col-9-12">오른쪽</div>
+				<div class="col-3-12">Z</div>
+				<div class="col-9-12">시점 변경</div>
+				<div class="col-12-12"><br></div>
+
+				<div class="col-12-12">&nbsp;&nbsp;<span id="boot-icon" class="bi bi-mouse"
+						style="font-size: 150%"></span></div>
+				<div class="col-3-12">드래그</div>
+				<div class="col-9-12">회전</div>
+
+			</div>
+		</div>
+		<div class="display-m full-container">
+			<div class="col-m-6-12 full-col">
+				<div class="help-joystick">
+					<span class="world-svg up-arrow" svg-src="./assets/svg/arrow2.svg"></span>
+					<span class="world-svg left-arrow" svg-src="./assets/svg/arrow2.svg"></span>
+					<span class="world-svg right-arrow" svg-src="./assets/svg/arrow2.svg"></span>
+					<span class="world-svg down-arrow" svg-src="./assets/svg/arrow2.svg"></span>
 				</div>
-				<div class="col-m-6-12 full-col">
-					<div class="help-joystick">
-						<span class="world-svg up-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-						<span class="world-svg left-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-						<span class="world-svg right-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-						<span class="world-svg down-arrow" svg-src="./assets/svg/arrow2.svg"></span>
-					</div>
-					<div class="help-joystick-caption">ROTATE</div>
+				<div class="help-joystick-caption">MOVE</div>
+			</div>
+			<div class="col-m-6-12 full-col">
+				<div class="help-joystick">
+					<span class="world-svg up-arrow" svg-src="./assets/svg/arrow2.svg"></span>
+					<span class="world-svg left-arrow" svg-src="./assets/svg/arrow2.svg"></span>
+					<span class="world-svg right-arrow" svg-src="./assets/svg/arrow2.svg"></span>
+					<span class="world-svg down-arrow" svg-src="./assets/svg/arrow2.svg"></span>
 				</div>
+				<div class="help-joystick-caption">ROTATE</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div id="world-navigation" class="m-inactive">
-		<span class="btn world-svg world-nav-btn" id="world-profile-btn" svg-src="./assets/svg/profile.svg"
-			tid="world-profile"></span>
-		<span class="btn world-svg world-nav-btn" id="world-history-btn" svg-src="./assets/svg/history.svg"
-			tid="world-history"></span>
-		<span class="btn world-svg world-nav-btn" id="world-help-btn" svg-src="./assets/svg/help.svg"
-			tid="world-help"></span>
-	</div>
+<div id="world-navigation" class="m-inactive">
+	<span class="btn world-svg world-nav-btn" id="world-profile-btn" svg-src="./assets/svg/profile.svg"
+		tid="world-profile"></span>
+	<span class="btn world-svg world-nav-btn" id="world-history-btn" svg-src="./assets/svg/history.svg"
+		tid="world-history"></span>
+	<span class="btn world-svg world-nav-btn" id="world-help-btn" svg-src="./assets/svg/help.svg"
+		tid="world-help"></span>
+</div>
 
-	<div id="world-joystick-left" class="joystick joystick-l display-m m-inactive">
-		<div class="joystick-thumb"></div>
-	</div>
-	<div id="world-joystick-right" class="joystick joystick-r display-m m-inactive">
-		<div class="joystick-thumb"></div>
-	</div>
+<div id="world-joystick-left" class="joystick joystick-l display-m m-inactive">
+	<div class="joystick-thumb"></div>
+</div>
+<div id="world-joystick-right" class="joystick joystick-r display-m m-inactive">
+	<div class="joystick-thumb"></div>
+</div>
 </div>

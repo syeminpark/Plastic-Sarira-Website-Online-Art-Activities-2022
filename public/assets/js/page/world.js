@@ -21,7 +21,9 @@ import {
 import SingleRenderer from '/assets/js/rendering/SingleRenderer.js'
 
 import ServerClientCommunication from '../utils/serverClientCommunication.js';
-import { miniSariraThree } from '../rendering/SpecificThree.js';
+import {
+	miniSariraThree
+} from '../rendering/SpecificThree.js';
 
 const test_img_srcs = [{
 		img_src: "./assets/img/Naechi/studio/1.jpg",
@@ -49,9 +51,11 @@ class World12345 extends Page12345 {
 		this.pagelayer = _pagelayer;
 
 		this.world = new WorldSystem(this.pagelayer);
-		
-		this.miniRenderer= new SingleRenderer() 
-		this.miniThree = new miniSariraThree(this.miniRenderer,'world',false)
+
+		this.miniRenderer = new SingleRenderer()
+		this.miniSariraThree = new miniSariraThree(this.miniRenderer, 'world', false)
+		this.miniSariraThree.render()
+		this.miniSariraThree.animate()
 
 		this.userController = new UserController(this);
 		this.ServerClientCommunication = new ServerClientCommunication()
@@ -59,6 +63,7 @@ class World12345 extends Page12345 {
 	}
 
 	setup() {
+		this.unload();
 		this.loadsvg();
 
 		const enter_btn = this.pagelayer.popup.querySelector('#world-enter-btn');
@@ -109,8 +114,9 @@ class World12345 extends Page12345 {
 		this.world_ended = false;
 
 		this.dom = document.getElementById('world-navigation');
-		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'));
-		this.world.importPLY( this.imageslider.add_data, this.imageslider.reposition);
+		this.miniSariraThree.setup(document.getElementById('sari-profile-container'), document.getElementById("world-profile"))
+		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'), this.miniSariraThree);
+		this.world.importPLY(this.imageslider.add_data, this.imageslider.reposition);
 		this.userController.setup(this.world);
 
 	}
@@ -137,7 +143,11 @@ class World12345 extends Page12345 {
 
 				this.userController.start(input.value);
 
+
 				this.ServerClientCommunication.createUser(input.value)
+
+
+
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
 				this.any_world_btn_clicked = false;
 
@@ -165,8 +175,9 @@ class World12345 extends Page12345 {
 					this.time += 2;
 					if (this.world.life_user.isDead == true) {
 						clearInterval(this.lifecheck);
-						this.worldEnd();
 						this.userController.end();
+						this.worldEnd();
+
 
 					} else {
 						this.userController.healthbarActive();
@@ -225,20 +236,26 @@ class World12345 extends Page12345 {
 			document.getElementById('death').play()
 		}
 
-		//getSariraDataForServer
-		let data = this.world.getSariraData()
-		this.ServerClientCommunication.postSariraById(data)
 
 		if (document.querySelector('#show-m-navigation').classList.contains('expanded')) {
 			document.querySelector('#show-m-navigation').click();
 		}
+
 		document.getElementById('world-navigation').classList.add('m-inactive');
 		document.getElementById('world-joystick-left').classList.add('m-inactive');
 		document.getElementById('world-joystick-right').classList.add('m-inactive');
+
 		this.end_message.classList.remove("inactive");
+
+
+		this.miniSariraThree.switchDom(document.getElementById('world-end-sarira'), this.end_message)
 		this.closePopups();
 		this.world_ended = true;
 		window.removeEventListener('keyup', this.moveSari.bind(this));
+		let data = this.world.getSariraData()
+		this.ServerClientCommunication.postSariraById(data)
+
+
 	}
 
 	closePopups() {

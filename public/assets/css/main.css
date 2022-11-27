@@ -979,11 +979,12 @@ body {
 	width: 100%;
 	height: calc(100% - var(--nav-bar));
 	font-size: calc(var(--font-large)*0.8);
+	
 }
 
 .world-popup-container .sari-profile {
-	width: calc(100% - calc(var(--main-padding) * 2));
-	height: calc(100% - calc(var(--main-padding) * 2));
+	width: calc(100% - calc(var(--main-padding) ));
+	height: calc(100% - calc(var(--main-padding) ));
 	background-color: black;
 	border-radius: var(--bevel-small);
 	position: absolute;
@@ -991,6 +992,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	box-shadow: var(--shadow-diagonal) var(--shadow-color);
+
 }
 
 .world-popup-container .btn.prev {

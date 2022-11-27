@@ -35,7 +35,6 @@ class Sarira {
     addPlastics(micro) {
         this.plasticList.push(micro)
         this.d3Dataset.push(micro.d3Dataset)
-        //add image to window
 
     }
 

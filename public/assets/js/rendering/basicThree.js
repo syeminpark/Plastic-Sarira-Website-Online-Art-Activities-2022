@@ -18,21 +18,26 @@ export default class BasicThree {
             0.02,
             1300
         )
+        this.camera.position.set(0,0,2)
 
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
+   
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
 
         this.scene.add(this.group)
-        window.addEventListener('resize', () => this.updateSize(), false)
+         window.addEventListener('resize',() => this.updateSize(), false)
+         
     }
+    
 
     setup(canvas) {
         this.canvas = canvas
         this.renderer.appendToCanvas(this.canvas)
         this.reset()
         this.controls.reset()
+        
     }
 
     update() {
@@ -68,7 +73,7 @@ export default class BasicThree {
     reset() {
         this.scene.traverse((child) => {
             if (child.type == 'Group') {
-                console.log
+          
                 for (let i = 0; i < child.children.length; i++) {
                     const mesh = child.children[i];
                     mesh.geometry.dispose()
@@ -83,6 +88,7 @@ export default class BasicThree {
             
         })
         this.renderer.clear();
+        
     }
     //item=mesh 
     addToGroup(item) {
@@ -95,5 +101,8 @@ export default class BasicThree {
 
         geometry.dispose();
         material.dispose();
+    }
+    setCameraPosition(x, y, z) {
+        this.camera.position.set(x, y, z)
     }
 }

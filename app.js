@@ -32,10 +32,6 @@ app.use('*', (req, res) => {
     })
   });
 
-// app.get("",(req,res)=>{
-//     res.send("./index.js");
-// });
-
 /** Create HTTP server. */
 const server = http.createServer(app);
 server.listen(PORT);

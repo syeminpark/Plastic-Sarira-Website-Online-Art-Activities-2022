@@ -117,7 +117,7 @@ class WorldSystem {
 
         let options = {
             world: this.worldThree,
-            miniSariThree: miniSariraThree,
+            miniSariraThree: miniSariraThree,
             Sarira_Material: this.pointsMaterial,
             Sarira_ConvexMaterial: this.convexMaterial
         }
@@ -157,6 +157,7 @@ class WorldSystem {
         geometry.setDrawRange(0, this.maxParticleCount);
 
         this.particleAppearence = new THREE.Points(geometry, material);
+        this.particleAppearence.frustumCulled = false
         this.particleAppearence.position.set(0, 0, 0);
         // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
         this.particleAppearence.traverse(function (object) {
