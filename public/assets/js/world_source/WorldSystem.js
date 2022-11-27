@@ -44,7 +44,7 @@ class WorldSystem {
         this.convexMaterial = createConvexMaterial();
         this.standardMaterial=createStandardMaterial()
 
-        this.initialCameraPosition = [0, 0, 5]
+        this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
     }
 
