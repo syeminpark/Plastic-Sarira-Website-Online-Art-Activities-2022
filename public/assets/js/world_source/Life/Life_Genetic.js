@@ -68,10 +68,6 @@ class Life_Genetic extends Life_EatOther {
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
-        this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, 0, this.lifespan);
-        this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
-                                     0, 1, 0.1, 5);
-
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
                                       0, 1, 0.05, 0.15);
     }
@@ -102,8 +98,12 @@ class Life_Genetic extends Life_EatOther {
 
         this.metaEnergyGet = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 0.1, 0.5);
 
-        this.moveTerm = MyMath.map(this.geneCode.moveActivity, 0, 1, 5000, 500);
-        this.metaTerm = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 5000, 500);
+        this.moveTerm = Math.floor(MyMath.map(this.geneCode.moveActivity, 0, 1, 100, 1));
+        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 100, 1));
+
+        this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.3, this.lifespan);
+        this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
+                                     0, 1, 0.01, 1);
 
         this.isReadyToDivision = false;
         
@@ -131,7 +131,7 @@ class Life_Genetic extends Life_EatOther {
     // ===============================================================================
 
     updateMetabolism(){
-        if (this.clock.getElapsedTime() % this.metaTerm) { 
+        if (this.clock.getElapsedTime() % this.metaTerm <= 0.1) { 
             this.growing();
             this.energy -= this.metaEnergyUse;
             
@@ -146,11 +146,12 @@ class Life_Genetic extends Life_EatOther {
     }
 
     growing(){
-        if (this.age < this.growAge) { 
+        if (this.age <= this.growAge) { 
             this.size += this.growValue;
             this.lifeMesh.scale.set(this.size, this.size, this.size);
-            console.log(`Life ${this.index} is Growing (${this.size})`);
+            // console.log(`Life ${this.index} is Growing (${this.size})`);
         }
+        // 자라면서 속력이 빨라짐
         if (this.velLimit < this.velLimitMax) {
             this.velLimit += 0.05;
         }
@@ -165,7 +166,7 @@ class Life_Genetic extends Life_EatOther {
     }
 
     applyForce(force){
-        if (this.clock.getElapsedTime() % this.moveTerm){
+        if (this.clock.getElapsedTime() % this.moveTerm <= 0.1){
             this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
             this.position = this.lifeMesh.position;
 
@@ -186,12 +187,12 @@ class Life_Genetic extends Life_EatOther {
     }
 
     lifeGo(callback){
-        if (this.age < this.lifespan && this.clock.getElapsedTime() % 1800) {
+        if (this.age < this.lifespan && this.clock.getElapsedTime() % this.metaTerm <= 0.1) {
             this.age += 0.1;
             if (this.age > this.lifespan * 0.7) this.velLimit -= 0.01;
         }
 
-        if (this.clock.getElapsedTime() % this.division_term && 
+        if (this.clock.getElapsedTime() % this.division_term <= 0.1 && 
             this.age >= this.division_age && 
             this.energy > this.division_energy && 
             this.isReadyToDivision == false) {

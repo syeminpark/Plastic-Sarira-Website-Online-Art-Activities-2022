@@ -145,7 +145,7 @@ class Life {
     }
 
     applyForce(force){
-        if (this.clock.getElapsedTime() % this.moveTerm){
+        if (this.clock.getElapsedTime() % this.moveTerm <= 0.1){
             this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
             this.position = this.lifeMesh.position;
 

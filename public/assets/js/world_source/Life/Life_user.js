@@ -93,13 +93,19 @@ class Life_user extends Life_Genetic {
         this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
         this.updateShaderMat();
         this.wrapParticles();
+        this.updateMetabolism();
 
         this.add_MicroPlasticToBodySystem();
         this.sarira_position = new THREE.Vector3().copy(this.position);
 
         this.bodySystem.update();
         this.bodySystem.setPosition(this.sarira_position);
-        // this.bodySystemWindow.update();
+    }
+
+    updateMetabolism(){
+        if (this.clock.getElapsedTime() % this.metaTerm <= 0.1) { 
+            this.growing();
+        }
     }
 
     stateMachine(otherLife) {
