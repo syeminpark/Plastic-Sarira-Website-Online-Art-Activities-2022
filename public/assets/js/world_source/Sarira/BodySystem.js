@@ -28,7 +28,6 @@ class BodySystem {
         this.convexMaterial;
         this.window = window
 
-
     }
 
     setPosition(positionList) {

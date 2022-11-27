@@ -22,8 +22,10 @@ import {
 import {
 	UserController
 } from '/assets/js/utils/UserController.js';
+import SingleRenderer from '/assets/js/rendering/SingleRenderer.js'
 
 import ServerClientCommunication from '../utils/serverClientCommunication.js';
+import { miniSariraThree } from '../rendering/SpecificThree.js';
 
 const test_img_srcs = [{
 		img_src: "./assets/img/Naechi/studio/1.jpg",
@@ -51,11 +53,13 @@ class World12345 extends Page12345 {
 		this.pagelayer = _pagelayer;
 
 		this.world = new WorldSystem(this.pagelayer);
+		
+		this.miniRenderer= new SingleRenderer() 
+		this.miniThree = new miniSariraThree(this.miniRenderer,'world',false)
+
 		this.userController = new UserController(this);
-
-		this.animate();
-
 		this.ServerClientCommunication = new ServerClientCommunication()
+		this.animate();
 	}
 
 	setup() {
@@ -109,9 +113,10 @@ class World12345 extends Page12345 {
 		this.world_ended = false;
 
 		this.dom = document.getElementById('world-navigation');
-		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'), this.imageslider.add_data, this.imageslider.reposition);
-	
+		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'));
+		this.world.importPLY( this.imageslider.add_data, this.imageslider.reposition);
 		this.userController.setup(this.world);
+
 	}
 
 	unload() {
@@ -218,7 +223,7 @@ class World12345 extends Page12345 {
 		} else if (e.code === 'KeyZ') {}
 	}
 
-	async worldEnd() {
+	worldEnd() {
 		//play death sound
 		if (document.getElementById('sound-btn').classList.contains('active')) {
 			document.getElementById('death').play()
@@ -226,7 +231,7 @@ class World12345 extends Page12345 {
 
 		//getSariraDataForServer
 		let data = this.world.getSariraData()
-		await this.ServerClientCommunication.postSariraById(data)
+		this.ServerClientCommunication.postSariraById(data)
 
 		if (document.querySelector('#show-m-navigation').classList.contains('expanded')) {
 			document.querySelector('#show-m-navigation').click();

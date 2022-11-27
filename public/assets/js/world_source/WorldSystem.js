@@ -49,7 +49,7 @@ class WorldSystem {
     }
 
     //해당 페이지 재접속시 다시 실행
-    setup(worldDom, enterDom,addToslider,reorganize) {
+    setup(worldDom, enterDom,miniSariraThree ) {
 
     
 
@@ -64,8 +64,11 @@ class WorldSystem {
 
         //파티클, 라이프 초기화
         this.createParticle();
-        this.createLife();
+        this.createLife(miniSariraThree);
 
+    }
+
+    importPLY(addToslider,reorganize){
         let randomSource = Waste_plastic_dataset.getRandomBatchPLY(this.initialWastePlasticCount)
         for (let i = 0; i < this.initialWastePlasticCount; i++) {
             this.worldThree.import(randomSource[i], this.createPlastic, addToslider,reorganize)
@@ -103,7 +106,7 @@ class WorldSystem {
     //=====================================================================================
     //=====================================================================================
 
-    createLife() {
+    createLife(miniSariraThree) {
         //생물 개체수 시작값
         const minNum = Math.floor(this.worldSize * 0.1);
 
@@ -114,13 +117,14 @@ class WorldSystem {
 
         let options = {
             world: this.worldThree,
+            miniSariThree: miniSariraThree,
             Sarira_Material: this.pointsMaterial,
             Sarira_ConvexMaterial: this.convexMaterial
         }
         //console.log(options);
 
         this.lifes = [];
-        this.life_user = new Life_user(options, this.worldThree);
+        this.life_user = new Life_user(options);
         this.lifes.push(this.life_user);
 
         for (let i = 1; i < this.lifeNum; i++) {

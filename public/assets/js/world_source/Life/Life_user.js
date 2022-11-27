@@ -107,10 +107,9 @@ class Life_user extends Life_Genetic {
     }
 
     SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial) {
-        this.bodySystemWindow = new BodySystem(0, false);
+        this.bodySystemWindow = new BodySystem(0, this.options.miniSariraThree,true);
         this.bodySystemWindow.createBuffer(microPlastic_Material);
         this.bodySystemWindow.createSarira(microPlastic_ConvexMaterial);
-        this.bodySystemWindow.createTerminal();
     }
 
     getSariraDataForServer() {

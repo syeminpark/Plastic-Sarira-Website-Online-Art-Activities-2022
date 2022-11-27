@@ -91,6 +91,7 @@ export default class ServerClientCommunication {
             })
         } catch (error) {
             console.log(JSON.stringify(error))
+            
         }
     }
 

@@ -6,10 +6,7 @@ import {
 export default class BasicThree {
     constructor(renderer, type, isDetail) {
         this.group = new THREE.Group()
-
-        
-        //scene
-
+        //scen
         this.type = type
         this.isDetail = isDetail
         this.renderer = renderer
@@ -98,7 +95,5 @@ export default class BasicThree {
 
         geometry.dispose();
         material.dispose();
-
-
     }
 }
