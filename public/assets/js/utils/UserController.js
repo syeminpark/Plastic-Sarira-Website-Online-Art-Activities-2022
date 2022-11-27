@@ -37,7 +37,7 @@ class UserController {
         this.user = world.life_user;
         this.velocity = new THREE.Vector3();
 
-        this.camDis = (this.user.size + this.user.noiseSize) * 5;
+        this.camDis = this.user.mass * 4;
         this.lerpSpeed = config.lerpSpeed
 
         this.isLifeFocusOn = true;
@@ -371,8 +371,6 @@ class UserController {
         this.control.enabled = true;
         this.control.enablePan = false;
         this.control.enableZoom = false;
-
-        this.camDis = (this.user.size + this.user.noiseSize) * 5;
 
         const camDir = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),

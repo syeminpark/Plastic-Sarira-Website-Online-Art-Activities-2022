@@ -56,10 +56,10 @@ class Life_user extends Life_Genetic {
 
         //라이프에도영향을 줌 
         this.lifespan = config.lifespan
+        this.metaTerm = 1;
     }
 
     init() {
-        
         if (this.geneCode == null) return;
 
         this.velLimit = 1;
@@ -69,10 +69,6 @@ class Life_user extends Life_Genetic {
         this.mass = this.size + this.noiseSize;
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
-
-        this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, 0, this.lifespan);
-        this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5,
-            0, 1, 0.1, 5);
 
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.15);
@@ -84,7 +80,6 @@ class Life_user extends Life_Genetic {
         //                 MyMath.random(-3, 3), MyMath.random(-3, 3)))
         //         }
         //     })
-
         }
 
 
@@ -93,7 +88,6 @@ class Life_user extends Life_Genetic {
         this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
         this.updateShaderMat();
         this.wrapParticles();
-        this.updateMetabolism();
 
         this.add_MicroPlasticToBodySystem();
         this.sarira_position = new THREE.Vector3().copy(this.position);
@@ -101,12 +95,6 @@ class Life_user extends Life_Genetic {
         this.bodySystem.update();
         this.bodySystem.setPosition(this.sarira_position);
         this.bodySystemWindow.update();
-    }
-
-    updateMetabolism(){
-        if (this.clock.getElapsedTime() % this.metaTerm <= 0.1) { 
-            this.growing();
-        }
     }
 
     stateMachine(otherLife) {
