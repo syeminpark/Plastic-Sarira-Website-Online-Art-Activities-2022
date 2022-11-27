@@ -16,6 +16,8 @@ class Sarira {
         this.d3Dataset=[]
 
         this.positionVector3 = new THREE.Vector3(0, 0, 0);
+
+        
     }
 
 

@@ -195,6 +195,13 @@ export class WorldThree extends BasicThree {
     constructor(renderer, type, isDetail) {
         super(renderer, type, isDetail);
         this.camera.fov = 75
+
+        let ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3);
+     
+        
+        this.scene.add(ambientLight, hemiLight, );
+
     }
 
     render = () => {

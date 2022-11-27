@@ -14,7 +14,8 @@ import {
 import {
     createParticleMaterial,
     createPointMaterial,
-    createConvexMaterial
+    createConvexMaterial,
+    createStandardMaterial,
 } from '../rendering/material.js';
 
 import {
@@ -42,6 +43,7 @@ class WorldSystem {
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
+        this.standardMaterial=createStandardMaterial()
 
         this.initialCameraPosition = [0, 0, 5]
         this.particleAppearence = undefined
@@ -119,7 +121,8 @@ class WorldSystem {
             world: this.worldThree,
             miniSariraThree: miniSariraThree,
             Sarira_Material: this.pointsMaterial,
-            Sarira_ConvexMaterial: this.convexMaterial
+            Sarira_ConvexMaterial: this.convexMaterial,
+            standardMaterial:this.standardMaterial
         }
         //console.log(options);
 
@@ -210,7 +213,7 @@ class WorldSystem {
             positions: finalPositions,
             colors: finalColors,
             beach: beach,
-            index: index
+            index: index,
         }
 
         return this.checkWorldForInput(object)

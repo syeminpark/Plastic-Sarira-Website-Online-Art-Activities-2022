@@ -40,13 +40,17 @@ export function createPointMaterial() {
 export function createStandardMaterial() {
     return new THREE.MeshStandardMaterial({
         color: 'white',
-        transparent: true,
+        // transparent: true,
         depthWrite:true,
         depthTest:true,
-        opacity: 0.5,
-        metalness: 0.3,
-        roughness: 0.1,
+        opacity: 0.9,
+        metalness: 0,
+        roughness: 0,
         side: THREE.DoubleSide,
+        emissive:'black',
+        emissiveIntensity :10,
+        // blending: THREE.AdditiveBlending,
+        // flatShading:true,
     });
 }
 

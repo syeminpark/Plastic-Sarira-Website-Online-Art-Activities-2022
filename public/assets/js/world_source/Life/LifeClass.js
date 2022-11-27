@@ -165,14 +165,14 @@ class Life_Absorb extends Life {
 
 // 사리 만드는 Life
 class Life_Sarira extends Life_Absorb {
-    constructor(index, world, Sarira_Material, Sarira_ConvexMaterial, setPos) {
+    constructor(index, world, Sarira_Material, standardMaterial, setPos) {
         super(index, world, setPos);
 
         this.bodySystem = new BodySystem(this.index, this.worldThree);
-        this.setSarira(Sarira_Material, Sarira_ConvexMaterial);
+        this.setSarira(Sarira_Material, standardMaterial);
     }
 
-    setSarira(microPlastic_Material, microPlastic_ConvexMaterial) {
+    setSarira(microPlastic_Material,  standardMaterial) {
         this.isMakeSarira = false;
         this.sariraPosition = new THREE.Vector3();
         this.sariraType = Math.floor(MyMath.random(1, 4));
@@ -185,7 +185,7 @@ class Life_Sarira extends Life_Absorb {
         this.sarira_position;
 
         this.bodySystem.createBuffer(microPlastic_Material);
-        this.bodySystem.createSarira(microPlastic_ConvexMaterial);
+        this.bodySystem.createSarira(standardMaterial);
     }
 
     update() {
