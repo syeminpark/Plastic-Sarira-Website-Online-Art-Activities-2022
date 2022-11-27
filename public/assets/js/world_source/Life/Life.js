@@ -6,7 +6,7 @@ import {createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
 class Life {
     constructor(index, world, setPos) {
         this.index = index;
-        this.worldThree = world;
+        this.worldThree = world.worldThree;
         this.worldSize = world.worldSize || 300;
                 
         this.init();
@@ -62,7 +62,7 @@ class Life {
     initWrap(){
         this.wrapCenter = new THREE.Vector3(0,0,0);
         this.wrapTar = this;
-        this.wrapSize = this.worldSize - (this.mass * 0.5);
+        this.wrapSize = this.worldSize - ((this.size + this.noiseSize) * 0.5);
     }
 
     initMetabolism(){
@@ -141,26 +141,25 @@ class Life {
     }
 
     gravity(){
-        this.velocity.multiplyScalar(0.99);
+        this.velocity.multiplyScalar(0.9);
     }
 
     applyForce(force){
-        if (this.clock.getElapsedTime() % this.moveTerm <= 0.1){
-            this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-            this.position = this.lifeMesh.position;
+        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
+        this.position = this.lifeMesh.position;
 
-            this.look(force);
+        this.acceleration.set(0,0,0);
 
-            this.acceleration.add(force);
-            this.velocity.add(this.acceleration);
+        this.look(force);
 
-            if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.1);
-            //this.velocity.clampLength(0, this.velLimit * 1.2);
+        this.acceleration.add(force);
+        this.velocity.add(this.acceleration);
 
-            this.position.add(this.velocity);
+        if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.1);
 
-            this.velocity.multiplyScalar(0.1);
-        }
+        this.position.add(this.velocity);
+
+        // this.velocity.multiplyScalar(0.01);
     }
 
     look(dir){
@@ -204,7 +203,7 @@ class Life {
                 this.absorbedParticles[i].initWrap();
             }
 
-            //console.log(this.lifeName + ' is die');
+            console.log(this.index + ' is die');
             this.isDead = true;
 
             this.contentsText = "";
@@ -222,6 +221,7 @@ class Life {
             this.lifespan -= this.size/2;
             
             let child = new Life(lifes.length, this.worldSize, new THREE.Vector3().copy(this.position));
+            console.log("life " + lifes.length + " created")
             
             if (child == null) return;
             lifeSystem.lifeNum++;
@@ -257,6 +257,9 @@ class Life {
             normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
             this.applyForce( normal.multiplyScalar(-0.1) );
             //otherLife.applyForce( normal.multiplyScalar(0.1) );
+
+            this.velocity.multiplyScalar(0.01);
+
             //console.log("life_" + this.index + " push life_" + otherLife.index);
         }
     }
@@ -272,12 +275,15 @@ class Life {
 
             this.velocity.multiplyScalar(-0.1);
 
-            normal.setLength( -0.01 );
+            normal.setLength( -0.1 );
             this.applyForce( normal );
 
             relativeVelocity.sub( this.velocity.multiplyScalar(0.1) );
             normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
+            normal.multiplyScalar(0.1);
             this.applyForce( normal );
+
+            this.velocity.multiplyScalar(0.8);
         }
 
         // const distance = this.wrapCenter.distanceTo(this.position);

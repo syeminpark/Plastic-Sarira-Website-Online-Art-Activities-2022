@@ -9,7 +9,8 @@ class Life_EatOther extends Life_Sarira {
         //this.options = options;
 
         this.state = 0;
-        this.sightRange = this.mass * 1.25;
+        this.attack = 2;
+        this.sightRange = this.mass * this.attack;
         this.chaseTarget = null;
         this.isEaten = false;
         this.digestionSpeed = MyMath.random(1, 3);
@@ -21,6 +22,7 @@ class Life_EatOther extends Life_Sarira {
     findLife(otherLife){
         let result = false;
         let distance = this.position.distanceTo(otherLife.position);
+        this.sightRange = this.mass * this.attack;
         if (distance < this.sightRange && this.mass > otherLife.mass * 2 && otherLife.isEaten == false) {
             result = true;
             this.chaseTarget = otherLife;
@@ -50,6 +52,7 @@ class Life_EatOther extends Life_Sarira {
             default:
                 break;
         }
+
     }
 
     normalMove(otherLife){
@@ -72,17 +75,17 @@ class Life_EatOther extends Life_Sarira {
         this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0,0);
         this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0,1,0);
 
-        let dir = new THREE.Vector3();
-        dir.copy(this.chaseTarget.position).sub(new THREE.Vector3().copy(this.position));
-        let distance = dir.length();
+        let dir = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.chaseTarget.position), 
+            new THREE.Vector3().copy(this.position));
+        let distance = this.position.distanceTo(this.chaseTarget.position);
 
         if (distance > this.sightRange * 2){
             this.state = 0;
             return;
         } 
 
-        dir.normalize();
-        dir.multiplyScalar(0.001);
+        dir.setLength(this.moveSpeed);
         this.applyForce(dir);
         
         if (distance < (this.size + this.chaseTarget.size) * 0.5){
@@ -92,6 +95,7 @@ class Life_EatOther extends Life_Sarira {
         // super.setTestText(
         //     `Life ${this.index} 
         //     chase Target = ${this.chaseTarget?.index}`);
+
     }
     
     eatLife(){
@@ -101,7 +105,7 @@ class Life_EatOther extends Life_Sarira {
         }
 
         if (this.chaseTarget.isDead == false){
-            //console.log(this.index + " eat " + this.chaseTarget.index);
+            console.log(this.index + " eat " + this.chaseTarget.index);
 
             this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0,0,1);
 

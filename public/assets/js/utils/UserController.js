@@ -30,7 +30,7 @@ class UserController {
         this.control = this.threeSystem.controls;
 
         this.control.minDistance = 5;
-        this.control.maxDistance = this.worldSize;
+        this.control.maxDistance = this.worldSize*1.5;
 
         //=================================================================================
 

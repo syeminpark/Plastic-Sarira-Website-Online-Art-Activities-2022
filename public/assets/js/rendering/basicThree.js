@@ -101,6 +101,8 @@ export default class BasicThree {
 
         geometry.dispose();
         material.dispose();
+
+        console.log(this.renderer.renderer.info)
     }
     setCameraPosition(x, y, z) {
         this.camera.position.set(x, y, z)

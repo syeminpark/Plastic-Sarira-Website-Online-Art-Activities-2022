@@ -3,7 +3,7 @@ export default{
     ///////////////////////////////////////////////////
     //world 
 
-    worldSize:200,
+    worldSize:100,
     //최대 파티클 개수 
     maxParticleCount:15000,
     //처음에 불러오는 폐플라스틱 개수 
@@ -12,10 +12,10 @@ export default{
     
     //각 폐플라스틱 사이 간격 
     // plasticOffsetRange:0.13,
-    plasticOffsetRange:0.3,
+    plasticOffsetRange:0.5,
 
     //흐름(속력+방향)
-    velMin: 0.001,
+    velMin: 0.005,
 
     velMin: 0.001,
 

@@ -57,6 +57,7 @@ class Life_Genetic extends Life_EatOther {
     init(){
         if (this.geneCode == null) return;
 
+        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.003, 0.01);
         this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .5);
         this.velLimit = this.velLimitMax * .2;
 
@@ -65,11 +66,13 @@ class Life_Genetic extends Life_EatOther {
 
         this.mass = this.size + this.noiseSize;
 
-        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
-        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
+        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
+        this.noiseGrowValue = MyMath.map(this.geneCode.shape, 0, 1, -this.size * .5, this.size * .5);
 
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
                                       0, 1, 0.05, 0.15);
+
+        this.attack = MyMath.map(this.geneCode.attack, 0, 1, 1, 30);
     }
 
     initWrap(){
@@ -86,30 +89,31 @@ class Life_Genetic extends Life_EatOther {
         this.isDead = false;
 
         this.age = 0;
-        this.lifespan = MyMath.map(this.geneCode.lifespan, 0, 1, 5, 100);
+        this.lifespan = MyMath.map(this.geneCode.lifespan, 0, 1, 2, 50);
 
         this.eatCount = 0;
+        this.digestionSpeed = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 1., 5.);
 
         this.isGetEnergy == false;
 
-        this.energy = MyMath.map(this.geneCode.startNutrients, 0, 1, 10, 500);
+        this.energy = MyMath.map(this.geneCode.startNutrients, 0, 1, 1, 100);
         this.moveEnergy = MyMath.map(this.geneCode.moveActivity, 0, 1, 0., 0.001);
         this.metaEnergyUse = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 0., 0.001);
 
         this.metaEnergyGet = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 0.1, 0.5);
 
-        this.moveTerm = Math.floor(MyMath.map(this.geneCode.moveActivity, 0, 1, 100, 1));
         this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 100, 1));
 
-        this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.3, this.lifespan);
+        this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
-                                     0, 1, 0.01, 1);
+                                     0, 1, 0.001, .5);
 
         this.isReadyToDivision = false;
         
         this.division_energy = MyMath.map(this.geneCode.divisionEnergy, 0, 1, this.geneCode.startNutrients, this.geneCode.startNutrients * 1.5);
         this.division_age = MyMath.map(this.geneCode.divisionAge, 0, 1, 0.1, this.lifespan * 0.5);
         this.division_term = MyMath.map(this.geneCode.divisionFreq, 0, 1,  this.lifespan * 0.1, this.lifespan * 0.5);
+        this.division_after = this.division_term;
     }
 
     setMicroPlastic(){
@@ -131,7 +135,7 @@ class Life_Genetic extends Life_EatOther {
     // ===============================================================================
 
     updateMetabolism(){
-        if (this.clock.getElapsedTime() % this.metaTerm <= 0.1) { 
+        if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
             this.growing();
             this.energy -= this.metaEnergyUse;
             
@@ -146,9 +150,13 @@ class Life_Genetic extends Life_EatOther {
     }
 
     growing(){
-        if (this.age <= this.growAge) { 
+        if (this.age <= this.growAge && this.size < this.sizeMax) { 
             this.size += this.growValue;
             this.lifeMesh.scale.set(this.size, this.size, this.size);
+            if (this.noiseSize < this.size*.8) this.noiseSize += MyMath.random(0, this.noiseGrowValue * .5);
+
+            this.mass = this.size + this.noiseSize;
+
             // console.log(`Life ${this.index} is Growing (${this.size})`);
         }
         // 자라면서 속력이 빨라짐
@@ -166,33 +174,29 @@ class Life_Genetic extends Life_EatOther {
     }
 
     applyForce(force){
-        if (this.clock.getElapsedTime() % this.moveTerm <= 0.1){
-            this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-            this.position = this.lifeMesh.position;
+        super.applyForce(force);
 
-            this.look(force);
+        this.energy -= this.moveEnergy;
+    }
 
-            this.acceleration.add(force);
-            this.velocity.add(this.acceleration);
-
-            if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.1);
-            //this.velocity.clampLength(0, this.velLimit * 1.2);
-
-            this.position.add(this.velocity);
-
-            this.velocity.multiplyScalar(0.1);
-
-            this.energy -= this.moveEnergy;
-        }
+    randomWalk() {
+        this.applyForce(new THREE.Vector3(
+            MyMath.random(-this.moveSpeed, this.moveSpeed),
+            MyMath.random(-this.moveSpeed, this.moveSpeed),
+            MyMath.random(-this.moveSpeed, this.moveSpeed)
+        ));
+        //console.log("life_" + this.index + " randomWalk");
     }
 
     lifeGo(callback){
         if (this.age < this.lifespan && this.clock.getElapsedTime() % this.metaTerm <= 0.1) {
             this.age += 0.1;
             if (this.age > this.lifespan * 0.7) this.velLimit -= 0.01;
+            if (this.division_after > 0) this.division_after -= 0.05;
         }
 
-        if (this.clock.getElapsedTime() % this.division_term <= 0.1 && 
+        if (this.clock.getElapsedTime() % this.division_term <= 0.01 && 
+            this.division_after < 0 &&
             this.age >= this.division_age && 
             this.energy > this.division_energy && 
             this.isReadyToDivision == false) {
@@ -200,7 +204,7 @@ class Life_Genetic extends Life_EatOther {
                 this.isReadyToDivision = true;
             }
 
-        if (this.age >= this.lifespan - 0.1){
+        if (this.age >= this.lifespan - 0.1 || this.energy < 0){
             this.die(callback);
         }
     }
@@ -209,20 +213,30 @@ class Life_Genetic extends Life_EatOther {
         if (this.geneCode.photosynthesis != 1){
             super.stateMachine(otherLife);
         }
+        else {
+            this.randomWalk();
+        }
     }
 
     division(lifes, lifeSystem){
-        if (this.isReadyToDivision == true){
+        if (this.isReadyToDivision == true && this.velocity.length() >= 0.001){
+            this.velocity.multiplyScalar(0.1);
+        }
+        else if (this.isReadyToDivision == true && this.velocity.length() < 0.01){
             this.energy -= this.division_energy;
             
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
                                          new THREE.Vector3().copy(this.position));
+            
+            console.log("life" + this.index + " create " + lifes.length)
+        
             if (child == null) return;
 
             lifeSystem.lifeNum ++;
             lifes.push(child);
-Z
+
             this.isReadyToDivision = false;
+            this.division_after = this.division_term;
 
             // console.log("create life_" + child.index);
             // console.log(child.position)

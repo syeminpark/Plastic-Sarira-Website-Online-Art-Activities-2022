@@ -108,12 +108,12 @@ class WorldSystem {
         const minNum = Math.floor(this.worldSize * 0.1);
 
         //생물 개체수 최댓값
-        this.maxNum = Math.floor(this.worldSize * 0.3);
+        this.maxNum = Math.floor(this.worldSize * 0.4);
 
         this.lifeNum = 1 + minNum;
 
         let options = {
-            world: this.worldThree,
+            world: this,
             miniSariraThree: miniSariraThree,
             Sarira_Material: this.pointsMaterial,
             Sarira_ConvexMaterial: this.convexMaterial,
@@ -314,12 +314,12 @@ class WorldSystem {
                 continue;
             }
 
-            // if (this.lifes.length < this.maxNum && this.lifes[i].index != 0) {
-            //     this.lifes[i].division(this.lifes, this);
-            // }
+            if (this.lifes.length < this.maxNum && this.lifes[i].index != 0) {
+                this.lifes[i].division(this.lifes, this);
+            }
 
             this.lifes[i].update();
-            this.lifes[i].updateTestText(); // 디버깅용
+            // this.lifes[i].updateTestText(); // 디버깅용
 
             for (let j = 0; j < this.lifes.length; j++) {
                 this.lifes[i].stateMachine(this.lifes[j]);
