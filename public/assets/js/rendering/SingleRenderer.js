@@ -6,7 +6,7 @@ export default class SingleRenderer {
     constructor() {
         this.renderer = new THREE.WebGLRenderer({
             alpha: true,
-            premultipliedAlpha: false,
+            // premultipliedAlpha: false,
             antialias: true
         })
         this.renderer.outputEncoding = THREE.sRGBEncoding
@@ -46,4 +46,6 @@ export default class SingleRenderer {
     getCurrentCanvas() {
         return this.currentCanvas
     }
+
+
 }

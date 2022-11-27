@@ -63,6 +63,7 @@ class Microplastic {
     }
 
     updateBuffer(bufferGeometry, indexLength) {
+        bufferGeometry.attributes.position.needsUpdate = true
         for (let i = 0; i < 3; i++) {
             bufferGeometry.attributes.position.array[((indexLength - 1) * 3) + i] = this.positionList[i]
             //  bufferGeometry.attributes.color.array[((indexLength - 1) * 3) + i] = this.color[i]

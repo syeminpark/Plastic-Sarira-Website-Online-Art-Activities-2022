@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import config from './index.js'
 
 //const CONNECTION_URL = `mongodb://${config.db.url}/${config.db.name}`
-const CONNECTION_URL=config.db.old_url;
+const CONNECTION_URL=config.db.url;
 
 //mongoose to make a connection with the database with our Node/Express application.
 mongoose.connect(CONNECTION_URL, {

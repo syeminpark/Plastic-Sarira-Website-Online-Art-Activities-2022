@@ -10,14 +10,6 @@ class Buffer {
         this.bufferGeometry
     }
 
-    
-    initializeMaterial() {
-        let pointMaterial = new THREE.PointsMaterial({
-            vertexColors: THREE.VertexColors,
-            size: 5
-        });
-        return pointMaterial
-    }
 
     initialize(material) {
         this.bufferGeometry = new THREE.BufferGeometry();
@@ -34,7 +26,7 @@ class Buffer {
     }
 
     getBufferGeometry(){
-        return this.bufferGeometry;ssssssssssssssssss
+        return this.bufferGeometry;
     }
 }
 

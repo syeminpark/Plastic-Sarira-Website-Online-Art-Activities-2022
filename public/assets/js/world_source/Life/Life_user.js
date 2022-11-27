@@ -10,6 +10,7 @@ import {
     MyMath
 } from '/assets/js/utils/MyMath.js';
 import config from '../../utils/config.js';
+import { miniSariraThree } from '../../rendering/SpecificThree.js';
 
 class Life_user extends Life_Genetic {
     constructor(options) {
@@ -49,8 +50,7 @@ class Life_user extends Life_Genetic {
 
         this.angle = new THREE.Vector3();
 
-        // this.SetWindowSarira();
-        // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial);
+        this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
 
         this.lifeName = 'user';
 
@@ -100,6 +100,7 @@ class Life_user extends Life_Genetic {
 
         this.bodySystem.update();
         this.bodySystem.setPosition(this.sarira_position);
+        this.bodySystemWindow.update();
     }
 
     updateMetabolism(){
@@ -112,8 +113,8 @@ class Life_user extends Life_Genetic {
 
     }
 
-    SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial) {
-        this.bodySystemWindow = new BodySystem(0, this.options.miniSariraThree,true);
+    SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial,miniSariraThree) {
+        this.bodySystemWindow = new BodySystem(0, miniSariraThree,true);
         this.bodySystemWindow.createBuffer(microPlastic_Material);
         this.bodySystemWindow.createSarira(microPlastic_ConvexMaterial);
     }
@@ -122,8 +123,8 @@ class Life_user extends Life_Genetic {
         //user
         let newPositionArray = [];
         let indexLength = 0;
-        let originalPositionArray = this.bodySystem.sariraBuffer.bufferGeometry.attributes.position.array;
-        let d3Dataset= this.bodySystem.sarira.getDataset()
+        let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
+        let d3Dataset= this.bodySystemWindow.sarira.getDataset()
         
 
         for (let i = 1; i < 300; i++) {
@@ -162,8 +163,9 @@ class Life_user extends Life_Genetic {
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
             // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
-           
             // this.bodySystem.addFloatingPlastics(send_pos, data);
+
+            this.bodySystemWindow.addFloatingPlastics(send_pos);
             this.bodySystem.addFloatingPlastics(send_pos);
      
             this.isMakeSarira = false;

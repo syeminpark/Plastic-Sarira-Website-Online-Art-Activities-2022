@@ -42,7 +42,7 @@ class BodySystem {
         this.particleMaterial = material;
         this.floatingBuffer.initialize(this.particleMaterial)
         //디버깅용으로 일단 켜두기 
-        this.floatingBuffer.render(this.threeSystem)
+        // this.floatingBuffer.render(this.threeSystem)
 
         this.sariraBuffer = new Buffer()
         this.sariraBuffer.initialize(this.particleMaterial)

@@ -42,9 +42,12 @@ export default class SariraThreeController {
     create(load_index, range, data, element) {
 
         for (let i = load_index * range; i < (load_index + 1) * range; i++) {
-            this.sariraThreeList[i].setElement(element[i])
-            this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
-            this.sariraObject.push(this.sariraThreeList[i].getObject())
+            if (this.sariraThreeList[i] != undefined && data[i]!=undefined) {
+                
+                this.sariraThreeList[i].setElement(element[i])
+                this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
+                this.sariraObject.push(this.sariraThreeList[i].getObject())
+            }
         }
     }
 
@@ -86,12 +89,12 @@ export default class SariraThreeController {
     }
 
     rendererResizeMobile() {
-                let renderer = this.renderer.getRenderer()
-                let width = renderer.domElement.clientWidth;
-                let height = renderer.domElement.clientHeight;
-           
-                if (this.canvas.offsetWidth != width || this.canvas.offsetHeight != height) {
-                    renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight)
+        let renderer = this.renderer.getRenderer()
+        let width = renderer.domElement.clientWidth;
+        let height = renderer.domElement.clientHeight;
+
+        if (this.canvas.offsetWidth != width || this.canvas.offsetHeight != height) {
+            renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight)
         }
     }
 
@@ -106,7 +109,7 @@ export default class SariraThreeController {
             }
         }
     }
-    
+
 
     valid() {
         if (document.getElementById("currentPage").innerHTML == this.type) {

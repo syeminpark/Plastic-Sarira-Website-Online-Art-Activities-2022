@@ -16,6 +16,8 @@ class Sarira {
         this.d3Dataset=[]
 
         this.positionVector3 = new THREE.Vector3(0, 0, 0);
+
+        
     }
 
 
@@ -35,7 +37,6 @@ class Sarira {
     addPlastics(micro) {
         this.plasticList.push(micro)
         this.d3Dataset.push(micro.d3Dataset)
-        //add image to window
 
     }
 
