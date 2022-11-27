@@ -1,16 +1,12 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import KeyboardState from './KeyboardState.js';
-import {
-    Health12345
-} from '/assets/js/health.js';
-import {
-    UserText
-} from '/assets/js/userText.js';
+import KeyboardState from '/assets/js/utils/KeyboardState.js';
 
-import {
-    MyMath
-} from '/assets/js/utils/MyMath.js';
+import { UserText } from '/assets/js/userText.js';
+import { Health12345 } from '/assets/js/health.js';
+import { Joystick12345 } from '/assets/js/joystick.js';
+
+import { MyMath } from '/assets/js/utils/MyMath.js';
 
 class UserController {
     constructor(worldPage) {
@@ -21,6 +17,7 @@ class UserController {
 
     setup(world) {
         this.isEnter = true;
+
         this.threeSystem = world.worldThree;
         this.worldSize = world.worldSize;
 
@@ -44,9 +41,18 @@ class UserController {
 
         this.isInWorld = true;
 
+        this.isKey_down = true;
+
         //=================================================================================
 
-        this.camera_focusOn_init();
+        this.fValue = 0;
+        this.bValue = 0;
+        this.rValue = 0;
+        this.lValue = 0;
+        this.moveVector = new THREE.Vector3();
+        this.upVector = new THREE.Vector3(0, 1, 0);
+
+        //=================================================================================
 
         this.healthbar = new Health12345(this.threeSystem,
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
@@ -57,8 +63,112 @@ class UserController {
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
 
+        this.l_joystick = new Joystick12345({
+            container: this.worldPage.pagelayer.popup.querySelector('#world-joystick-left'),
+            stick: this.worldPage.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
+
+        });
+        this.r_joystick = new Joystick12345({
+            container: this.worldPage.pagelayer.popup.querySelector('#world-joystick-right'),
+            stick: this.worldPage.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
+        });
+
+        this.camera_focusOn_init();
     }
 
+    //=====================================================================================
+    //=====================================================================================
+
+    resetKeyboardState(){
+        KeyboardState.status = {}
+    }
+
+    start(userName) {
+        this.healthbar.start();
+        this.userName.setText(userName);
+    }
+
+    healthbarActive() {
+        this.healthbar.set(1 - this.user.age / this.user.lifespan);
+    }
+
+    update() {
+        if (this.isEnter == true) {
+            this.key_Check();
+
+            // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
+            if (this.isLifeFocusOn == true && this.user.isDead == false) {
+
+                // 카메라 유저 따라다니기
+                this.camera_focusOn_update();
+                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
+
+                // 유저가 world 밖으로 나가지 않도록 함
+                this.wrap();
+
+                // 모바일 / 웹 확인
+                // 웹
+                if (this.isKey_down == true) {
+                    // 유저 컨트롤용 키보드 인풋을 받음
+                    if (this.control.enableRotate == false) this.control.enableRotate = true;
+                    if (this.control.enableZoom == false) this.control.enableZoom = true;
+
+                    this.key_update();
+                    this.updateUserPos();
+                }
+                // 모바일
+                else if (this.l_joystick.is_pressed == true) {
+                    if (this.control.enableRotate == true) this.control.enableRotate = false;
+                    if (this.control.enableZoom == true) this.control.enableZoom = false;
+
+                    this.l_joystick.animate();
+                    this.joystick_update(this.l_joystick);
+                    this.updateUserPos();
+                }
+                else if (this.r_joystick.is_pressed){
+                    if (this.control.enableRotate == true) this.control.enableRotate = false;
+                    if (this.control.enableZoom == true) this.control.enableZoom = false;
+
+                    this.r_joystick.animate();
+                    this.joystick_update(this.r_joystick);
+                    this.updateControlRotate();
+                }
+                else if (this.l_joystick.checkAnimate()){
+                    this.l_joystick.animate();
+                } 
+                else if (this.r_joystick.checkAnimate()){
+                    this.r_joystick.animate();
+                }
+            }
+            // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
+            else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
+                // 카메라가 일정 거리에 도달하면 애니메이션을 중지함
+                if (this.camera.position.length() > this.worldSize * .495) {
+
+                    // this.control.target = new THREE.Vector3(0, 0, 0);
+                    this.isfocusOffLerpDone = true;
+
+                    // 이후 오빗컨트롤 조작 가능케 함
+                    this.control.enabled = true;
+                }
+                else {
+                    this.camera.position.lerp(this.camLerpPos, 0.05);
+                }
+            }
+
+            this.healthbar.updatePos(this.getUserScreenPosition());
+            this.userName.updatePos();
+
+        }
+    }
+
+    end() {
+        this.healthbar.end();
+        this.userName.end();
+        this.isEnter = false;
+    }
+
+    
     //=====================================================================================
     //=====================================================================================
 
@@ -79,81 +189,19 @@ class UserController {
         const w = MyMath.map(dist, -300, -45, 200, 120);
         const h = MyMath.map(dist, -300, -45, 15, 10);
 
-        return {
-            x: x,
-            y: y,
-            yy: yy,
-            w: w,
-            h: h
-        };
+        return { x: x, y: y, yy: yy, w: w, h: h };
     }
 
     //=====================================================================================
     //=====================================================================================
 
-    start(userName) {
-        this.healthbar.start();
-        this.userName.setText(userName);
-    }
-
-    healthbarActive() {
-        this.healthbar.set(1 - this.user.age / this.user.lifespan);
-    }
-
-    update() {
-        if (this.isEnter == true) {
-            this.key_ZCheck();
-
-            // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
-            if (this.isLifeFocusOn == true && this.user.isDead == false) {
-
-                // 카메라 유저 따라다니기
-                this.camera_focusOn_update();
-                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
-
-                // 유저가 world 밖으로 나가지 않도록 함
-                this.wrap();
-
-                // 유저 3인칭 컨트롤용 키보드 인풋을 받음
-                this.key_update();
-            } else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
-                if (this.camera.position.length() > this.worldSize * .4 || this.focusOffTimer <= 0) {
-
-                    this.focusOffTimer -= 0.01;
-
-                    this.control.target = new THREE.Vector3(0, 0, 0);
-
-                    this.isfocusOffLerpDone = true;
-                } else {
-                    this.camera.position.lerp(this.camLerpPos, 0.1);
-                }
-            }
-
-
-            this.healthbar.updatePos(this.getUserScreenPosition());
-            this.userName.updatePos();
-
-            // console.log(this.user.position, this.camera.position)
-        }
-    }
-    resetKeyboardState(){
-        KeyboardState.status = {}
-    }
-
-    end() {
-        this.healthbar.end();
-        this.userName.end();
-        this.isEnter = false;
-    }
-
-    //=====================================================================================
-    //=====================================================================================
-
-    key_ZCheck() {
+    key_Check() {
         this.keyboard.update();
+
         // z 눌렸을 때 한번만 실행
         if (this.keyboard.down("Z")) {
             this.isLifeFocusOn = !this.isLifeFocusOn;
+            this.isKey_down = true;
 
             if (this.isLifeFocusOn == true) {
                 this.camera_focusOn_init();
@@ -161,61 +209,143 @@ class UserController {
                 this.camera_focusOff_init();
             }
         }
+
+        // 키 눌렀는지 체크
+        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D")) {
+
+            this.isKey_down = true;
+        }
+
+        // velocity 초기화
+        if (this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")) {
+
+            this.isKey_down = false;
+            this.velocity.set(0,0,0);
+            this.fValue = 0;
+            this.bValue = 0;
+            this.lValue = 0;
+            this.rValue = 0;
+        }
+
+        if (this.l_joystick.is_pressed == false){
+            this.velocity.set(0,0,0);
+            this.fValue = 0;
+            this.bValue = 0;
+            this.lValue = 0;
+            this.rValue = 0;
+        }
     }
 
     key_update() {
-        // velocity 초기화
-        if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D") ||
-            this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")) {
+        if (this.keyboard.pressed("W")) {
+                
+            if (this.fValue < 0.15) this.fValue += 0.05;
+        }
+        if (this.keyboard.pressed("S")) {
+            
+            if (this.bValue < 0.15) this.bValue += 0.05;
+        }
+        if (this.keyboard.pressed("A")) {
 
-            this.velocity.multiplyScalar(0);
+            if (this.lValue < 0.15) this.lValue += 0.05;
+        }
+        if (this.keyboard.pressed("D")) {
+
+            if (this.rValue < 0.15) this.rValue += 0.05;
+        }
+    }
+
+    joystick_update(jstick) {
+        const forward = jstick.pan_pos.y;
+        const turn = jstick.pan_pos.x;
+
+        if (forward > 5) {
+            this.fValue = 0
+            this.bValue = MyMath.map(Math.abs(forward), 0, 50, 0.04, 0.1);
+        } else if (forward < -5) {
+            this.fValue = MyMath.map(Math.abs(forward), 0, 50, 0.04, 0.1);
+            this.bValue = 0
+        }
+  
+        if (turn > 5) {
+            this.lValue = 0
+            this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+        } else if (turn < -5) {
+            this.lValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+            this.rValue = 0
+        }
+    }
+
+    //=====================================================================================
+
+    updateUserPos() {
+        let fv = new THREE.Vector3();
+
+        if (this.fValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.user.position),
+                new THREE.Vector3().copy(this.camera.position));
+            temp.setLength(this.fValue);
+            fv.add(temp);
         }
 
-        if (this.keyboard.pressed("W") || this.keyboard.pressed("S")) {
-
-            let fv = new THREE.Vector3();
-
-            if (this.keyboard.pressed("W")) {
-                fv.subVectors(
-                    new THREE.Vector3().copy(this.user.position),
-                    new THREE.Vector3().copy(this.camera.position));
-            }
-            if (this.keyboard.pressed("S")) {
-                fv.subVectors(
-                    new THREE.Vector3().copy(this.camera.position),
-                    new THREE.Vector3().copy(this.user.position));
-            }
-
-            fv.normalize();
-            fv.multiplyScalar(0.05);
-
-            this.velocity.add(fv);
-            if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
-
-            this.user.position.add(this.velocity);
+        if (this.bValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.camera.position),
+                new THREE.Vector3().copy(this.user.position));
+            temp.setLength(this.bValue);
+            fv.add(temp);
         }
 
-        if (this.keyboard.pressed("A") || this.keyboard.pressed("D")) {
-
-            let fv = new THREE.Vector3().subVectors(
+        if (this.lValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
                 new THREE.Vector3().copy(this.camera.position),
                 new THREE.Vector3().copy(this.user.position));
 
-            fv.cross(new THREE.Vector3(0, 1, 0));
+            temp.cross(new THREE.Vector3(0, 1, 0));
+            temp.multiplyScalar(1);
+            temp.setLength(this.lValue);
+            fv.add(temp);
+        }
 
-            if (this.keyboard.pressed("A")) {
-                fv.multiplyScalar(1);
-            }
-            if (this.keyboard.pressed("D")) {
-                fv.multiplyScalar(-1);
-            }
+        if (this.rValue > 0) {
+            const temp = new THREE.Vector3().subVectors(
+                new THREE.Vector3().copy(this.camera.position),
+                new THREE.Vector3().copy(this.user.position));
 
-            fv.normalize();
-            fv.multiplyScalar(0.02);
-            this.velocity.add(fv);
-            if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
+            temp.cross(new THREE.Vector3(0, 1, 0));
+            temp.multiplyScalar(-1);
+            temp.setLength(this.rValue);
+            fv.add(temp);
+        }
 
-            this.user.position.add(this.velocity);
+        this.velocity.add(fv);
+        if (this.velocity.length() > 0.25) this.velocity.setLength(0.25);
+
+        this.user.position.add(this.velocity);
+        this.user.position.add(fv);
+
+    }
+
+    updateControlRotate(){
+        if (this.fValue > 0) {
+            this.camera.translateY(-0.05);
+            console.log("forward")
+        }
+
+        if (this.bValue > 0) {
+            this.camera.translateY(0.05);
+            console.log("backward")
+        }
+
+        if (this.lValue > 0) {
+            this.camera.translateX(0.05);
+            console.log("left")
+        }
+
+        if (this.rValue > 0) {
+            this.camera.translateX(-0.05);
+            console.log("right")
         }
     }
 
@@ -223,11 +353,12 @@ class UserController {
     //=====================================================================================
 
     camera_focusOff_init() {
+        this.isfocusOffLerpDone = false;
+
         this.control.enablePan = true;
         this.control.enableZoom = true;
-
-        this.isfocusOffLerpDone = false;
-        this.focusOffTimer = 1;
+        
+        this.control.enabled = false;
 
         this.camLerpPos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.camera.position),
@@ -236,13 +367,17 @@ class UserController {
     }
 
     camera_focusOn_init() {
+        this.control.enabled = true;
         this.control.enablePan = false;
         this.control.enableZoom = false;
 
-        const userFollowCam_Pos = new THREE.Vector3().subVectors(
-                new THREE.Vector3().copy(this.user.position),
-                new THREE.Vector3().copy(this.camera.position))
+        const camDir = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position),
+            new THREE.Vector3().copy(this.camera.position))
             .setLength(this.camDis);
+        const userFollowCam_Pos = new THREE.Vector3().subVectors(
+            new THREE.Vector3().copy(this.user.position),
+            camDir);
 
         this.camLerpPos = userFollowCam_Pos;
     }
@@ -251,8 +386,8 @@ class UserController {
         this.control.target.lerp(this.user.position, this.lerpSpeed);
 
         const camDir = new THREE.Vector3().subVectors(
-                new THREE.Vector3().copy(this.user.position),
-                new THREE.Vector3().copy(this.camera.position))
+            new THREE.Vector3().copy(this.user.position),
+            new THREE.Vector3().copy(this.camera.position))
             .setLength(this.camDis);
         const userFollowCam_Pos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.user.position),
@@ -277,6 +412,4 @@ class UserController {
     }
 }
 
-export {
-    UserController
-}
+export { UserController }

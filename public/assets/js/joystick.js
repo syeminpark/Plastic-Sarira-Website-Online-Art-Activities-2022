@@ -12,6 +12,8 @@ class Joystick12345{
 			this.is_pressed = false;
 			this.is_dragged = false;
 
+			this.isAnimationOn = false;
+
 			this.mpos = {x: 0, y: 0};
 			this.pan_pos = {x: 0, y: 0};
 			this.pan_tpos = {x: 0, y: 0};
@@ -37,14 +39,16 @@ class Joystick12345{
 		this.pan_tpos.x = this.mpos.x - (this.container_bbox.left + this.container_bbox.width * 0.5);
 		this.pan_tpos.y = this.mpos.y - (this.container_bbox.top + this.container_bbox.height * 0.5);
 	
-		console.log(this.container_bbox, this.pan_tpos, this.mpos);
+		// console.log(this.container_bbox, this.pan_tpos, this.mpos);
 	}
 
 	stickPressed(e){
 		this.is_pressed = true;
 		this.mpos = ReturnTouchPos(e);
 		this.setPan();
-		if(!this.animation) this.animate();
+
+		this.isAnimationOn = true;
+		// if(!this.animation) this.animate();
 	}
 
 	stickDragging(e){
@@ -69,7 +73,7 @@ class Joystick12345{
 	}
 
 	animate(){
-		this.animation = requestAnimationFrame(this.animate.bind(this));
+		// this.animation = requestAnimationFrame(this.animate.bind(this));
 
 		this.container_bbox = this.container.getBoundingClientRect();
 
@@ -96,13 +100,25 @@ class Joystick12345{
 		this.stick.style.top = (50 + sposy) + '%';
 		this.stick.style.left = (50 + sposx) + '%';
 
+		// if(	!this.is_pressed && !this.is_dragged &&
+		// 	Length2D({x: this.pan_tpos.x - this.pan_pos.x, y: this.pan_tpos.y - this.pan_pos.y})<0.01){
+		// 	if(this.animation){
+		// 		cancelAnimationFrame(this.animation);
+		// 		this.animation = null;
+		// 	}
+		// }
+	}
+
+	checkAnimate(){
+		if (this.isAnimationOn == false) return false;
+
+		// 애니메이션 끝남
 		if(	!this.is_pressed && !this.is_dragged &&
 			Length2D({x: this.pan_tpos.x - this.pan_pos.x, y: this.pan_tpos.y - this.pan_pos.y})<0.01){
-			if(this.animation){
-				cancelAnimationFrame(this.animation);
-				this.animation = null;
-			}
-		}
+			this.isAnimationOn = false;
+			return false;
+		} 
+		return true;	
 	}
 }
 

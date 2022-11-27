@@ -13,10 +13,6 @@ import {
 	ImageSlide12345
 } from './../imageslide.js';
 import {
-	Joystick12345
-} from './../joystick.js';
-
-import {
 	WorldSystem
 } from '../world_source/WorldSystem.js';
 import {
@@ -82,15 +78,15 @@ class World12345 extends Page12345 {
 			});
 		}
 
-		this.l_joystick = new Joystick12345({
-			container: this.pagelayer.popup.querySelector('#world-joystick-left'),
-			stick: this.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
+		// this.l_joystick = new Joystick12345({
+		// 	container: this.pagelayer.popup.querySelector('#world-joystick-left'),
+		// 	stick: this.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
 
-		});
-		this.r_joystick = new Joystick12345({
-			container: this.pagelayer.popup.querySelector('#world-joystick-right'),
-			stick: this.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
-		});
+		// });
+		// this.r_joystick = new Joystick12345({
+		// 	container: this.pagelayer.popup.querySelector('#world-joystick-right'),
+		// 	stick: this.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
+		// });
 
 		this.imageslider = new ImageSlide12345(
 			this.pagelayer.popup.querySelector('#history-img-slide'),
