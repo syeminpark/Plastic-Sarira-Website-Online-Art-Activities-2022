@@ -50,8 +50,11 @@ class Life {
         this.size = MyMath.random(5, 20);
         this.noiseSize = MyMath.random(5, 20);
         this.noiseSpeed = MyMath.random(0.05, 0.15);
-        
 
+        this.shapeX = Math.floor(MyMath.random(1, 24));
+        this.shapeY = Math.floor(MyMath.random(1, 24));
+        this.noiseShape = MyMath.random(1., 30.);
+        
         this.moveTerm = this.mass * 500;
 
         this.lifeName = 'life' + String(this.index);
@@ -83,14 +86,10 @@ class Life {
     // ===============================================================================
 
     setDisplay() {
-        const noiseCount = MyMath.random(1., 30.);
-        
-        let geometry = new THREE.SphereGeometry(this.size, 32, 32);
-        let material = createLifeNoiseMaterial(this.worldThree.camera, noiseCount, this.noiseSize);
-        // let material = new THREE.MeshDepthMaterial({
-        //     transparent: true,
-        //     opacity: 0.5,
-        // });
+        let geometry = new THREE.SphereGeometry(this.size, this.shapeX, this.shapeY);
+        let material = createLifeNoiseMaterial(this.worldThree.camera, this.noiseShape, this.noiseSize);
+        // let material = createLifeMaterial(this.worldThree.camera);
+
         material.transparent = true;
 
         this.lifeMesh = new THREE.Mesh(geometry, material);

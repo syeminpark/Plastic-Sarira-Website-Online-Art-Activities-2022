@@ -23,6 +23,8 @@ class Life_user extends Life_Genetic {
 
             size: MyMath.random(.5, .6), // 크기
             shape: MyMath.random(0, 1), // 노이즈 모양
+            shapeX: MyMath.random(0, 1), // 
+            shapeY: MyMath.random(0, 1), // 
 
             growValue: MyMath.random(.4, .5), // 시간당 자라는 양
             growAge: MyMath.random(0, .2), // 성장이 멈추는 나이
@@ -65,13 +67,19 @@ class Life_user extends Life_Genetic {
         this.velLimit = 1;
 
         this.size = MyMath.random(1, 3);
-        this.noiseSize = MyMath.random(0, this.size * 0.5);
-        this.mass = this.size + this.noiseSize;
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
+        this.mass = this.size + this.noiseSize;
+
+        this.noiseSize = MyMath.random(0, this.size * 0.5);
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.15);
+
+        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
+
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
 
         // document.addEventListener('keydown', 
         //     (evenet)=>{

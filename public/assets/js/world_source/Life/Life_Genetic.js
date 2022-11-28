@@ -19,6 +19,9 @@ class Life_Genetic extends Life_EatOther {
             size : MyMath.random(0, 1), // 크기
             shape : MyMath.random(0, 1), // 노이즈 모양
 
+            shapeX: MyMath.random(0, 1), // 
+            shapeY: MyMath.random(0, 1), // 
+
             growValue : MyMath.random(0, 1), // 시간당 자라는 양
             growAge : MyMath.random(0, 1), // 성장이 멈추는 나이
             
@@ -63,6 +66,11 @@ class Life_Genetic extends Life_EatOther {
 
         this.size = 1;
         this.noiseSize = MyMath.random(0, this.size * .5);
+
+        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
+
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
 
         this.mass = this.size + this.noiseSize;
 
@@ -152,7 +160,9 @@ class Life_Genetic extends Life_EatOther {
     growing(){
         if (this.age <= this.growAge && this.size < this.sizeMax) { 
             this.size += this.growValue;
-            this.lifeMesh.scale.set(this.size, this.size, this.size);
+            this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
+                                    this.size + (this.shapeY * 0.01), 
+                                    this.size);
             if (this.noiseSize < this.size*.8) this.noiseSize += MyMath.random(0, this.noiseGrowValue * .5);
 
             this.mass = this.size + this.noiseSize;
@@ -266,6 +276,8 @@ class Life_Genetic extends Life_EatOther {
     
                 size : this.geneCode.size + diverseValue, // 크기
                 shape : this.geneCode.shape + diverseValue, // 노이즈 모양
+                shapeX: this.geneCode.shapeX + diverseValue, // 
+                shapeY: this.geneCode.shapeY + diverseValue, // 
     
                 growValue : this.geneCode.growValue + diverseValue, // 시간당 자라는 양
                 growAge : this.geneCode.growAge + diverseValue, // 성장이 멈추는 나이
@@ -291,7 +303,7 @@ class Life_Genetic extends Life_EatOther {
         const mutation = MyMath.random(0, 100);
 
         if (mutation < 0.1){ // 돌연변이
-            const mutationPart = Math.floor(MyMath.random(0, 17)); // 돌연변이가 일어날 부분
+            const mutationPart = Math.floor(MyMath.random(0, 19)); // 돌연변이가 일어날 부분
             switch (mutationPart) {
                 case 0:
                     geneCode.photosynthesis = Math.round(MyMath.random(0, 1)); // 광합성
@@ -344,6 +356,12 @@ class Life_Genetic extends Life_EatOther {
                 case 16:
                     geneCode.defense = MyMath.random(0, 1); // 방어력
                     break;
+                case 17:
+                    geneCode.shapeX = MyMath.random(0, 1); // 공격력
+                    break;
+                case 18:
+                    geneCode.shapeY = MyMath.random(0, 1); // 방어력
+                        break;
                 default:
                     break;
             }
