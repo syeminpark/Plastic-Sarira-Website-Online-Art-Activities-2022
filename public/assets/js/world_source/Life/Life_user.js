@@ -66,9 +66,8 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = MyMath.random(1, 3);
-        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
-
+        this.size = MyMath.random(3, 10);
+        // this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
 
         this.noiseSize = MyMath.random(0, this.size * 0.5);
         this.mass = this.size + this.noiseSize;
