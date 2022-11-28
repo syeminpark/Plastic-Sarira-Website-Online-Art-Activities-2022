@@ -68,9 +68,10 @@ class Life_user extends Life_Genetic {
 
         this.size = MyMath.random(1, 3);
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
-        this.mass = this.size + this.noiseSize;
+
 
         this.noiseSize = MyMath.random(0, this.size * 0.5);
+        this.mass = this.size + this.noiseSize;
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
