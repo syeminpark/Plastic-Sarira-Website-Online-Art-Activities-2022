@@ -30,6 +30,7 @@ class Life_Absorb extends Life {
 
         this.microPlastic_breath_maxAmount = Math.floor(MyMath.mapRange(this.mass, 0, 50, 30, 100));
 
+        this.isMakeSarira = false;
     }
 
     update() {
@@ -65,26 +66,26 @@ class Life_Absorb extends Life {
     }
 
     eat(microPlastic) {
+        const distance = this.position.distanceTo(microPlastic.position);
+        const lifeSize = (this.size + this.noiseSize) * 0.9;
+
+        //아직 먹히지 않은 상태의 파티클 끌어당기기
+        if (distance < lifeSize && distance > this.size * 0.45) {
+
+            let sariraPos = this.position;
+            let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
+
+            force.multiplyScalar(0.1);
+            microPlastic.applyForce(force);
+            microPlastic.velocity.multiplyScalar(0.9);
+        }
+
         if (microPlastic.isEaten == false &&
             this.isDead == false &&
             this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
 
-            const distance = this.position.distanceTo(microPlastic.position);
-            const lifeSize = (this.size + this.noiseSize) * 1.5;
-
-            //아직 먹히지 않은 상태의 파티클 끌어당기기
-            if (distance < lifeSize && distance > this.size * 0.45) {
-
-                let sariraPos = this.position;
-                let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
             //파티클 먹고 파티클 흡수 상태로 변경
-            else if (distance <= this.size * 0.45) {
+            if (distance <= this.size * 0.45) {
                 // microPlastic.data.setAbsorbedBy(1);
                 this.absorbedParticles.push(microPlastic);
                 if (microPlastic.d3Data != undefined) this.sariraParticlesData.push(microPlastic.d3Data);
@@ -97,24 +98,23 @@ class Life_Absorb extends Life {
 
     breath(microPlastic) {
         //아직 먹히지 않은 상태의 파티클 끌어당기기
+        const distance = this.position.distanceTo(microPlastic.position);
+        const lifeSize = (this.size + this.noiseSize) * 1;
+
+        if (distance < lifeSize && distance > this.size * 0.55) {
+            let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
+
+            force.multiplyScalar(0.1);
+            microPlastic.applyForce(force);
+            microPlastic.velocity.multiplyScalar(0.9);
+        }
 
         if (microPlastic.isEaten == false &&
             this.isDead == false &&
             this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
-
-            const distance = this.position.distanceTo(microPlastic.position);
-            const lifeSize = (this.size + this.noiseSize) * 1;
-
-            if (distance < lifeSize && distance > this.size * 0.55) {
-                let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
+       
             //파티클 먹고 파티클 흡수 상태로 변경
-            else if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
+            if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
                 // microPlastic.data.setAbsorbedBy(1);
                 this.absorbedParticles.push(microPlastic);
                 if (microPlastic.d3Data != undefined) this.sariraParticlesData.push(microPlastic.d3Data);
@@ -150,19 +150,21 @@ class Life_Absorb extends Life {
             //sariraSpeed가 nan이다 지금
     
             if ( MyMath.random(0, 100) > 99 && distance < sariraSpace &&
-                this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
-                // this.absorbedParticles[i].data.setPassBy('');
+                this.absorbedParticles[i].isSarira == false && 
+                this.absorbedParticles.length < this.absorbPlasticNum) {
 
                 this.absorbedParticles[i].isSarira = true;
 
                 this.sariraParticles.push(this.absorbedParticles[i]);
-                // this.sariraParticlesData.push(this.absorbedParticles[i].data.getDataList());
+                
                 if (this.absorbedParticles[i].d3Data != undefined) {
                     this.sariraParticlesData.push(this.absorbedParticles[i].d3Data);
-                    console.log(this.absorbedParticles[i].d3Data)
+                    // console.log(this.absorbedParticles[i].d3Data)
                 }
+                
+                this.absorbedParticles.splice(i, 1);
 
-                //if (sariraSpace < this.size) sariraSpace += 0.01;
+                if (sariraSpace < this.size) sariraSpace += 0.01;
                 this.isMakeSarira = true;
             }
         }
@@ -212,6 +214,9 @@ class Life_Sarira extends Life_Absorb {
 
             // this.bodySystem.addFloatingPlastics(send_pos, data);
             this.bodySystem.addFloatingPlastics(send_pos);
+
+            this.sariraParticles[this.sariraParticles.length - 1].isActive = false;
+            this.sariraParticles.splice(this.sariraParticles.length - 1, 1);
 
             this.isMakeSarira = false;
         }

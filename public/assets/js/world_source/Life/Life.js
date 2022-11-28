@@ -147,7 +147,7 @@ class Life {
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.position = this.lifeMesh.position;
 
-        this.acceleration.setLength(0.01);
+        this.acceleration.setLength(0.001);
         this.acceleration.multiplyScalar(0.01);
 
         this.look(force);
@@ -159,7 +159,7 @@ class Life {
 
         this.position.add(this.velocity);
 
-        // this.velocity.multiplyScalar(0.9);
+        this.velocity.multiplyScalar(0.9);
     }
 
     look(dir){

@@ -37,7 +37,7 @@ class UserController {
         this.user = world.life_user;
         this.velocity = new THREE.Vector3();
 
-        this.camDis = this.user.mass * 4;
+        this.camDis = this.user.mass * 3;
         this.lerpSpeed = config.lerpSpeed
 
         this.isLifeFocusOn = true;

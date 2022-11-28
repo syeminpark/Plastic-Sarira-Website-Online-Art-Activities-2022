@@ -142,15 +142,13 @@ class Life_user extends Life_Genetic {
     }
 
     add_MicroPlasticToBodySystem() {
-        //function map_range(value, low1, high1, low2, high2) {
-        //    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-        //}
-        
         //test for debugging
         // if(MyMath.random(0,100)>90){
         //     this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-10, 10),
         //         MyMath.random(-10, 10), MyMath.random(-10, 10)))
         // }
+        
+        // if (this.isMakeSarira == true) console.log(this.absorbedParticles.length)
 
         var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
@@ -158,11 +156,14 @@ class Life_user extends Life_Genetic {
          
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
-            // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
             // this.bodySystem.addFloatingPlastics(send_pos, data);
+            // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
 
-            this.bodySystemWindow.addFloatingPlastics(send_pos);
             this.bodySystem.addFloatingPlastics(send_pos);
+            this.bodySystemWindow.addFloatingPlastics(send_pos);
+
+            this.sariraParticles[this.sariraParticles.length - 1].isActive = false;
+            this.sariraParticles.splice(this.sariraParticles.length - 1, 1);
      
             this.isMakeSarira = false;
         }
