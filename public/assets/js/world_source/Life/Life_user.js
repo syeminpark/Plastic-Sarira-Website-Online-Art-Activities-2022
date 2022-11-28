@@ -70,7 +70,7 @@ class Life_user extends Life_Genetic {
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
         this.mass = this.size + this.noiseSize;
 
-        this.noiseSize = MyMath.random(0, this.size * 0.5);
+        this.noiseSize = MyMath.random(0, this.size * 0.1);
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
@@ -79,7 +79,9 @@ class Life_user extends Life_Genetic {
         this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
         this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
 
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
+        // this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
+        this.noiseShape = MyMath.random(0.05, 0.3);
+        this.noiseAnimSpeed = MyMath.random(0.1, 0.5);
 
         // document.addEventListener('keydown', 
         //     (evenet)=>{

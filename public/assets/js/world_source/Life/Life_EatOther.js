@@ -72,8 +72,8 @@ class Life_EatOther extends Life_Sarira {
             return;
         } 
         
-        this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0.8,0.8);
-        this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.8,1,0.8);
+        this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0.5,0.5);
+        this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.5,1,0.5);
 
         let dir = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.chaseTarget.position), 
@@ -108,7 +108,7 @@ class Life_EatOther extends Life_Sarira {
         if (this.chaseTarget.isDead == false){
             // console.log(this.index + " eat " + this.chaseTarget.index);
 
-            this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.8,.8,1);
+            this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.5,0.5,1);
 
             this.chaseTarget.isEaten = true;
             this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
