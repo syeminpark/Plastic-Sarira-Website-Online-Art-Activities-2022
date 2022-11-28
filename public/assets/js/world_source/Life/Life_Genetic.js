@@ -57,7 +57,7 @@ class Life_Genetic extends Life_EatOther {
     init(){
         if (this.geneCode == null) return;
 
-        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.003, 0.01);
+        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.001, 0.003);
         this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .5);
         this.velLimit = this.velLimitMax * .2;
 
@@ -72,7 +72,7 @@ class Life_Genetic extends Life_EatOther {
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
                                       0, 1, 0.05, 0.15);
 
-        this.attack = MyMath.map(this.geneCode.attack, 0, 1, 1, 30);
+        this.attack = MyMath.map(this.geneCode.attack, 0, 1, 2, 10);
     }
 
     initWrap(){
@@ -89,7 +89,7 @@ class Life_Genetic extends Life_EatOther {
         this.isDead = false;
 
         this.age = 0;
-        this.lifespan = MyMath.map(this.geneCode.lifespan, 0, 1, 2, 50);
+        this.lifespan = MyMath.map(this.geneCode.lifespan, 0, 1, 10, 100);
 
         this.eatCount = 0;
         this.digestionSpeed = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 1., 5.);
@@ -102,7 +102,7 @@ class Life_Genetic extends Life_EatOther {
 
         this.metaEnergyGet = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 0.1, 0.5);
 
-        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 100, 1));
+        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 50, 1));
 
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
@@ -110,10 +110,10 @@ class Life_Genetic extends Life_EatOther {
 
         this.isReadyToDivision = false;
         
-        this.division_energy = MyMath.map(this.geneCode.divisionEnergy, 0, 1, this.geneCode.startNutrients, this.geneCode.startNutrients * 1.5);
-        this.division_age = MyMath.map(this.geneCode.divisionAge, 0, 1, 0.1, this.lifespan * 0.5);
-        this.division_term = MyMath.map(this.geneCode.divisionFreq, 0, 1,  this.lifespan * 0.1, this.lifespan * 0.5);
-        this.division_after = this.division_term;
+        this.division_energy = MyMath.map(this.geneCode.divisionEnergy, 0, 1, this.energy * 0.1, this.energy * 0.4);
+        this.division_age = MyMath.map(this.geneCode.divisionAge, 0, 1, 0.1, this.lifespan * 0.2);
+        this.division_term = MyMath.map(this.geneCode.divisionFreq, 0, 1, this.lifespan * 0.1, this.lifespan * 0.3);
+        this.division_after = this.division_term * 0.1;
     }
 
     setMicroPlastic(){
@@ -190,10 +190,18 @@ class Life_Genetic extends Life_EatOther {
 
     lifeGo(callback){
         if (this.age < this.lifespan && this.clock.getElapsedTime() % this.metaTerm <= 0.1) {
-            this.age += 0.1;
+            this.age += 0.5;
             if (this.age > this.lifespan * 0.7) this.velLimit -= 0.01;
-            if (this.division_after > 0) this.division_after -= 0.05;
         }
+
+        if (this.division_after > 0) this.division_after -= 0.01;
+
+        // if (this.clock.getElapsedTime() % this.division_term <= 0.01)
+        //     console.log(`life ${this.index} 
+        //     division timer = ${this.division_after} 
+        //     age = ${this.age} (${this.division_age})
+        //     energy = ${this.energy} (${this.division_energy})
+        //     `)
 
         if (this.clock.getElapsedTime() % this.division_term <= 0.01 && 
             this.division_after < 0 &&
@@ -219,10 +227,9 @@ class Life_Genetic extends Life_EatOther {
     }
 
     division(lifes, lifeSystem){
-        if (this.isReadyToDivision == true && this.velocity.length() >= 0.001){
-            this.velocity.multiplyScalar(0.1);
-        }
-        else if (this.isReadyToDivision == true && this.velocity.length() < 0.01){
+        if (this.isReadyToDivision == true){
+            if (this.velocity.length() >= 0.001) this.velocity.multiplyScalar(0.01);
+
             this.energy -= this.division_energy;
             
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 

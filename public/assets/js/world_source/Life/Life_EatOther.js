@@ -86,6 +86,7 @@ class Life_EatOther extends Life_Sarira {
         } 
 
         dir.setLength(this.moveSpeed);
+        dir.multiplyScalar(0.1);
         this.applyForce(dir);
         
         if (distance < (this.size + this.chaseTarget.size) * 0.5){
@@ -105,7 +106,7 @@ class Life_EatOther extends Life_Sarira {
         }
 
         if (this.chaseTarget.isDead == false){
-            console.log(this.index + " eat " + this.chaseTarget.index);
+            // console.log(this.index + " eat " + this.chaseTarget.index);
 
             this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0,0,1);
 
