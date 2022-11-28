@@ -65,7 +65,7 @@ class Life_Genetic extends Life_EatOther {
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
-        this.noiseSize = MyMath.random(0, this.size * .5);
+        this.noiseSize = MyMath.random(0.1, this.size * 3);
 
         this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 1, 32));
         this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
