@@ -158,18 +158,20 @@ class World12345 extends Page12345 {
 						this.togglePopup(world_btn);
 					});
 
-					setTimeout(() => {
-						if (!this.any_world_btn_clicked) {
-							this.togglePopup(world_btn);
-							if (i == world_btns.length - 1) {
-								setTimeout(() => {
-									if (!this.any_world_btn_clicked)
-										this.togglePopup(world_btn);
-								}, 6000 * i);
-							}
-						}
-					}, 3000 * i);
+					// setTimeout(() => {
+					// 	if (!this.any_world_btn_clicked) {
+					// 		this.togglePopup(world_btn);
+					// 		if (i == world_btns.length - 1) {
+					// 			setTimeout(() => {
+					// 				if (!this.any_world_btn_clicked)
+					// 					this.togglePopup(world_btn);
+					// 			}, 6000 * i);
+					// 		}
+					// 	}
+					// }, 3000 * i);
 				}
+				//only toggle controls 
+				this.togglePopup( world_btns[2]);
 
 				this.lifecheck = setInterval(() => {
 					this.time += 2;

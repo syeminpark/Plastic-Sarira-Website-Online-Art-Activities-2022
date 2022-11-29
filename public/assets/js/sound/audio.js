@@ -28,7 +28,7 @@ class Audio12345 {
 
 		this.clickSoundVolume = 0.5
 		this.backgroundVolume = 0.5
-		this.deathVolume=0.7
+		this.deathVolume = 0.7
 		this.default = 1
 
 		this.initAudio();
@@ -107,11 +107,13 @@ class Audio12345 {
 			if (array[i].id != "sound-btn") {
 				array[i].addEventListener('mousedown', (event) => {
 					event.preventDefault()
-					this.clickSoundDOM.currentTime = 0
-					this.clickSoundDOM.play()
-					setTimeout(() => {
-						this.clickSoundDOM.pause();
-					}, 150);
+					if (this.is_audio_on) {
+						this.clickSoundDOM.currentTime = 0
+						this.clickSoundDOM.play()
+						setTimeout(() => {
+							this.clickSoundDOM.pause();
+						}, 150);
+					}
 				})
 			}
 		}
