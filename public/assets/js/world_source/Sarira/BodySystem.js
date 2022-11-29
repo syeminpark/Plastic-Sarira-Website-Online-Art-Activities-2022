@@ -92,8 +92,8 @@ class BodySystem {
 
                 //window does not call this class's setPosition function 
                 if (this.window) {
-                    this.sarira.updateConvex(micro)
-                    // this.sarira.updateConvexAll()
+                    // this.sarira.updateConvex(micro)
+                    this.sarira.updateConvexAll()
                 }
 
                 this.sarira.initializeConvex() //이미 초기화했으면 알아서 넘어감 
