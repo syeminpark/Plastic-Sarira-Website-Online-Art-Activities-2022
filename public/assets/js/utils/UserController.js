@@ -67,12 +67,12 @@ class UserController {
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
 
-        this.l_joystick = new Joystick12345({
+        this.l_joystick = new Joystick12345(0, {
             container: this.worldPage.pagelayer.popup.querySelector('#world-joystick-left'),
             stick: this.worldPage.pagelayer.popup.querySelector('#world-joystick-left .joystick-thumb')
 
         });
-        this.r_joystick = new Joystick12345({
+        this.r_joystick = new Joystick12345(1, {
             container: this.worldPage.pagelayer.popup.querySelector('#world-joystick-right'),
             stick: this.worldPage.pagelayer.popup.querySelector('#world-joystick-right .joystick-thumb')
         });
@@ -110,9 +110,6 @@ class UserController {
                 // 유저가 world 밖으로 나가지 않도록 함
                 this.wrap();
 
-                // this.l_joystick.debug();
-                // this.r_joystick.debug();
-
                 // 모바일 / 웹 확인
                 // 웹
                 if (this.isMobile == false) {
@@ -122,6 +119,9 @@ class UserController {
 
                     this.key_update();
                     this.updateUserPos();
+
+                    // this.l_joystick.debug();
+                    // this.r_joystick.debug();
                 }
                 // 모바일
                 else {

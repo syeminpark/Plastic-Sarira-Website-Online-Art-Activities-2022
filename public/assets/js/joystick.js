@@ -1,7 +1,7 @@
-import {ReturnTouchPos, IsPointerAvailable, Length2D} from './util.js';
+import {ReturnTouchPos, ReturnMultiTouchPos, IsPointerAvailable, Length2D} from './util.js';
 
 class Joystick12345{
-	constructor(_params){
+	constructor(index, _params){
 		if(_params){
 			this.container = _params.container;
 			this.stick = _params.stick;
@@ -13,6 +13,8 @@ class Joystick12345{
 			this.is_dragged = false;
 
 			this.isAnimationOn = false;
+
+			this.index = index; // 0 일 경우 좌측 조이스틱, 1 일 경우 우측 조이스틱
 
 			this.mpos = {x: 0, y: 0};
 			this.pan_pos = {x: 0, y: 0};
@@ -33,18 +35,33 @@ class Joystick12345{
 		}
 	}
 
+	debug(){
+		console.log(this.container_bbox, this.pan_tpos, this.mpos);
+	}
+
 	setPan(){
 		this.container_bbox = this.container.getBoundingClientRect();
 
 		this.pan_tpos.x = this.mpos.x - (this.container_bbox.left + this.container_bbox.width * 0.5);
 		this.pan_tpos.y = this.mpos.y - (this.container_bbox.top + this.container_bbox.height * 0.5);
-	
-		// console.log(this.container_bbox, this.pan_tpos, this.mpos);
 	}
 
 	stickPressed(e){
+		
 		this.is_pressed = true;
-		this.mpos = ReturnTouchPos(e);
+
+		if (ReturnMultiTouchPos(e) == false)
+			this.mpos = ReturnTouchPos(e);
+		else {
+			const touches = ReturnMultiTouchPos(e);
+			
+			touches.forEach(touchPos => {
+				if ((this.index == 0 && touchPos.x < 200) || (this.index == 1 && touchPos.x > 200)){
+					this.mpos = touchPos;
+				}
+			});
+		}
+
 		this.setPan();
 
 		this.isAnimationOn = true;
@@ -55,7 +72,19 @@ class Joystick12345{
 		e.preventDefault();
 		if(this.is_pressed){
 			this.is_dragged = true;
-			this.mpos = ReturnTouchPos(e);
+
+			if (ReturnMultiTouchPos(e) == false)
+				this.mpos = ReturnTouchPos(e);
+			else {
+				const touches = ReturnMultiTouchPos(e);
+				
+				touches.forEach(touchPos => {
+					if ((this.index == 0 && touchPos.x < 200) || (this.index == 1 && touchPos.x > 200)){
+						this.mpos = touchPos;
+					}
+				});
+			}
+
 			this.setPan();
 		}else{
 			this.is_dragged = false;
@@ -68,8 +97,18 @@ class Joystick12345{
 
 		this.pan_tpos.x = 0;
 		this.pan_tpos.y = 0;
-
-		this.mpos = ReturnTouchPos(e);
+		
+		if (ReturnMultiTouchPos(e) == false)
+			this.mpos = ReturnTouchPos(e);
+		else {
+			const touches = ReturnMultiTouchPos(e);
+			
+			touches.forEach(touchPos => {
+				if ((this.index == 0 && touchPos.x < 200) || (this.index == 1 && touchPos.x > 200)){
+					this.mpos = touchPos;
+				}
+			});
+		}
 	}
 
 	animate(){
