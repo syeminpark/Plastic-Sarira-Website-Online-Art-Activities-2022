@@ -29,8 +29,9 @@ class UserController {
         this.camera = this.threeSystem.camera;
         this.control = this.threeSystem.controls;
 
+        // this.control.enableDamping = false;
         this.control.minDistance = 5;
-        this.control.maxDistance = this.worldSize*1.5;
+        this.control.maxDistance = this.worldSize * 2;
 
         //=================================================================================
 
@@ -103,33 +104,22 @@ class UserController {
             // focus on 모드이면서, 유저가 살아있을 시 = 유저 조작 모드
             if (this.isLifeFocusOn == true && this.user.isDead == false) {
 
-                // 카메라 유저 따라다니기
-                this.camera_focusOn_update();
-                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
-
-                // 유저가 world 밖으로 나가지 않도록 함
-                this.wrap();
-
                 // 모바일 / 웹 확인
                 // 웹
                 if (this.isMobile == false) {
                     // 유저 컨트롤용 키보드 인풋을 받음
-                    if (this.control.enableRotate == false) this.control.enableRotate = true;
-                    if (this.control.enableZoom == false) this.control.enableZoom = true;
 
                     this.key_update();
                     this.updateUserPos();
-
-                    // this.l_joystick.debug();
-                    // this.r_joystick.debug();
+                    // this.camera.lookAt(this.user.position);
                 }
                 // 모바일
                 else {
                     if (this.control.enableRotate == true) this.control.enableRotate = false;
                     if (this.control.enableZoom == true) this.control.enableZoom = false;
-                    
+
                     if (this.l_joystick.is_pressed == true) {
-                        
+
                         this.l_joystick.animate();
                         this.joystick_update(this.l_joystick);
                         this.updateUserPos();
@@ -148,6 +138,13 @@ class UserController {
                         this.r_joystick.animate();
                     }
                 }
+
+                // 카메라 유저 따라다니기
+                this.camera_focusOn_update();
+                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
+                // this.camera.position.x = this.camLerpPos.x;
+                // this.camera.position.y = this.camLerpPos.y;
+                // this.camera.position.z = this.camLerpPos.z;
             }
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
@@ -165,9 +162,11 @@ class UserController {
                 }
             }
 
+            // 유저가 world 밖으로 나가지 않도록 함
+            this.wrap();
+
             this.healthbar.updatePos(this.getUserScreenPosition());
             this.userName.updatePos();
-
         }
     }
 
@@ -235,8 +234,8 @@ class UserController {
             this.lValue = 0;
             this.rValue = 0;
         }
-
-        if (this.l_joystick.is_pressed == false) {
+        
+        if (this.l_joystick.is_pressed == false && this.isMobile == true) {
             this.velocity.set(0, 0, 0);
             this.fValue = 0;
             this.bValue = 0;
@@ -296,6 +295,8 @@ class UserController {
                 new THREE.Vector3().copy(this.camera.position));
             temp.setLength(this.fValue);
             fv.add(temp);
+
+            // console.log(this.control.getPolarAngle());
         }
 
         if (this.bValue > 0) {
@@ -352,7 +353,6 @@ class UserController {
         if (this.rValue > 0) {
             this.camera.translateX(-0.3);
         }
-        this.camera.lookAt(this.user.position);
     }
 
     //=====================================================================================
@@ -366,6 +366,8 @@ class UserController {
 
         this.control.enabled = false;
 
+        this.maxPolarAngle = Math.PI;
+
         this.camLerpPos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.camera.position),
             new THREE.Vector3().copy(this.user.position)
@@ -374,6 +376,8 @@ class UserController {
 
     camera_focusOn_init() {
         this.control.enabled = true;
+        this.control.enableRotate = true;
+
         this.control.enablePan = false;
         this.control.enableZoom = false;
 
@@ -407,11 +411,12 @@ class UserController {
 
     wrap() {
         const distance = this.user.position.length();
-        const wrapLength = this.worldSize - (this.camDis * 2);
+        const wrapLength = this.worldSize - (this.user.size);
 
         if (distance > wrapLength) {
             this.isInWorld = false;
-            this.camera.position.setLength(wrapLength);
+            this.user.position.setLength(wrapLength);
+            console.log("wrap")
         } else {
             this.isInWorld = true;
         }

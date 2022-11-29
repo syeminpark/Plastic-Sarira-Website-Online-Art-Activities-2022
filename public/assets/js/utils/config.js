@@ -15,8 +15,6 @@ export default{
     plasticOffsetRange:0.5,
 
     //흐름(속력+방향)
-    velMin: 0.005,
-
     velMin: 0.001,
 
     ///////////////////////////////////////////////////
@@ -40,7 +38,7 @@ export default{
     type:"audience",
     sariraArchiveMax:300,
 
-    worldCameraPositon:[0, 0, -10]
+    worldCameraPositon:[0, 0, -200]
 }
 
 
