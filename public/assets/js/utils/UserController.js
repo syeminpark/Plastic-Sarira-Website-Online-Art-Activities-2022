@@ -334,19 +334,19 @@ class UserController {
 
     updateControlRotate() {
         if (this.fValue > 0) {
-            this.camera.translateY(-0.5);
+            this.camera.translateY(-0.2);
         }
 
         if (this.bValue > 0) {
-            this.camera.translateY(0.5);
+            this.camera.translateY(0.2);
         }
 
         if (this.lValue > 0) {
-            this.camera.translateX(0.5);
+            this.camera.translateX(0.2);
         }
 
         if (this.rValue > 0) {
-            this.camera.translateX(-0.5);
+            this.camera.translateX(-0.2);
         }
         this.camera.lookAt(this.user.position);
     }
