@@ -14,10 +14,9 @@ export default class Convex {
         this.materialFront = this.materialBack.clone()
         this.group = new THREE.Object3D
         this.group.name =  Symbol('sari') 
-        
-        if(this.threeSystem.addToGroupList){
+
         this.threeSystem.addToGroupList(this.group.name)
-        }
+
     }
 
     //must be at least three points. 

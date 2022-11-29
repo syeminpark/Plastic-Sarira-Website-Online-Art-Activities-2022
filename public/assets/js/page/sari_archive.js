@@ -59,7 +59,6 @@ class SariArchive12345 extends Page12345 {
 		const load_more_btn = this.pagelayer.popup.querySelector('#load-more-btn');
 		if (load_more_btn) {
 			load_more_btn.addEventListener('click', () => {
-				console.log((this.load_index+1)*this.range,this.sariraThreeController.max)
 				if (this.sliced_data.length - 1 > this.load_index ) {
 					this.load_index++;
 					this.loadList(this.sliced_data[this.load_index]);

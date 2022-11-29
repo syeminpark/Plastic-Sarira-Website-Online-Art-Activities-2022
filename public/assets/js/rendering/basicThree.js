@@ -42,7 +42,7 @@ export default class BasicThree {
         this.renderer.appendToCanvas(this.canvas)
         this.reset()
         this.controls.reset()
-         this.groupNames=[]
+        this.groupNames=[]
 
     }
 
@@ -80,6 +80,7 @@ export default class BasicThree {
         this.scene.traverse((child) => {
         
             if (child.type == 'Group') {
+                console.log()
 
                 for (let i = 0; i < child.children.length; i++) {
                     const mesh = child.children[i];

@@ -131,10 +131,8 @@ export class SariraThree extends BasicThree {
         this.group.add(this.object)
 
         if (data.length > 9) {
-            let object = {
-                scene: this.scene
-            }
-            this.convex = new Convex(object, this.sariraMaterial)
+            
+            this.convex = new Convex(this, this.sariraMaterial)
             this.convex.updateVertices(geometry, data.length)
             this.convex.initializeMesh()
         }
