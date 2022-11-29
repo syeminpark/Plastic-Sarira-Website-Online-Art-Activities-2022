@@ -310,6 +310,9 @@ html{
 	.m-pl-list-l.m-inactive {
 		bottom: calc(-100vw + var(--nav-bar));
 	}
+	mark{
+		background-color:#fff5ab;
+	   }
 
 	#plastic-detail-layer {
 		width: calc(100% - calc(var(--main-padding) * 2));
@@ -322,6 +325,7 @@ html{
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
 	}
 
 	.list-header .plsvg {
