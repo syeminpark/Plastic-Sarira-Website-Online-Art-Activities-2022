@@ -954,7 +954,7 @@ body {
 	width: 20vw;
 	height: calc(var(--bevel-large) * 1.5);
 	border-radius: calc(var(--bevel-large) * 1.5);
-	background-color: white;
+	background-color: rgb(85, 85, 85);
 	opacity: 1;
 	transition: opacity 0.3s;
 }
@@ -964,7 +964,7 @@ body {
 }
 
 .health-bar {
-	background-color: black;
+	background-color: #7FFF00;
 	border-radius: var(--bevel-large);
 }
 
