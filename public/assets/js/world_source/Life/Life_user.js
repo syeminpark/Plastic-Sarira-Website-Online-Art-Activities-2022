@@ -54,7 +54,7 @@ class Life_user extends Life_Genetic {
 
         this.angle = new THREE.Vector3();
 
-        this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
+        this.SetWindowSarira(options.Sarira_Material, options.standardMateriall, options.miniSariraThree);
 
         this.lifeName = 'user';
 
