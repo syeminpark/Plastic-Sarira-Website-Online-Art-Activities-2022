@@ -54,7 +54,7 @@ class Life_user extends Life_Genetic {
 
         this.angle = new THREE.Vector3();
 
-        this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
+        this.SetWindowSarira(options.Sarira_Material, options.standardMateriall, options.miniSariraThree);
 
         this.lifeName = 'user';
 
@@ -123,23 +123,30 @@ class Life_user extends Life_Genetic {
         let indexLength = 0;
         console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
         let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
+        let bufferLength = this.bodySystemWindow.sarira.getPlasticListLength()
+        console.log(bufferLength)
         let d3Dataset = this.bodySystemWindow.sarira.getDataset()
 
-
-        for (let i = 1; i < 300; i++) {
-            if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
-                if (originalPositionArray[0 * 3] == 0 && originalPositionArray[(0 * 3) + 1] == 0 && originalPositionArray[(0 * 3) + 2] == 0) {
-                    indexLength = i;
-                    break;
+        if (bufferLength > 4) {
+            for (let i = 1; i < 300; i++) {
+                if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
+                    if (originalPositionArray[i * 3 * 2] == 0 && originalPositionArray[(i * 3 * 2) + 1] == 0 && originalPositionArray[(i * 3  * 2) + 2] == 0) {
+                        if (originalPositionArray[i * 3 * 3] == 0 && originalPositionArray[(i * 3 * 3) + 1] == 0 && originalPositionArray[(i * 3  * 3) + 2] == 0) {
+                            break;
+                        }
+                    }
                 }
+                indexLength = i;
             }
+        } else {
+            indexLength = bufferLength
         }
-        for (let i =3; i < indexLength * 3; i++) {
-            newPositionArray[i-3] = originalPositionArray[i]
+        for (let i = 3; i < indexLength * 3; i++) {
+            newPositionArray[i - 3] = originalPositionArray[i]
         }
 
         let message = {
-            vertices:   newPositionArray,
+            vertices: newPositionArray,
             metaData: null
         }
         console.log(message);

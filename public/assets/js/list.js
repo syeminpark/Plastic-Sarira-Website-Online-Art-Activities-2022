@@ -75,7 +75,10 @@ class List12345 {
 			this.container.appendChild(item);
 			if (this.detail_layer)
 				item.addEventListener('click', () => {
+					//우선 사리 디테일 창 막아놓기 
+					if (this.marker_data[i].properties != undefined) {
 					this.detailLoad(this.marker_data[i], param);
+					}
 				});
 		}
 
