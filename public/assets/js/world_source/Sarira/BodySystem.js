@@ -11,7 +11,7 @@ import {
 
 class BodySystem {
 
-    constructor(index = 0, worldThree, window=false) {
+    constructor(index = 0, worldThree, window = false) {
         index == 0 ? this.isUser = true : this.isUser = false;
 
         // isWorld == true ? this.threeSystem = threeSystemController.worldThreeSystem : this.threeSystem = threeSystemController.sariraThreeSystem;
@@ -27,15 +27,21 @@ class BodySystem {
         this.particleMaterial;
         this.convexMaterial;
         this.window = window
+        this.tempPos =[0,0,0]
 
     }
 
     setPosition(positionList) {
-        if (this.window == false) {
-            this.sarira.updateVerticesFromLife(positionList) //microplastic.movewithlife
+
+            if (this.window == false) {
+                this.sarira.updateVerticesFromLife(positionList) //microplastic.movewithlife
+            }
+            else{
+                console.log(this.sarira.plasticList.length)
+            }
             this.sarira.updateConvexAll()
+ 
         }
-    }
 
     createBuffer(material) {
         this.floatingBuffer = new Buffer()
@@ -59,10 +65,13 @@ class BodySystem {
         this.moveFloatingPlastics()
         this.updateSarira() //micro.getposition-microupdateBuffer-micro.switch
         this.sarira.setPosition()
-       
+
+
     }
 
-    addFloatingPlastics(positionList,d3Dataset) {
+    addFloatingPlastics(positionList, d3Dataset) {
+        this.floatingBuffer.dispose()
+        this.floatingPlasticsList=[]
         let tempMicro = new Microplastic(this.threeSystem)
         tempMicro.initialize(positionList)
 
@@ -88,13 +97,6 @@ class BodySystem {
                 //micro.getPosition(this.floatingBuffer.bufferGeometry, index)
                 micro.updateBuffer(this.sariraBuffer.getBufferGeometry(), this.sarira.getPlasticListLength())
                 micro.switch(this.floatingBuffer.getBufferGeometry(), index, this.floatingPlasticsList)
-
-
-                //window does not call this class's setPosition function 
-                if (this.window) {
-                    // this.sarira.updateConvex(micro)
-                    this.sarira.updateConvexAll()
-                }
 
                 this.sarira.initializeConvex() //이미 초기화했으면 알아서 넘어감 
 

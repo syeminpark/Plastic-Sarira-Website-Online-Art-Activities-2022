@@ -28,6 +28,10 @@ class Buffer {
     getBufferGeometry(){
         return this.bufferGeometry;
     }
+    dispose(){
+        this.bufferGeometry.dispose()
+    }
+
 }
 
 export {Buffer}

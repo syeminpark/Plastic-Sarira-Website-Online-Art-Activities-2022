@@ -34,8 +34,14 @@ export default class Convex {
 
     updateBuffer(plastic) {
         this.clearObject()
+        if(plastic.positionVector3.x!=null && plastic.positionVector3.y!=null&&  plastic.positionVector3.z!=null){
         this.vertices.push(plastic.positionVector3);
+ 
         this.meshGeometry = new ConvexGeometry(this.vertices);
+        }
+        else{
+            console.log(plastic.positionVector3)
+        }
     }
 
 

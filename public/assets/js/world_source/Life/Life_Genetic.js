@@ -6,8 +6,8 @@ import {MyMath} from '/assets/js/utils/MyMath.js';
 
 class Life_Genetic extends Life_EatOther {
     constructor(index, options, geneCode, setPos){
-        // super(index, options.world, options.Sarira_Material,options.standardMaterial, setPos);
-           super(index, options.world, options.Sarira_Material,options.Sarira_ConvexMaterial, setPos);
+        super(index, options.world, options.Sarira_Material,options.standardMaterial, setPos);
+        //    super(index, options.world, options.Sarira_Material,options.Sarira_ConvexMaterial, setPos);
         this.options = options;
 
         this.geneCode = geneCode || {
