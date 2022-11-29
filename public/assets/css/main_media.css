@@ -316,6 +316,9 @@
 	.list-header {
 		position: relative;
 		top: calc(var(--main-padding) * -0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.list-header .plsvg {

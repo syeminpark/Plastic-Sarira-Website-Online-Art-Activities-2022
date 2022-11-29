@@ -65,7 +65,7 @@ class SariArchive12345 extends Page12345 {
 					this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData,this.list.container.children)
 
 				} else {
-
+					load_more_btn.innerHTML="END OF LIST"
 				}
 			});
 		}
