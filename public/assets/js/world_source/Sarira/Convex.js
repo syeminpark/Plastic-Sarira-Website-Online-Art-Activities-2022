@@ -13,8 +13,11 @@ export default class Convex {
         this.convexMeshFront;
         this.materialFront = this.materialBack.clone()
         this.group = new THREE.Object3D
-        this.groupName = Symbol()
-
+        this.group.name =  Symbol('sari') 
+        
+        if(this.threeSystem.addToGroupList){
+        this.threeSystem.addToGroupList(this.group.name)
+        }
     }
 
     //must be at least three points. 
@@ -61,7 +64,6 @@ export default class Convex {
         this.convexMeshFront.renderOrder = 1
         this.group.add(this.convexMeshBack)
         this.group.add(this.convexMeshFront)
-        this.group.name = this.groupName
         this.threeSystem.scene.add(this.group)
 
     }
@@ -71,6 +73,7 @@ export default class Convex {
         this.threeSystem.scene.remove(selectedObject);
         this.meshGeometry.dispose()
         this.group.clear()
+     
     }
 
 }

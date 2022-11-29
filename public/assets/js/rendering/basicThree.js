@@ -1,3 +1,4 @@
+
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {
     OrbitControls
@@ -18,26 +19,31 @@ export default class BasicThree {
             0.02,
             1300
         )
-        this.camera.position.set(0,0,2)
+        this.camera.position.set(0, 0, 5)
 
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
-   
+
         this.controls.enableDamping = true
         this.controls.maxDistance = 1000
         this.controls.enablePan = false;
 
         this.scene.add(this.group)
-         window.addEventListener('resize',() => this.updateSize(), false)
-         
+        this.groupNames = []
+
+        window.addEventListener('resize', () => this.updateSize(), false)
+
     }
-    
+    addToGroupList(name) {
+        this.groupNames.push(name)
+    }
 
     setup(canvas) {
         this.canvas = canvas
         this.renderer.appendToCanvas(this.canvas)
         this.reset()
         this.controls.reset()
-        
+         this.groupNames=[]
+
     }
 
     update() {
@@ -72,8 +78,9 @@ export default class BasicThree {
 
     reset() {
         this.scene.traverse((child) => {
+        
             if (child.type == 'Group') {
-          
+
                 for (let i = 0; i < child.children.length; i++) {
                     const mesh = child.children[i];
                     mesh.geometry.dispose()
@@ -82,13 +89,18 @@ export default class BasicThree {
                 }
                 child.clear()
             }
-            if(child.name=="sari"){
-                this.scene.remove(child)
-            }
+
             
+console.log(this.groupNames)
+            for (let groupName of this.groupNames) {
+                console.log('g',groupName)
+                let selectedObject = this.scene.getObjectByName(groupName);
+                this.scene.remove(selectedObject)
+            }
+        
         })
         this.renderer.clear();
-        
+
     }
     //item=mesh 
     addToGroup(item) {
