@@ -7,12 +7,13 @@ export default class Convex {
         this.meshObject = {}
         this.threeSystem = threeSystem
         this.materialBack = material
+        
         this.meshGeometry;
         this.convexMeshBack;
         this.convexMeshFront;
         this.materialFront = this.materialBack.clone()
         this.group = new THREE.Object3D
-        this.groupName = 'sari'
+        this.groupName = Symbol()
 
     }
 

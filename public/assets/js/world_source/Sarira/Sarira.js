@@ -11,7 +11,7 @@ class Sarira {
         this.threeSystem = threeSystem
         this.particleMaterial = particleMaterial
         this.convex;
-        this.convexMaterial = convexMaterial.clone()
+        this.convexMaterial = convexMaterial
         this.bufferGeometry = bufferGeometry
         this.d3Dataset=[]
 
@@ -58,6 +58,8 @@ class Sarira {
     //다 지우고 다시 그리는 방식
     updateConvexAll() {
         if (this.convex != undefined && this.plasticList.length > 3) {
+            
+            
             this.convex.clearObject()
             this.convex.updateVertices(this.bufferGeometry, this.plasticList.length)
             this.convex.initializeMesh()

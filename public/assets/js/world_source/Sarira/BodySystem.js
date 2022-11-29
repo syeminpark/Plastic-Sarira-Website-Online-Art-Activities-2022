@@ -59,6 +59,7 @@ class BodySystem {
         this.moveFloatingPlastics()
         this.updateSarira() //micro.getposition-microupdateBuffer-micro.switch
         this.sarira.setPosition()
+       
     }
 
     addFloatingPlastics(positionList,d3Dataset) {
