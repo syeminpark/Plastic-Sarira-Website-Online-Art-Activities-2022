@@ -24,7 +24,7 @@ class List12345 {
 			detail_closer.addEventListener('click', () => {
 				this.detail_layer.classList.add('inactive');
 				document.getElementById('currentPage').classList.add('detail_inactive');
-				console.log(this.detail_layer.classList)
+			
 			});
 		}
 	}
@@ -42,7 +42,7 @@ class List12345 {
 	load(_data, param) {
 
 		this.marker_data = _data;
-		// console.log(this.marker_data);
+		console.log(this.marker_data);
 		//this.reset();
 		for (let i = 0; i < this.marker_data.length; i++) {
 			let item = document.createElement('div');
@@ -73,7 +73,6 @@ class List12345 {
 
 			this.list_items.push(item);
 			this.container.appendChild(item);
-
 			if (this.detail_layer)
 				item.addEventListener('click', () => {
 					this.detailLoad(this.marker_data[i], param);
@@ -85,10 +84,10 @@ class List12345 {
 	}
 
 	detailLoad(_item, param) {
+		console.log(_item.name)
 		console.log("detailLoad", _item)
 		this.detail_layer.classList.remove('inactive');
 		document.getElementById('currentPage').classList.remove('detail_inactive');
-		console.log()
 		if (_item.vert_caption) {
 			if (this.detail_layer.querySelector('.detail-layer-caption-1')) {
 				this.detail_layer.querySelector('.detail-layer-caption-1').innerHTML = _item.vert_caption;

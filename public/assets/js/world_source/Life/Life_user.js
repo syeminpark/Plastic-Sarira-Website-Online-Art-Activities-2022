@@ -10,7 +10,9 @@ import {
     MyMath
 } from '/assets/js/utils/MyMath.js';
 import config from '../../utils/config.js';
-import { miniSariraThree } from '../../rendering/SpecificThree.js';
+import {
+    miniSariraThree
+} from '../../rendering/SpecificThree.js';
 
 class Life_user extends Life_Genetic {
     constructor(options) {
@@ -88,7 +90,7 @@ class Life_user extends Life_Genetic {
         //                 MyMath.random(-3, 3), MyMath.random(-3, 3)))
         //         }
         //     })
-        }
+    }
 
 
     update() {
@@ -109,8 +111,8 @@ class Life_user extends Life_Genetic {
 
     }
 
-    SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial,miniSariraThree) {
-        this.bodySystemWindow = new BodySystem(0, miniSariraThree,true);
+    SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial, miniSariraThree) {
+        this.bodySystemWindow = new BodySystem(0, miniSariraThree, true);
         this.bodySystemWindow.createBuffer(microPlastic_Material);
         this.bodySystemWindow.createSarira(microPlastic_ConvexMaterial);
     }
@@ -121,16 +123,23 @@ class Life_user extends Life_Genetic {
         let indexLength = 0;
         console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
         let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
-        let d3Dataset= this.bodySystemWindow.sarira.getDataset()
-        
+        let d3Dataset = this.bodySystemWindow.sarira.getDataset()
 
-        //TRIM
+
         for (let i = 1; i < 300; i++) {
-            newPositionArray[i] = originalPositionArray[i]
-    }
+            if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
+                if (originalPositionArray[0 * 3] == 0 && originalPositionArray[(0 * 3) + 1] == 0 && originalPositionArray[(0 * 3) + 2] == 0) {
+                    indexLength = i;
+                    break;
+                }
+            }
+        }
+        for (let i =3; i < indexLength * 3; i++) {
+            newPositionArray[i-3] = originalPositionArray[i]
+        }
 
         let message = {
-            vertices:newPositionArray,
+            vertices:   newPositionArray,
             metaData: null
         }
         console.log(message);
@@ -143,13 +152,13 @@ class Life_user extends Life_Genetic {
         //     this.bodySystem.addFloatingPlastics(new THREE.Vector3(MyMath.random(-10, 10),
         //         MyMath.random(-10, 10), MyMath.random(-10, 10)))
         // }
-        
+
         // if (this.isMakeSarira == true) console.log(this.absorbedParticles.length)
 
         var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
             // var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-         
+
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
             // this.bodySystem.addFloatingPlastics(send_pos, data);
@@ -160,7 +169,7 @@ class Life_user extends Life_Genetic {
 
             this.sariraParticles[this.sariraParticles.length - 1].isActive = false;
             this.sariraParticles.splice(this.sariraParticles.length - 1, 1);
-     
+
             this.isMakeSarira = false;
         }
 

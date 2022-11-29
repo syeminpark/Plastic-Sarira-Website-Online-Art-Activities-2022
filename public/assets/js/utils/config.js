@@ -38,7 +38,7 @@ export default{
      ///////////////////////////////////////////////////
     //server
     type:"audience",
-    sariraArchiveMax:300,
+    sariraArchiveMax:3 00,
 
     worldCameraPositon:[0, 0, -10]
 }
