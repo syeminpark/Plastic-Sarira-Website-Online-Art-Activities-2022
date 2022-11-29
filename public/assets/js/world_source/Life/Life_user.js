@@ -119,22 +119,24 @@ class Life_user extends Life_Genetic {
         //user
         let newPositionArray = [];
         let indexLength = 0;
+        console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
         let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
         let d3Dataset= this.bodySystemWindow.sarira.getDataset()
         
 
         for (let i = 1; i < 300; i++) {
-            if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
-                indexLength = i;
-                break;
-            }
-        }
-        for (let i = 0; i < indexLength * 3; i++) {
+            // if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
+            //     indexLength = i;
+            //     break;
+            // }
+        // }
+        // for (let i = 0; i < indexLength * 3; i++) {
             newPositionArray[i] = originalPositionArray[i]
-        }
+        // }
+    }
 
         let message = {
-            vertices: newPositionArray,
+            vertices:newPositionArray,
             metaData: null
         }
         console.log(message);

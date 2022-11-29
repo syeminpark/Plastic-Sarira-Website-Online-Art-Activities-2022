@@ -90,8 +90,6 @@ export default class BasicThree {
                 child.clear()
             }
 
-            
-console.log(this.groupNames)
             for (let groupName of this.groupNames) {
                 console.log('g',groupName)
                 let selectedObject = this.scene.getObjectByName(groupName);

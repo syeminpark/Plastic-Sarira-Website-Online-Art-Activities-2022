@@ -90,7 +90,7 @@ class SariArchive12345 extends Page12345 {
 
 		//current code 
 		this.res = await this.serverClientCommunication.getSariraByRange(this.sariraThreeController.max)
-		console.log(this.res)
+		console.log('response',this.res.allSariraData)
 
 		//dynamically creating a bot_caption by its id 
 		for (let i = 0; i < this.res.allSariraData.length; i++) {
