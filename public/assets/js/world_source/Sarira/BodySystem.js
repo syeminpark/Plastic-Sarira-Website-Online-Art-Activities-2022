@@ -36,9 +36,9 @@ class BodySystem {
             if (this.window == false) {
                 this.sarira.updateVerticesFromLife(positionList) //microplastic.movewithlife
             }
-            else{
-                console.log(this.sarira.plasticList.length)
-            }
+            // else if (this.isUser){
+            //     console.log(this.sarira.plasticList.length)
+            // }
             this.sarira.updateConvexAll()
  
         }

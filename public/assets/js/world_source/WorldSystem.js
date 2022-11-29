@@ -59,8 +59,11 @@ class WorldSystem {
         this.worldThree.setCameraPosition(...this.initialCameraPosition)
         this.worldThree.updateSize()
         this.enterDom = enterDom
+        
+        //세계 경계선 생성
+        this.createWorldboundary();
 
-        //파티클, 라이프 초기화
+        //파티클, 라이프 생성
         this.createParticle();
         this.createLife(miniSariraThree);
     }
@@ -103,6 +106,31 @@ class WorldSystem {
     //=====================================================================================
     //=====================================================================================
 
+    createWorldboundary(){
+        let boundaryParticlePositions = []; 
+        for (let i = 0; i < this.maxParticleCount * 0.1; i++) {
+            const position = new THREE.Vector3(
+                MyMath.random(-this.worldSize, this.worldSize),
+                MyMath.random(-this.worldSize, this.worldSize),
+                MyMath.random(-this.worldSize, this.worldSize)); 
+          
+            position.setLength(this.worldSize);
+            
+            boundaryParticlePositions.push(position);
+        }
+
+        let geometry = new THREE.BufferGeometry().setFromPoints(boundaryParticlePositions);
+        let material = createPointMaterial();
+
+        let worldBoundary = new THREE.Points(geometry, material);
+        worldBoundary.frustumCulled = false
+        worldBoundary.position.set(0, 0, 0);
+        worldBoundary.traverse(function (object) {
+            object.frustumCulled = false;
+        });
+        this.worldThree.addToGroup(worldBoundary);
+    }
+
     createLife(miniSariraThree) {
         //생물 개체수 시작값
         const minNum = Math.floor(this.worldSize * 0.1);
@@ -142,6 +170,7 @@ class WorldSystem {
             // 랜덤 위치 파티클 생성
             // if (i < this.maxParticleCount * 0.1) {
             //     p.setPos();
+            //     p.position.setLength(this.worldSize)
             //     p.isActive = true;
             // }
 
