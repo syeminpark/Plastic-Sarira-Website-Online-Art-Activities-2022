@@ -46,7 +46,7 @@ export default class SariraThreeController {
                 
                 this.sariraThreeList[i].setElement(element[i])
                 this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
-                this.sariraObject.push(this.sariraThreeList[i].getObject())
+                this.sariraObject[i]=this.sariraThreeList[i].getObject()
             }
         }
     }

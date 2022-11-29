@@ -123,6 +123,7 @@ export class SariraThree extends BasicThree {
     }
 
     import(data) {
+      
         const geometry = new THREE.BufferGeometry();
         let meshes = []
         geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
@@ -130,7 +131,7 @@ export class SariraThree extends BasicThree {
         this.object = new THREE.Points(geometry, this.pointMaterial);
         this.group.add(this.object)
 
-        if (data.length > 9) {
+        if (data.length > 9 ) {
             
             this.convex = new Convex(this, this.sariraMaterial)
             this.convex.updateVertices(geometry, data.length)
