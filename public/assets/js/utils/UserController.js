@@ -110,6 +110,9 @@ class UserController {
                 // 유저가 world 밖으로 나가지 않도록 함
                 this.wrap();
 
+                // this.l_joystick.debug();
+                // this.r_joystick.debug();
+
                 // 모바일 / 웹 확인
                 // 웹
                 if (this.isMobile == false) {
@@ -122,8 +125,8 @@ class UserController {
                 }
                 // 모바일
                 else {
-                    // if (this.control.enableRotate == true) this.control.enableRotate = false;
-                    // if (this.control.enableZoom == true) this.control.enableZoom = false;
+                    if (this.control.enableRotate == true) this.control.enableRotate = false;
+                    if (this.control.enableZoom == true) this.control.enableZoom = false;
                     
                     if (this.l_joystick.is_pressed == true) {
                         
@@ -131,16 +134,17 @@ class UserController {
                         this.joystick_update(this.l_joystick);
                         this.updateUserPos();
                     }
-                    else if (this.r_joystick.is_pressed) {
+                    if (this.l_joystick.checkAnimate()) {
+                        this.l_joystick.animate();
+                    }
+
+                    if (this.r_joystick.is_pressed) {
 
                         this.r_joystick.animate();
                         this.joystick_update(this.r_joystick);
                         this.updateControlRotate();
                     }
-                    else if (this.l_joystick.checkAnimate()) {
-                        this.l_joystick.animate();
-                    }
-                    else if (this.r_joystick.checkAnimate()) {
+                    if (this.r_joystick.checkAnimate()) {
                         this.r_joystick.animate();
                     }
                 }
