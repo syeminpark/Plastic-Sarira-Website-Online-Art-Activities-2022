@@ -122,8 +122,8 @@ class UserController {
                 }
                 // 모바일
                 else {
-                    if (this.control.enableRotate == true) this.control.enableRotate = false;
-                    if (this.control.enableZoom == true) this.control.enableZoom = false;
+                    // if (this.control.enableRotate == true) this.control.enableRotate = false;
+                    // if (this.control.enableZoom == true) this.control.enableZoom = false;
                     
                     if (this.l_joystick.is_pressed == true) {
                         
@@ -334,20 +334,21 @@ class UserController {
 
     updateControlRotate() {
         if (this.fValue > 0) {
-            this.camera.translateY(-0.05);
+            this.camera.translateY(-0.5);
         }
 
         if (this.bValue > 0) {
-            this.camera.translateY(0.05);
+            this.camera.translateY(0.5);
         }
 
         if (this.lValue > 0) {
-            this.camera.translateX(0.05);
+            this.camera.translateX(0.5);
         }
 
         if (this.rValue > 0) {
-            this.camera.translateX(-0.05);
+            this.camera.translateX(-0.5);
         }
+        this.camera.lookAt(this.user.position);
     }
 
     //=====================================================================================
