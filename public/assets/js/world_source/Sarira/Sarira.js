@@ -11,7 +11,7 @@ class Sarira {
         this.threeSystem = threeSystem
         this.particleMaterial = particleMaterial
         this.convex;
-        this.convexMaterial = convexMaterial
+        this.convexMaterial = convexMaterial.clone()
         this.bufferGeometry = bufferGeometry
         this.d3Dataset=[]
 
