@@ -123,29 +123,18 @@ class Life_user extends Life_Genetic {
     getSariraDataForServer() {
         //user
         let newPositionArray = [];
-        let indexLength = 0;
         console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
         let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
-        let bufferLength = this.bodySystemWindow.sarira.getPlasticListLength()
-        console.log(bufferLength)
+
         let d3Dataset = this.bodySystemWindow.sarira.getDataset()
 
-        if (bufferLength > 4) {
-            for (let i = 1; i < 300; i++) {
-                if (originalPositionArray[i * 3] == 0 && originalPositionArray[(i * 3) + 1] == 0 && originalPositionArray[(i * 3) + 2] == 0) {
-                    if (originalPositionArray[i * 3 * 2] == 0 && originalPositionArray[(i * 3 * 2) + 1] == 0 && originalPositionArray[(i * 3  * 2) + 2] == 0) {
-                        if (originalPositionArray[i * 3 * 3] == 0 && originalPositionArray[(i * 3 * 3) + 1] == 0 && originalPositionArray[(i * 3  * 3) + 2] == 0) {
-                            break;
-                        }
-                    }
-                }
-                indexLength = i;
-            }
-        } else {
-            indexLength = bufferLength
-        }
-        for (let i = 3; i < indexLength * 3; i++) {
-            newPositionArray[i - 3] = originalPositionArray[i]
+        for (let i = 0; i <this.bodySystemWindow.sarira.getPlasticListLength()* 3; i+=3) {
+ 
+            newPositionArray[i] = originalPositionArray[i]
+            newPositionArray[i+1] = originalPositionArray[i+1]
+            newPositionArray[i+2] = originalPositionArray[i+2]
+            
+    
         }
 
         let message = {

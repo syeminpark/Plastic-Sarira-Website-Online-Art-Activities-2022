@@ -63,12 +63,18 @@ class Microplastic {
     }
 
     updateBuffer(bufferGeometry, indexLength) {
-        bufferGeometry.attributes.position.needsUpdate = true
+       
+       
         for (let i = 0; i < 3; i++) {
             bufferGeometry.attributes.position.array[((indexLength - 1) * 3) + i] = this.positionList[i]
+            if(this.positionList[i]==NaN){
+                console.error("NAN")
+            }
+            
             //  bufferGeometry.attributes.color.array[((indexLength - 1) * 3) + i] = this.color[i]
         }
         bufferGeometry.setDrawRange(0, indexLength);
+        bufferGeometry.attributes.position.needsUpdate = true
     }
     // if (!this.any_world_btn_clicked)
 

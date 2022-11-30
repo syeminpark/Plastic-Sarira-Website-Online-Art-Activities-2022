@@ -2,7 +2,7 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 class Buffer {
 
-    constructor(positionList,colorList,maxPoints = 300,) {
+    constructor(positionList,colorList,maxPoints = 1500,) {
         this.maxPoints = maxPoints
         positionList != undefined ? this.positionList=positionList : this.positionList = new Float32Array(this.maxPoints * 3)
         //colorList != undefined ? this.colorList=colorList : this.colorList = new Float32Array(this.maxPoints * 3)

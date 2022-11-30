@@ -93,6 +93,7 @@ class BodySystem {
         for (let [index, micro] of this.floatingPlasticsList.entries()) {
             if (micro.checkStuck(this.sarira.getPlasticList())) {
                 this.sarira.addPlastics(micro)
+                
 
                 //micro.getPosition(this.floatingBuffer.bufferGeometry, index)
                 micro.updateBuffer(this.sariraBuffer.getBufferGeometry(), this.sarira.getPlasticListLength())
