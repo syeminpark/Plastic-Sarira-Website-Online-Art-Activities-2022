@@ -12,10 +12,10 @@ export default{
     
     //각 폐플라스틱 사이 간격 
     // plasticOffsetRange:0.13,
-    plasticOffsetRange:0.5,
+    plasticOffsetRange:0.6,
 
     //흐름(속력+방향)
-    velMin: 0.001,
+    velMin: 0.0005,
 
     ///////////////////////////////////////////////////
     //life 

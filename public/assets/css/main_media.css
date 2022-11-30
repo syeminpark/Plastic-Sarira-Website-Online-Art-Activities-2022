@@ -27,6 +27,7 @@
 	}
 html{
 	touch-action: manipulation;
+	overflow: hidden;
 }
 
 	.col-m-1-12 {width: calc(100% / 12);}

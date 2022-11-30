@@ -25,23 +25,7 @@ import {
 	miniSariraThree
 } from '../rendering/SpecificThree.js';
 
-const test_img_srcs = [{
-		img_src: "./assets/img/Naechi/studio/1.jpg",
-		id: "NAE#1",
-		timestamp: "2006-09-07"
-	},
-	{
-		img_src: "./assets/img/Naechi/studio/2.jpg",
-		id: "NAE#2",
-		timestamp: "2007-11-10"
-	},
-	{
-		img_src: "./assets/img/Naechi/studio/3.jpg",
-		id: "NAE#3",
-		timestamp: "2012-01-17"
-	}
-];
-
+import config from '../utils/config.js';
 class World12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
@@ -63,6 +47,7 @@ class World12345 extends Page12345 {
 	}
 
 	setup() {
+		
 		this.unload();
 		this.loadsvg();
 
@@ -116,7 +101,7 @@ class World12345 extends Page12345 {
 		this.dom = document.getElementById('world-navigation');
 		this.miniSariraThree.setup(document.getElementById('sari-profile-container'), document.getElementById("world-profile"))
 		this.world.setup(document.getElementById('world-scene'), document.getElementById('world-navigation'), this.miniSariraThree);
-		this.world.importPLY(this.imageslider.add_data, this.imageslider.reposition);
+		this.world.importPLY(this.imageslider.add_data, this.imageslider.reposition, config.initialMaxPlasticCount);	
 		this.userController.setup(this.world);
 
 	}
@@ -128,6 +113,17 @@ class World12345 extends Page12345 {
 	}
 
 	enter() {
+		// let i =0; 
+		// let importPLY =setInterval( ()=>{
+		// 	this.world.importPLY(this.imageslider.add_data, this.imageslider.reposition,1);	
+		// 	i++ 
+		// 	if( i >10){
+				
+		// 		clearInterval(this.lifecheck);
+		// 	}
+		
+		// },5000)
+
 		this.userController.resetKeyboardState();
 
 		let inputs = (document.querySelectorAll('input'))

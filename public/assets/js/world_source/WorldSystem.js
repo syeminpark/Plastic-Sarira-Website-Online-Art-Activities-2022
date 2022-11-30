@@ -32,24 +32,24 @@ class WorldSystem {
 
         this.worldSize = config.worldSize
         this.maxParticleCount = config.maxParticleCount
-        this.initialWastePlasticCount = config.initialMaxPlasticCount
         this.plasticScale = config.plasticScale
         this.offsetRange = config.plasticOffsetRange
 
         //흐름(속력+방향)
         this.velMin = config.velMin
+        this.velMax = config.velMax
         this.enterDom = undefined
 
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
-        this.standardMaterial=createStandardMaterial()
+        this.standardMaterial = createStandardMaterial()
 
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
     }
 
     //해당 페이지 재접속시 다시 실행
-    setup(worldDom, enterDom,miniSariraThree ) {
+    setup(worldDom, enterDom, miniSariraThree) {
 
         //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
@@ -59,7 +59,7 @@ class WorldSystem {
         this.worldThree.setCameraPosition(...this.initialCameraPosition)
         this.worldThree.updateSize()
         this.enterDom = enterDom
-        
+
         //세계 경계선 생성
         this.createWorldboundary();
 
@@ -68,10 +68,10 @@ class WorldSystem {
         this.createLife(miniSariraThree);
     }
 
-    importPLY(addToslider,reorganize){
-        let randomSource = Waste_plastic_dataset.getRandomBatchPLY(this.initialWastePlasticCount)
-        for (let i = 0; i < this.initialWastePlasticCount; i++) {
-            this.worldThree.import(randomSource[i], this.createPlastic, addToslider,reorganize)
+    importPLY(addToslider, reorganize,count) {
+        let randomSource = Waste_plastic_dataset.getRandomBatchPLY(count)
+        for (let i = 0; i < count; i++) {
+            this.worldThree.import(randomSource[i], this.createPlastic, addToslider, reorganize)
         }
     }
 
@@ -87,7 +87,7 @@ class WorldSystem {
             // this.worldThree.render()
             // this.worldThree.update()
             // this.updateParticles();
-        
+
             this.updateLifes();
         }
     }
@@ -106,16 +106,16 @@ class WorldSystem {
     //=====================================================================================
     //=====================================================================================
 
-    createWorldboundary(){
-        let boundaryParticlePositions = []; 
+    createWorldboundary() {
+        let boundaryParticlePositions = [];
         for (let i = 0; i < this.maxParticleCount * 0.1; i++) {
             const position = new THREE.Vector3(
                 MyMath.random(-this.worldSize, this.worldSize),
                 MyMath.random(-this.worldSize, this.worldSize),
-                MyMath.random(-this.worldSize, this.worldSize)); 
-          
+                MyMath.random(-this.worldSize, this.worldSize));
+
             position.setLength(this.worldSize);
-            
+
             boundaryParticlePositions.push(position);
         }
 
@@ -145,7 +145,7 @@ class WorldSystem {
             miniSariraThree: miniSariraThree,
             Sarira_Material: this.pointsMaterial,
             Sarira_ConvexMaterial: this.convexMaterial,
-            standardMaterial:this.standardMaterial
+            standardMaterial: this.standardMaterial
         }
         //console.log(options);
 
@@ -259,10 +259,14 @@ class WorldSystem {
                 activableParticles[i].isActive = true;
                 activableParticles[i].setPos(object.positions[i]);
                 activableParticles[i].setColor(object.colors[i]);
-                activableParticles[i].setD3PlasticData({type:"Waste Plastic", type:object.beach, area:object.index});
+                activableParticles[i].setD3PlasticData({
+                    type: "Waste Plastic",
+                    type: object.beach,
+                    area: object.index
+                });
             }
             return true
-      
+
         } else {
             this.rejectedObject.push(object)
         }
@@ -289,26 +293,25 @@ class WorldSystem {
             if (this.particles[index].isActive == false) {
                 this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
                 continue;
+
+                }
+                let flow = new THREE.Vector3(
+                    MyMath.random(-this.velMin, this.velMin),
+                    MyMath.random(-this.velMin, this.velMin),
+                    MyMath.random(-this.velMin, this.velMin));
+
+                this.particles[index].applyForce(flow);
+                this.particles[index].wrap();
+
+                this.lifes.forEach(life => {
+                    life.breath(this.particles[index]);
+                    if (life.energy < life.hungryValue) life.eat(this.particles[index]);
+                });
+
+                this.life_user.eat(this.particles[index]);
+                this.life_user.breath(this.particles[index]);
             }
-            if (this.valid()) {
-
-            let flow = new THREE.Vector3(
-                MyMath.random(-this.velMin, this.velMin),
-                MyMath.random(-this.velMin, this.velMin),
-                MyMath.random(-this.velMin, this.velMin));
-
-            this.particles[index].applyForce(flow);
-            this.particles[index].wrap();
-
-            this.lifes.forEach(life => {
-                life.breath(this.particles[index]);
-                if (life.energy < life.hungryValue) life.eat(this.particles[index]);
-            });
-
-            this.life_user.eat(this.particles[index]);
-            this.life_user.breath(this.particles[index]);
-        }
-        }
+        
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;
 
 
