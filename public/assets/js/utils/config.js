@@ -15,11 +15,11 @@ export default{
     plasticOffsetRange:0.6,
 
     //흐름(속력+방향)
-    velMin: 0.0005,
+    velMin: 0.001,
 
     ///////////////////////////////////////////////////
     //life 
-    lifespan: 200,
+    lifespan: 250,
 
     //생물체 크기?
 
