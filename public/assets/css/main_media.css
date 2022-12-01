@@ -51,13 +51,15 @@
 	    justify-content: center;
 	    padding: 0 calc(var(--nav-margin) * 1.5) 0 calc(var(--nav-margin) * 1.5);
 	}
+	footer{
+		padding-bottom: 40px; 
+	}
 
 	#navigation {
 	
 		left: 50%;
 	    top: unset;
-	    /* bottom: var(--main-padding); */
-		bottom: 2%;
+	    bottom: var(--main-padding);
 	    transform: translate(-50%,0);
 	    width: calc(var(--nav-bar) * 5 + var(--nav-margin) * 4);
 	    min-height: var(--nav-bar);
