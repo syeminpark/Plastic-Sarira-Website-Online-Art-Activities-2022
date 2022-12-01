@@ -16,6 +16,7 @@
 		--shadow-diagonal: 2px 2px 4px 2px;
 		--shadow-vertical: 0px 2px 2px 1px;
 		--shadow-vertical-up: 0px -2px 2px 1px;
+		--TIP-padding: 13vw; 
 	}
 
 	.display-m {
@@ -25,10 +26,7 @@
 	[class*="col-"] {
 		width: 100%;
 	}
-html{
-	touch-action: manipulation;
-	overflow: hidden;
-}
+
 
 	.col-m-1-12 {width: calc(100% / 12);}
 	.col-m-2-12 {width: calc(200% / 12);}
@@ -210,6 +208,14 @@ html{
 	    calc(var(--main-padding) * 0.5) 
 	    calc(var(--main-padding) * 1);
 	    cursor: pointer;
+	}
+	.TIP{
+		position: relative;
+		top: var(	--TIP-padding);
+		left: 50%;
+		transform: translate(-50%, 0);
+		font-size: var(--font-small);
+		text-align: center;
 	}
 
 	.world-popup {

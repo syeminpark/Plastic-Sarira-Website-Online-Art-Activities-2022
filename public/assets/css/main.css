@@ -14,6 +14,7 @@
 	--shadow-color: rgba(0, 0, 0, 0.2);
 	--shadow-diagonal: 2px 2px 4px 2px;
 	--shadow-vertical: 0px 2px 2px 1px;
+	--TIP-padding: 1.5vw; 
 }
 
 html,
@@ -187,6 +188,15 @@ body {
 	left: 50%;
 	transform: translate(-50%, 0);
 	cursor: pointer;
+}
+
+.TIP{
+	position: fixed;
+	bottom: var(	--TIP-padding);
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: var(--font-small);
+
 }
 
 #navigation {

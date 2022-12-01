@@ -1,8 +1,8 @@
 <html>
 
 <head>
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="icon" type="image/x-icon" href="./favicon.png" id="favicon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
@@ -17,7 +17,7 @@
 
 <body>
 	<div id="preloader" class="preloader bck-blk ztop"></div>
-	<p class ="detail_inactive" id ="currentPage" style="display: none;"> </p> 
+	<p class="detail_inactive" id="currentPage" style="display: none;"> </p>
 	<div id="main-container">
 		<div class="header z3">
 			<div class="language">
@@ -25,9 +25,18 @@
 				/
 				<span id="EN-btn" class="btn">EN</span>
 			</div>
-			<div class="title display-pc" id="plastic-sarira-title" data-src="./assets/html/home.html" data-name="home">
+			<div class="title display" id="plastic-sarira-title" data-src="./assets/html/home.html" data-name="home">
 				&#9679;&ensp;<span class="EN">PLASTIC SARIRA</span><span class="KR">PLASTIC SARIRA</span>&ensp;&#9679;
 			</div>
+			<div class="TIP">
+				<div class="KR " id="tip-KR">
+					text
+				</div>
+				<div class="EN" id="tip-EN">
+					text
+				</div>
+			</div>
+
 		</div>
 		<div id="background-container">
 			<div id="bck-preloader" class="preloader bck-blk z2 inactive"></div>
@@ -67,9 +76,11 @@
 		<audio id="death" src="./assets/mp3/death.mp3"></audio>
 		<span class="btn audio-svg z3" id="sound-btn" svg-src="./assets/svg/music.svg"></span>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/d3-force-boundary@0.0.1/dist/d3-force-boundary.min.js"></script>
 	<script src="https://d3js.org/d3.v6.min.js"></script>
-	<script type="module" src="./index.js"  crossorigin="anonymous"></script>
+	<script type="module" src="./index.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

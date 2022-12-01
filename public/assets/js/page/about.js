@@ -6,11 +6,13 @@ class About12345 extends Page12345{
 	constructor(_pagelayer){
 		super();
 
+
 		this.pagelayer = _pagelayer
 		//console.log(this.pagelayer.popup);
 	}
 
 	setup(){
+
 		this.setprofile();
 		this.loadsvg();
 		this.set_scrolls(this.pagelayer);

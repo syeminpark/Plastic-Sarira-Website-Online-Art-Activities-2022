@@ -20,7 +20,7 @@ class Audio12345 {
 		this.is_init = true;
 		this.button.addEventListener('click', this.toggle.bind(this));
 
-		this.visualizer = new AudioVisualizer12345(_visualizer);
+		// this.visualizer = new AudioVisualizer12345(_visualizer);
 
 		this.clickSoundDOM = document.getElementById("click")
 		this.zInteractionDOM = document.getElementById('zInteraction')
@@ -60,7 +60,7 @@ class Audio12345 {
 		const background_gain = this.audioContext.createGain();
 		this.analyserNode = this.audioContext.createAnalyser();
 		this.analyserNode.fftSize = 32;
-		this.visualizer.setAnalyzer(this.analyserNode);
+		// this.visualizer.setAnalyzer(this.analyserNode);
 
 		try {
 			let response = await fetch("./assets/mp3/background.mp3")
@@ -86,14 +86,14 @@ class Audio12345 {
 		this.bufferStartTime = this.audioContext.currentTime
 		this.is_audio_on = true;
 		this.button.classList.add("active");
-		this.visualizer.show();
+		// this.visualizer.show();
 	}
 
 	off() {
 		this.analyserNode.disconnect(this.audioContext.destination);
 		this.is_audio_on = false;
 		this.button.classList.remove("active");
-		this.visualizer.hide();
+		// this.visualizer.hide();
 		if (this.gainNode)
 			this.gainNode.gain.setValueAtTime(0, this.audioCtx.currentTime);
 	}
