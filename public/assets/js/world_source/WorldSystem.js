@@ -80,10 +80,11 @@ class WorldSystem {
             this.worldThree.render()
             this.worldThree.update()
 
-            this.updateParticles();
+         
 
         }
         if (this.valid()) {
+            this.updateParticles();
             // this.worldThree.render()
             // this.worldThree.update()
             // this.updateParticles();
