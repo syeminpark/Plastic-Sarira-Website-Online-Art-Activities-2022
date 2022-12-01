@@ -888,7 +888,7 @@ body {
 #world-enter input {
 	border-color: white;
 	border-width: 0 0 var(--border-width) 0;
-	border-radius: var(--bevel-large);
+	/* border-radius: var(--bevel-large); */
 	overflow:hidden;
 
 	width: 80%;
@@ -897,7 +897,7 @@ body {
 	text-align: center;
 	font-size: inherit;
 	color: inherit;
-	border:1px solid white;
+	/* border:2px solid white; */
 }
 
 
@@ -965,9 +965,9 @@ body {
 	border-radius: var(--bevel-large);
 	box-shadow: var(--shadow-diagonal) var(--shadow-color);
 	/*width: 55%;*/
-	text-align: center;
+	/* text-align: center;
 	transition: box-shadow 0.3s;
-} */
+} */ */
 
 #world-end .txt-btn:hover,
 #world-enter .txt-btn:hover {
