@@ -57,19 +57,15 @@
 	
 		left: 50%;
 	    top: unset;
-	    /* bottom: var(--main-padding); */
-		bottom:3%;
+	    bottom: var(--main-padding);
 	    transform: translate(-50%,0);
 	    width: calc(var(--nav-bar) * 5 + var(--nav-margin) * 4);
-	    /* min-height: var(--nav-bar);
-	    height: var(--nav-bar); */
-		height:100vh;
-		min-height: -webkit-fill-available;
+	    min-height: var(--nav-bar);
+	    height: var(--nav-bar);
 	    display: flex;
     	align-items: center;
     	justify-content: center;
     	transition: transform 0.3s;
-		padding-bottom: 40px; 
 	}
 
 	#navigation .btn {
