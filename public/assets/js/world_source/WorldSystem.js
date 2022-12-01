@@ -80,11 +80,10 @@ class WorldSystem {
             this.worldThree.render()
             this.worldThree.update()
 
-         
+            this.updateParticles();
 
         }
         if (this.valid()) {
-            this.updateParticles();
             // this.worldThree.render()
             // this.worldThree.update()
             // this.updateParticles();
@@ -296,6 +295,7 @@ class WorldSystem {
                 continue;
 
                 }
+                if(this.valid()){
                 let flow = new THREE.Vector3(
                     MyMath.random(-this.velMin, this.velMin),
                     MyMath.random(-this.velMin, this.velMin),
@@ -303,6 +303,7 @@ class WorldSystem {
 
                 this.particles[index].applyForce(flow);
                 this.particles[index].wrap();
+                }
 
                 this.lifes.forEach(life => {
                     life.breath(this.particles[index]);
