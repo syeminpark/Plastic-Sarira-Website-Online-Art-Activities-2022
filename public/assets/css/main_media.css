@@ -18,13 +18,6 @@
 		--shadow-vertical-up: 0px -2px 2px 1px;
 		--TIP-padding: 14vw; 
 	}
-	body {
-		min-height: 100vh;
-		min-height: -webkit-fill-available;
-	  }
-	  html {
-		height: -webkit-fill-available;
-	  }
 
 	.display-m {
 		display: block;
@@ -63,7 +56,8 @@
 	
 		left: 50%;
 	    top: unset;
-	    bottom: var(--main-padding);
+	    /* bottom: var(--main-padding); */
+		bottom: 2%;
 	    transform: translate(-50%,0);
 	    width: calc(var(--nav-bar) * 5 + var(--nav-margin) * 4);
 	    min-height: var(--nav-bar);
