@@ -1007,6 +1007,8 @@ body {
 
 #world-to-sarira {
 	position: relative;
+	background-color:white;
+
 }
 
 #world-to-sarira svg {
@@ -1019,6 +1021,9 @@ body {
 
 #world-end .txt-btn {
 	width: auto;
+	background-color:white;
+	border:1px solid black;
+
 }
 
 #world-end.inactive {
