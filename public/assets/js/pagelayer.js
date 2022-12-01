@@ -243,7 +243,7 @@ class PageLayer12345 {
 			document.getElementById('tip-KR').innerHTML="TIP: 해변목록 / 해변명을 클릭하면 새로운 정보를 볼 수 있어요"
 			document.getElementById('tip-EN').innerHTML="TIP: Click each name from the beach list for new data"
 		} else if (_btn.getAttribute("data-name") == "sarira") {
-			document.getElementById('tip-KR').innerHTML="TIP: 각 참여자들이 만든 플라스틱 사리를 모두 보여주고 있어요 "
+			document.getElementById('tip-KR').innerHTML="TIP: 모든 참여자들이 남긴 플라스틱 사리를 보여주고 있어요 "
 			document.getElementById('tip-EN').innerHTML="TIP: These are plastic sariras left by every participant"
 			this.sarirapage.setup();
 		} else if (_btn.getAttribute("data-name") == "world") {
