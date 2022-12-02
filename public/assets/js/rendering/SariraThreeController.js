@@ -32,9 +32,9 @@ export default class SariraThreeController {
         this.renderer.clear()
         this.canvas = canvas
         
-        // for (let i = 0; i < this.max; i++) {
-        //     // this.sariraThreeList[i].setup(this.canvas)
-        // }
+        for (let i = 0; i < this.max; i++) {
+            this.sariraThreeList[i].setup(this.canvas)
+        }
     }
 
     create(load_index, range, data, element) {
