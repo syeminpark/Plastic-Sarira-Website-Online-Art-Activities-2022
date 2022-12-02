@@ -747,7 +747,7 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
 	transition: opacity 0.3s;
-	z-index: 10;
+	
 	color:grey;
 	font-size: var(--font-small);
 }
