@@ -684,7 +684,7 @@ body {
 }
 
 .list-vert-caption {
-	position: absolute;\search
+	position: absolute;
 	top: calc(var(--main-padding) * 1.2);
 	right: calc(var(--main-padding) * 1.2);
 	transform: translate(50%, -50%) rotate(90deg) translate(50%, 0%);
