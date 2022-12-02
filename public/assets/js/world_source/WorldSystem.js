@@ -240,6 +240,7 @@ class WorldSystem {
             index: index,
         }
 
+
         return this.checkWorldForInput(object)
     }
 
@@ -260,9 +261,9 @@ class WorldSystem {
                 activableParticles[i].setPos(object.positions[i]);
                 activableParticles[i].setColor(object.colors[i]);
                 activableParticles[i].setD3PlasticData({
-                    type: "Waste Plastic",
-                    type: object.beach,
-                    area: object.index
+                    category: "Waste Plastic",
+                    subcategory: object.beach.toUpperCase(),
+                    uniqueID: object.index
                 });
             }
             return true

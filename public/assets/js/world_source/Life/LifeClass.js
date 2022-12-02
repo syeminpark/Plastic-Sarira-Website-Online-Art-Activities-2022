@@ -38,31 +38,31 @@ class Life_Absorb extends Life {
     }
 
     //안씀
-    absorb(microPlastic) {
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 1;
-        let sariraPos = this.position;
+    // absorb(microPlastic) {
+    //     const distance = this.position.distanceTo(microPlastic.position);
+    //     const lifeSize = (this.size + this.noiseSize) * 1;
+    //     let sariraPos = this.position;
 
-        let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
+    //     let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
 
-        if (microPlastic.isEaten == false && this.absorbedParticles.length < this.microPlastic_maxAmount) {
-            //아직 먹히지 않은 상태의 파티클 끌어당기기
-            if (distance < lifeSize) {
-                force.multiplyScalar(0.02);
-                microPlastic.applyForce(force);
-            }
+    //     if (microPlastic.isEaten == false && this.absorbedParticles.length < this.microPlastic_maxAmount) {
+    //         //아직 먹히지 않은 상태의 파티클 끌어당기기
+    //         if (distance < lifeSize) {
+    //             force.multiplyScalar(0.02);
+    //             microPlastic.applyForce(force);
+    //         }
 
-            //파티클 먹고 파티클 상태 먹힌것으로 변경
-            if (distance < this.size * 0.5) {
-                microPlastic.data.setPassBy('life' + this.index);
-                this.absorbedParticles.push(microPlastic);
-                this.sariraParticlesData.push(microPlastic.data.getDataList());
+    //         //파티클 먹고 파티클 상태 먹힌것으로 변경
+    //         if (distance < this.size * 0.5) {
+    //             microPlastic.data.setPassBy('life' + this.index);
+    //             this.absorbedParticles.push(microPlastic);
+    //             this.sariraParticlesData.push(microPlastic.data.getDataList());
 
-                microPlastic.isEaten = true;
-                this.isMakeSarira = true;
-            }
-        }
-    }
+    //             microPlastic.isEaten = true;
+    //             this.isMakeSarira = true;
+    //         }
+    //     }
+    // }
 
     eat(microPlastic) {
         const distance = this.position.distanceTo(microPlastic.position);
@@ -86,8 +86,11 @@ class Life_Absorb extends Life {
                 if (distance <= this.size * 0.45) {
                     // microPlastic.data.setAbsorbedBy(1);
                     this.absorbedParticles.push(microPlastic);
-                    if (microPlastic.d3Data != undefined) this.sariraParticlesData.push(microPlastic.d3Data);
+                    if (microPlastic.d3Data != undefined) {
 
+                    this.sariraParticlesData.push(microPlastic.d3Data);
+                    }
+                    
                     this.energy += 0.1;
                     microPlastic.isEaten = true;
                 }
@@ -115,8 +118,11 @@ class Life_Absorb extends Life {
                 if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
                     // microPlastic.data.setAbsorbedBy(1);
                     this.absorbedParticles.push(microPlastic);
-                    if (microPlastic.d3Data != undefined) this.sariraParticlesData.push(microPlastic.d3Data);
-
+                    if (microPlastic.d3Data != undefined) {
+                        this.sariraParticlesData.push(microPlastic.d3Data);
+                        // console.log(microPlastic.d3Data)
+                    }
+                    
                     microPlastic.isEaten = true;
                 }
             }

@@ -8,7 +8,9 @@ class D3Dataset {
 
     static categories = ['Waste Plastic', 'Microbe', "Herbivore", "Carnivore", "Homo Sapiens"];
     static subcategories = {
-        "Waste Plastic": ['MA', 'BANG', 'JANG', 'NAE', 'SONG', 'CHEONG', 'GAM', 'YUM', 'DO', 'GU', 'DU'],
+        "Waste Plastic": ['MASIAN', 'BANGAMEORI', 'JANGAN', 'NAECHI', 'SONGPYEONG', 
+        'CHEONGGAM', 'GAMCHU', 'YUMJEON', 'DOGU', 'GURYEONGPO', 'DUMO-MONGDOL'],
+        
         'Microbe': "MICROBE",
         "Herbivore": "HERBIVORE",
         "Carnivore": 'CARNIVORE'

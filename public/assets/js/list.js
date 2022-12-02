@@ -75,7 +75,6 @@ class List12345 {
 
 		
 			this.list_items.push(item);
-			console.log(this.list_items.length)
 			this.total_marker_data.push(this.marker_data[i])
 			this.container.appendChild(item);
 			if (this.detail_layer)
@@ -91,8 +90,7 @@ class List12345 {
 	}
 
 	detailLoad(_item, param) {
-		console.log(_item.name)
-		console.log("detailLoad", _item)
+		
 		this.detail_layer.classList.remove('inactive');
 		document.getElementById('currentPage').classList.remove('detail_inactive');
 		if (_item.vert_caption) {

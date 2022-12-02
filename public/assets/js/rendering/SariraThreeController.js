@@ -98,7 +98,7 @@ export default class SariraThreeController {
 
     checkCanvas() {
         if (this.renderer.getCurrentCanvas() != this.canvas) {
-            console.log("chnagecanvas")
+          
             this.renderer.appendToCanvas(this.canvas)
             this.renderer.setSize(this.canvas.getBoundingClientRect().width, this.canvas.getBoundingClientRect().height)
             for (let sariraThree of this.sariraThreeList) {
