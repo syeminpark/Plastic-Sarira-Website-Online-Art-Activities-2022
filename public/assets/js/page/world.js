@@ -138,10 +138,8 @@ class World12345 extends Page12345 {
 				document.getElementById('world-joystick-right').classList.remove('m-inactive');
 
 				this.userController.start(input.value);
-
-
 				this.ServerClientCommunication.createUser(input.value)
-
+				this.world.setUserName(input.value)
 
 
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');

@@ -51,10 +51,11 @@ class Life_user extends Life_Genetic {
 
         this.angle = new THREE.Vector3();
 
+
         this.SetWindowSarira(options.Sarira_Material, options.standardMaterial, options.miniSariraThree);
         // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
 
-        this.lifeName = 'user';
+        this.lifeName = undefined
 
         //라이프에도영향을 줌 
         this.lifespan = config.lifespan
@@ -186,6 +187,9 @@ class Life_user extends Life_Genetic {
         let type = 'Homo Sapiens';
 
         return type;
+    }
+    setName(name){
+        this.lifeName=name
     }
 }
 

@@ -46,6 +46,7 @@ class WorldSystem {
 
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
+        this.userName=undefined
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -67,6 +68,10 @@ class WorldSystem {
         this.createParticle();
         this.createLife(miniSariraThree);
     }
+    setUserName(name){
+        this.life_user.setName(name)
+    }
+
 
     importPLY(addToslider, reorganize,count) {
         let randomSource = Waste_plastic_dataset.getRandomBatchPLY(count)
