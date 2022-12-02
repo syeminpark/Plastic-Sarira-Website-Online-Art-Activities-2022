@@ -161,7 +161,7 @@ class Life_user extends Life_Genetic {
 
             // this.bodySystem.addFloatingPlastics(send_pos, data);
             // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
-
+            //  console.log(data)
             this.bodySystem.addFloatingPlastics(send_pos);
             this.bodySystemWindow.addFloatingPlastics(send_pos);
 

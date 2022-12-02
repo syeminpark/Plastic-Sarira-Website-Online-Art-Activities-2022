@@ -48,6 +48,7 @@ class SariArchive12345 extends Page12345 {
 
 	async setup() {
 		this.load_index = 0;
+		let res;
 		const list_container = this.pagelayer.popup.querySelector("#sari-list");
 		const list_scroller = this.pagelayer.popup.querySelector(".scrollable");
 		const detail_layer = this.pagelayer.popup.querySelector("#sari-detail-layer");
@@ -55,21 +56,26 @@ class SariArchive12345 extends Page12345 {
 
 		if (list_container) {
 			this.list.setup(list_container, list_scroller, detail_layer);
-			await this.loadData()
+			res= await this.loadData()
 			if (load_more_btn) {
 				load_more_btn.classList.remove('inactive')
-				load_more_btn.addEventListener('click', () => {
-					if (this.sliced_data.length - 1 > this.load_index) {
-						this.load_index++;
-						this.loadList(this.sliced_data[this.load_index]);
-						this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData, this.list.container.children)
-
-					} else {
-						load_more_btn.innerHTML = "END OF LIST"
-					}
-				});
+				document.getElementById('loading-text').classList.add('inactive')
 			}
 		}
+		if (load_more_btn) {
+			load_more_btn.addEventListener('click', () => {
+				if (this.sliced_data.length - 1 > this.load_index) {
+					this.load_index++;
+					this.loadList(this.sliced_data[this.load_index]);
+					this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
+
+				} else {
+					load_more_btn.innerHTML = "END OF LIST"
+				}
+			});
+
+		}
+
 		this.loadsvg();
 	}
 
@@ -86,22 +92,22 @@ class SariArchive12345 extends Page12345 {
 
 	async loadData() {
 		//current code 
-		this.res = await this.serverClientCommunication.getSariraByRange(this.sariraThreeController.max)
-		console.log('response', this.res.allSariraData)
+		let res = await this.serverClientCommunication.getSariraByRange(this.sariraThreeController.max)
+		console.log('response', res.allSariraData)
 
 		//dynamically creating a bot_caption by its id 
-		for (let i = 0; i < this.res.allSariraData.length; i++) {
-			this.res.allSariraData[i].bot_caption = this.res.allSariraData[i].name
-			this.res.allSariraData[i].vert_caption = this.res.allSariraData[i].createdAt.split('T')[0]
+		for (let i = 0; i < res.allSariraData.length; i++) {
+			res.allSariraData[i].bot_caption = res.allSariraData[i].name
+			res.allSariraData[i].vert_caption = res.allSariraData[i].createdAt.split('T')[0]
 		}
 		//--> split data at intervals of 20, and load first part.
-		this.sliceData(this.res.allSariraData, this.range);
+		this.sliceData(res.allSariraData, this.range);
 		this.loadList(this.sliced_data[this.load_index])
 		this.set_scrolls(this.pagelayer);
 
 		this.sariraThreeController.setup(document.getElementById("full-container"))
-		this.sariraThreeController.create(this.load_index, this.range, this.res.allSariraData, this.list.container.children)
-		return this.res
+		this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
+		return res
 	}
 
 	loadList(_data) {

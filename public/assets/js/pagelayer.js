@@ -167,10 +167,10 @@ class PageLayer12345 {
 		}
 
 		if (!_no_preloader) this.preloader.reset();
-		setTimeout(async () => {
+		setTimeout( () => {
 			this.is_loading = true;
 
-			await this.load(_btn, _lang, _no_preloader);
+			this.load(_btn, _lang, _no_preloader);
 		}, 600);
 	}
 

@@ -210,7 +210,7 @@ class Life_Sarira extends Life_Absorb {
         // if (this.isMakeSarira == true && this.sariraParticlesData.length > 0) {
             let data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
             let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
-
+            // console.log(data)
             // this.bodySystem.addFloatingPlastics(send_pos, data);
             this.bodySystem.addFloatingPlastics(send_pos);
 
