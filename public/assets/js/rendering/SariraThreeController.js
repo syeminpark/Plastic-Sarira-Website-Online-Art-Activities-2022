@@ -22,27 +22,28 @@ export default class SariraThreeController {
         }
 
     }
-    setMaterial(pointMaterial, sariraMaterial) {
-        this.pointMaterial=pointMaterial
-        this.sariraMaterial=sariraMaterial
-    }
 
     setup(canvas) {
         this.sariraObject = []
         this.renderer.clear()
         this.canvas = canvas
-        
 
-        // for (let i = 0; i < this.max; i++) {
-        //     // this.sariraThreeList[i].setup(this.canvas)
-        // }
+        for (let i = 0; i < this.max; i++) {
+            this.sariraThreeList[i].setup(this.canvas)
+        }
+    }
+
+    setMaterial(pointMaterial, sariraMaterial) {
+
+        for (let i = 0; i < this.max; i++)
+            this.sariraThreeList[i].setMaterial(pointMaterial, sariraMaterial)
     }
 
     create(load_index, range, data, element) {
 
         for (let i = load_index * range; i < (load_index + 1) * range; i++) {
             if (this.sariraThreeList[i] != undefined && data[i]!=undefined) {
-                this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
+                
                 this.sariraThreeList[i].setElement(element[i])
                 this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
                 this.sariraObject[i]=this.sariraThreeList[i].getObject()
