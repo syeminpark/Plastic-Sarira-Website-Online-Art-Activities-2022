@@ -4,6 +4,8 @@ import {Language12345} from './assets/js/language.js';
 import {PageLayer12345} from './assets/js/pagelayer.js';
 import {Audio12345} from './assets/js/sound/audio.js';
 
+document.getElementById('home-loading').classList.add('inactive')
+
 //Preloader가 사리 만드는 역할
 const preloader = new Preloader12345(
 	document.querySelector('#preloader'), 

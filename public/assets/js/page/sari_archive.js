@@ -59,7 +59,7 @@ class SariArchive12345 extends Page12345 {
 			res= await this.loadData()
 			if (load_more_btn) {
 				load_more_btn.classList.remove('inactive')
-				document.getElementById('loading-text').classList.add('inactive')
+				document.getElementById('archive-loading').classList.add('inactive')
 			}
 		}
 		if (load_more_btn) {
