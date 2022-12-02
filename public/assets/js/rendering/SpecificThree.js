@@ -101,6 +101,7 @@ export class SariraThree extends BasicThree {
         super(renderer, type, isDetail)
         this.convex = undefined
         this.object = undefined
+        this.loaded=false
 
         let ambientLight = new THREE.AmbientLight(0xffffff, 30);
         let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 10);

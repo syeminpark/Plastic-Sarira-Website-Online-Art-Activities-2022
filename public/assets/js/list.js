@@ -13,6 +13,7 @@ class List12345 {
 		this.scroller = _scroller;
 		this.detail_layer = _detail;
 		this.list_items = [];
+		this.total_marker_data=[]
 
 		if (this.scroller) {
 			this.scroller.addEventListener('scroll', this.onListScroll.bind(this));
@@ -32,6 +33,7 @@ class List12345 {
 	reset() {
 		this.scroller.scrollTop = 0;
 		this.list_items = [];
+		this.total_marker_data=[]
 		if (this.container) {
 			while (this.container.firstChild) {
 				this.container.removeChild(this.container.lastChild);
@@ -42,7 +44,8 @@ class List12345 {
 	load(_data, param) {
 
 		this.marker_data = _data;
-		console.log(this.marker_data);
+		let range =  this.marker_data.length
+		let index= this.list_items.length /range 
 		//this.reset();
 		for (let i = 0; i < this.marker_data.length; i++) {
 			let item = document.createElement('div');
@@ -70,15 +73,16 @@ class List12345 {
 				item.setAttribute('img-src', this.marker_data[i]["img-src"]);
 			}
 
-
+		
 			this.list_items.push(item);
+			console.log(this.list_items.length)
+			this.total_marker_data.push(this.marker_data[i])
 			this.container.appendChild(item);
 			if (this.detail_layer)
 				item.addEventListener('click', () => {
-					//우선 사리 디테일 창 막아놓기 
 					if (this.marker_data[i].properties != undefined) {
-					this.detailLoad(this.marker_data[i], param);
-					}
+					this.detailLoad(this.total_marker_data[ index*range+i ], param);
+				}
 				});
 		}
 

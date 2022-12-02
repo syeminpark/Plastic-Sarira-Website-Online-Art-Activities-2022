@@ -684,7 +684,7 @@ body {
 }
 
 .list-vert-caption {
-	position: absolute;
+	position: absolute;\search
 	top: calc(var(--main-padding) * 1.2);
 	right: calc(var(--main-padding) * 1.2);
 	transform: translate(50%, -50%) rotate(90deg) translate(50%, 0%);
@@ -710,6 +710,12 @@ body {
 	border-radius: var(--bevel-small);
 	padding: var(--main-padding) calc(var(--main-padding) * 2) var(--main-padding) calc(var(--main-padding) * 2);
 	cursor: pointer;
+	
+}
+.txt-btn.inactive{
+	opacity: 0;
+	pointer-events: none;
+	
 }
 
 .sari-svg svg {
