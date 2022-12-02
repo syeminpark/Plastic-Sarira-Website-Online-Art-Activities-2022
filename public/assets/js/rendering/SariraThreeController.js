@@ -12,14 +12,14 @@ export default class SariraThreeController {
         this.sariraObject = []
 
         this.max = config.sariraArchiveMax
-        this.sariraThreeList = []
+        this.sariraThreeList = undefined
 
-        for (let i = 0; i < this.max; i++) {
-            let sariraThree = new SariraThree(this.renderer, this.type, false)
+        // for (let i = 0; i < this.max; i++) {
+        //     let sariraThree = new SariraThree(this.renderer, this.type, false)
 
-            sariraThree.animate()
-            this.sariraThreeList.push(sariraThree)
-        }
+        //     sariraThree.animate()
+        //     this.sariraThreeList.push(sariraThree)
+        // }
 
     }
     setMaterial(pointMaterial, sariraMaterial) {
@@ -28,11 +28,11 @@ export default class SariraThreeController {
     }
 
     setup(canvas) {
+        this.sariraThreeList = []
         this.sariraObject = []
         this.renderer.clear()
         this.canvas = canvas
         
-
         // for (let i = 0; i < this.max; i++) {
         //     // this.sariraThreeList[i].setup(this.canvas)
         // }
@@ -41,11 +41,15 @@ export default class SariraThreeController {
     create(load_index, range, data, element) {
 
         for (let i = load_index * range; i < (load_index + 1) * range; i++) {
-            if (this.sariraThreeList[i] != undefined && data[i]!=undefined) {
-                this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
-                this.sariraThreeList[i].setElement(element[i])
-                this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
-                this.sariraObject[i]=this.sariraThreeList[i].getObject()
+            if (this.sariraThreeList != undefined && data[i]!=undefined) {
+
+                let sariraThree = new SariraThree(this.renderer, this.type, false)
+                 sariraThree.animate()
+                 sariraThree.setMaterial(this.pointMaterial, this.sariraMaterial)
+                 sariraThree.setElement(element[i])
+                 sariraThree.import(JSON.parse(data[i].message).vertices)
+                this.sariraObject[i]=sariraThree.getObject()
+                this.sariraThreeList.push(sariraThree)
             }
         }
     }
