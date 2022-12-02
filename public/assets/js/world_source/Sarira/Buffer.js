@@ -2,13 +2,27 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 class Buffer {
 
-    constructor(positionList,colorList,maxPoints = 1500,) {
+    constructor(positionList, colorList, maxPoints = 1500, ) {
         this.maxPoints = maxPoints
-        positionList != undefined ? this.positionList=positionList : this.positionList = new Float32Array(this.maxPoints * 3)
+        positionList != undefined ? this.positionList = positionList : this.positionList = new Float32Array(this.maxPoints * 3)
         //colorList != undefined ? this.colorList=colorList : this.colorList = new Float32Array(this.maxPoints * 3)
 
         this.bufferGeometry
+        this.box
     }
+
+
+    getBoundingBox() {
+        this.bufferGeometry.computeBoundingBox()
+        const boundingbox = this.bufferGeometry.boundingBox
+        return {
+            width: boundingbox.max.x - boundingbox.min.x,
+            depth: boundingbox.max.z - boundingbox.min.z,
+            height: boundingbox.max.y - boundingbox.min.y
+        }
+    }
+
+
 
 
     initialize(material) {
@@ -19,19 +33,22 @@ class Buffer {
 
         this.point = new THREE.Points(this.bufferGeometry, material);
         this.point.frustumCulled = false
+        this.box = new THREE.BoxHelper(this.point, 0xffff00);
     }
 
     render(threeSystem) {
         threeSystem.addToGroup(this.point)
     }
 
-    getBufferGeometry(){
+    getBufferGeometry() {
         return this.bufferGeometry;
     }
-    dispose(){
+    dispose() {
         this.bufferGeometry.dispose()
     }
 
 }
 
-export {Buffer}
+export {
+    Buffer
+}

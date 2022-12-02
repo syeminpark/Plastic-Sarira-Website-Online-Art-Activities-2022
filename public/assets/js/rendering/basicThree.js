@@ -29,7 +29,7 @@ export default class BasicThree {
 
         this.scene.add(this.group)
         this.groupNames = []
-
+     
         window.addEventListener('resize', () => this.updateSize(), false)
 
     }

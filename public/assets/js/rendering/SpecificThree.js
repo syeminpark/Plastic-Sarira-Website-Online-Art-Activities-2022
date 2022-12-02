@@ -37,6 +37,7 @@ export default class PointThree extends BasicThree {
                 for (let i = 0; i < this.originalArray.length; i++) {
                     this.originalArray[i] = i;
                 }
+       
                 this.object = new THREE.Points(geometry, this.material);
                 this.group.add(this.object)
                 this.camera.position.set(0, 0, 180 + geometry.boundingBox.max.y * 5)
@@ -248,11 +249,11 @@ export class miniSariraThree extends BasicThree {
 
         this.camera.fov = 75
 
-        let ambientLight = new THREE.AmbientLight(0xffffff, 30);
-        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 10);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 10);
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 10);
-        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 10);
+        let ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
+        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 1);
         directionalLight.position.set(-10, 0, 0);
         directionalLight2.position.set(0, 10, 0);
         directionalLight3.position.set(10, -10, 0);
@@ -260,7 +261,7 @@ export class miniSariraThree extends BasicThree {
         directionalLight.target.position.set(0, 0, 0);
         directionalLight2.target.position.set(0, 0, 0);
         directionalLight3.target.position.set(0, 0, 0);
-        this.scene.add(ambientLight, hemiLight, directionalLight, directionalLight2, directionalLight3);
+        this.scene.add( directionalLight, directionalLight2, directionalLight3);
 
         this.selectedCheckDOM = undefined;
     }
