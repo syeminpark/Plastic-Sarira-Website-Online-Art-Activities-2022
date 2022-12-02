@@ -47,6 +47,7 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	async setup() {
+		document.getElementById('archive-loading').classList.remove('inactive')
 		this.load_index = 0;
 		let res;
 		const list_container = this.pagelayer.popup.querySelector("#sari-list");
@@ -57,9 +58,10 @@ class SariArchive12345 extends Page12345 {
 		if (list_container) {
 			this.list.setup(list_container, list_scroller, detail_layer);
 			res= await this.loadData()
+			document.getElementById('archive-loading').classList.add('inactive')
 			if (load_more_btn) {
 				load_more_btn.classList.remove('inactive')
-				document.getElementById('archive-loading').classList.add('inactive')
+				
 			}
 		}
 		if (load_more_btn) {
