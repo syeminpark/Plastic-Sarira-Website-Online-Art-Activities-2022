@@ -51,6 +51,10 @@ const mobile_menu_toggle_btn = document.querySelector('#show-m-navigation');
 //홈페이지 전용 preloader(사리 애니메이션 스타트)
 preloader.start();
 
+//prevent double click
+document.ondblclick = function(e) {
+	e.preventDefault();
+}
 
 ////////////////////////////////////////////////////////////
 window.addEventListener('load', ()=>{
