@@ -4,6 +4,7 @@
 	--font-title: 1.5vw;
 	--font-large: 1.2vw;
 	--font-small: 0.75vw;
+	--font-nav: 0.6vw;
 	--font-citation: 0.5vw;
 	--bevel-large: 10px;
 	--bevel-small: 5px;
@@ -199,7 +200,7 @@ body {
 
 }
 
-#navigation {
+/* #navigation {
 	position: fixed;
 	left: var(--main-padding);
 	top: 50%;
@@ -208,11 +209,11 @@ body {
 	min-height: var(--nav-bar);
 	background-color: white;
 	border-radius: var(--bevel-small);
-}
+} */
 
-#navigation2 {
+#navigation {
 	position: fixed;
-	left: 4%;
+	left: var(--main-padding);
 	top: 50%;
 	transform: translate(0, -50%);
 	width: var(--nav-bar);
@@ -255,7 +256,7 @@ body {
 	justify-content: center;
 }
 
-#navigation .btn {
+/* #navigation .btn {
 	display: inline-flex;
 	width: var(--nav-btn);
 	height: var(--nav-btn);
@@ -263,6 +264,25 @@ body {
 	position: relative;
 	right: 50%;
 	transform: translate(50%, 0);
+} */
+
+#navigation .btn .nav-text{
+	font-size: var(--font-nav);
+	transform: translate(0%,100%);
+
+}
+#navigation .btn {
+	display: inline-flex;
+	width: var(--nav-btn);
+	height: var(--nav-btn);
+	margin: var(--nav-margin);
+	margin-bottom: var(--nav-margin);
+	position: relative;
+	right: 50%;
+	transform: translate(50%, 0);
+
+	justify-content: center;
+	text-align: center;
 }
 
 #navigation .btn svg,
@@ -282,20 +302,21 @@ body {
 }
 
 #world-navigation .btn svg,
-#navigation .btn svg,
+#navigation .btn ,
 #sound-btn.btn svg {
 	opacity: 0.5;
 	transition: opacity 0.3s;
 }
 
 #world-navigation .btn.active svg,
-#navigation .btn.active svg,
+#navigation .btn.active,
 #sound-btn.btn.active svg {
 	opacity: 1;
 }
 
-#world-navigation .btn:hover svg,
-#navigation .btn:hover svg,
+#world-navigation .btn:hover,
+#navigation .btn:hover,
+.nav-text:hover,
 #sound-btn.btn:hover svg {
 	opacity: 1;
 }

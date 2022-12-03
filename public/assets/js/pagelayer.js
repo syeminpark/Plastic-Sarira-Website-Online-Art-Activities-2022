@@ -177,11 +177,15 @@ class PageLayer12345 {
 	toggleBtns(_btn) {
 
 		const nav_btns = document.getElementById("navigation").querySelectorAll(".btn");
+		const nav_text = document.getElementById("navigation").querySelectorAll(".nav-text");
+		console.log(nav_text)
 		for (let i = 0; i < nav_btns.length; i++) {
 			if (nav_btns[i] === _btn) {
 				nav_btns[i].classList.add("active");
+				nav_text[i].classList.add("active");
 			} else {
 				nav_btns[i].classList.remove("active");
+				nav_text[i].classList.remove("active");
 			}
 
 		}
