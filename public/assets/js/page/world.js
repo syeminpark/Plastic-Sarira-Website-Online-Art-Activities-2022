@@ -44,6 +44,9 @@ class World12345 extends Page12345 {
 		this.userController = new UserController(this);
 		this.ServerClientCommunication = new ServerClientCommunication()
 		this.animate();
+
+
+
 	}
 
 	setup() {

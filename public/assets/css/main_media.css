@@ -394,15 +394,30 @@
 	}
 
 	.joystick {
-		border: calc(var(--border-width) * 1.5) solid white;
+		
+		/* border: calc(var(--border-width) ) solid white; */
 	    position: fixed;
 	    bottom: 20vw;
-	    width: 25vw;
-	    height: 25vw;
+	    width: 40vw;
+	    height: 40vw;
 	    border-radius: 100%;
-	    transition: bottom 0.3s;
-	}
+	    transition: bottom 0.3s
 
+	}
+	.joystick .text{
+		display:flex;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, 50%);
+		justify-content:center;
+		text-align: center;
+		display: flex;
+		color:white;
+		-webkit-text-stroke: 1px;
+		-webkit-text-stroke-color:black;
+
+	
+	}
 	.expanded .joystick {
 		bottom: var(--main-padding);
 	}
@@ -420,6 +435,7 @@
 	}
 
 	.joystick-thumb {
+		
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -428,6 +444,7 @@
 		height: 30%;
 		border-radius: 100%;
 		background-color: white;
+	
 	}
 
 	.help-joystick {
@@ -437,8 +454,8 @@
 	    transform: translate(-50%, -50%);
 	    width: 20vw;
 	    height: 20vw;
-	    border: var(--border-width) solid black;
-	    border-radius: 100%;
+	    /* border: var(--border-width) solid black;
+	    border-radius: 100%; */
 	}
 
 	.help-joystick:after {
