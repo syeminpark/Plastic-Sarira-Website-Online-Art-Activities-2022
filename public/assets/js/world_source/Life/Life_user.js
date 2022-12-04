@@ -120,7 +120,7 @@ class Life_user extends Life_Genetic {
     getSariraDataForServer() {
         //user
         let newPositionArray = [];
-        console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
+        // console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
         let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
 
         let d3Dataset = this.bodySystemWindow.sarira.getDataset()

@@ -2,6 +2,7 @@ import {
     MyMath
 } from "../utils/MyMath.js"
 import * as Tone from 'https://cdn.skypack.dev/tone';
+import config from "../utils/config.js";
 
 export default class SariraGenerationSound {
     constructor() {
@@ -65,21 +66,30 @@ export default class SariraGenerationSound {
     }
 
     setFeedbackDelay(micorplasticCount) {
-        console.log(micorplasticCount)
-        this.feedbackRate = MyMath.map(micorplasticCount, 0, 1000, 0, 1)
+        // console.log(micorplasticCount)
+        if (micorplasticCount > config.maxParticleEaten) {
+            micorplasticCount = config.maxParticleEaten
+        }
+        this.feedbackRate = MyMath.map(micorplasticCount, 0, config.maxParticleEaten, 0, 1)
         this.feedbackDelayNode.feedback.value = this.feedbackRate
     }
 
 
 
     setFrequency_PitchShift(width, height) {
-        this.pitch_left = MyMath.map(height, 0, 4, 0, -10)
-        this.pitch_right = MyMath.map(width, 0, 4, 0, -10)
-        console.log('pitch', this.pitch_left, this.pitch_right)
+        if (width > config.sizeMax) {
+            width = config.sizeMax
+        }
+        if (height > config.sizeMax) {
+            height = config.sizeMax
+        }
+        this.pitch_left = MyMath.map(height, 0, config.sizeMax, 0, -10)
+        this.pitch_right = MyMath.map(width, 0, config.sizeMax, 0, -10)
+        // console.log('pitch', this.pitch_left, this.pitch_right)
 
-        this.frequency_left = MyMath.map(height, 0, 4, 100, -100)
-        this.frequency_right = MyMath.map(width, 0, 4, 100, -100)
-        console.log('freq', this.frequency_left, this.frequency_right)
+        this.frequency_left = MyMath.map(height,0, config.sizeMax, 100, -100)
+        this.frequency_right = MyMath.map(width,0, config.sizeMax,100, -100)
+        // console.log('freq', this.frequency_left, this.frequency_right)
 
         // this.pitchShift_leftNode.pitch = this.pitch_left
         // this.pitchShift_rightNode.pitch = this.pitch_right
@@ -89,7 +99,10 @@ export default class SariraGenerationSound {
     }
 
     setFreeverb(depth) {
-        this.freeverb_wet = MyMath.map(depth, 0, 4, 0, 1)
+        if(depth>config.sizeMax){
+            depth=config.sizeMax
+        }
+        this.freeverb_wet = MyMath.map(depth, 0, config.sizeMax, 0, 1)
         this.freeverbNode.wet.value = this.freeverb_wet; //max is 1
     }
 
@@ -109,8 +122,8 @@ export default class SariraGenerationSound {
             }
         }
     }
- 
-    dispose(){
+
+    dispose() {
         this.gainNode.dispose()
     }
 }

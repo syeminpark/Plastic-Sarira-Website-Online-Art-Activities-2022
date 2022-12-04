@@ -250,9 +250,6 @@ class WorldSystem {
             beach: beach,
             index: index,
         }
-
-
-        console.log(this.importedPLYCount)
         return this.checkWorldForInput(object)
     }
 

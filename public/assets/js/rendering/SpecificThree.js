@@ -249,19 +249,8 @@ export class miniSariraThree extends BasicThree {
 
         this.camera.fov = 75
 
-        let ambientLight = new THREE.AmbientLight(0xffffff, 1);
-        let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
-        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(-10, 0, 0);
-        directionalLight2.position.set(0, 10, 0);
-        directionalLight3.position.set(10, -10, 0);
-        directionalLight3.position.set(10, 0, 10);
-        directionalLight.target.position.set(0, 0, 0);
-        directionalLight2.target.position.set(0, 0, 0);
-        directionalLight3.target.position.set(0, 0, 0);
-        this.scene.add( directionalLight, directionalLight2, directionalLight3);
+        let ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        this.scene.add(ambientLight,);
 
         this.selectedCheckDOM = undefined;
     }
