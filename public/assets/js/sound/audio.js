@@ -1,6 +1,4 @@
-import {
-	AudioVisualizer12345
-} from './audio_visualizer.js';
+
 import {
 	unmute
 } from './unmute.js'
@@ -26,9 +24,9 @@ class Audio12345 {
 		this.zInteractionDOM = document.getElementById('zInteraction')
 		this.deathDOM = document.getElementById('death')
 
-		this.clickSoundVolume = 0.5
-		this.backgroundVolume = 0.5
-		this.deathVolume = 0.7
+		this.clickSoundVolume = 1
+		this.backgroundVolume =1
+		this.deathVolume = 1
 		this.default = 1
 
 		this.initAudio();

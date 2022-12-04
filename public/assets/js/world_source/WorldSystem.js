@@ -46,6 +46,7 @@ class WorldSystem {
 
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
+
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -54,6 +55,7 @@ class WorldSystem {
         //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
         this.rejectedObject = []
+        this.importedPLYCount = []
 
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(...this.initialCameraPosition)
@@ -67,12 +69,17 @@ class WorldSystem {
         this.createParticle();
         this.createLife(miniSariraThree);
     }
-    setUserName(name){
+    unload() {
+        if (this.life_user) {
+            this.life_user.bodySystemWindow.unload()
+        }
+    }
+    setUserName(name) {
         this.life_user.setName(name)
     }
 
 
-    importPLY(addToslider, reorganize,count) {
+    importPLY(addToslider, reorganize, count) {
         let randomSource = Waste_plastic_dataset.getRandomBatchPLY(count)
         for (let i = 0; i < count; i++) {
             this.worldThree.import(randomSource[i], this.createPlastic, addToslider, reorganize)
@@ -245,6 +252,7 @@ class WorldSystem {
         }
 
 
+        console.log(this.importedPLYCount)
         return this.checkWorldForInput(object)
     }
 
@@ -270,8 +278,13 @@ class WorldSystem {
                     uniqueID: object.index
                 });
             }
-            return true
 
+            if (this.importedPLYCount.length == 0) {
+                this.importedPLYCount.push(object.positions.length)
+            } else {
+                this.importedPLYCount.push(object.positions.length + this.importedPLYCount[this.importedPLYCount.length - 1])
+            }
+            return true
         } else {
             this.rejectedObject.push(object)
         }
@@ -283,6 +296,8 @@ class WorldSystem {
 
 
     updateParticles() {
+
+
 
         let particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
         let particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
@@ -299,26 +314,40 @@ class WorldSystem {
                 this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
                 continue;
 
-                }
-                if(this.valid()){
-                let flow = new THREE.Vector3(
-                    MyMath.random(-this.velMin, this.velMin),
-                    MyMath.random(-this.velMin, this.velMin),
-                    MyMath.random(-this.velMin, this.velMin));
-
-                this.particles[index].applyForce(flow);
-                this.particles[index].wrap();
-                }
-
-                this.lifes.forEach(life => {
-                    life.breath(this.particles[index]);
-                    if (life.energy < life.hungryValue) life.eat(this.particles[index]);
-                });
-
-                this.life_user.eat(this.particles[index]);
-                this.life_user.breath(this.particles[index]);
             }
-        
+            if (this.valid()) {
+                //index 5000
+
+                let flows = []
+                for (let i = 0; i < this.importedPLYCount.length; i++) {
+                    flows.push(new THREE.Vector3(
+                        MyMath.random(-this.velMin, this.velMin),
+                        MyMath.random(-this.velMin, this.velMin),
+                        MyMath.random(-this.velMin, this.velMin)))
+                }
+                for (let i = 0; i < this.importedPLYCount.length; i++) {
+                    if (index <= this.importedPLYCount[i]) {
+                        //해당하는 PLY모델 소속의 index임 
+                        // console.log(index,i, this.importedPLYCount[i])
+                        this.particles[index].applyForce(flows[i]);
+                        break
+                    }
+                }
+
+                ///index = particle Count approx 15,000
+                // this.particles[index].applyForce(flows[0]);
+                this.particles[index].wrap();
+            }
+
+            this.lifes.forEach(life => {
+                life.breath(this.particles[index]);
+                if (life.energy < life.hungryValue) life.eat(this.particles[index]);
+            });
+
+            this.life_user.eat(this.particles[index]);
+            this.life_user.breath(this.particles[index]);
+        }
+
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;
 
 

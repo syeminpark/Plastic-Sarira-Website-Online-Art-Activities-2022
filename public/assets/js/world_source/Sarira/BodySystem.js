@@ -1,4 +1,4 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import SariraGenerationSound from '../../sound/SariraGenerationSound.js';
 import {
     Buffer
 } from './Buffer.js';
@@ -8,6 +8,7 @@ import {
 import {
     Microplastic
 } from './Microplastic.js';
+
 
 class BodySystem {
 
@@ -29,6 +30,11 @@ class BodySystem {
         this.window = window
         this.tempPos = [0, 0, 0]
 
+        if (this.window) {
+            this.generationSound = new SariraGenerationSound()
+            this.generationSound.setup();
+        }
+
     }
 
     setPosition(positionList) {
@@ -40,7 +46,6 @@ class BodySystem {
         //     console.log(this.sarira.plasticList.length)
         // }
         this.sarira.updateConvexAll()
-
     }
 
     createBuffer(material) {
@@ -66,15 +71,9 @@ class BodySystem {
         this.updateSarira() //micro.getposition-microupdateBuffer-micro.switch
         this.sarira.setPosition()
 
-        if(this.window)
-        this.makeGenerativeSound()
-
-    }
-    makeGenerativeSound(){
-       let sariraSize= this.sariraBuffer.getBoundingBox()
-       let microCount= this.sarira.getPlasticList().length;
-       console.log(microCount)
-  
+        if (this.window) {
+            this.generationSound.play()
+        }
     }
 
 
@@ -103,15 +102,29 @@ class BodySystem {
             if (micro.checkStuck(this.sarira.getPlasticList())) {
                 this.sarira.addPlastics(micro)
 
+                if (this.window) {
+                    //only does once
 
-                //micro.getPosition(this.floatingBuffer.bufferGeometry, index)
+
+                    let sariraSize = this.sariraBuffer.getBoundingBox()
+                    let microCount = this.sarira.getPlasticList().length;
+
+                    this.generationSound.setFeedbackDelay(microCount)
+                    this.generationSound.setFrequency_PitchShift(sariraSize.width, sariraSize.height)
+                    this.generationSound.setFreeverb(sariraSize.depth)
+                }
+
                 micro.updateBuffer(this.sariraBuffer.getBufferGeometry(), this.sarira.getPlasticListLength())
                 micro.switch(this.floatingBuffer.getBufferGeometry(), index, this.floatingPlasticsList)
 
-           
                 this.sarira.initializeConvex() //이미 초기화했으면 알아서 넘어감 
 
             }
+        }
+    }
+    unload(){
+        if(this.window){
+            this.generationSound.dispose()
         }
     }
 }

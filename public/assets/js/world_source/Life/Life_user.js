@@ -154,7 +154,7 @@ class Life_user extends Life_Genetic {
         var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
             var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-            console.log(data)
+           
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
             // this.bodySystem.addFloatingPlastics(send_pos, data);

@@ -26,6 +26,9 @@ import {
 } from '../rendering/SpecificThree.js';
 
 import config from '../utils/config.js';
+
+import SariraGenerationSound from '../sound/SariraGenerationSound.js';
+
 class World12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
@@ -113,6 +116,8 @@ class World12345 extends Page12345 {
 		if (this.lifecheck) {
 			clearInterval(this.lifecheck);
 		}
+
+		this.world.unload()
 	}
 
 	enter() {
