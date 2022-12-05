@@ -149,7 +149,7 @@ class UserController {
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
                 // 카메라가 일정 거리에 도달하면 애니메이션을 중지함
-                if (this.camera.position.length() > this.worldSize * .995) {
+                if (this.camera.position.length() > this.worldSize * .99) {
 
                     // this.control.target = new THREE.Vector3(0, 0, 0);
                     this.isfocusOffLerpDone = true;

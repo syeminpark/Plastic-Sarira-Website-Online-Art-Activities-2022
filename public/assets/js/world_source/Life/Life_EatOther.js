@@ -55,6 +55,11 @@ class Life_EatOther extends Life_Sarira {
 
     }
 
+    randomWalk(){
+        if (this.isEaten == true) return;
+        super.randomWalk();
+    }
+
     normalMove(otherLife){
         if (this.findLife(otherLife)){
             this.state = 1;

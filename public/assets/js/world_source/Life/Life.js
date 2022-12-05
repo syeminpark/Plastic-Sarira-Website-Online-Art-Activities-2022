@@ -94,6 +94,11 @@ class Life {
 
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
+        
+        this.lifeMesh.frustumCulled = false
+        this.lifeMesh.traverse(function (object) {
+            object.frustumCulled = false;
+        });
 
         this.worldThree.addToGroup(this.lifeMesh);
     }
@@ -147,19 +152,18 @@ class Life {
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.position = this.lifeMesh.position;
 
-        this.acceleration.setLength(0.001);
-        this.acceleration.multiplyScalar(0.01);
+        this.acceleration.multiplyScalar(0.99);
 
         this.look(force);
 
         this.acceleration.add(force);
         this.velocity.add(this.acceleration);
 
-        if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.1);
+        if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.01);
 
         this.position.add(this.velocity);
 
-        this.velocity.multiplyScalar(0.9);
+        this.velocity.multiplyScalar(0.1);
     }
 
     look(dir){
@@ -273,7 +277,7 @@ class Life {
 
         if (distance > this.wrapSize) {
 
-            this.velocity.multiplyScalar(-0.1);
+            this.velocity.multiplyScalar(-0.9);
 
             normal.setLength( -0.1 );
             this.applyForce( normal );

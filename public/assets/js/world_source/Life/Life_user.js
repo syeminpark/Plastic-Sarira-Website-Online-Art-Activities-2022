@@ -108,7 +108,57 @@ class Life_user extends Life_Genetic {
     }
 
     stateMachine(otherLife) {
+        if (otherLife.index == 0) return;
+        this.eatLife(otherLife);
+    }
 
+    eatLife(otherLife) {
+        this.chaseTarget = undefined;
+        const distance = this.position.distanceTo(otherLife.position);
+
+        if (this.chaseTarget == undefined) this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1, 1, 1);
+
+        if (this.chaseTarget == undefined && distance < (this.size + otherLife.size) * 0.5) {
+            this.chaseTarget = otherLife;
+        }
+        else {
+            this.chaseTarget = undefined;
+        }
+
+        if (this.chaseTarget != undefined) {
+            if (this.chaseTarget.isDead == false) {
+                // console.log(this.index + " eat " + this.chaseTarget.index);
+
+                this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0, 0, 1);
+
+                this.chaseTarget.isEaten = true;
+                this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
+
+                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1, .8, .8);
+
+                let wrapSize = this.size * 0.25;
+                this.chaseTarget.wrapSize = wrapSize;
+
+                let dir = new THREE.Vector3().subVectors(
+                    new THREE.Vector3().copy(this.chaseTarget.position), 
+                    new THREE.Vector3().copy(this.position));
+
+                dir.setLength(this.moveSpeed/2);
+                dir.multiplyScalar(0.1);
+                this.chaseTarget.applyForce(dir);
+
+                if (this.chaseTarget.energy > 0) {
+                    this.energy++;
+                    this.chaseTarget.energy -= this.digestionSpeed;
+                    if (wrapSize > 0) {
+                        wrapSize *= 0.9;
+                    }
+                }
+            }
+            else if (this.chaseTarget.isDead == true) {
+                this.chaseTarget = undefined;
+            }
+        }
     }
 
     SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial, miniSariraThree) {
@@ -130,8 +180,6 @@ class Life_user extends Life_Genetic {
             newPositionArray[i] = originalPositionArray[i]
             newPositionArray[i+1] = originalPositionArray[i+1]
             newPositionArray[i+2] = originalPositionArray[i+2]
-            
-    
         }
 
         let message = {

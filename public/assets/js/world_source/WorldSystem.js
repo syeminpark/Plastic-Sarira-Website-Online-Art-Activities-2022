@@ -293,9 +293,6 @@ class WorldSystem {
 
 
     updateParticles() {
-
-
-
         let particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
         let particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
 
