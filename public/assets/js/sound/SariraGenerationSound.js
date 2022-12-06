@@ -18,6 +18,8 @@ export default class SariraGenerationSound {
 
         this.frequency_left = 100 //range -100, 100 
         this.frequency_right = 100 //range -100, 100 
+        this.frequency_max=5000
+        this.frequency_min=-100
 
         //3.convol reverb
         this.roomsize = 0.3 // 추가된 항목. range 0,1
@@ -87,8 +89,8 @@ export default class SariraGenerationSound {
         this.pitch_right = MyMath.map(width, 0, config.sizeMax, 0, -10)
         // console.log('pitch', this.pitch_left, this.pitch_right)
 
-        this.frequency_left = MyMath.map(height,0, config.sizeMax, 100, -100)
-        this.frequency_right = MyMath.map(width,0, config.sizeMax,100, -100)
+        this.frequency_left = MyMath.map(height,0, config.sizeMax, this.frequency_max, this.frequency_min)
+        this.frequency_right = MyMath.map(width,0, config.sizeMax,this.frequency_max, this.frequency_min)
         // console.log('freq', this.frequency_left, this.frequency_right)
 
         // this.pitchShift_leftNode.pitch = this.pitch_left
