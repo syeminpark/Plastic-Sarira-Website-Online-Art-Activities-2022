@@ -108,7 +108,7 @@ class BodySystem {
 
                     let sariraSize = this.sariraBuffer.getBoundingBox()
                     let microCount = this.sarira.getPlasticList().length;
-                    // console.log(sariraSize)
+                    console.log(sariraSize,this. sarira.plasticList.length)
 
                     this.generationSound.setFeedbackDelay(microCount)
                     this.generationSound.setFrequency_PitchShift(sariraSize.width, sariraSize.height)

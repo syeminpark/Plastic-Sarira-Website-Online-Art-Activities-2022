@@ -16,9 +16,9 @@ export default class SariraGenerationSound {
         this.pitch_left = 0 //range -60 , 60
         this.pitch_right = 0 //range -60 , 60
 
-        this.frequency_left = 100 //range -100, 100 
-        this.frequency_right = 100 //range -100, 100 
-        this.frequency_max=5000
+        this.frequency_left = 0 //range -100, 100 
+        this.frequency_right = 0 //range -100, 100 
+        this.frequency_max= 2000
         this.frequency_min=-100
 
         //3.convol reverb
@@ -34,8 +34,8 @@ export default class SariraGenerationSound {
         this.feedbackDelayNode = new Tone.FeedbackDelay(delayTime, this.feedbackRate)
         this.frequency_shift_leftNode = new Tone.FrequencyShifter(this.frequency_left)
         this.frequency_shift_rightNode = new Tone.FrequencyShifter(this.frequency_right)
-        this.pitchShift_leftNode = new Tone.PitchShift(this.pitch_left)
-        this.pitchShift_rightNode = new Tone.PitchShift(this.pitch_right)
+        // this.pitchShift_leftNode = new Tone.PitchShift(this.pitch_left)
+        // this.pitchShift_rightNode = new Tone.PitchShift(this.pitch_right)
 
         const damp = 830
         this.freeverbNode = new Tone.Freeverb(this.roomsize, damp)
@@ -58,11 +58,11 @@ export default class SariraGenerationSound {
             this.sourceNode.connect(this.splitNode)
             this.splitNode.connect(this.frequency_shift_leftNode, LEFT, MONO)
             this.splitNode.connect(this.frequency_shift_rightNode, RIGHT, MONO)
-            this.frequency_shift_leftNode.connect(this.pitchShift_leftNode)
-            this.frequency_shift_rightNode.connect(this.pitchShift_rightNode)
+            this.frequency_shift_leftNode.connect(this.mergeNode, MONO, LEFT)
+            this.frequency_shift_rightNode.connect(this.mergeNode, MONO, RIGHT)
 
-            this.pitchShift_leftNode.connect(this.mergeNode, MONO, LEFT)
-            this.pitchShift_rightNode.connect(this.mergeNode, MONO, RIGHT)
+            // this.pitchShift_leftNode.connect(this.mergeNode, MONO, LEFT)
+            // this.pitchShift_rightNode.connect(this.mergeNode, MONO, RIGHT)
             Tone.connectSeries(this.mergeNode, this.feedbackDelayNode, this.freeverbNode, this.gainNode)
         })
     }

@@ -163,7 +163,7 @@ class Life_Absorb extends Life {
                 this.absorbedParticles.splice(i, 1);
 
                 if (sariraSpace < this.size) sariraSpace += 0.01;
-                this.isMakeSarira = true;
+                // this.isMakeSarira = true;
             }
         }
     }
