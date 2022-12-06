@@ -321,7 +321,7 @@ class WorldSystem {
                 }
                 for (let i = 0; i < this.importedPLYCount.length; i++) {
                     if (index <= this.importedPLYCount[i]) {
-                        //해당하는 PLY모델 소속의 index임 
+                        // 해당하는 PLY모델 소속의 index임 
                         // console.log(index,i, this.importedPLYCount[i])
                         this.particles[index].applyForce(flows[i]);
                         break
