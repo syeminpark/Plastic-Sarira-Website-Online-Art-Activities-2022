@@ -38,7 +38,7 @@ export default{
     type:"audience",
     sariraArchiveMax:100,
 
-    worldCameraPositon:[0, 0, -200],
+    worldCameraPositon:[0, 0, -250],
 
     //sound
     sizeMax:4,
