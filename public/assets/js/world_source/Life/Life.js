@@ -152,7 +152,7 @@ class Life {
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.position = this.lifeMesh.position;
 
-        this.acceleration.multiplyScalar(0.99);
+        this.acceleration.multiplyScalar(0.999);
 
         this.look(force);
 
