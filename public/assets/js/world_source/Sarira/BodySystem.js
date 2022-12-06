@@ -78,8 +78,8 @@ class BodySystem {
 
 
     addFloatingPlastics(positionList, d3Dataset) {
-        this.floatingBuffer.dispose()
-        this.floatingPlasticsList = []
+        // this.floatingBuffer.dispose()
+        // this.floatingPlasticsList = []
         let tempMicro = new Microplastic(this.threeSystem)
         tempMicro.initialize(positionList)
 
