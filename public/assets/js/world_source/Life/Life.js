@@ -318,8 +318,12 @@ class Life {
         this.text.style.position = 'fixed';
         document.body.appendChild(this.text);
 
-        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size, 0xffff00 );
-        // this.lifeMesh.add( this.arrowHelper );
+        if(this.index==0){
+        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size*1, 0xffffff,0.5,0.5 );
+        const axesHelper = new THREE.AxesHelper( 5 );
+        this.lifeMesh.add(  axesHelper);
+     
+        }
     }
 
     updateTestText(){

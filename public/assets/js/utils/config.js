@@ -22,7 +22,7 @@ export default{
     lifespan: 170,
 
     //생물체 크기?
-    
+
     //라이프바 초기 y 위치?? 
 
     //controls
@@ -38,7 +38,7 @@ export default{
     type:"audience",
     sariraArchiveMax:100,
 
-    worldCameraPositon:[0, 0, -250],
+    worldCameraPositon:[0, 0, -200],
 
     //sound
     sizeMax:4,
