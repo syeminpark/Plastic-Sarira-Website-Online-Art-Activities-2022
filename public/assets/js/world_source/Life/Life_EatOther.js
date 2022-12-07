@@ -10,7 +10,7 @@ class Life_EatOther extends Life_Sarira {
 
         this.state = 0;
         this.attack = 2;
-        this.sightRange = this.mass * this.attack;
+        this.sightRange = this.mass + this.attack;
         this.chaseTarget = null;
         this.isEaten = false;
         this.digestionSpeed = MyMath.random(1, 3);
@@ -85,8 +85,9 @@ class Life_EatOther extends Life_Sarira {
             return;
         } 
 
-        if (dir.length() > this.velLimit) dir.setLength(this.velLimit * .1);
+        if (dir.length() > this.velLimit * .1) dir.setLength(this.velLimit * .1);
         this.applyForce(dir);
+        this.acceleration.set(0,0,0);
         
         if (distance < (this.size + this.chaseTarget.size) * 0.5){
             this.state = 2;
@@ -121,7 +122,7 @@ class Life_EatOther extends Life_Sarira {
                 const dir = new THREE.Vector3().subVectors(new THREE.Vector3().copy(this.position),
                                                         new THREE.Vector3().copy(this.chaseTarget.position));
 
-                if (dir.length() > this.chaseTarget.velLimit) dir.setLength(this.chaseTarget.velLimit * .1);
+                if (dir.length() > this.chaseTarget.velLimit * .1) dir.setLength(this.chaseTarget.velLimit * .1);
                 this.chaseTarget.applyForce(dir);
                 this.chaseTarget.acceleration.set(0,0,0);
             } else {

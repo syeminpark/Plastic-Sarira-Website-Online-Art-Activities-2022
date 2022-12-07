@@ -66,12 +66,12 @@ class Life_Genetic extends Life_EatOther {
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
-        this.noiseSize = MyMath.random(0, this.size * .5);
+        this.noiseSize = MyMath.random(0, MyMath.map(this.size, 1, 30, 0, 1));
 
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
+        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 16, 32));
         this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
 
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
 
         this.mass = this.size + this.noiseSize;
 
@@ -115,7 +115,6 @@ class Life_Genetic extends Life_EatOther {
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
                                      0, 1, 0.001, 0.5);
-        this.noiseGrowValue = MyMath.map(this.geneCode.shape, 0, 1, -this.growValue * .5, this.growValue * .5);
 
         this.isReadyToDivision = false;
         
@@ -164,7 +163,6 @@ class Life_Genetic extends Life_EatOther {
             this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
                                     this.size + (this.shapeY * 0.01), 
                                     this.size);
-            if (this.noiseSize < this.size*.8) this.noiseSize += MyMath.random(0, this.noiseGrowValue * .5);
 
             this.mass = this.size + this.noiseSize;
 
@@ -251,7 +249,7 @@ class Life_Genetic extends Life_EatOther {
             lifeSystem.lifeNum ++;
             lifes.push(child);
 
-            console.log(`life${this.index} create child${lifeSystem.lifeNum} (size:${child.lifeMesh.scale.x})`)
+            console.log(`life${this.index} create child${lifeSystem.lifeNum}`)
 
             this.isReadyToDivision = false;
             this.division_after = this.division_term;
