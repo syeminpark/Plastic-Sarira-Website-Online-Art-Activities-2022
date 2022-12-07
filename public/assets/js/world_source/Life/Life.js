@@ -159,11 +159,11 @@ class Life {
         this.acceleration.add(force);
         this.velocity.add(this.acceleration);
 
-        if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.01);
+        if (this.velocity > this.velLimit) this.velocity.setLength(this.velLimit);
 
         this.position.add(this.velocity);
 
-        this.velocity.multiplyScalar(0.1);
+        this.velocity.multiplyScalar(0.01);
     }
 
     look(dir){
@@ -203,11 +203,10 @@ class Life {
         
         if (this.isDead == false && this.lifeMesh.scale.x <= 0.010){
             for (let i = 0; i < this.absorbedParticles.length; i++) {
-                // this.absorbedParticles[i].data.setPassBy(this.lifeName);
                 this.absorbedParticles[i].initWrap();
             }
 
-            console.log(this.index + ' is die');
+            // console.log(this.index + ' is die');
             this.isDead = true;
 
             this.contentsText = "";

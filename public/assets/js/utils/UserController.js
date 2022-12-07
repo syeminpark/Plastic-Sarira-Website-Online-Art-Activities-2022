@@ -39,7 +39,7 @@ class UserController {
         
         this.camDis = this.user.mass * 3;
         
-        this.lerpSpeed = config.lerpSpeed / 2;
+        this.lerpSpeed = config.lerpSpeed * 0.05;
         this.isLifeFocusOn = true;
         this.isfocusOffLerpDone = false;
         
@@ -139,10 +139,11 @@ class UserController {
                 // 카메라 유저 따라다니기
                 this.camera_focusOn_update();
 
-                if (this.camera.position.distanceTo(this.user.position) >= this.camDis * .95){
+                // 처음 줌인 조절
+                if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
                     this.isFirstLerp = false;
                 }
-                if (this.isFirstLerp == false && this.lerpSpeed > config.lerpSpeed) {
+                if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
                     this.lerpSpeed = config.lerpSpeed;
                 }
                 this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);

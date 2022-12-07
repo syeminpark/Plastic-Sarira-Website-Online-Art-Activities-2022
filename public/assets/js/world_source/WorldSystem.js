@@ -335,11 +335,8 @@ class WorldSystem {
 
             this.lifes.forEach(life => {
                 life.breath(this.particles[index]);
-                if (life.energy < life.hungryValue) life.eat(this.particles[index]);
+                life.eat(this.particles[index]);
             });
-
-            this.life_user.eat(this.particles[index]);
-            this.life_user.breath(this.particles[index]);
         }
 
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;

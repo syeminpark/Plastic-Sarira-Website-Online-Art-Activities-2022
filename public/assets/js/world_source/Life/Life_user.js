@@ -67,10 +67,10 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = MyMath.random(3, 10);
+        this.size = config.userSize;
         // this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
 
-        this.noiseSize = MyMath.random(0, this.size * 0.5);
+        this.noiseSize = 2.5;
         this.mass = this.size + this.noiseSize;
         this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
 
@@ -109,7 +109,7 @@ class Life_user extends Life_Genetic {
 
     stateMachine(otherLife) {
         if (otherLife.index == 0) return;
-        this.eatLife(otherLife);
+        // this.eatLife(otherLife);
     }
 
     eatLife(otherLife) {
@@ -200,9 +200,7 @@ class Life_user extends Life_Genetic {
         // if (this.isMakeSarira == true) console.log(this.absorbedParticles.length)
 
         var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
-        if (this.isMakeSarira == true) {
-            var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-           
+        if (this.isMakeSarira == true) {        
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
             // this.bodySystem.addFloatingPlastics(send_pos, data);

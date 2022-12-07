@@ -62,14 +62,14 @@ class Life_Genetic extends Life_EatOther {
         if (this.geneCode == null) return;
 
         this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.001, 0.003);
-        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .2);
+        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .1);
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
         this.noiseSize = MyMath.random(0, this.size * .5);
 
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 3, 32));
+        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 16, 32));
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 32));
 
         this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
 
@@ -246,7 +246,7 @@ class Life_Genetic extends Life_EatOther {
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
                                          new THREE.Vector3().copy(this.position));
             
-            console.log("life" + this.index + " create " + lifes.length)
+            // console.log("life" + this.index + " create " + lifes.length)
         
             if (child == null) return;
 
@@ -401,10 +401,10 @@ class Life_Genetic extends Life_EatOther {
         let type = "microbe";
         if (this.geneCode.size <= 0.1){
             if (this.geneCode.photosynthesis == 1){
-                type = 'Algae'; // 조류
+                type = 'Autotrophic Bacteria'; // 독립영양생물 (양분을 스스로 생산)
             } 
             else{
-                type = 'Bacteria'; // 박테리아
+                type = 'Heterotrophic Bacteria'; // 종속영양생물 (외부로부터 양분을 흡수해야 함)
             }
         }
         else {
@@ -443,66 +443,6 @@ class Life_Genetic extends Life_EatOther {
             uniqueID: `#${this.index}`
         };
         return data;
-    }
-
-    eat(microPlastic) {
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 0.9;
-
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            //아직 먹히지 않은 상태의 파티클 끌어당기기
-            if (distance < lifeSize && distance > this.size * 0.45) {
-
-                let sariraPos = this.position;
-                let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
-
-                if (distance <= this.size * 0.45) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                    microPlastic.setD3PlasticData(this.setD3jsData());
-                }
-            }
-        }
-    }
-
-    breath(microPlastic) {
-        //아직 먹히지 않은 상태의 파티클 끌어당기기
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 1;
-
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            if (distance < lifeSize && distance > this.size * 0.55) {
-                let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
-        
-                if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                    microPlastic.setD3PlasticData(this.setD3jsData());
-                }
-            }
-        }
     }
 
     // ===============================================================================

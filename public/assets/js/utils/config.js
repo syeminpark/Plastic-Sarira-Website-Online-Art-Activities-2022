@@ -22,11 +22,12 @@ export default{
     lifespan: 170,
 
     //생물체 크기?
+    userSize: 5,
 
     //라이프바 초기 y 위치?? 
 
     //controls
-    lerpSpeed : 0.03,
+    lerpSpeed : 0.3,
 
     ///////////////////////////////////////////////////
     //materials

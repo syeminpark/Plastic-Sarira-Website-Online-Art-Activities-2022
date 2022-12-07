@@ -20,16 +20,38 @@ class Life_Absorb extends Life {
 
     setMicroPlastic() {
         this.absorbedParticles = [];
-        this.sariraParticlesData = [];
         this.sariraParticles = [];
 
-        this.absorbPlasticNum = (this.size + this.noiseSize) * 100;
+        // this.absorbPlasticInSec = Math.floor(MyMath.random(1, 10));
+        // this.absorbPlasticInLife = Math.floor(MyMath.random(10, 100));
 
-        this.microPlastic_eat_maxAmount = Math.floor(MyMath.mapRange(this.mass, 0, 50, 10, 60))
+        // this.microPlastic_eat_minAmount = Math.floor(this.absorbPlasticInSec * 0.7);
+        // this.microPlastic_breath_minAmount = Math.floor(this.absorbPlasticInSec * 0.3);
 
-        this.microPlastic_breath_maxAmount = Math.floor(MyMath.mapRange(this.mass, 0, 50, 10, 30));
+        // this.microPlastic_eat_maxAmount = Math.floor(this.absorbPlasticInLife * 0.7);
+        // this.microPlastic_breath_maxAmount = Math.floor(this.absorbPlasticInLife * 0.3);
 
-        this.isMakeSarira = false;
+        // this.absorbParticleCount = 0;
+
+        // this.isMakeSarira = false;
+
+        // ==========================================================
+
+        this.eatParticles = [];
+        this.breathParticles = [];
+
+        this.eatPosition = new THREE.Vector3(MyMath.random(-this.size/2, this.size/2), 
+                                             MyMath.random(-this.size/2, this.size/2), 
+                                             MyMath.random(-this.size/2, this.size/2));
+        this.breathPosition = new THREE.Vector3(MyMath.random(-this.size/2, this.size/2), 
+                                             MyMath.random(-this.size/2, this.size/2), 
+                                             MyMath.random(-this.size/2, this.size/2));
+    
+        this.eatCount = Math.floor(MyMath.random(1, 10));
+        this.breathCount = Math.floor(MyMath.random(1, 10));
+
+        this.eatSize = MyMath.random(5, this.size);
+        this.breathSize = MyMath.random(5, this.size);
     }
 
     update() {
@@ -37,135 +59,121 @@ class Life_Absorb extends Life {
         this.wrapParticles();
     }
 
-    //안씀
-    // absorb(microPlastic) {
-    //     const distance = this.position.distanceTo(microPlastic.position);
-    //     const lifeSize = (this.size + this.noiseSize) * 1;
-    //     let sariraPos = this.position;
-
-    //     let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
-
-    //     if (microPlastic.isEaten == false && this.absorbedParticles.length < this.microPlastic_maxAmount) {
-    //         //아직 먹히지 않은 상태의 파티클 끌어당기기
-    //         if (distance < lifeSize) {
-    //             force.multiplyScalar(0.02);
-    //             microPlastic.applyForce(force);
-    //         }
-
-    //         //파티클 먹고 파티클 상태 먹힌것으로 변경
-    //         if (distance < this.size * 0.5) {
-    //             microPlastic.data.setPassBy('life' + this.index);
-    //             this.absorbedParticles.push(microPlastic);
-    //             this.sariraParticlesData.push(microPlastic.data.getDataList());
-
-    //             microPlastic.isEaten = true;
-    //             this.isMakeSarira = true;
-    //         }
-    //     }
-    // }
-
     eat(microPlastic) {
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 0.9;
+        if (this.isDead == false && 
+            this.eatParticles.length < this.eatCount &&
+            microPlastic.isEaten == false && microPlastic.isActive == true) {
 
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            //아직 먹히지 않은 상태의 파티클 끌어당기기
-            if (distance < lifeSize && distance > this.size * 0.45) {
+                const eatPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
+                                                              this.eatPosition);
+                const distance = eatPos.distanceTo(microPlastic.position);
 
-                let sariraPos = this.position;
-                let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
-
-                if (distance <= this.size * 0.45) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
+                if (distance < this.mass){
+                    this.eatParticles.push(microPlastic);
                 }
+            }        
+    }
+
+    eatWrap(){
+        for (let i = 0; i < this.eatParticles.length; i++) {
+            const eatP = this.eatParticles[i];
+            
+            // const eatPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
+            //                                               this.eatPosition);
+            const eatPos = new THREE.Vector3().copy(this.position);
+            const dir = new THREE.Vector3().subVectors(eatPos, eatP.position);
+
+
+            if (dir.length() > this.mass){
+                dir.setLength(this.mass);
+                eatP.position = new THREE.Vector3().addVectors(eatPos, dir);                
+            }
+            else if (dir.length() <= this.mass && dir.length() > this.size){
+                dir.multiplyScalar(0.1);
+                eatP.applyForce(dir);
+            }
+            else {
+                if (eatP.isEaten == false){
+                    eatP.isEaten = true;
+                    eatP.wrapCenter = eatPos;
+                    eatP.wrapSize = this.size;
+                    eatP.velLimit = 0.25;
+                }
+                // dir.multiplyScalar(0.1);
+                eatP.applyForce(dir);
+                eatP.velocity.multiplyScalar(0.99);
             }
         }
     }
 
     breath(microPlastic) {
-        //아직 먹히지 않은 상태의 파티클 끌어당기기
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 1;
+        // //아직 먹히지 않은 상태의 파티클 끌어당기기
+        // const distance = this.position.distanceTo(microPlastic.position);
+        // const lifeSize = (this.size + this.noiseSize) * 1;
 
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            if (distance < lifeSize && distance > this.size * 0.55) {
-                let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
+        // if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
+        //     if (distance < lifeSize && distance > this.size * 0.55) {
+        //         let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
 
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
+        //         force.multiplyScalar(0.1);
+        //         microPlastic.applyForce(force);
+        //         microPlastic.velocity.multiplyScalar(0.9);
+        //     }
 
-            if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
+        //     if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
         
-                if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                }
-            }
-        }
+        //         if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
+        //             this.absorbedParticles.push(microPlastic);                  
+        //             microPlastic.isEaten = true;
+        //         }
+        //     }
+        // }
+    }
+
+    breathWrap(){
+
     }
 
     wrapParticles() {
-        let sariraPos = new THREE.Vector3().copy(this.position);
-        let sariraSpace = this.size * 0.3;
+        // let sariraPos = new THREE.Vector3().copy(this.position);
+        // let sariraSpace = this.size * 0.3;
 
-        //흡수된 파티클 몸안에 가둠
-        for (let i = 0; i < this.absorbedParticles.length; i++) {
-            this.absorbedParticles[i].wrapCenter = this.position;
-            this.absorbedParticles[i].wrapSize = this.size * 0.7;
-            this.absorbedParticles[i].velLimit = 0.25;
+        // //흡수된 파티클 몸안에 가둠
+        // for (let i = 0; i < this.absorbedParticles.length; i++) {
+        //     const p =  this.absorbedParticles[i];
+        //     p.wrapCenter = this.position;
+        //     p.wrapSize = this.size;
+        //     p.velLimit = 0.25;
 
-            let distance = this.position.distanceTo(this.absorbedParticles[i].position);
-            const force = new THREE.Vector3().subVectors(sariraPos, this.absorbedParticles[i].position);
-            const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * 0.6));
+        //     let distance = this.position.distanceTo(p.position);
+        //     // const force = new THREE.Vector3().subVectors(sariraPos, p.position);
+        //     // const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * 0.6));
 
-            //if (distance < this.size*0.7) force.multiplyScalar(((distance*distance*distance)/150));
-            force.multiplyScalar(((distance * distance * distance) / 900));
-            this.absorbedParticles[i].applyForce(force);
-            if (distance > this.size) this.absorbedParticles[i].position = wrapPos;
+        //     // force.multiplyScalar(((distance * distance * distance) / 900));
+        //     // p.applyForce(force);
+        //     // if (distance > this.size) p.position = wrapPos;
 
-            //그중에서 일정 확률로 몇몇 파티클이 사리가 되도록 함
-            // if (MyMath.random(0, 5) < this.sariraSpeed && distance < sariraSpace &&
-            //     this.absorbedParticles[i].isSarira == false && this.absorbedParticles.length < this.absorbPlasticNum) {
-            
-            //sariraSpeed가 nan이다 지금
-    
-            if ( MyMath.random(0, 100) > 99 && distance < sariraSpace &&
-                this.absorbedParticles[i].isSarira == false && 
-                this.absorbedParticles.length < this.absorbPlasticNum) {
-
-                this.absorbedParticles[i].isSarira = true;
-
-                this.sariraParticles.push(this.absorbedParticles[i]);
+        //     //그중에서 일정 확률로 몇몇 파티클이 사리가 되도록 함   
+        //     if (distance < sariraSpace &&
+        //         p.isSarira == false && 
+        //         this.absorbedParticles.length < this.absorbPlasticInSec) {
                 
-                if (this.absorbedParticles[i].d3Data != undefined) {
-                    this.sariraParticlesData.push(this.absorbedParticles[i].d3Data);
-                    // console.log(this.absorbedParticles[i].d3Data)
-                }
-                
-                this.absorbedParticles.splice(i, 1);
+        //         p.isSarira = true;
 
-                if (sariraSpace < this.size) sariraSpace += 0.01;
-                this.isMakeSarira = true;
-            }
-        }
+        //         this.sariraParticles.push(this.absorbedParticles[i]);            
+        //         this.absorbedParticles.splice(i, 1);
+
+        //         if (sariraSpace < this.size) sariraSpace += 0.01;
+        //         this.isMakeSarira = true;
+        //     }
+        // }
+
+        this.eatWrap();
+        this.breathWrap();
+    }
+
+    setD3jsData(){
+
     }
 }
 
@@ -206,8 +214,6 @@ class Life_Sarira extends Life_Absorb {
 
     add_MicroPlasticToSarira() {
         if (this.isMakeSarira == true) {
-            // let data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-            
             let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
             this.bodySystem.addFloatingPlastics(send_pos);
 
