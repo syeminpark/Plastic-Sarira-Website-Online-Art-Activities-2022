@@ -16,13 +16,11 @@ export default class SariraGenerationSound {
         this.pitch_left = 0 //range -60 , 60
         this.pitch_right = 0 //range -60 , 60
 
-        this.frequency_left = 2000 //range -100, 100 
-        this.frequency_right = 2000 //range -100, 100 
-        this.frequency_max= 2000
-        this.frequency_min= -100
+        this.frequency_left = 100 //range -100, 100 
+        this.frequency_right = 100 //range -100, 100 
 
         //3.convol reverb
-        this.roomsize = 0.1 // 추가된 항목. range 0,1
+        this.roomsize = 0.3 // 추가된 항목. range 0,1
         this.freeverb_wet = 0 //range 0,1
 
 
@@ -34,11 +32,8 @@ export default class SariraGenerationSound {
         this.feedbackDelayNode = new Tone.FeedbackDelay(delayTime, this.feedbackRate)
         this.frequency_shift_leftNode = new Tone.FrequencyShifter(this.frequency_left)
         this.frequency_shift_rightNode = new Tone.FrequencyShifter(this.frequency_right)
-        // console.log(this.frequency_shift_leftNode)
-
-
-        // this.pitchShift_leftNode = new Tone.PitchShift(this.pitch_left)
-        // this.pitchShift_rightNode = new Tone.PitchShift(this.pitch_right)
+        this.pitchShift_leftNode = new Tone.PitchShift(this.pitch_left)
+        this.pitchShift_rightNode = new Tone.PitchShift(this.pitch_right)
 
         const damp = 830
         this.freeverbNode = new Tone.Freeverb(this.roomsize, damp)
@@ -61,11 +56,11 @@ export default class SariraGenerationSound {
             this.sourceNode.connect(this.splitNode)
             this.splitNode.connect(this.frequency_shift_leftNode, LEFT, MONO)
             this.splitNode.connect(this.frequency_shift_rightNode, RIGHT, MONO)
-            this.frequency_shift_leftNode.connect(this.mergeNode, MONO, LEFT)
-            this.frequency_shift_rightNode.connect(this.mergeNode, MONO, RIGHT)
+            this.frequency_shift_leftNode.connect(this.pitchShift_leftNode)
+            this.frequency_shift_rightNode.connect(this.pitchShift_rightNode)
 
-            // this.pitchShift_leftNode.connect(this.mergeNode, MONO, LEFT)
-            // this.pitchShift_rightNode.connect(this.mergeNode, MONO, RIGHT)
+            this.pitchShift_leftNode.connect(this.mergeNode, MONO, LEFT)
+            this.pitchShift_rightNode.connect(this.mergeNode, MONO, RIGHT)
             Tone.connectSeries(this.mergeNode, this.feedbackDelayNode, this.freeverbNode, this.gainNode)
         })
     }
@@ -88,19 +83,19 @@ export default class SariraGenerationSound {
         if (height > config.sizeMax) {
             height = config.sizeMax
         }
-        // this.pitch_left = MyMath.map(height, 0, config.sizeMax, 0, -10)
-        // this.pitch_right = MyMath.map(width, 0, config.sizeMax, 0, -10)
-        // // console.log('pitch', this.pitch_left, this.pitch_right)
+        this.pitch_left = MyMath.map(height, 0, config.sizeMax, 0, -10)
+        this.pitch_right = MyMath.map(width, 0, config.sizeMax, 0, -10)
+        // console.log('pitch', this.pitch_left, this.pitch_right)
 
-        this.frequency_left = MyMath.map(height,0, config.sizeMax, this.frequency_max, this.frequency_min)
-        this.frequency_right = MyMath.map(width,0, config.sizeMax,this.frequency_max, this.frequency_min)
-        console.log('freq', this.frequency_left, this.frequency_right)
+        this.frequency_left = MyMath.map(height,0, config.sizeMax, 100, -100)
+        this.frequency_right = MyMath.map(width,0, config.sizeMax,100, -100)
+        // console.log('freq', this.frequency_left, this.frequency_right)
 
         // this.pitchShift_leftNode.pitch = this.pitch_left
         // this.pitchShift_rightNode.pitch = this.pitch_right
 
-        this.frequency_shift_leftNode.frequency.value = this.frequency_left
-        this.frequency_shift_rightNode.frequency.value =  this.frequency_right
+        this.frequency_shift_leftNode.freqeuncy = this.frequency_left
+        this.frequency_shift_rightNode.freqeuncy = this.frequency_right
     }
 
     setFreeverb(depth) {

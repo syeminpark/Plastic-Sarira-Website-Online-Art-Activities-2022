@@ -36,24 +36,27 @@ class UserController {
         //=================================================================================
 
         this.user = world.life_user;
-        
+        this.velocity = new THREE.Vector3();
+
         this.camDis = this.user.mass * 3;
-        
-        this.lerpSpeed = config.lerpSpeed / 2;
+        this.lerpSpeed = config.lerpSpeed
+
         this.isLifeFocusOn = true;
         this.isfocusOffLerpDone = false;
-        
+
         this.isInWorld = true;
-        this.isFirstLerp = true;
-        
-        this.velocity = new THREE.Vector3();
+
+        this.isKey_down = true;
+
+        //=================================================================================
+
         this.fValue = 0;
         this.bValue = 0;
         this.rValue = 0;
         this.lValue = 0;
-        
-        this.isKey_down = true;
-        
+        this.moveVector = new THREE.Vector3();
+        this.upVector = new THREE.Vector3(0, 1, 0);
+
         //=================================================================================
 
         this.healthbar = new Health12345(this.threeSystem,
@@ -138,20 +141,15 @@ class UserController {
 
                 // 카메라 유저 따라다니기
                 this.camera_focusOn_update();
-
-                if (this.camera.position.distanceTo(this.user.position) >= this.camDis * .95){
-                    this.isFirstLerp = false;
-                }
-                if (this.isFirstLerp == false && this.lerpSpeed > config.lerpSpeed) {
-                    this.lerpSpeed = config.lerpSpeed;
-                }
                 this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
-  
+                // this.camera.position.x = this.camLerpPos.x;
+                // this.camera.position.y = this.camLerpPos.y;
+                // this.camera.position.z = this.camLerpPos.z;
             }
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
                 // 카메라가 일정 거리에 도달하면 애니메이션을 중지함
-                if (this.camera.position.length() >= this.worldSize * .95) {
+                if (this.camera.position.length() > this.worldSize * .995) {
 
                     // this.control.target = new THREE.Vector3(0, 0, 0);
                     this.isfocusOffLerpDone = true;

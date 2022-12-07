@@ -43,7 +43,6 @@ class WorldSystem {
         this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
         this.standardMaterial = createStandardMaterial()
-        this.particleMaterial = createParticleMaterial();
 
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
@@ -175,7 +174,7 @@ class WorldSystem {
         //생성
         this.particles = [];
         let particlePositions = [];
-        
+        let material = createParticleMaterial();
 
         for (let i = 0; i < this.maxParticleCount; i++) {
             let p = new MicroPlastic_D3js(i, this.worldSize);
@@ -195,7 +194,7 @@ class WorldSystem {
         geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
         geometry.setDrawRange(0, this.maxParticleCount);
 
-        this.particleAppearence = new THREE.Points(geometry,  this.particleMaterial);
+        this.particleAppearence = new THREE.Points(geometry, material);
         this.particleAppearence.frustumCulled = false
         this.particleAppearence.position.set(0, 0, 0);
         // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
@@ -294,6 +293,9 @@ class WorldSystem {
 
 
     updateParticles() {
+
+
+
         let particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
         let particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
 
@@ -312,28 +314,25 @@ class WorldSystem {
             }
             if (this.valid()) {
                 //index 5000
-                let flow = new THREE.Vector3(
-                    MyMath.random(-this.velMin, this.velMin),
-                    MyMath.random(-this.velMin, this.velMin),
-                    MyMath.random(-this.velMin, this.velMin))
-                // let flows = []
-                // for (let i = 0; i < this.importedPLYCount.length; i++) {
-                //     flows.push(new THREE.Vector3(
-                //         MyMath.random(-this.velMin, this.velMin),
-                //         MyMath.random(-this.velMin, this.velMin),
-                //         MyMath.random(-this.velMin, this.velMin)))
-                // }
-                // for (let i = 0; i < this.importedPLYCount.length; i++) {
-                //     if (index <= this.importedPLYCount[i]) {
-                //         // 해당하는 PLY모델 소속의 index임 
-                //         // console.log(index,i, this.importedPLYCount[i])
-                //         this.particles[index].applyForce(flows[i]);
-                //         break
-                //     }
-                // }
+
+                let flows = []
+                for (let i = 0; i < this.importedPLYCount.length; i++) {
+                    flows.push(new THREE.Vector3(
+                        MyMath.random(-this.velMin, this.velMin),
+                        MyMath.random(-this.velMin, this.velMin),
+                        MyMath.random(-this.velMin, this.velMin)))
+                }
+                for (let i = 0; i < this.importedPLYCount.length; i++) {
+                    if (index <= this.importedPLYCount[i]) {
+                        //해당하는 PLY모델 소속의 index임 
+                        // console.log(index,i, this.importedPLYCount[i])
+                        this.particles[index].applyForce(flows[i]);
+                        break
+                    }
+                }
 
                 ///index = particle Count approx 15,000
-                this.particles[index].applyForce(flow);
+                // this.particles[index].applyForce(flows[0]);
                 this.particles[index].wrap();
             }
 

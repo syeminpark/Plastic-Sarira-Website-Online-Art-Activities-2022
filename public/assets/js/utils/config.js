@@ -19,7 +19,7 @@ export default{
 
     ///////////////////////////////////////////////////
     //life 
-    lifespan: 200,
+    lifespan: 170,
 
     //생물체 크기?
 
@@ -38,7 +38,7 @@ export default{
     type:"audience",
     sariraArchiveMax:100,
 
-    worldCameraPositon:[0, 0, -250],
+    worldCameraPositon:[0, 0, -200],
 
     //sound
     sizeMax:4,

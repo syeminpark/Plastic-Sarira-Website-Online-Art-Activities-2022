@@ -80,18 +80,19 @@ class MicroPlastic_D3js extends Particle {
     super(index, worldSize);
 
     this.isSarira = false;
+    this.toxicity = false;
+
 
     this.d3Data = new D3Dataset(this.index);
   }
 
   setD3PlasticData(plasticData){
     
-    // console.log(plasticData)
     this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, `#${plasticData.uniqueID}`);
   }
 
-  setD3Life(name){
-    this.d3Data?.solidify(name);
+  setD3Life(userData){
+    this.d3Data?.solidify(userData);
   }
 }
 
