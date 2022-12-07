@@ -39,7 +39,7 @@ class UserController {
         this.velocity = new THREE.Vector3();
 
         this.camDis = this.user.mass * 3;
-        this.lerpSpeed = config.lerpSpeed * 0.05;
+        this.lerpSpeed = config.lerpSpeed * 0.2;
 
         this.isLifeFocusOn = true;
         this.isfocusOffLerpDone = false;

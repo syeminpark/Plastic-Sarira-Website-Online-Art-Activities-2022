@@ -26,7 +26,7 @@ export default{
     //라이프바 초기 y 위치?? 
 
     //controls
-    lerpSpeed : 0.3,
+    lerpSpeed : 0.1,
 
     ///////////////////////////////////////////////////
     //materials
