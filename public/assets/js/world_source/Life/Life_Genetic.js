@@ -62,7 +62,7 @@ class Life_Genetic extends Life_EatOther {
         if (this.geneCode == null) return;
 
         this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.001, 0.003);
-        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .5);
+        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .1);
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
@@ -172,7 +172,7 @@ class Life_Genetic extends Life_EatOther {
         }
         // 자라면서 속력이 빨라짐
         if (this.velLimit < this.velLimitMax) {
-            this.velLimit += 0.05;
+            this.velLimit += 0.01;
         }
     }
 
