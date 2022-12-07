@@ -1,4 +1,4 @@
-const forever = require('forever-monitor');
+import forever from 'forever-monitor'
 
 const child = new forever.Monitor('app.js', {
     max: 3, //max number of retires

@@ -20,7 +20,7 @@ export default class BasicThree {
             1300
         )
         this.camera.position.set(0, 0, 5)
-
+        this.camera.up.set( 0, 1, 0 );
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
 
         this.controls.enableDamping = true
