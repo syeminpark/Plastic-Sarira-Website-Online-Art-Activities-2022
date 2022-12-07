@@ -282,9 +282,9 @@ class UserController {
 
         if (turn > 5) {
             this.lValue = 0
-            this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+            this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.01, 0.05);
         } else if (turn < -5) {
-            this.lValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+            this.lValue = MyMath.map(Math.abs(turn), 0, 50, 0.01, 0.05);
             this.rValue = 0
         }
     }
