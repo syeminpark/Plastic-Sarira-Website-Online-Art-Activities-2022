@@ -95,6 +95,7 @@ class PageLayer12345 {
 		if (load) {
 			if (btn.getAttribute("data-name") == 'home') {
 				this.triggerLoad(btn, lang, true);
+				
 			}
 		}
 	}
@@ -107,7 +108,6 @@ class PageLayer12345 {
 				}
 			}
 		}
-
 		this.homepage.reset_page();
 		this.aboutpage.reset_page();
 		this.researchpage.reset_page();
@@ -234,6 +234,9 @@ class PageLayer12345 {
 
 		if (_btn.getAttribute("data-name") == "home") {
 			this.homepage.setup();
+			//horrible place to place it but this structure somehow doesn't refresh the world page twice..
+			//also doesn't unload world page .. think its because of the main/background unload difference 
+			this.worldpage.unload()
 			document.getElementById('tip-KR').innerHTML="TIP: 화면을 드래그하면, 3D 모델이 회전합니다"
 			document.getElementById('tip-EN').innerHTML="TIP: Drag the screen to rotate the view"
 
