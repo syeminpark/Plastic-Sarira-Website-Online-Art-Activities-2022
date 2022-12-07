@@ -818,7 +818,8 @@ body {
 }
 
 .world-popup.inactive {
-	transform: translate(0, calc(100% + calc(var(--nav-bar) + calc(var(--main-padding) * 5))));
+	transform: translate(0, calc(100% + calc(var(--nav-bar) + calc(var(--main-padding) * 2))));
+}
 
 .world-popup .world-popup-header {
 	position: absolute;
