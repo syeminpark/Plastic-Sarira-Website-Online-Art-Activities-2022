@@ -61,8 +61,8 @@ class Life_Genetic extends Life_EatOther {
     init(){
         if (this.geneCode == null) return;
 
-        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.001, 0.003);
-        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .1);
+        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.00001, 0.001);
+        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .01);
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
@@ -76,8 +76,7 @@ class Life_Genetic extends Life_EatOther {
         this.mass = this.size + this.noiseSize;
 
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
-        this.noiseGrowValue = MyMath.map(this.geneCode.shape, 0, 1, -this.size * .5, this.size * .5);
-
+        
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
                                       0, 1, 0.05, 0.15);
 
@@ -115,7 +114,8 @@ class Life_Genetic extends Life_EatOther {
 
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
-                                     0, 1, 0.001, .5);
+                                     0, 1, 0.001, 0.5);
+        this.noiseGrowValue = MyMath.map(this.geneCode.shape, 0, 1, -this.growValue * .5, this.growValue * .5);
 
         this.isReadyToDivision = false;
         
@@ -172,7 +172,7 @@ class Life_Genetic extends Life_EatOther {
         }
         // 자라면서 속력이 빨라짐
         if (this.velLimit < this.velLimitMax) {
-            this.velLimit += 0.01;
+            this.velLimit += 0.001;
         }
     }
 
@@ -246,12 +246,12 @@ class Life_Genetic extends Life_EatOther {
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
                                          new THREE.Vector3().copy(this.position));
             
-            console.log("life" + this.index + " create " + lifes.length)
-        
             if (child == null) return;
 
             lifeSystem.lifeNum ++;
             lifes.push(child);
+
+            console.log(`life${this.index} create child${lifeSystem.lifeNum} (size:${child.lifeMesh.scale.x})`)
 
             this.isReadyToDivision = false;
             this.division_after = this.division_term;

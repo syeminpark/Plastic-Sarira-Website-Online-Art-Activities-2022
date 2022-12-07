@@ -85,8 +85,7 @@ class Life_EatOther extends Life_Sarira {
             return;
         } 
 
-        dir.setLength(this.moveSpeed);
-        dir.multiplyScalar(0.1);
+        if (dir.length() > this.velLimit) dir.setLength(this.velLimit * .1);
         this.applyForce(dir);
         
         if (distance < (this.size + this.chaseTarget.size) * 0.5){
@@ -111,10 +110,24 @@ class Life_EatOther extends Life_Sarira {
             this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.8,.8,1);
 
             this.chaseTarget.isEaten = true;
-            this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
-
+            
             let wrapSize = this.size * 0.25;
-            this.chaseTarget.wrapSize = wrapSize;
+            // this.chaseTarget.wrapSize = wrapSize;
+            // this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
+            // this.chaseTarget.acceleration.multiplyScalar(0.01);
+            // this.chaseTarget.velocity.multiplyScalar(0.01);
+
+            if (this.position.distanceTo(this.chaseTarget.position) > this.size / 2){
+                const dir = new THREE.Vector3().subVectors(new THREE.Vector3().copy(this.position),
+                                                        new THREE.Vector3().copy(this.chaseTarget.position));
+
+                if (dir.length() > this.chaseTarget.velLimit) dir.setLength(this.chaseTarget.velLimit * .1);
+                this.chaseTarget.applyForce(dir);
+                this.chaseTarget.acceleration.set(0,0,0);
+            } else {
+                
+            }
+
             if (this.chaseTarget.energy > 0){
                 this.energy ++;
                 this.chaseTarget.energy -= this.digestionSpeed;

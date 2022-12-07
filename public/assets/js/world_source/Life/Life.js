@@ -140,7 +140,7 @@ class Life {
     }
 
     gravity(){
-        this.velocity.multiplyScalar(0.9);
+        this.velocity.multiplyScalar(0.1);
     }
 
     applyForce(force){
@@ -148,6 +148,7 @@ class Life {
         this.position = this.lifeMesh.position;
 
         this.acceleration.multiplyScalar(0.999);
+        if (this.acceleration > this.velLimit * .1) this.acceleration.setLength(this.velLimit * .1);
 
         this.look(force);
 
@@ -264,7 +265,7 @@ class Life {
     }
 
     wrapLife() {
-        let normal = new THREE.Vector3();  // 중심점
+        let normal = new THREE.Vector3();  
         const relativeVelocity = new THREE.Vector3(0, 0, 0);
         
         normal.copy(this.wrapTar.position).sub(this.wrapCenter); // sub other center
@@ -274,15 +275,15 @@ class Life {
 
             this.velocity.multiplyScalar(-0.1);
 
-            normal.setLength( -0.1 );
+            normal.setLength( -0.01 );
             this.applyForce( normal );
 
             relativeVelocity.sub( this.velocity.multiplyScalar(0.1) );
             normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
-            normal.multiplyScalar(0.1);
+            normal.multiplyScalar(0.01);
             this.applyForce( normal );
 
-            this.velocity.multiplyScalar(0.8);
+            this.velocity.multiplyScalar(0.1);
         }
 
         // const distance = this.wrapCenter.distanceTo(this.position);
