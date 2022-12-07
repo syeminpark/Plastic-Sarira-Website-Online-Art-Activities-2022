@@ -82,16 +82,12 @@ class Life_Absorb extends Life {
 
             if (this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
 
-                //파티클 먹고 파티클 흡수 상태로 변경
                 if (distance <= this.size * 0.45) {
-                    // microPlastic.data.setAbsorbedBy(1);
                     this.absorbedParticles.push(microPlastic);
-                    if (microPlastic.d3Data != undefined) {
-
-                    this.sariraParticlesData.push(microPlastic.d3Data);
+                    if (microPlastic?.d3Data != undefined) {
+                        this.sariraParticlesData.push(microPlastic.d3Data);
                     }
                     
-                    this.energy += 0.1;
                     microPlastic.isEaten = true;
                 }
             }
@@ -114,13 +110,10 @@ class Life_Absorb extends Life {
 
             if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
         
-                //파티클 먹고 파티클 흡수 상태로 변경
                 if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    // microPlastic.data.setAbsorbedBy(1);
                     this.absorbedParticles.push(microPlastic);
-                    if (microPlastic.d3Data != undefined) {
+                    if (microPlastic?.d3Data != undefined) {
                         this.sariraParticlesData.push(microPlastic.d3Data);
-                        // console.log(microPlastic.d3Data)
                     }
                     
                     microPlastic.isEaten = true;
@@ -213,11 +206,9 @@ class Life_Sarira extends Life_Absorb {
 
     add_MicroPlasticToSarira() {
         if (this.isMakeSarira == true) {
-        // if (this.isMakeSarira == true && this.sariraParticlesData.length > 0) {
-            let data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
+            // let data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
+            
             let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
-            // console.log(data)
-            // this.bodySystem.addFloatingPlastics(send_pos, data);
             this.bodySystem.addFloatingPlastics(send_pos);
 
             this.sariraParticles[this.sariraParticles.length - 1].isActive = false;

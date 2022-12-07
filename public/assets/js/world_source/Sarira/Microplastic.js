@@ -48,29 +48,20 @@ class Microplastic {
         bufferGeometry.attributes.position.needsUpdate = true
         //  bufferGeometry.attributes.color.needsUpdate = true
 
+        let positionList = []
         for (let i = 0; i < 3; i++) {
-            this.positionList[i] = bufferGeometry.attributes.position.array[(index * 3) + i]
+            positionList[i] = bufferGeometry.attributes.position.array[(index * 3) + i]
         }
         this.positionVector3.set(this.positionList[0], this.positionList[1], this.positionList[2])
     }
 
-    setPositionVector(bufferGeometry, index) {
-        let temp=[]
-        for (let i = 0; i < 3; i++) {
-            temp[i] = bufferGeometry.attributes.position.array[(index * 3) + i]
-        }
-        this.positionVector3.set(temp[0], temp[1], temp[2])
-    }
+
 
     updateBuffer(bufferGeometry, indexLength) {
        
        
         for (let i = 0; i < 3; i++) {
             bufferGeometry.attributes.position.array[((indexLength - 1) * 3) + i] = this.positionList[i]
-            if(this.positionList[i]==NaN){
-                console.error("NAN")
-            }
-            
             //  bufferGeometry.attributes.color.array[((indexLength - 1) * 3) + i] = this.color[i]
         }
         bufferGeometry.setDrawRange(0, indexLength);
@@ -134,8 +125,7 @@ class Microplastic {
     }
 
     moveWithLife(lifePositionList, bufferGeometry, index) {
-        bufferGeometry.attributes.position.needsUpdate = true
-
+     
         let newLifePositionList = [lifePositionList.x, lifePositionList.y, lifePositionList.z]
 
         for (let i = 0; i < 3; i++) {
