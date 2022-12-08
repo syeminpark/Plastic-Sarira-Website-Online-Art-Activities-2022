@@ -249,7 +249,7 @@ class Life_Genetic extends Life_EatOther {
             lifeSystem.lifeNum ++;
             lifes.push(child);
 
-            console.log(`life${this.index} create child${lifeSystem.lifeNum}`)
+            // console.log(`life${this.index} create child${lifeSystem.lifeNum}`)
 
             this.isReadyToDivision = false;
             this.division_after = this.division_term;

@@ -94,7 +94,7 @@ export default class SariraGenerationSound {
 
         this.frequency_left = MyMath.map(height,0, config.sizeMax, this.frequency_max, this.frequency_min)
         this.frequency_right = MyMath.map(width,0, config.sizeMax,this.frequency_max, this.frequency_min)
-        console.log('freq', this.frequency_left, this.frequency_right)
+       
 
         // this.pitchShift_leftNode.pitch = this.pitch_left
         // this.pitchShift_rightNode.pitch = this.pitch_right
