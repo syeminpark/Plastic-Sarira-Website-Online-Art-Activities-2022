@@ -159,19 +159,19 @@ class PageLayer12345 {
 
 	triggerLoad(_btn, _lang, _no_preloader) {
 
-		if (this.other_pagelayer) {
-			if (this.other_pagelayer.is_loading) {
-				//console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
-				return false;
+		if (!this.is_loading) {
+			if (this.other_pagelayer) {
+				if (this.other_pagelayer.is_loading) {
+					//console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
+					return false;
+				}
 			}
-		}
-
-		if (!_no_preloader) this.preloader.reset();
-		setTimeout( () => {
 			this.is_loading = true;
-
-			this.load(_btn, _lang, _no_preloader);
-		}, 600);
+			if (!_no_preloader) this.preloader.reset();
+			setTimeout(() => {
+				this.load(_btn, _lang, _no_preloader);
+			}, 600);
+		}
 	}
 
 	toggleBtns(_btn) {
