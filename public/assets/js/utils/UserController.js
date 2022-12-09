@@ -36,24 +36,27 @@ class UserController {
         //=================================================================================
 
         this.user = world.life_user;
-        
+        this.velocity = new THREE.Vector3();
+
         this.camDis = this.user.mass * 3;
-        
-        this.lerpSpeed = config.lerpSpeed * 0.05;
+        this.lerpSpeed = config.lerpSpeed * 0.2;
+
         this.isLifeFocusOn = true;
         this.isfocusOffLerpDone = false;
-        
+
         this.isInWorld = true;
-        this.isFirstLerp = true;
-        
-        this.velocity = new THREE.Vector3();
+
+        this.isKey_down = true;
+
+        //=================================================================================
+
         this.fValue = 0;
         this.bValue = 0;
         this.rValue = 0;
         this.lValue = 0;
-        
-        this.isKey_down = true;
-        
+        this.moveVector = new THREE.Vector3();
+        this.upVector = new THREE.Vector3(0, 1, 0);
+
         //=================================================================================
 
         this.healthbar = new Health12345(this.threeSystem,
@@ -114,6 +117,7 @@ class UserController {
                 else {
                     if (this.control.enableRotate == true) this.control.enableRotate = false;
                     if (this.control.enableZoom == true) this.control.enableZoom = false;
+                    if (this.control.enablePan == true) this.control.enablePan = false;
 
                     if (this.l_joystick.is_pressed == true) {
 
@@ -138,21 +142,20 @@ class UserController {
 
                 // 카메라 유저 따라다니기
                 this.camera_focusOn_update();
+                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
 
-                // 처음 줌인 조절
+                // 첫 접속시 zoom in
                 if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
                     this.isFirstLerp = false;
                 }
                 if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
                     this.lerpSpeed = config.lerpSpeed;
                 }
-                this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
-  
             }
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
                 // 카메라가 일정 거리에 도달하면 애니메이션을 중지함
-                if (this.camera.position.length() >= this.worldSize * .95) {
+                if (this.camera.position.length() > this.worldSize * .995) {
 
                     // this.control.target = new THREE.Vector3(0, 0, 0);
                     this.isfocusOffLerpDone = true;
@@ -280,9 +283,9 @@ class UserController {
 
         if (turn > 5) {
             this.lValue = 0
-            this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+            this.rValue = MyMath.map(Math.abs(turn), 0, 50, 0.01, 0.05);
         } else if (turn < -5) {
-            this.lValue = MyMath.map(Math.abs(turn), 0, 50, 0.04, 0.1);
+            this.lValue = MyMath.map(Math.abs(turn), 0, 50, 0.01, 0.05);
             this.rValue = 0
         }
     }
@@ -316,7 +319,7 @@ class UserController {
                 new THREE.Vector3().copy(this.user.position));
 
             temp.cross(new THREE.Vector3(0, 1, 0));
-            temp.multiplyScalar(1);
+            temp.multiplyScalar(0.5);
             temp.setLength(this.lValue);
             fv.add(temp);
         }
@@ -327,7 +330,7 @@ class UserController {
                 new THREE.Vector3().copy(this.user.position));
 
             temp.cross(new THREE.Vector3(0, 1, 0));
-            temp.multiplyScalar(-1);
+            temp.multiplyScalar(-0.5);
             temp.setLength(this.rValue);
             fv.add(temp);
         }
@@ -337,24 +340,29 @@ class UserController {
 
         this.user.position.add(this.velocity);
         this.user.position.add(fv);
-
     }
 
+    // control rotate custom 
+    // 참고: https://stackoverflow.com/questions/50633960/three-js-orbitcontrols-how-update-rotation-camera
     updateControlRotate() {
         if (this.fValue > 0) {
-            this.camera.translateY(-0.3);
+            // this.camera.translateY(-0.3);
+            this.control.rotateUp(-this.fValue*0.05);
         }
 
         if (this.bValue > 0) {
-            this.camera.translateY(0.3);
+            // this.camera.translateY(0.3);
+            this.control.rotateUp(this.bValue*0.05);
         }
 
         if (this.lValue > 0) {
-            this.camera.translateX(0.3);
+            // this.camera.translateX(0.3);
+            this.control.rotateLeft(-this.lValue*0.1);
         }
 
         if (this.rValue > 0) {
-            this.camera.translateX(-0.3);
+            // this.camera.translateX(-0.3);
+            this.control.rotateLeft(this.rValue*0.1);
         }
     }
 

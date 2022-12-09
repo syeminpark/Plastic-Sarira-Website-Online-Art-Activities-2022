@@ -293,6 +293,9 @@ class WorldSystem {
 
 
     updateParticles() {
+
+
+
         let particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
         let particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
 
@@ -311,25 +314,29 @@ class WorldSystem {
             }
             if (this.valid()) {
                 //index 5000
-
-                let flows = []
-                for (let i = 0; i < this.importedPLYCount.length; i++) {
-                    flows.push(new THREE.Vector3(
-                        MyMath.random(-this.velMin, this.velMin),
-                        MyMath.random(-this.velMin, this.velMin),
-                        MyMath.random(-this.velMin, this.velMin)))
-                }
-                for (let i = 0; i < this.importedPLYCount.length; i++) {
-                    if (index <= this.importedPLYCount[i]) {
-                        // 해당하는 PLY모델 소속의 index임 
-                        // console.log(index,i, this.importedPLYCount[i])
-                        this.particles[index].applyForce(flows[i]);
-                        break
-                    }
-                }
+                let flow = new THREE.Vector3(
+                            MyMath.random(-this.velMin, this.velMin),
+                            MyMath.random(-this.velMin, this.velMin),
+                            MyMath.random(-this.velMin, this.velMin))
+                    
+                // let flows = []
+                // for (let i = 0; i < this.importedPLYCount.length; i++) {
+                //     flows.push(new THREE.Vector3(
+                //         MyMath.random(-this.velMin, this.velMin),
+                //         MyMath.random(-this.velMin, this.velMin),
+                //         MyMath.random(-this.velMin, this.velMin)))
+                // }
+                // for (let i = 0; i < this.importedPLYCount.length; i++) {
+                //     if (index <= this.importedPLYCount[i]) {
+                //         //해당하는 PLY모델 소속의 index임 
+                //         // console.log(index,i, this.importedPLYCount[i])
+                //         this.particles[index].applyForce(flows[i]);
+                //         break
+                //     }
+                // }
 
                 ///index = particle Count approx 15,000
-                // this.particles[index].applyForce(flows[0]);
+                this.particles[index].applyForce(flow);
                 this.particles[index].wrap();
             }
 

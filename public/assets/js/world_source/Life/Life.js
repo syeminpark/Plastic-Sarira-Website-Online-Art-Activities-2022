@@ -94,11 +94,6 @@ class Life {
 
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-        
-        this.lifeMesh.frustumCulled = false
-        this.lifeMesh.traverse(function (object) {
-            object.frustumCulled = false;
-        });
 
         this.worldThree.addToGroup(this.lifeMesh);
     }
@@ -145,7 +140,7 @@ class Life {
     }
 
     gravity(){
-        this.velocity.multiplyScalar(0.9);
+        this.velocity.multiplyScalar(0.1);
     }
 
     applyForce(force){
@@ -153,6 +148,7 @@ class Life {
         this.position = this.lifeMesh.position;
 
         this.acceleration.multiplyScalar(0.999);
+        if (this.acceleration > this.velLimit * .1) this.acceleration.setLength(this.velLimit * .1);
 
         this.look(force);
 
@@ -268,7 +264,7 @@ class Life {
     }
 
     wrapLife() {
-        let normal = new THREE.Vector3();  // 중심점
+        let normal = new THREE.Vector3();  
         const relativeVelocity = new THREE.Vector3(0, 0, 0);
         
         normal.copy(this.wrapTar.position).sub(this.wrapCenter); // sub other center
@@ -276,17 +272,17 @@ class Life {
 
         if (distance > this.wrapSize) {
 
-            this.velocity.multiplyScalar(-0.9);
+            this.velocity.multiplyScalar(-0.1);
 
-            normal.setLength( -0.1 );
+            normal.setLength( -0.01 );
             this.applyForce( normal );
 
             relativeVelocity.sub( this.velocity.multiplyScalar(0.1) );
             normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
-            normal.multiplyScalar(0.1);
+            normal.multiplyScalar(0.01);
             this.applyForce( normal );
 
-            this.velocity.multiplyScalar(0.8);
+            this.velocity.multiplyScalar(0.1);
         }
 
         // const distance = this.wrapCenter.distanceTo(this.position);
@@ -321,8 +317,12 @@ class Life {
         this.text.style.position = 'fixed';
         document.body.appendChild(this.text);
 
-        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size, 0xffff00 );
-        // this.lifeMesh.add( this.arrowHelper );
+        if(this.index==0){
+        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size*1, 0xffffff,0.5,0.5 );
+        const axesHelper = new THREE.AxesHelper( 5 );
+        this.lifeMesh.add(  axesHelper);
+     
+        }
     }
 
     updateTestText(){

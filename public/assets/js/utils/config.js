@@ -19,7 +19,7 @@ export default{
 
     ///////////////////////////////////////////////////
     //life 
-    lifespan: 170,
+    lifespan: 150,
 
     //생물체 크기?
     userSize: 5,
@@ -27,7 +27,7 @@ export default{
     //라이프바 초기 y 위치?? 
 
     //controls
-    lerpSpeed : 0.3,
+    lerpSpeed : 0.1,
 
     ///////////////////////////////////////////////////
     //materials
@@ -39,7 +39,7 @@ export default{
     type:"audience",
     sariraArchiveMax:100,
 
-    worldCameraPositon:[0, 0, -250],
+    worldCameraPositon:[0, 0, -200],
 
     //sound
     sizeMax:4,

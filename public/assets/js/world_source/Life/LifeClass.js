@@ -215,6 +215,8 @@ class Life_Sarira extends Life_Absorb {
     add_MicroPlasticToSarira() {
         if (this.isMakeSarira == true) {
             let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
+            // console.log(data)
+            // this.bodySystem.addFloatingPlastics(send_pos, data);
             this.bodySystem.addFloatingPlastics(send_pos);
 
             this.sariraParticles[this.sariraParticles.length - 1].isActive = false;
