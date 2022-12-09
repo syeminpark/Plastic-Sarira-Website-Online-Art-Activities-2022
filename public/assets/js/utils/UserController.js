@@ -39,7 +39,7 @@ class UserController {
         this.velocity = new THREE.Vector3();
 
         this.camDis = this.user.mass * 3;
-        this.lerpSpeed = config.lerpSpeed
+        this.lerpSpeed = config.lerpSpeed * 0.2;
 
         this.isLifeFocusOn = true;
         this.isfocusOffLerpDone = false;
@@ -117,6 +117,7 @@ class UserController {
                 else {
                     if (this.control.enableRotate == true) this.control.enableRotate = false;
                     if (this.control.enableZoom == true) this.control.enableZoom = false;
+                    if (this.control.enablePan == true) this.control.enablePan = false;
 
                     if (this.l_joystick.is_pressed == true) {
 
@@ -339,19 +340,23 @@ class UserController {
 
     updateControlRotate() {
         if (this.fValue > 0) {
-            this.camera.translateY(-0.3);
+            // this.camera.translateY(-0.3);
+            this.control.rotateUp(-this.fValue*0.05);
         }
 
         if (this.bValue > 0) {
-            this.camera.translateY(0.3);
+            // this.camera.translateY(0.3);
+            this.control.rotateUp(this.bValue*0.05);
         }
 
         if (this.lValue > 0) {
-            this.camera.translateX(0.3);
+            // this.camera.translateX(0.3);
+            this.control.rotateLeft(-this.lValue*0.1);
         }
 
         if (this.rValue > 0) {
-            this.camera.translateX(-0.3);
+            // this.camera.translateX(-0.3);
+            this.control.rotateLeft(this.rValue*0.1);
         }
     }
 
