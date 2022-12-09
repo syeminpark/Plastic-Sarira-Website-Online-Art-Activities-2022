@@ -112,7 +112,7 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	loadList(_data) {
-
+		this.list.load(_data, this.sariraThree);
 	}
 }
 

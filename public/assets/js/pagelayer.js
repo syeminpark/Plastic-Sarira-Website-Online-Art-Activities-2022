@@ -44,14 +44,14 @@ class PageLayer12345 {
 		}
 
 		this.btns = [];
-		this.singleRenderer = new SingleRenderer(this)
-
+		this.singleRenderer=new SingleRenderer(this)
+		
 		this.homepage = new Home12345(this);
 		this.aboutpage = new About12345(this);
 		this.researchpage = new Research12345(this);
 		this.sarirapage = new SariArchive12345(this);
 		this.worldpage = new World12345(this);
-
+	
 
 		this.is_hidden = true;
 		this.is_loading = false;
@@ -95,7 +95,7 @@ class PageLayer12345 {
 		if (load) {
 			if (btn.getAttribute("data-name") == 'home') {
 				this.triggerLoad(btn, lang, true);
-
+				
 			}
 		}
 	}
@@ -145,7 +145,7 @@ class PageLayer12345 {
 	hide() {
 		this.is_hidden = true;
 		console.log("HIDEEE")
-
+	
 		document.getElementById('currentPage').classList.add('detail_inactive')
 		this.popup.classList.add("inactive");
 		this.unload(this);
@@ -158,26 +158,27 @@ class PageLayer12345 {
 	}
 
 	triggerLoad(_btn, _lang, _no_preloader) {
-		if (!this.is_loading) {
-			if (this.other_pagelayer) {
-				if (this.other_pagelayer.is_loading) {
-					//console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
-					return false;
-				}
+
+		if (this.other_pagelayer) {
+			if (this.other_pagelayer.is_loading) {
+				//console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
+				return false;
 			}
-			this.is_loading = true;
-			if (!_no_preloader) this.preloader.reset();
-			setTimeout(() => {
-				this.load(_btn, _lang, _no_preloader);
-			}, 600);
 		}
+
+		if (!_no_preloader) this.preloader.reset();
+		setTimeout( () => {
+			this.is_loading = true;
+
+			this.load(_btn, _lang, _no_preloader);
+		}, 600);
 	}
 
 	toggleBtns(_btn) {
 
 		const nav_btns = document.getElementById("navigation").querySelectorAll(".btn");
 		const nav_text = document.getElementById("navigation").querySelectorAll(".nav-text");
-
+		
 		for (let i = 0; i < nav_btns.length; i++) {
 			if (nav_btns[i] === _btn) {
 				nav_btns[i].classList.add("active");
@@ -224,41 +225,41 @@ class PageLayer12345 {
 			}
 		}
 
-		let currentPage = _btn.getAttribute("data-name")
-		document.getElementById("currentPage").innerHTML = currentPage
+		let currentPage= _btn.getAttribute("data-name")
+		document.getElementById("currentPage").innerHTML=currentPage
 
-		console.log("current Page: ", _btn.getAttribute("data-name"))
-
-
+		console.log("current Page: ", _btn.getAttribute("data-name") )
+		
+		
 
 		if (_btn.getAttribute("data-name") == "home") {
 			this.homepage.setup();
 			//horrible place to place it but this structure somehow doesn't refresh the world page twice..
-			//also doesn't unload world page .. think its because of the main/background unload difference 
+			//also doesn't unload world page .. think its because of the main/background unload difference
 			this.worldpage.unload()
-			document.getElementById('tip-KR').innerHTML = "TIP: 화면을 드래그하면, 3D 모델이 회전합니다"
-			document.getElementById('tip-EN').innerHTML = "TIP: Drag the screen to rotate the view"
+			document.getElementById('tip-KR').innerHTML="TIP: 화면을 드래그하면, 3D 모델이 회전합니다"
+			document.getElementById('tip-EN').innerHTML="TIP: Drag the screen to rotate the view"
 
-
+		
 		} else if (_btn.getAttribute("data-name") == "about") {
 			this.aboutpage.setup();
-			document.getElementById('tip-KR').innerHTML = "TIP: 소리 버튼을 클릭하여 더욱 몰입적으로 체험해보세요"
-			document.getElementById('tip-EN').innerHTML = "TIP: Toggle the sound button for immersivity "
+			document.getElementById('tip-KR').innerHTML="TIP: 소리 버튼을 클릭하여 더욱 몰입적으로 체험해보세요"
+			document.getElementById('tip-EN').innerHTML="TIP: Toggle the sound button for immersivity "
 		} else if (_btn.getAttribute("data-name") == "research") {
 			this.researchpage.setup();
-			document.getElementById('tip-KR').innerHTML = "TIP: 해변목록 / 해변명을 클릭하면 새로운 정보를 볼 수 있어요"
-			document.getElementById('tip-EN').innerHTML = "TIP: Click each name from the beach list for new data"
+			document.getElementById('tip-KR').innerHTML="TIP: 해변목록 / 해변명을 클릭하면 새로운 정보를 볼 수 있어요"
+			document.getElementById('tip-EN').innerHTML="TIP: Click each name from the beach list for new data"
 		} else if (_btn.getAttribute("data-name") == "sarira") {
-			document.getElementById('tip-KR').innerHTML = "TIP: 모든 참여자들이 남긴 플라스틱 사리를 보여주고 있어요 "
-			document.getElementById('tip-EN').innerHTML = "TIP: These are plastic sariras left by every participant"
+			document.getElementById('tip-KR').innerHTML="TIP: 모든 참여자들이 남긴 플라스틱 사리를 보여주고 있어요 "
+			document.getElementById('tip-EN').innerHTML="TIP: These are plastic sariras left by every participant"
 			this.sarirapage.setup();
 		} else if (_btn.getAttribute("data-name") == "world") {
 			this.worldpage.setup();
-			document.getElementById('tip-KR').innerHTML = "TIP: 주어진 시간 (초록 라이프바) 내에 생태계를 자유롭게 탐색하세요"
-			document.getElementById('tip-EN').innerHTML = "TIP: Freely explore within your time limit (green lifebar)"
+			document.getElementById('tip-KR').innerHTML="TIP: 주어진 시간 (초록 라이프바) 내에 생태계를 자유롭게 탐색하세요"
+			document.getElementById('tip-EN').innerHTML="TIP: Freely explore within your time limit (green lifebar)"
 		}
 
-
+	
 
 
 
