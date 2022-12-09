@@ -143,9 +143,14 @@ class UserController {
                 // 카메라 유저 따라다니기
                 this.camera_focusOn_update();
                 this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
-                // this.camera.position.x = this.camLerpPos.x;
-                // this.camera.position.y = this.camLerpPos.y;
-                // this.camera.position.z = this.camLerpPos.z;
+
+                // 첫 접속시 zoom in
+                if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
+                    this.isFirstLerp = false;
+                }
+                if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
+                    this.lerpSpeed = config.lerpSpeed;
+                }
             }
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
@@ -314,7 +319,7 @@ class UserController {
                 new THREE.Vector3().copy(this.user.position));
 
             temp.cross(new THREE.Vector3(0, 1, 0));
-            temp.multiplyScalar(1);
+            temp.multiplyScalar(0.5);
             temp.setLength(this.lValue);
             fv.add(temp);
         }
@@ -325,7 +330,7 @@ class UserController {
                 new THREE.Vector3().copy(this.user.position));
 
             temp.cross(new THREE.Vector3(0, 1, 0));
-            temp.multiplyScalar(-1);
+            temp.multiplyScalar(-0.5);
             temp.setLength(this.rValue);
             fv.add(temp);
         }
@@ -335,9 +340,10 @@ class UserController {
 
         this.user.position.add(this.velocity);
         this.user.position.add(fv);
-
     }
 
+    // control rotate custom 
+    // 참고: https://stackoverflow.com/questions/50633960/three-js-orbitcontrols-how-update-rotation-camera
     updateControlRotate() {
         if (this.fValue > 0) {
             // this.camera.translateY(-0.3);
