@@ -15,7 +15,7 @@
 	--shadow-color: rgba(0, 0, 0, 0.2);
 	--shadow-diagonal: 2px 2px 4px 2px;
 	--shadow-vertical: 0px 2px 2px 1px;
-	--TIP-padding: 1.5vw; 
+	--TIP-padding: 1.5vw;
 }
 
 html,
@@ -191,9 +191,9 @@ body {
 	cursor: pointer;
 }
 
-.TIP{
+.TIP {
 	position: fixed;
-	bottom: var(	--TIP-padding);
+	bottom: var(--TIP-padding);
 	left: 50%;
 	transform: translate(-50%, 0);
 	font-size: var(--font-small);
@@ -266,11 +266,12 @@ body {
 	transform: translate(50%, 0);
 } */
 
-#navigation .btn .nav-text{
+#navigation .btn .nav-text {
 	font-size: var(--font-nav);
-	transform: translate(0%,100%);
+	transform: translate(0%, 100%);
 
 }
+
 #navigation .btn {
 	display: inline-flex;
 	width: var(--nav-btn);
@@ -302,7 +303,7 @@ body {
 }
 
 #world-navigation .btn svg,
-#navigation .btn ,
+#navigation .btn,
 #sound-btn.btn svg {
 	opacity: 0.5;
 	transition: opacity 0.3s;
@@ -333,7 +334,7 @@ body {
 	border-radius: var(--bevel-large);
 	transition: top 0.3s;
 	overflow: hidden;
-	
+
 }
 
 #main-popup-layer.inactive {
@@ -731,12 +732,13 @@ body {
 	border-radius: var(--bevel-small);
 	padding: var(--main-padding) calc(var(--main-padding) * 2) var(--main-padding) calc(var(--main-padding) * 2);
 	cursor: pointer;
-	
+
 }
-.txt-btn.inactive{
+
+.txt-btn.inactive {
 	opacity: 0;
 	pointer-events: none;
-	
+
 }
 
 .sari-svg svg {
@@ -762,17 +764,18 @@ body {
 	left: 0.3vw;
 }
 
-.loading-text{
+.loading-text {
 	position: absolute;
-	top:  50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	transition: opacity 0.3s;
-	
-	color:grey;
+
+	color: grey;
 	font-size: var(--font-small);
 }
-.loading-text.inactive{
+
+.loading-text.inactive {
 	opacity: 0;
 }
 
@@ -818,7 +821,7 @@ body {
 }
 
 .world-popup.inactive {
-	transform: translate(0, calc(100% + calc(var(--nav-bar) + calc(var(--main-padding) * 2))));
+	transform: translate(0, calc(100% + calc(var(--nav-bar) + calc(var(--main-padding) * 5))));
 }
 
 .world-popup .world-popup-header {
@@ -906,10 +909,10 @@ body {
 	transform: translate(-50%, -50%);
 	width: 38vw;
 	height: 20vw;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0, 0, 0, 0.5);
 	border-color: white;
 	border-radius: var(--bevel-large);
-	color:white;
+	color: white;
 
 	display: flex;
 	flex-direction: column;
@@ -919,8 +922,8 @@ body {
 	font-size: var(--font-large);
 	transition: opacity 0.3s;
 
-	list-style:none;
-	border:1px solid grey;
+	list-style: none;
+	border: 1px solid grey;
 }
 
 
@@ -928,10 +931,10 @@ body {
 	border-color: white;
 	border-width: 0 0 var(--border-width) 0;
 	/* border-radius: var(--bevel-large); */
-	overflow:hidden;
+	overflow: hidden;
 
 	width: 80%;
-	background-color: rgba(0,0,0,1);
+	background-color: rgba(0, 0, 0, 1);
 
 	text-align: center;
 	font-size: inherit;
@@ -945,7 +948,7 @@ body {
 #world-enter .txt-btn {
 	position: relative;
 	border-color: white;
-	background-color: rgba(0,0,0,1);
+	background-color: rgba(0, 0, 0, 1);
 	border-radius: var(--bevel-large);
 	box-shadow: var(--shadow-diagonal) var(--shadow-color);
 	/*width: 55%;*/
@@ -1004,11 +1007,10 @@ body {
 	border-radius: var(--bevel-large);
 	box-shadow: var(--shadow-diagonal) var(--shadow-color);
 	/*width: 55%;*/
-	/* text-align: center;
+/* text-align: center;
 	transition: box-shadow 0.3s;
-} */ */
-
-#world-end .txt-btn:hover,
+} */
+*/ #world-end .txt-btn:hover,
 #world-enter .txt-btn:hover {
 	box-shadow: none;
 }
@@ -1046,7 +1048,7 @@ body {
 
 #world-to-sarira {
 	position: relative;
-	background-color:white;
+	background-color: white;
 
 }
 
@@ -1060,8 +1062,8 @@ body {
 
 #world-end .txt-btn {
 	width: auto;
-	background-color:white;
-	border:1px solid black;
+	background-color: white;
+	border: 1px solid black;
 
 }
 
@@ -1092,7 +1094,7 @@ body {
 	border-radius: var(--bevel-large);
 }
 
-.user-name{
+.user-name {
 	color: white;
 }
 
@@ -1103,12 +1105,12 @@ body {
 	width: 100%;
 	height: calc(100% - var(--nav-bar));
 	font-size: calc(var(--font-large)*0.8);
-	
+
 }
 
 .world-popup-container .sari-profile {
-	width: calc(100% - calc(var(--main-padding) ));
-	height: calc(100% - calc(var(--main-padding) ));
+	width: calc(100% - calc(var(--main-padding)));
+	height: calc(100% - calc(var(--main-padding)));
 	background-color: black;
 	border-radius: var(--bevel-small);
 	position: absolute;
@@ -1320,14 +1322,15 @@ text {
 
 
 #plane {
-	width:100%;
+	width: 100%;
 	height: 100%;
 }
 
-.plane-caption{
+.plane-caption {
 	font-size: var(--font-small);
 	display: flex;
 	justify-content: center;
 	transform: translate(0, -150%);
-	
+
 }
+
