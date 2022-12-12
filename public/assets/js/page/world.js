@@ -47,9 +47,6 @@ class World12345 extends Page12345 {
 		this.userController = new UserController(this);
 		this.ServerClientCommunication = new ServerClientCommunication()
 		this.animate();
-
-
-
 	}
 
 	setup() {
@@ -149,7 +146,6 @@ class World12345 extends Page12345 {
 				this.ServerClientCommunication.createUser(input.value)
 				this.world.setUserName(input.value)
 
-
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
 				this.any_world_btn_clicked = false;
 
@@ -181,7 +177,6 @@ class World12345 extends Page12345 {
 						clearInterval(this.lifecheck);
 						this.userController.end();
 						this.worldEnd();
-
 
 					} else {
 						this.userController.healthbarActive();

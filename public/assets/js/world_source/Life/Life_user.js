@@ -96,7 +96,6 @@ class Life_user extends Life_Genetic {
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
         this.updateShaderMat();
-        this.wrapParticles();
 
         this.add_MicroPlasticToBodySystem();
         this.sarira_position = new THREE.Vector3().copy(this.position);
@@ -130,9 +129,7 @@ class Life_user extends Life_Genetic {
  
             newPositionArray[i] = originalPositionArray[i]
             newPositionArray[i+1] = originalPositionArray[i+1]
-            newPositionArray[i+2] = originalPositionArray[i+2]
-            
-    
+            newPositionArray[i+2] = originalPositionArray[i+2]   
         }
 
         let message = {

@@ -55,7 +55,7 @@ class Particle {
     this.acceleration.multiplyScalar(this.mass);
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
-    if (this.velocity.length() > this.velLimit) this.velocity.multiplyScalar(0.1);
+    if (this.velocity.length() > this.velLimit) this.velocity.setLength(this.velLimit);
     this.acceleration.setLength(0);
   }
 
@@ -69,7 +69,9 @@ class Particle {
     const distance = this.wrapCenter.distanceTo(this.position);
     if (distance > this.wrapSize) {
       //this.velocity.multiplyScalar(-0.9999);
-      let dir = new THREE.Vector3().copy(this.wrapCenter).sub(this.position).normalize().multiplyScalar(0.001);
+      const dir = new THREE.Vector3().subVectors(new THREE.Vector3().copy(this.wrapCenter), 
+                                                 new THREE.Vector3().copy(this.position));
+      dir.multiplyScalar(0.1);
       this.applyForce(dir);
     }
   }

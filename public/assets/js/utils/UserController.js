@@ -147,6 +147,9 @@ class UserController {
                 // 첫 접속시 zoom in
                 if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
                     this.isFirstLerp = false;
+
+                    if (this.worldPage.world.worldStart == false)
+					    this.worldPage.world.worldStart = true;
                 }
                 if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
                     this.lerpSpeed = config.lerpSpeed;

@@ -40,6 +40,9 @@ class Life_Absorb extends Life {
         this.eatParticles = [];
         this.breathParticles = [];
 
+        this.eatTarget = undefined;
+        this.breathInOutTiming = MyMath.random(100, 500);
+
         this.eatPosition = new THREE.Vector3(MyMath.random(-this.size/2, this.size/2), 
                                              MyMath.random(-this.size/2, this.size/2), 
                                              MyMath.random(-this.size/2, this.size/2));
@@ -47,129 +50,162 @@ class Life_Absorb extends Life {
                                              MyMath.random(-this.size/2, this.size/2), 
                                              MyMath.random(-this.size/2, this.size/2));
     
-        this.eatCount = Math.floor(MyMath.random(1, 10));
-        this.breathCount = Math.floor(MyMath.random(1, 10));
+        this.eatCount = Math.floor(MyMath.random(5, 12));
+        this.breathCount = Math.floor(MyMath.random(5, 12));
 
-        this.eatSize = MyMath.random(5, this.size);
-        this.breathSize = MyMath.random(5, this.size);
+        this.eatSize = MyMath.random(1, this.size/2);
+        this.breathSize = MyMath.random(1, this.size/2);
+
+        // this.eatPower = MyMath.random(0.001, 0.01);
+        this.breathPower = MyMath.random(0.001, 0.01);
     }
 
     update() {
         super.update();
-        this.wrapParticles();
     }
 
+
     eat(microPlastic) {
-        if (this.isDead == false && 
+
+        const particleSpeed = 0.000005;
+
+        // 1. 먹을 타겟 찾기
+        if (this.eatTarget == undefined &&
+            MyMath.random(0, 1) < 0.1 &&
             this.eatParticles.length < this.eatCount &&
             microPlastic.isEaten == false && microPlastic.isActive == true) {
 
+            const eatPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
+                                                          this.eatPosition);
+            const distance = eatPos.distanceTo(microPlastic.position);
+
+            if (distance < this.mass * 1.5 && distance >= this.eatSize){
+                
+                this.eatTarget = microPlastic;
+            }     
+            // if (this.index == 0) console.log("find target");       
+        }        
+
+        // 2. 타겟 먹기
+        else if (this.eatTarget != undefined){
+
+            const eatPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
+                                                          this.eatPosition);
+            const dir = new THREE.Vector3().subVectors(eatPos, this.eatTarget.position);
+            const distance = dir.length();
+
+            if (distance > this.mass * 2){
+                this.eatTarget = undefined;
+            }
+            else if (distance <= this.mass * 2 && distance > this.eatSize){
+                dir.multiplyScalar(particleSpeed);
+                this.eatTarget.applyForce(dir);
+                this.eatTarget.velocity.multiplyScalar(0.1);
+            } else if (distance <= this.eatSize) {
+                this.eatParticles.push(this.eatTarget);
+                this.eatTarget = undefined;
+            }
+            if (this.index == 0) console.log("eat target");       
+        }
+
+        // 3. 타겟 가두기
+        else if (this.eatParticles.length > 0){
+            for (let i = 0; i < this.eatParticles.length; i++) {
+                const eatP = this.eatParticles[i];
+                
                 const eatPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
-                                                              this.eatPosition);
-                const distance = eatPos.distanceTo(microPlastic.position);
+                                                            this.eatPosition);
+                const dir = new THREE.Vector3().subVectors(eatPos, eatP.position);
+                const distance = dir.length();
 
-                if (distance < this.mass){
-                    this.eatParticles.push(microPlastic);
-                }
-            }        
-    }
+                dir.multiplyScalar(particleSpeed);
 
-    eatWrap(){
-        for (let i = 0; i < this.eatParticles.length; i++) {
-            const eatP = this.eatParticles[i];
-            
-            // const eatPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
-            //                                               this.eatPosition);
-            const eatPos = new THREE.Vector3().copy(this.position);
-            const dir = new THREE.Vector3().subVectors(eatPos, eatP.position);
-
-
-            if (dir.length() > this.mass){
-                dir.setLength(this.mass);
-                eatP.position = new THREE.Vector3().addVectors(eatPos, dir);                
-            }
-            else if (dir.length() <= this.mass && dir.length() > this.size){
-                dir.multiplyScalar(0.1);
-                eatP.applyForce(dir);
-            }
-            else {
-                if (eatP.isEaten == false){
+                if (eatP.isEaten == false && distance <= this.eatSize){
                     eatP.isEaten = true;
+                    eatP.wrapSize = this.eatSize;
+                    eatP.velLimit = 0.025;
+                } 
+
+                if (eatP.isActive == true){
                     eatP.wrapCenter = eatPos;
-                    eatP.wrapSize = this.size;
-                    eatP.velLimit = 0.25;
+
+                    if (distance <= this.eatSize && eatP.velLimit > 0.05){
+                        eatP.velLimit = 0.025;
+                    } else if (distance > this.eatSize && eatP.velLimit < 0.05){
+                        eatP.velLimit = 0.1;
+                        eatP.velocity.multiplyScalar(0.1);
+                    }
                 }
-                // dir.multiplyScalar(0.1);
-                eatP.applyForce(dir);
-                eatP.velocity.multiplyScalar(0.99);
+                if (this.index == 0) console.log("wrap target");       
             }
         }
-    }
+
+        // 4. 일정 시간 지나면 일부 파티클 내보내기 (배출, 배설)
+        else if (this.eatParticles.length >= this.eatCount * 0.75 && MyMath.random(0, 1) < 0.001){
+            this.eatParticles[length-1].wrapCenter = new THREE.Vector3(0,0,0);
+            this.eatParticles[length-1].wrapSize = this.wrapSize;
+            this.eatParticles[length-1].velLimit = 0.1;
+            this.eatParticles[length-1].isEaten = false;
+            this.eatParticles.pop();
+            if (this.index == 0) console.log("out target");       
+        }
+    }        
 
     breath(microPlastic) {
-        // //아직 먹히지 않은 상태의 파티클 끌어당기기
-        // const distance = this.position.distanceTo(microPlastic.position);
-        // const lifeSize = (this.size + this.noiseSize) * 1;
+        if (this.isDead == false && 
+            this.breathParticles.length < this.breathCount &&
+            microPlastic.isEaten == false && microPlastic.isActive == true) {
 
-        // if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-        //     if (distance < lifeSize && distance > this.size * 0.55) {
-        //         let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
+            const breathPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
+                                                            this.breathPosition);
+            const distance = breathPos.distanceTo(microPlastic.position);
 
-        //         force.multiplyScalar(0.1);
-        //         microPlastic.applyForce(force);
-        //         microPlastic.velocity.multiplyScalar(0.9);
-        //     }
+            if (distance < this.mass){
+                microPlastic.setColor(new THREE.Color(0,0,1));
+                this.breathParticles.push(microPlastic);
+            }
+        }
 
-        //     if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
-        
-        //         if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-        //             this.absorbedParticles.push(microPlastic);                  
-        //             microPlastic.isEaten = true;
-        //         }
-        //     }
-        // }
+        this.breathWrap();
     }
 
     breathWrap(){
+        for (let i = 0; i < this.breathParticles.length; i++) {
+            const breathP = this.breathParticles[i];
+            
+            const breathPos = new THREE.Vector3().addVectors(new THREE.Vector3().copy(this.position), 
+                                                          this.breathPosition);
+            const dir = new THREE.Vector3().subVectors(breathPos, breathP.position);
 
-    }
+            if (breathP.isEaten == false){
+                if (dir.length() < this.mass * 1.5){
+                    dir.multiplyScalar(0.01);
+                    breathP.applyForce(dir);
+                } 
+                else if (dir.length() < this.breathSize){
+                    breathP.isEaten = true;
+                    breathP.wrapCenter = breathPos;
+                    breathP.wrapSize = this.breathSize;
+                    breathP.velLimit = 0.0025;
+                }
+            } else {
+                if (dir.length() > this.mass){
+                    // breathP.position = new THREE.Vector3().subVectors(breathPos, dir);
+                }
+                else if (dir.length() <= this.mass && dir.length() > this.breathSize) {
+                    
+                    breathP.acceleration.multiplyScalar(0);
+                    
+                    // 내쉬고 들이쉬기
+                    if (this.clock.getElapsedTime() % 600 > this.breathInOutTiming) dir.multiplyScalar(-1);
+                    else dir.multiplyScalar(1);
 
-    wrapParticles() {
-        // let sariraPos = new THREE.Vector3().copy(this.position);
-        // let sariraSpace = this.size * 0.3;
-
-        // //흡수된 파티클 몸안에 가둠
-        // for (let i = 0; i < this.absorbedParticles.length; i++) {
-        //     const p =  this.absorbedParticles[i];
-        //     p.wrapCenter = this.position;
-        //     p.wrapSize = this.size;
-        //     p.velLimit = 0.25;
-
-        //     let distance = this.position.distanceTo(p.position);
-        //     // const force = new THREE.Vector3().subVectors(sariraPos, p.position);
-        //     // const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * 0.6));
-
-        //     // force.multiplyScalar(((distance * distance * distance) / 900));
-        //     // p.applyForce(force);
-        //     // if (distance > this.size) p.position = wrapPos;
-
-        //     //그중에서 일정 확률로 몇몇 파티클이 사리가 되도록 함   
-        //     if (distance < sariraSpace &&
-        //         p.isSarira == false && 
-        //         this.absorbedParticles.length < this.absorbPlasticInSec) {
-                
-        //         p.isSarira = true;
-
-        //         this.sariraParticles.push(this.absorbedParticles[i]);            
-        //         this.absorbedParticles.splice(i, 1);
-
-        //         if (sariraSpace < this.size) sariraSpace += 0.01;
-        //         this.isMakeSarira = true;
-        //     }
-        // }
-
-        this.eatWrap();
-        this.breathWrap();
+                    dir.multiplyScalar(0.001);
+                    breathP.applyForce(dir);
+                    breathP.velocity.multiplyScalar(0.1);
+                }
+            }
+        }
     }
 
     setD3jsData(){
