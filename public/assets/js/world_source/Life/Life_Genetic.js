@@ -54,7 +54,7 @@ class Life_Genetic extends Life_EatOther {
 
         this.setDisplay();
 
-        this.initTestText();
+        // this.initTestText();
     }
 
     // 초기 설정

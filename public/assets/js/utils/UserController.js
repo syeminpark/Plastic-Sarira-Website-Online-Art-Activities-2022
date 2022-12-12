@@ -38,7 +38,7 @@ class UserController {
         this.user = world.life_user;
         this.velocity = new THREE.Vector3();
 
-        this.camDis = this.user.mass * 3;
+        this.camDis = this.user.mass * config.ZoomIn_Distance;
         this.lerpSpeed = config.lerpSpeed * 0.2;
 
         this.isLifeFocusOn = true;
@@ -147,6 +147,10 @@ class UserController {
                 // 첫 접속시 zoom in
                 if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
                     this.isFirstLerp = false;
+                }
+                if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.25 &&
+                    this.worldPage.world.worldStart == false){
+                    this.worldPage.world.worldStart = true;
                 }
                 if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
                     this.lerpSpeed = config.lerpSpeed;
@@ -347,22 +351,22 @@ class UserController {
     updateControlRotate() {
         if (this.fValue > 0) {
             // this.camera.translateY(-0.3);
-            this.control.rotateUp(-this.fValue*0.05);
+            this.control.rotateUp(-this.fValue*0.1);
         }
 
         if (this.bValue > 0) {
             // this.camera.translateY(0.3);
-            this.control.rotateUp(this.bValue*0.05);
+            this.control.rotateUp(this.bValue*0.1);
         }
 
         if (this.lValue > 0) {
             // this.camera.translateX(0.3);
-            this.control.rotateLeft(-this.lValue*0.1);
+            this.control.rotateLeft(-this.lValue*0.15);
         }
 
         if (this.rValue > 0) {
             // this.camera.translateX(-0.3);
-            this.control.rotateLeft(this.rValue*0.1);
+            this.control.rotateLeft(this.rValue*0.15);
         }
     }
 
@@ -382,7 +386,7 @@ class UserController {
         this.camLerpPos = new THREE.Vector3().subVectors(
             new THREE.Vector3().copy(this.camera.position),
             new THREE.Vector3().copy(this.user.position)
-        ).setLength(this.worldSize * 1);
+        ).setLength(this.worldSize * config.ZoomOut_Distance);
     }
 
     camera_focusOn_init() {

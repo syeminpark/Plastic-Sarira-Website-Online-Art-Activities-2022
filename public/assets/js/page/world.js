@@ -47,9 +47,6 @@ class World12345 extends Page12345 {
 		this.userController = new UserController(this);
 		this.ServerClientCommunication = new ServerClientCommunication()
 		this.animate();
-
-
-
 	}
 
 	setup() {
@@ -182,11 +179,11 @@ class World12345 extends Page12345 {
 						this.userController.end();
 						this.worldEnd();
 
-
 					} else {
+						this.world.life_user.age ++;
 						this.userController.healthbarActive();
 					}
-				}, 600);
+				}, 1000);
 
 				// window.addEventListener('keyup', this.moveSari.bind(this));
 			}

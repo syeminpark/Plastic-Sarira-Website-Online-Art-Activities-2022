@@ -68,7 +68,8 @@ class Life_Absorb extends Life {
         const distance = this.position.distanceTo(microPlastic.position);
         const lifeSize = (this.size + this.noiseSize) * 0.9;
 
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
+        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false && 
+            this.absorbedParticles.length < this.absorbPlasticNum){
             //아직 먹히지 않은 상태의 파티클 끌어당기기
             if (distance < lifeSize && distance > this.size * 0.45) {
 
@@ -84,7 +85,6 @@ class Life_Absorb extends Life {
 
                 //파티클 먹고 파티클 흡수 상태로 변경
                 if (distance <= this.size * 0.45) {
-                    // microPlastic.data.setAbsorbedBy(1);
                     this.absorbedParticles.push(microPlastic);
                     if (microPlastic.d3Data != undefined) {
 
