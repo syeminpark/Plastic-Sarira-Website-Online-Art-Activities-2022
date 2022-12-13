@@ -145,12 +145,14 @@ class UserController {
                 this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
 
                 // 첫 접속시 zoom in
-                if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
-                    this.isFirstLerp = false;
-                }
-                if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.25 &&
-                    this.worldPage.world.worldStart == false){
-                    this.worldPage.world.worldStart = true;
+                if (this.isFirstLerp == true){
+                    if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
+                        this.isFirstLerp = false;
+                    }
+                    if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 2 &&
+                        this.worldPage.world.worldStart == false){
+                        this.worldPage.world.worldStart = true;
+                    }
                 }
                 if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
                     this.lerpSpeed = config.lerpSpeed;
@@ -231,6 +233,9 @@ class UserController {
         // 키 눌렀는지 체크
         if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D")) {
 
+            if (this.worldPage.world.worldStart == false){
+                this.worldPage.world.worldStart = true;
+            }
             this.isKey_down = true;
         }
 

@@ -60,6 +60,7 @@ class Life_user extends Life_Genetic {
         //라이프에도영향을 줌 
         this.lifespan = config.lifespan;
         this.metaTerm = 1;
+        this.sariraSpeed = .5;
     }
 
     init() {
@@ -67,7 +68,7 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = MyMath.random(3, 10);
+        this.size = 5;
         // this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
 
         this.noiseSize = MyMath.random(0, this.size * 0.5);
