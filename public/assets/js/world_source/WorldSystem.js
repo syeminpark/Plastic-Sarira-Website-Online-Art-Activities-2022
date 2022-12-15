@@ -47,7 +47,7 @@ class WorldSystem {
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
 
-        this.worldStart = false;
+        // this.worldStart = false;
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -307,7 +307,7 @@ class WorldSystem {
                 continue;
 
             }
-            if (this.valid() && this.worldStart == true) {
+            if (this.valid()) {
                 //index 5000
                 let flow = new THREE.Vector3(
                             MyMath.random(-this.velMin, this.velMin),

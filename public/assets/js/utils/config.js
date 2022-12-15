@@ -27,7 +27,7 @@ export default{
 
     //controls
     lerpSpeed : 0.1,
-    ZoomIn_Distance : 2,
+    ZoomIn_Distance : 2.5,
     ZoomOut_Distance : 1.5,
 
     ///////////////////////////////////////////////////

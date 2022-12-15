@@ -255,7 +255,7 @@ class PageLayer12345 {
 			this.sarirapage.setup();
 		} else if (_btn.getAttribute("data-name") == "world") {
 			this.worldpage.setup();
-			document.getElementById('tip-KR').innerHTML="TIP: 주어진 시간 (초록 라이프바) 내에 생태계를 자유롭게 탐색하세요"
+			document.getElementById('tip-KR').innerHTML="TIP: 주어진 시간 (초록 라이프바) 동안 생태계를 자유롭게 탐색해보세요"
 			document.getElementById('tip-EN').innerHTML="TIP: Freely explore within your time limit (green lifebar)"
 		}
 

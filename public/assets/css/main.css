@@ -1093,6 +1093,12 @@ body {
 	background-color: #7FFF00;
 	border-radius: var(--bevel-large);
 }
+.health-text {
+	color:rgb(85, 85, 85);
+	transform: translate(0%, 50%);
+	font-size: var(--font-citation);
+
+}
 
 .user-name {
 	color: white;
