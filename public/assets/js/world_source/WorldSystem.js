@@ -47,6 +47,7 @@ class WorldSystem {
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
 
+        this.worldStart = false;
     }
 
     //해당 페이지 재접속시 다시 실행
@@ -95,9 +96,6 @@ class WorldSystem {
 
         }
         if (this.valid()) {
-            // this.worldThree.render()
-            // this.worldThree.update()
-            // this.updateParticles();
 
             this.updateLifes();
         }
@@ -293,9 +291,6 @@ class WorldSystem {
 
 
     updateParticles() {
-
-
-
         let particlePositionAttributes = this.particleAppearence.geometry.getAttribute('position').array;
         let particleColorAttributes = this.particleAppearence.geometry.getAttribute('color').array;
 
@@ -312,7 +307,7 @@ class WorldSystem {
                 continue;
 
             }
-            if (this.valid()) {
+            if (this.valid() && this.worldStart == true) {
                 //index 5000
                 let flow = new THREE.Vector3(
                             MyMath.random(-this.velMin, this.velMin),
@@ -338,15 +333,12 @@ class WorldSystem {
                 ///index = particle Count approx 15,000
                 this.particles[index].applyForce(flow);
                 this.particles[index].wrap();
+
+                this.lifes.forEach(life => {
+                    // life.breath(this.particles[index]);
+                    life.eat(this.particles[index]);
+                });
             }
-
-            this.lifes.forEach(life => {
-                life.breath(this.particles[index]);
-                if (life.energy < life.hungryValue) life.eat(this.particles[index]);
-            });
-
-            this.life_user.eat(this.particles[index]);
-            this.life_user.breath(this.particles[index]);
         }
 
         this.particleAppearence.geometry.attributes.position.needsUpdate = true;

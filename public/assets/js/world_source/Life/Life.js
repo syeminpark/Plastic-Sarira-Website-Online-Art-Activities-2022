@@ -140,7 +140,7 @@ class Life {
     }
 
     gravity(){
-        this.velocity.multiplyScalar(0.1);
+        this.velocity.multiplyScalar(0.01);
     }
 
     applyForce(force){
