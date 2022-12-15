@@ -7,15 +7,15 @@ export default{
     //최대 파티클 개수 
     maxParticleCount:15000,
     //처음에 불러오는 폐플라스틱 개수 
-    initialMaxPlasticCount:10,
-    plasticScale:0.3,
+    initialMaxPlasticCount:11,
+    plasticScale:0.5,
     
     //각 폐플라스틱 사이 간격 
     // plasticOffsetRange:0.13,
     plasticOffsetRange:0.6,
 
     //흐름(속력+방향)
-    velMin: 0.001,
+    velMin: 0.0005,
 
     ///////////////////////////////////////////////////
     //life 
