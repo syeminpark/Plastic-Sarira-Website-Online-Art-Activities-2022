@@ -326,11 +326,12 @@
 
 	.m-pl-list-l.m-inactive {
 		bottom: calc(-100% + var(--nav-bar));
-		animation: jump 3s 1;
+		animation: jump 2s 1;
 	}
 	@keyframes jump {
-		0% { transform: translate(-50%, 0%) }
-		50% { transform: translate(-50%, -10%)  }
+		0% { transform: translate(-50%, -0%)}
+		50% { transform: translate(-50%, -70%) }
+		/* 50% { transform: translate(-50%, -3%)  } */
 		100% { transform: translate(-50%, -0%)}
 	}
 	mark{
