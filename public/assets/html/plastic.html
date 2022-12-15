@@ -1,7 +1,9 @@
 <div class="full-container">
 	<div class="col-3-12 full-col m-pl-list-l m-inactive" id="m-list-toggle-target">
 		<div class="full-container scrollable-nobar main-padd">
-			<div class="display-m list-header"  id="m-plastic-list-toggle"><mark class="arrow-highlight EN"> [ BEACH LIST ] </mark><mark class="KR"> [ 해변 목록 ] </mark><span class="btn plsvg" id="m-plastic-list-toggle" svg-src="./assets/svg/arrow1.svg"></span></div>
+			<div class="display-m list-header" id="m-plastic-list-toggle"><mark class="arrow-highlight EN"> [ BEACH LIST
+					] </mark><mark class="KR"> [ 해변 목록 ] </mark><span class="btn plsvg" id="m-plastic-list-toggle"
+					svg-src="./assets/svg/arrow1.svg"></span></div>
 			<ul class="list m-inactive" id="beach-list">
 				<li data-link="./assets/json/beaches/sample/Naechi.json">
 					<span class="EN">Naechi Beach</span>
@@ -50,15 +52,61 @@
 			</ul>
 			<div class="footnote">
 				<div class="EN">
-					After consulting on our research methodology with the <span class="left-para">「</span>East Asian Sea Community Ocean<span class="right-para">」</span>, a non-profit independent research institute, we collected waste plastics from 11 beaches.<br><br>
-					The 3D scanned models of these plastics can be seen by clicking on each image. In the next page, some of these data are inserted into the 
-					virtual ecosytstem and turn into microplastics.
-				
+					After consulting our research methodology<a href="#request" aria-describedby="footnote-label">
+						<a href="#confirm" aria-describedby="footnote-label">
+						</a></a> 
+					with the 'Our Sea of East Asia Network (OSEAN)', a non-profit independent research institute, we
+					collected waste plastics from 11 beaches.<br><br>
+					The 3D scanned models of these plastics can be seen by clicking on each image. In the next page,
+					some of these data decompose into microplastics inside our virtual ecosystem.
+
 				</div>
 				<div class="KR">
-					비영리 독립 연구소 <span class="left-para">「</span>(사)동아시아 바다공동체 오션<span class="right-para">」</span>에서 <a href="../assets/pdf/consult_kr.pdf"  style="color:black" target="_blank" >해변 조사 방법론에 대한 자문<i class="fa-solid fa-link"></i></a> 을 거친 후, 전국 해변 11 곳의 폐플라스틱을 수집하였습니다.<br><br>
-					각 폐플라스틱 이미지를 클릭하여 3D 스캔된 모델을 확인할 수 있으며, 이 데이터셋 중 일부는 다음 페이지에 가상 생태계에 투입되어 미세플라스틱으로 변환됩니다.
+					비영리 독립 연구소 <span class="left-para">「</span>(사)동아시아 바다공동체 오션<span class="right-para">」</span>에서
+					해변 조사 방법론에 대한 자문을 <a href="#request" aria-describedby="footnote-label">
+					<a href="#confirm" aria-describedby="footnote-label"></a></a>거친 후
+					전국 해변 11 곳의 폐플라스틱을 수집하였습니다.<br><br>
+					각 폐플라스틱 이미지를 클릭하여 3D 스캔된 모델을 확인할 수 있으며, 이 데이터셋 중 일부는 가상 생태계에 투입되어 미세플라스틱으로 변환됩니다.
+
 				</div>
+				<footer>
+					<h2 class="visually-hidden" id="footnote-label">Footnotes</h2>
+					<ol>
+						<li id="request">
+							<span class='KR'>
+								<a href="../assets/pdf/consult_kr.pdf" style="color:black" target="_blank">
+									자문 요청서.pdf<i class="fa-solid fa-link"></i></a>
+							</span>
+							<span class='EN'>
+								<a href="../assets/pdf/consult_en.pdf" style="color:black" target="_blank">
+									Consultation Request Paper.pdf<i class="fa-solid fa-link"></i></a>
+
+							</span>
+						<li id="confirm">
+							<span class='KR'>
+								<a href="../assets/pdf/confirm_kr.pdf" style="color:black" target="_blank">
+									자문 확인서.pdf<i class="fa-solid fa-link"></i></a>
+							</span>
+							<span class='EN'>
+								<a href="../assets/pdf/confirm_en.pdf" style="color:black" target="_blank">
+									Consultation Confirmation Paper.pdf<i class="fa-solid fa-link"></i></a>
+							</span>
+						</li>
+					</ol>
+					<!-- </span>
+					<span class='EN'>
+						<ol>
+							<li id="request">
+								<a href="../assets/pdf/consult_en.pdf" style="color:black" target="_blank">
+									Consultation Request Paper.pdf<i class="fa-solid fa-link"></i></a>
+							</li>
+							<li id="confirm">
+								<a href="../assets/pdf/confirm_en.pdf" style="color:black" target="_blank">
+									Consultation Confrimation Paper.pdf<i class="fa-solid fa-link"></i></a>
+							</li>
+						</ol>
+					</span> -->
+				</footer>
 			</div>
 		</div>
 	</div>
@@ -72,13 +120,13 @@
 					<div class="beach-address">
 						<span class="KR"></span>
 						<span class="EN"></span>
-						
+
 					</div>
 				</div>
-				<div class="z1 zoom-control">
+				<!-- <div class="z1 zoom-control">
 					<span id="zoom-in" class="plsvg" svg-src="./assets/svg/plus.svg"></span>
 					<span id="zoom-out" class="plsvg" svg-src="./assets/svg/minus.svg"></span>
-				</div>
+				</div> -->
 			</div>
 			<div id="map-list" class="plastic-list main-padd"></div>
 			<div id="plastic-detail" class="inactive">
@@ -88,7 +136,7 @@
 	</div>
 </div>
 <div class="full-container inactive z3" id="plastic-detail-wrapper">
-	<div id="plastic-detail-layer" >
+	<div id="plastic-detail-layer">
 		<span id="plastic-detail-closer" class="btn closer">
 			<span class="plsvg display-pc" svg-src="./assets/svg/minus_white.svg"></span>
 			<span class="plsvg display-m" svg-src="./assets/svg/arrow2_white.svg"></span>
