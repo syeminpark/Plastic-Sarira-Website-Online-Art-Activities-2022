@@ -1080,9 +1080,11 @@ body {
 	width: 20vw;
 	height: calc(var(--bevel-large) * 1.5);
 	border-radius: calc(var(--bevel-large) * 1.5);
-	background-color: rgb(85, 85, 85);
+	background-color: rgb(198, 198, 198);
 	opacity: 1;
 	transition: opacity 0.3s;
+	box-shadow: 0 0 0 3px rgb(0, 0, 0) inset; 
+	
 }
 
 .health-container.inactive {
@@ -1093,15 +1095,17 @@ body {
 	background-color: #7FFF00;
 	border-radius: var(--bevel-large);
 }
-.health-text {
-	color:rgb(85, 85, 85);
+#health-text {
+	color:rgb(226, 226, 226);
 	transform: translate(0%, 50%);
 	font-size: var(--font-citation);
+	
 
 }
 
 .user-name {
 	color: white;
+	font-size: var(--font-small);
 }
 
 .world-popup-container {

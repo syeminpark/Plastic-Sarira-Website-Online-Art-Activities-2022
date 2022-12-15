@@ -5,6 +5,7 @@ class Health12345{
 		this.container = _container;
 		this.bar = _bar;
 
+
 		this.bar.style.position = "absolute";
 		this.bar.style.left = "calc(var(--border-width) * 2)";
 		this.bar.style.top = "50%";
@@ -63,6 +64,7 @@ class Health12345{
 	start(){
 		this.container.classList.remove("inactive");
 		this.update();
+
 	}
 
 	end(){

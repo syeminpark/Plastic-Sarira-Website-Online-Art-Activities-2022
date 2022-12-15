@@ -4,12 +4,14 @@ import KeyboardState from '/assets/js/utils/KeyboardState.js';
 
 import { UserText } from '/assets/js/userText.js';
 import { Health12345 } from '/assets/js/health.js';
+import HealthTime from '../HealthTime.js';
 import { Joystick12345 } from '/assets/js/joystick.js';
 
 import { MyMath } from '/assets/js/utils/MyMath.js';
 import { IsMobile } from '/assets/js/util.js';
 
 import config from './config.js';
+
 
 class UserController {
     constructor(worldPage) {
@@ -64,6 +66,8 @@ class UserController {
             this.worldPage.pagelayer.popup.querySelector('#world-health-bar'));
         this.healthbar.updatePos(this.getUserScreenPosition());
 
+        this.healthTime= new HealthTime(config.lifespan,document.getElementById('health-text'));
+
         this.userName = new UserText(this.threeSystem,
             this.worldPage.pagelayer.popup.querySelector('#world-health-container'),
             this.worldPage.pagelayer.popup.querySelector('#world-user-name'));
@@ -91,6 +95,7 @@ class UserController {
     start(userName) {
         this.healthbar.start();
         this.userName.setText(userName);
+        this.healthTime.start()
     }
 
     healthbarActive() {
