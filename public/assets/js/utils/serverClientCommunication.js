@@ -3,7 +3,8 @@ import config from './config.js';
 
 export default class ServerClientCommunication {
     constructor() {
-        this.url = window.location.href.slice(0, -1)
+        this.url = window.location.href.split('#')[0].slice(0,-1)
+     
         this.name;
         this.id
     }
