@@ -255,8 +255,8 @@ class PageLayer12345 {
 			this.sarirapage.setup();
 		} else if (_btn.getAttribute("data-name") == "world") {
 			this.worldpage.setup();
-			document.getElementById('tip-KR').innerHTML="TIP: 수명이 다할 떄까지 탐색하시면 사리를 남길 수 있어요"
-			document.getElementById('tip-EN').innerHTML="TIP: Explore until the end of your lifetime to leave a sarira"
+			document.getElementById('tip-KR').innerHTML="TIP: 수명이 다할 때까지 체험하시면 사리를 남길 수 있어요"
+			document.getElementById('tip-EN').innerHTML="TIP: Engage until the end of your lifetime to leave a sarira"
 		}
 
 	
