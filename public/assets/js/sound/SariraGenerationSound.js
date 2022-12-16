@@ -6,6 +6,7 @@ import config from "../utils/config.js";
 
 export default class SariraGenerationSound {
     constructor() {
+
         this.directory = "./assets/mp3/sarira_beats.mp3"
 
         this.hasStarted = false;
@@ -115,6 +116,7 @@ export default class SariraGenerationSound {
         if (document.getElementById('sound-btn').classList.contains('active')) {
 
             if (!this.hasStarted) {
+                Tone.context.resume()
                 this.gainNode.connect(Tone.Destination)
                 this.hasStarted = true
                 console.log('start')
