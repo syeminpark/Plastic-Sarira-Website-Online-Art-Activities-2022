@@ -1097,10 +1097,8 @@ body {
 }
 #health-text {
 	color:rgb(226, 226, 226);
-	transform: translate(0%, 50%);
+	transform: translate(0%, 100%);
 	font-size: var(--font-citation);
-	
-
 }
 
 .user-name {

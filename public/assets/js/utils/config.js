@@ -44,5 +44,5 @@ export default{
 
     //sound
     sizeMax:4,
-    maxParticleEaten: 1000,
+    maxParticleEaten: 100,
 }
