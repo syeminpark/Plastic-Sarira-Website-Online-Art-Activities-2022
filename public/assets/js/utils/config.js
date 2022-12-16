@@ -5,9 +5,9 @@ export default{
 
     worldSize:100,
     //최대 파티클 개수 
-    maxParticleCount:15000,
+    maxParticleCount:20000,
     //처음에 불러오는 폐플라스틱 개수 
-    initialMaxPlasticCount:11,
+    initialMaxPlasticCount:15,
     plasticScale:0.5,
     
     //각 폐플라스틱 사이 간격 
