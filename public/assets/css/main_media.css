@@ -327,12 +327,20 @@
 	.m-pl-list-l.m-inactive {
 		bottom: calc(-100% + var(--nav-bar));
 		animation: jump 3s 1;
+		
 	}
 	@keyframes jump {
-	
-		0% { transform: translate(-50%, -0%)}
-		50% { transform: translate(-50%, -3%) }
-		100% { transform: translate(-50%, -0%)}
+		
+		0% {
+			bottom: calc(-100% + var(--nav-bar));
+		  }
+		  50% {
+			bottom: calc(-100% + var(--nav-bar)*2);
+		  
+		  }
+		  100% {
+			bottom: calc(-100% + var(--nav-bar));
+		  }
 	}
 	mark{
 		background-color:#fff5ab;

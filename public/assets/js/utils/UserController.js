@@ -41,6 +41,8 @@ class UserController {
         this.velocity = new THREE.Vector3();
 
         this.camDis = this.user.mass * config.ZoomIn_Distance;
+
+        this.isFirstLerp = true;
         this.lerpSpeed = config.lerpSpeed * 0.2;
 
         this.isLifeFocusOn = true;
@@ -151,23 +153,19 @@ class UserController {
 
                 // 첫 접속시 zoom in
                 if (this.isFirstLerp == true){
-                    if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 1.05){
+                    if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 2){
                         this.isFirstLerp = false;
                     }
-                    if (this.camera.position.distanceTo(this.user.position) <= this.camDis * 2){
-                    
-                        //  &&this.worldPage.world.worldStart == false){
-                        // this.worldPage.world.worldStart = true;
-                    }
                 }
-                if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
-                    this.lerpSpeed = config.lerpSpeed;
+                else if (this.isFirstLerp == false && this.lerpSpeed < config.lerpSpeed) {
+                    this.lerpSpeed *= 1.05;
+                    console.log("lerp done")
                 }
             }
             // focus on 모드가 아니고, focus off 줌아웃 애니메이션이 끝나지 않았을 시 
             else if (this.isLifeFocusOn == false && this.isfocusOffLerpDone == false) {
                 // 카메라가 일정 거리에 도달하면 애니메이션을 중지함
-                if (this.camera.position.length() > this.worldSize * .995) {
+                if (this.camera.position.length() > this.worldSize * config.ZoomOut_Distance * .995) {
 
                     // this.control.target = new THREE.Vector3(0, 0, 0);
                     this.isfocusOffLerpDone = true;
@@ -238,10 +236,6 @@ class UserController {
 
         // 키 눌렀는지 체크
         if (this.keyboard.down("W") || this.keyboard.down("S") || this.keyboard.down("A") || this.keyboard.down("D")) {
-
-            // if (this.worldPage.world.worldStart == false){
-            //     this.worldPage.world.worldStart = true;
-            // }
             this.isKey_down = true;
         }
 
@@ -325,6 +319,10 @@ class UserController {
                 new THREE.Vector3().copy(this.camera.position),
                 new THREE.Vector3().copy(this.user.position));
             temp.setLength(this.bValue);
+            
+            // 유저와 카메라 거리 유지
+            if (this.user.position.distanceTo(this.camera.position) <= this.camDis * .5) temp.multiplyScalar(0.01);
+            
             fv.add(temp);
         }
 
