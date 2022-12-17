@@ -1,7 +1,8 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import {MyMath} from '/assets/js/utils/MyMath.js';
-import {createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
+import {createLifeMaterial, createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
+import {THREE_Noise} from '/assets/js/rendering/ThreeNoise.js';
 
 class Life {
     constructor(index, world, setPos) {
@@ -88,7 +89,6 @@ class Life {
     setDisplay() {
         let geometry = new THREE.SphereGeometry(this.size, this.shapeX, this.shapeY);
         let material = createLifeNoiseMaterial(this.worldThree.camera, this.noiseShape, this.noiseSize);
-        // let material = createLifeMaterial(this.worldThree.camera);
 
         material.transparent = true;
 
@@ -189,7 +189,7 @@ class Life {
             this.lifeMesh.scale.y -= 0.015;
             this.lifeMesh.scale.z -= 0.015;
 
-            if(this.lifeMesh.material.uniforms.noiseCount.value < 100.) 
+            if(this.lifeMesh.material.uniforms.noiseCount?.value < 100.) 
                 this.lifeMesh.material.uniforms.noiseCount.value += 1.;
         }
 
@@ -345,4 +345,69 @@ class Life {
     }
 }
 
-export {Life}
+class Life_noShader extends Life {
+    constructor(index, world, setPos) {
+        super(index, world, setPos);
+    }
+
+    setDisplay() {
+        let geometry = new THREE.SphereGeometry(this.size, this.shapeX, this.shapeY);
+        let material = createLifeMaterial(this.worldThree.camera);
+
+        material.transparent = true;
+
+        this.lifeMesh = new THREE.Mesh(geometry, material);
+        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
+
+        this.worldThree.addToGroup(this.lifeMesh);
+
+        this.initNoise();
+    }
+
+    updateShaderMat(){
+        this.updateGlow_3D();
+        this.updateNoise();
+    }
+
+    initNoise() {
+        const { Perlin } = THREE_Noise;
+        this.perlin = new Perlin(Math.random());
+        
+        this.noiseShape = MyMath.random(0.05, 0.3);
+        this.noiseAnimSpeed = MyMath.random(0.1, 0.5);
+
+        this.n_position = this.lifeMesh.geometry.attributes.position.clone();
+        this.n_normal = this.lifeMesh.geometry.attributes.normal.clone();
+        this.n_position_num = this.n_position.count;
+    }
+
+    updateNoise() {
+        const position = this.lifeMesh.geometry.attributes.position;
+        // const normal = this.lifeMesh.geometry.attributes.normal;
+        const elapsedTime = this.clock.getElapsedTime();
+
+        const noise = [];
+        for (let i = 0; i < this.n_position_num; i++) {
+            const pos = new THREE.Vector3().fromBufferAttribute(this.n_position, i);
+            const norm = new THREE.Vector3().fromBufferAttribute(this.n_normal, i);
+            const newPos = pos.clone();
+
+            pos.multiplyScalar(this.noiseShape);
+            pos.x += elapsedTime * this.noiseAnimSpeed;
+            const n = this.perlin.get3(pos) * this.mass;
+
+            newPos.add(norm.multiplyScalar(n));
+
+            noise.push(newPos);
+        }
+
+        position.copyVector3sArray(noise);
+
+        // this.sariraPosition = noise[Math.floor(MyMath.random(0, 1089))];
+
+        this.lifeMesh.geometry.computeVertexNormals();
+        this.lifeMesh.geometry.attributes.position.needsUpdate = true;
+    }
+}
+
+export {Life, Life_noShader}

@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {
-    Life
+    Life, Life_noShader
 } from './Life.js'
 import {
     BodySystem
@@ -11,7 +11,7 @@ import {
 } from '/assets/js/utils/MyMath.js';
 
 // 파티클 흡수하는 Life
-class Life_Absorb extends Life {
+class Life_Absorb extends Life_noShader {
     constructor(index, world, setPos) {
         super(index, world, setPos);
 
