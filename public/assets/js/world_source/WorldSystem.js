@@ -46,8 +46,6 @@ class WorldSystem {
 
         this.initialCameraPosition = config.worldCameraPositon
         this.particleAppearence = undefined
-
-        // this.worldStart = false;
     }
 
     //해당 페이지 재접속시 다시 실행
