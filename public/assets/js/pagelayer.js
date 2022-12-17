@@ -95,6 +95,7 @@ class PageLayer12345 {
 		if (load) {
 			if (btn.getAttribute("data-name") == 'home') {
 				this.triggerLoad(btn, lang, true);
+				
 			}
 		}
 	}
@@ -107,7 +108,6 @@ class PageLayer12345 {
 				}
 			}
 		}
-
 		this.homepage.reset_page();
 		this.aboutpage.reset_page();
 		this.researchpage.reset_page();
@@ -159,19 +159,19 @@ class PageLayer12345 {
 
 	triggerLoad(_btn, _lang, _no_preloader) {
 
-		if (this.other_pagelayer) {
-			if (this.other_pagelayer.is_loading) {
-				//console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
-				return false;
+		if (!this.is_loading) {
+			if (this.other_pagelayer) {
+				if (this.other_pagelayer.is_loading) {
+					//console.log("the other pagelayer is loading. exit loading : " + _btn.getAttribute("data-name"));
+					return false;
+				}
 			}
-		}
-
-		if (!_no_preloader) this.preloader.reset();
-		setTimeout( () => {
 			this.is_loading = true;
-
-			this.load(_btn, _lang, _no_preloader);
-		}, 600);
+			if (!_no_preloader) this.preloader.reset();
+			setTimeout(() => {
+				this.load(_btn, _lang, _no_preloader);
+			}, 600);
+		}
 	}
 
 	toggleBtns(_btn) {
@@ -234,6 +234,9 @@ class PageLayer12345 {
 
 		if (_btn.getAttribute("data-name") == "home") {
 			this.homepage.setup();
+			//horrible place to place it but this structure somehow doesn't refresh the world page twice..
+			//also doesn't unload world page .. think its because of the main/background unload difference
+			this.worldpage.unload()
 			document.getElementById('tip-KR').innerHTML="TIP: 화면을 드래그하면, 3D 모델이 회전합니다"
 			document.getElementById('tip-EN').innerHTML="TIP: Drag the screen to rotate the view"
 
@@ -252,12 +255,11 @@ class PageLayer12345 {
 			this.sarirapage.setup();
 		} else if (_btn.getAttribute("data-name") == "world") {
 			this.worldpage.setup();
-			document.getElementById('tip-KR').innerHTML="TIP: 주어진 시간 (초록 라이프바) 내에 생태계를 자유롭게 탐색하세요"
-			document.getElementById('tip-EN').innerHTML="TIP: Freely explore within your time limit (green lifebar)"
+			document.getElementById('tip-KR').innerHTML="TIP: 수명이 다할 때까지 체험하시면 사리를 남길 수 있어요"
+			document.getElementById('tip-EN').innerHTML="TIP: Explore til the end of your lifetime to leave a sarira"
 		}
 
 	
-
 
 
 		this.toggleBtns(_btn);

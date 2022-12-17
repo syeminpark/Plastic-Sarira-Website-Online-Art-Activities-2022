@@ -314,17 +314,33 @@
 		bottom: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		height: 100vw;
+		height: 100%;
 		width: calc(100% + calc(var(--border-width) * 2));
 		background-color: white;
 		border-radius: calc(var(--bevel-large) * 3) calc(var(--bevel-large) * 3) 0 0;
 		box-shadow: var(--shadow-vertical-up) var(--shadow-color);
 		transition: bottom 0.3s;
 		z-index: 2;
+		
 	}
 
 	.m-pl-list-l.m-inactive {
-		bottom: calc(-100vw + var(--nav-bar));
+		bottom: calc(-100% + var(--nav-bar));
+		animation: jump 3s 1;
+		
+	}
+	@keyframes jump {
+		
+		0% {
+			bottom: calc(-100% + var(--nav-bar));
+		  }
+		  50% {
+			bottom: calc(-100% + var(--nav-bar)*2);
+		  
+		  }
+		  100% {
+			bottom: calc(-100% + var(--nav-bar));
+		  }
 	}
 	mark{
 		background-color:#fff5ab;

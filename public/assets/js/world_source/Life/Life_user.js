@@ -55,11 +55,12 @@ class Life_user extends Life_Genetic {
         this.SetWindowSarira(options.Sarira_Material, options.standardMaterial, options.miniSariraThree);
         // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
 
-        this.lifeName = undefined
+        this.lifeName = undefined;
 
         //라이프에도영향을 줌 
-        this.lifespan = config.lifespan
+        this.lifespan = config.lifespan;
         this.metaTerm = 1;
+        this.sariraSpeed = .5;
     }
 
     init() {
@@ -67,7 +68,7 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = MyMath.random(3, 10);
+        this.size = 5;
         // this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
 
         this.noiseSize = MyMath.random(0, this.size * 0.5);
@@ -107,58 +108,14 @@ class Life_user extends Life_Genetic {
         this.bodySystemWindow.setPosition(this.sarira_position);
     }
 
-    stateMachine(otherLife) {
-        if (otherLife.index == 0) return;
-        this.eatLife(otherLife);
+    lifeGo(callback){
+        if (this.age >= this.lifespan - 0.1 || this.energy < 0){
+            this.die(callback);
+        }
     }
 
-    eatLife(otherLife) {
-        this.chaseTarget = undefined;
-        const distance = this.position.distanceTo(otherLife.position);
+    stateMachine(otherLife) {
 
-        if (this.chaseTarget == undefined) this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1, 1, 1);
-
-        if (this.chaseTarget == undefined && distance < (this.size + otherLife.size) * 0.5) {
-            this.chaseTarget = otherLife;
-        }
-        else {
-            this.chaseTarget = undefined;
-        }
-
-        if (this.chaseTarget != undefined) {
-            if (this.chaseTarget.isDead == false) {
-                // console.log(this.index + " eat " + this.chaseTarget.index);
-
-                this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0, 0, 1);
-
-                this.chaseTarget.isEaten = true;
-                this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
-
-                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1, .8, .8);
-
-                let wrapSize = this.size * 0.25;
-                this.chaseTarget.wrapSize = wrapSize;
-
-                let dir = new THREE.Vector3().subVectors(
-                    new THREE.Vector3().copy(this.chaseTarget.position), 
-                    new THREE.Vector3().copy(this.position));
-
-                dir.setLength(this.moveSpeed/2);
-                dir.multiplyScalar(0.1);
-                this.chaseTarget.applyForce(dir);
-
-                if (this.chaseTarget.energy > 0) {
-                    this.energy++;
-                    this.chaseTarget.energy -= this.digestionSpeed;
-                    if (wrapSize > 0) {
-                        wrapSize *= 0.9;
-                    }
-                }
-            }
-            else if (this.chaseTarget.isDead == true) {
-                this.chaseTarget = undefined;
-            }
-        }
     }
 
     SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial, miniSariraThree) {
@@ -199,15 +156,9 @@ class Life_user extends Life_Genetic {
 
         // if (this.isMakeSarira == true) console.log(this.absorbedParticles.length)
 
-        var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
-            var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-           
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
-            // this.bodySystem.addFloatingPlastics(send_pos, data);
-            // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
-            //  console.log(data)
             this.bodySystem.addFloatingPlastics(send_pos);
             this.bodySystemWindow.addFloatingPlastics(send_pos);
 
@@ -236,8 +187,9 @@ class Life_user extends Life_Genetic {
 
         return type;
     }
+
     setName(name){
-        this.lifeName=name
+        this.lifeName = name;
     }
 }
 

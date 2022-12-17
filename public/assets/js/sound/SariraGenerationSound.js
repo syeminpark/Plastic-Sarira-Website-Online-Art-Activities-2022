@@ -6,6 +6,7 @@ import config from "../utils/config.js";
 
 export default class SariraGenerationSound {
     constructor() {
+
         this.directory = "./assets/mp3/sarira_beats.mp3"
 
         this.hasStarted = false;
@@ -94,7 +95,7 @@ export default class SariraGenerationSound {
 
         this.frequency_left = MyMath.map(height,0, config.sizeMax, this.frequency_max, this.frequency_min)
         this.frequency_right = MyMath.map(width,0, config.sizeMax,this.frequency_max, this.frequency_min)
-        console.log('freq', this.frequency_left, this.frequency_right)
+       
 
         // this.pitchShift_leftNode.pitch = this.pitch_left
         // this.pitchShift_rightNode.pitch = this.pitch_right
@@ -115,6 +116,7 @@ export default class SariraGenerationSound {
         if (document.getElementById('sound-btn').classList.contains('active')) {
 
             if (!this.hasStarted) {
+                Tone.context.resume()
                 this.gainNode.connect(Tone.Destination)
                 this.hasStarted = true
                 console.log('start')

@@ -10,6 +10,7 @@ import {
 } from './Microplastic.js';
 
 
+
 class BodySystem {
 
     constructor(index = 0, worldThree, window = false) {
@@ -78,8 +79,8 @@ class BodySystem {
 
 
     addFloatingPlastics(positionList, d3Dataset) {
-        // this.floatingBuffer.dispose()
-        // this.floatingPlasticsList = []
+        this.floatingBuffer.dispose()
+        this.floatingPlasticsList = []
         let tempMicro = new Microplastic(this.threeSystem)
         tempMicro.initialize(positionList)
 
@@ -90,11 +91,10 @@ class BodySystem {
     moveFloatingPlastics() {
         for (let [index, micro] of this.floatingPlasticsList.entries()) {
             let force = this.sarira.plasticList[0].attract(micro);
-            micro.setPosition(this.floatingBuffer.getBufferGeometry(), index);
-        
+
             micro.applyForce(force);
             micro.walk(this.floatingBuffer.getBufferGeometry(), index)
- 
+            micro.setPosition(this.floatingBuffer.getBufferGeometry(), index);
         }
     }
 
@@ -102,19 +102,22 @@ class BodySystem {
         for (let [index, micro] of this.floatingPlasticsList.entries()) {
             if (micro.checkStuck(this.sarira.getPlasticList())) {
                 this.sarira.addPlastics(micro)
-                micro.updateBuffer(this.sariraBuffer.getBufferGeometry(), this.sarira.getPlasticListLength())
-                micro.switch(this.floatingBuffer.getBufferGeometry(), index, this.floatingPlasticsList)
 
                 if (this.window) {
                     //only does once
+
+
                     let sariraSize = this.sariraBuffer.getBoundingBox()
                     let microCount = this.sarira.getPlasticList().length;
-                    console.log(sariraSize,this. sarira.plasticList.length)
+                    // console.log(sariraSize)
 
                     this.generationSound.setFeedbackDelay(microCount)
                     this.generationSound.setFrequency_PitchShift(sariraSize.width, sariraSize.height)
                     this.generationSound.setFreeverb(sariraSize.depth)
                 }
+
+                micro.updateBuffer(this.sariraBuffer.getBufferGeometry(), this.sarira.getPlasticListLength())
+                micro.switch(this.floatingBuffer.getBufferGeometry(), index, this.floatingPlasticsList)
 
                 this.sarira.initializeConvex() //이미 초기화했으면 알아서 넘어감 
 

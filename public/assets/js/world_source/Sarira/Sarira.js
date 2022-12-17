@@ -37,10 +37,13 @@ class Sarira {
         this.d3Dataset.push(micro.d3Dataset)
       
     }
+   
+
+
 
     setPosition() {
         for (let [index, plastic] of this.plasticList.entries()) {
-            plastic.setPosition(this.bufferGeometry, index);
+            plastic.setPositionVector(this.bufferGeometry, index);
         }
     }
 

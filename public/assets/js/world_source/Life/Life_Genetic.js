@@ -61,23 +61,22 @@ class Life_Genetic extends Life_EatOther {
     init(){
         if (this.geneCode == null) return;
 
-        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.001, 0.003);
-        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .2);
+        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.00001, 0.001);
+        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .001);
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
-        this.noiseSize = MyMath.random(0, this.size * .5);
+        this.noiseSize = MyMath.random(0, MyMath.map(this.size, 1, 30, 0, 1));
 
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 3, 32));
+        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 16, 32));
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
 
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
 
         this.mass = this.size + this.noiseSize;
 
         this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
-        this.noiseGrowValue = MyMath.map(this.geneCode.shape, 0, 1, -this.size * .5, this.size * .5);
-
+        
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
                                       0, 1, 0.05, 0.15);
 
@@ -115,7 +114,7 @@ class Life_Genetic extends Life_EatOther {
 
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
-                                     0, 1, 0.001, .5);
+                                     0, 1, 0.001, 0.5);
 
         this.isReadyToDivision = false;
         
@@ -164,7 +163,6 @@ class Life_Genetic extends Life_EatOther {
             this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
                                     this.size + (this.shapeY * 0.01), 
                                     this.size);
-            if (this.noiseSize < this.size*.8) this.noiseSize += MyMath.random(0, this.noiseGrowValue * .5);
 
             this.mass = this.size + this.noiseSize;
 
@@ -172,7 +170,7 @@ class Life_Genetic extends Life_EatOther {
         }
         // 자라면서 속력이 빨라짐
         if (this.velLimit < this.velLimitMax) {
-            this.velLimit += 0.05;
+            this.velLimit += 0.001;
         }
     }
 
@@ -246,12 +244,12 @@ class Life_Genetic extends Life_EatOther {
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
                                          new THREE.Vector3().copy(this.position));
             
-            console.log("life" + this.index + " create " + lifes.length)
-        
             if (child == null) return;
 
             lifeSystem.lifeNum ++;
             lifes.push(child);
+
+            // console.log(`life${this.index} create child${lifeSystem.lifeNum}`)
 
             this.isReadyToDivision = false;
             this.division_after = this.division_term;
@@ -372,25 +370,25 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setFoodChain(){
-        let foodChainName = "Primary Consumer";
+        let foodChainName = "Life";
         if (this.geneCode.photosynthesis == 1) {
-            foodChainName = "Producer";
+            foodChainName = 'Producer';
         } 
         else if (this.geneCode.decomposer == 1) {
-            foodChainName = "Decomposer";
+            foodChainName = 'Decomposer';
         }
         else if (this.geneCode.carnivore == 0 && this.geneCode.herbivore == 1){
-            this.foodChainName = "Primary Consumer";
+            this.foodChainName = 'Primary Consumer';
         }
         else{
             if (this.eatCount > 0){
-                foodChainName = "Secondary Consumer";
+                foodChainName = 'Secondary Consumer';
             } 
             if (this.eatCount > 10 && this.isEaten == true) {
-                foodChainName = "Tertiary Consumer";
+                foodChainName = 'Tertiary Consumer';
             }
             if (this.eatCount > 20 && this.isEaten == false) {
-                foodChainName = "Final Consumer";
+                foodChainName = 'final Consumer';
             }
         }
 
@@ -429,80 +427,16 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setD3jsData(){
-        let mainLifeName = this.setFoodChain();
         let subLifeName = this.setLifeType();
         // user일 경우 종 뒤에 이름 추가 ex) 호모사피엔스/김아무개
-        if (this.index == 0) {
-            mainLifeName = "Final Consumer";
-            subLifeName = `Homo Sapiens "${this.lifeName}"`;
-        }
+        if (this.index == 0) subLifeName = `${this.setLifeType()}/${this.lifeName}`;
 
-        const data = {
-            category: mainLifeName, 
-            subcategory: subLifeName, 
-            uniqueID: `#${this.index}`
-        };
+        const data = [
+            this.setFoodChain(), // "category"
+            subLifeName, // "subcategory"
+            `#${this.index}` // "uniqueID"
+        ];
         return data;
-    }
-
-    eat(microPlastic) {
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 0.9;
-
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            //아직 먹히지 않은 상태의 파티클 끌어당기기
-            if (distance < lifeSize && distance > this.size * 0.45) {
-
-                let sariraPos = this.position;
-                let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
-
-                if (distance <= this.size * 0.45) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                    microPlastic.setD3PlasticData(this.setD3jsData());
-                }
-            }
-        }
-    }
-
-    breath(microPlastic) {
-        //아직 먹히지 않은 상태의 파티클 끌어당기기
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 1;
-
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            if (distance < lifeSize && distance > this.size * 0.55) {
-                let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
-        
-                if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                    microPlastic.setD3PlasticData(this.setD3jsData());
-                }
-            }
-        }
     }
 
     // ===============================================================================
