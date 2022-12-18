@@ -350,6 +350,26 @@ class Life_noShader extends Life {
         super(index, world, setPos);
     }
 
+    init(){
+        super.init();
+
+        this.sizeMax = 0;
+        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, 0, 20);
+        
+        this.noiseShape = MyMath.random(0.05, 0.3);
+        this.noiseSpeed = MyMath.random(0.1, 0.5);
+    }
+
+    initNoise() {
+        const { Perlin } = THREE_Noise;
+        this.perlin = new Perlin(Math.random());
+
+        this.n_position = this.lifeMesh.geometry.attributes.position.clone();
+        this.n_normal = this.lifeMesh.geometry.attributes.normal.clone();
+        this.n_position_num = this.n_position.count;
+    }
+
+
     setDisplay() {
         let geometry = new THREE.SphereGeometry(this.size, this.shapeX, this.shapeY);
         let material = createLifeMaterial(this.worldThree.camera);
@@ -369,18 +389,6 @@ class Life_noShader extends Life {
         this.updateNoise();
     }
 
-    initNoise() {
-        const { Perlin } = THREE_Noise;
-        this.perlin = new Perlin(Math.random());
-        
-        this.noiseShape = MyMath.random(0.05, 0.3);
-        this.noiseAnimSpeed = MyMath.random(0.1, 0.5);
-
-        this.n_position = this.lifeMesh.geometry.attributes.position.clone();
-        this.n_normal = this.lifeMesh.geometry.attributes.normal.clone();
-        this.n_position_num = this.n_position.count;
-    }
-
     updateNoise() {
         const position = this.lifeMesh.geometry.attributes.position;
         // const normal = this.lifeMesh.geometry.attributes.normal;
@@ -393,8 +401,8 @@ class Life_noShader extends Life {
             const newPos = pos.clone();
 
             pos.multiplyScalar(this.noiseShape);
-            pos.x += elapsedTime * this.noiseAnimSpeed;
-            const n = this.perlin.get3(pos) * this.mass;
+            pos.x += elapsedTime * this.noiseSpeed;
+            const n = this.perlin.get3(pos) * this.noiseSizeMax;
 
             newPos.add(norm.multiplyScalar(n));
 
@@ -402,8 +410,6 @@ class Life_noShader extends Life {
         }
 
         position.copyVector3sArray(noise);
-
-        // this.sariraPosition = noise[Math.floor(MyMath.random(0, 1089))];
 
         this.lifeMesh.geometry.computeVertexNormals();
         this.lifeMesh.geometry.attributes.position.needsUpdate = true;

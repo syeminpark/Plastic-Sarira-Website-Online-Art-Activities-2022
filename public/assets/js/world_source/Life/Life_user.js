@@ -48,18 +48,15 @@ class Life_user extends Life_Genetic {
 
         this.velocity = new THREE.Vector3();
         this.acceleration = new THREE.Vector3();
-
         this.angle = new THREE.Vector3();
 
-
         this.SetWindowSarira(options.Sarira_Material, options.standardMaterial, options.miniSariraThree);
-        // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
 
         this.lifeName = undefined;
-
-        //라이프에도영향을 줌 
         this.lifespan = config.lifespan;
+
         this.metaTerm = 1;
+
         this.sariraSpeed = .5;
     }
 
@@ -69,20 +66,19 @@ class Life_user extends Life_Genetic {
         this.velLimit = 1;
 
         this.size = 5;
-        // this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
-
         this.noiseSize = MyMath.random(0, this.size * 0.5);
         this.mass = this.size + this.noiseSize;
-        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
-
-        this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
-            0, 1, 0.05, 0.15);
+        
+        this.sizeMax = 5;
+        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, 0, this.sizeMax * .7);
 
         this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 16, 32));
 
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
-
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 1);
+        this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
+            0, 1, 0.05, 0.5);
+       
         // document.addEventListener('keydown', 
         //     (evenet)=>{
         //         if(event.key=='1'){

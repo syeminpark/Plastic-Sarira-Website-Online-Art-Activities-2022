@@ -45,14 +45,11 @@ class Life_Genetic extends Life_EatOther {
         };
 
         this.init();
-        this.initMetabolism();
-        this.setMicroPlastic();
-
-        this.mass = this.size + this.noiseSize;
-
         this.initWrap();
+        this.initMetabolism();
 
         this.setDisplay();
+        this.setMicroPlastic();
 
         // this.initTestText();
     }
@@ -66,20 +63,26 @@ class Life_Genetic extends Life_EatOther {
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
-        this.noiseSize = MyMath.random(0, MyMath.map(this.size, 1, 30, 0, 1));
-
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 16, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
-
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
+        this.noiseSize = MyMath.random(0, MyMath.map(this.size, 1, 30, 0, 20));
+        
+        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
+        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, 0, this.sizeMax * .5);
 
         this.mass = this.size + this.noiseSize;
 
-        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
-        
-        this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
-                                      0, 1, 0.05, 0.15);
+        // 구체 생성시 정점 수 가로 / 세로
+        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 16, 32));
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 32));
 
+        // 노이즈 쉐이더
+        // this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
+        // this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
+        //                               0, 1, 0.05, 0.15);
+
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 1);
+        this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
+                                      0, 1, 0.05, 0.5);
+        
         this.attack = MyMath.map(this.geneCode.attack, 0, 1, 2, 10);
     }
 
