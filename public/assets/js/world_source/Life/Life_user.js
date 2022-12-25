@@ -25,13 +25,13 @@ class Life_user extends Life_Genetic {
             shapeX: MyMath.random(0, 1), // 
             shapeY: MyMath.random(0, 1), // 
 
-            growValue: MyMath.random(.4, .5), // 시간당 자라는 양
+            growValue: MyMath.random(.2, .3), // 시간당 자라는 양
             growAge: MyMath.random(0, .2), // 성장이 멈추는 나이
 
             moveActivity: MyMath.random(.5, .6), // 1일 경우 활동적임 (움직임 많음 = 속도 빠름)
             // 노이즈 애니메이팅 효과에도 영향
             // 높을 수록 에너지 소모량 높음
-            metabolismActivity: MyMath.random(.4, .5), // 대사 활동. 에너지 소모와 동시에 획득
+            metabolismActivity: MyMath.random(.8, .9), // 대사 활동. 에너지 소모와 동시에 획득
             // 동물의 경우 소화 속도, 식물의 경우 광합성시 에너지 획득량
             // 분열 속도에 영향
             lifespan: MyMath.random(.6, .7),
@@ -55,8 +55,6 @@ class Life_user extends Life_Genetic {
         this.lifeName = undefined;
         this.lifespan = config.lifespan;
 
-        this.metaTerm = 1;
-
         this.sariraSpeed = .5;
     }
 
@@ -65,17 +63,18 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = 5;
-        this.noiseSize = MyMath.random(0, this.size * 0.5);
+        this.size = 1;
+        this.noiseSize = this.size * MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, .5, 1.5);
+        this.lerpSize = this.size;
+        
+        this.sizeMax = 10;
+        
         this.mass = this.size + this.noiseSize;
         
-        this.sizeMax = 5;
-        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, 0, this.sizeMax * .7);
+        this.shapeX = 32;
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 32));
 
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 16, 32));
-
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 1);
+        this.noiseShape = this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.1, 0.5);
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.5);
        
@@ -90,17 +89,18 @@ class Life_user extends Life_Genetic {
 
 
     update() {
-        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-        this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
+
         this.updateShaderMat();
         this.wrapParticles();
+        this.updateMetabolism();
 
         this.add_MicroPlasticToBodySystem();
         this.sarira_position = new THREE.Vector3().copy(this.position);
 
         this.bodySystem.update();
-        this.bodySystemWindow.update();
         this.bodySystem.setPosition(this.sarira_position);
+        
+        this.bodySystemWindow.update();
         this.bodySystemWindow.setPosition(this.sarira_position);
     }
 
@@ -110,9 +110,38 @@ class Life_user extends Life_Genetic {
         }
     }
 
+    updateMetabolism(){
+        
+        if (this.lerpSize > this.size){
+            this.size += 0.01;
+            this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
+                                    this.size + (this.shapeY * 0.01), 
+                                    this.size);
+            this.mass = this.size + this.noiseSize;
+        } 
+        else {
+            if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
+                this.growing();
+                console.log("user grow" + this.size);
+            }
+        }
+    }
+
+    growing(){
+        if (this.age <= this.growAge && this.lerpSize < this.sizeMax) { 
+            const growValue = this.growValue;
+            this.lerpSize += growValue;
+            if (this.noiseSize < this.size * .3) {
+                this.noiseSize += (growValue * .1);
+                this.noiseShape += (growValue * .03);
+            }
+        }
+    }
+
     stateMachine(otherLife) {
 
     }
+
 
     // ===============================================================================
     // ===============================================================================

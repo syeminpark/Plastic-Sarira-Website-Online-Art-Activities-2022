@@ -354,7 +354,6 @@ class Life_noShader extends Life {
         super.init();
 
         this.sizeMax = 0;
-        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, 0, 20);
         
         this.noiseShape = MyMath.random(0.05, 0.3);
         this.noiseSpeed = MyMath.random(0.1, 0.5);
@@ -402,7 +401,7 @@ class Life_noShader extends Life {
 
             pos.multiplyScalar(this.noiseShape);
             pos.x += elapsedTime * this.noiseSpeed;
-            const n = this.perlin.get3(pos) * this.noiseSizeMax;
+            const n = this.perlin.get3(pos) * this.noiseSize;
 
             newPos.add(norm.multiplyScalar(n));
 
