@@ -123,12 +123,12 @@ class Life_Absorb extends Life_noShader {
 
             let distance = this.position.distanceTo(this.absorbedParticles[i].position);
             const force = new THREE.Vector3().subVectors(sariraPos, this.absorbedParticles[i].position);
-            const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * 0.6));
+            const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * -0.5));
 
             //if (distance < this.size*0.7) force.multiplyScalar(((distance*distance*distance)/150));
             force.multiplyScalar(((distance * distance * distance) / 900));
             this.absorbedParticles[i].applyForce(force);
-            if (distance > this.size) this.absorbedParticles[i].position = wrapPos;
+            if (distance > this.size * 0.5) this.absorbedParticles[i].position = wrapPos;
 
             //그중에서 일정 확률로 몇몇 파티클이 사리가 되도록 함   
             if (MyMath.random(0, 100) < this.sariraSpeed && 
