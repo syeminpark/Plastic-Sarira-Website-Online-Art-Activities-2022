@@ -90,6 +90,9 @@ class Life_user extends Life_Genetic {
 
     update() {
 
+        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
+        this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
+
         this.updateShaderMat();
         this.wrapParticles();
         this.updateMetabolism();
