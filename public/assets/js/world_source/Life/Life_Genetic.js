@@ -66,20 +66,21 @@ class Life_Genetic extends Life_EatOther {
         this.noiseSize = MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, 0.01, 0.5);
         this.lerpSize = this.size;
         
-        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
+        this.sizeMax = 24 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
+        console.log(this.index, this.geneCode.size, this.sizeMax);
 
         this.mass = this.size + this.noiseSize;
 
         // 구체 생성시 정점 수 가로 / 세로
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 16, 33));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 33));
+        this.shapeX = 32;
+        this.shapeY = 32;
 
         // 노이즈 쉐이더
         // this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
         // this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
         //                               0, 1, 0.05, 0.15);
 
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.05, 1);
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.05, 1.5);
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
                                       0, 1, 0.05, 0.75);
         
@@ -123,10 +124,14 @@ class Life_Genetic extends Life_EatOther {
 
         this.isReadyToDivision = false;
         
-        this.division_energy = MyMath.map(this.geneCode.divisionEnergy, 0, 1, this.energy * 0.1, this.energy * 0.4);
+        this.division_energy = MyMath.map(this.geneCode.divisionEnergy + this.sizeMax, 0, 31, this.energy * 0.1, this.energy * 0.6);
+
         this.division_age = MyMath.map(this.geneCode.divisionAge, 0, 1, 0.1, this.lifespan * 0.2);
         this.division_term = MyMath.map(this.geneCode.divisionFreq, 0, 1, this.lifespan * 0.1, this.lifespan * 0.3);
         this.division_after = this.division_term * 0.1;
+
+        // console.log("Life", this.index, " - sizeV:", this.geneCode.size, ", size:", this.sizeMax, 
+        //             ", energy:", this.energy, ", division energy:", this.division_energy)
     }
 
     setMicroPlastic(){
@@ -180,7 +185,9 @@ class Life_Genetic extends Life_EatOther {
                 this.noiseSize += (growValue * .1);
                 this.noiseShape += (growValue * .03);
             }
-
+            if (this.division_energy < this.lerpSize){
+                this.division_energy = this.lerpSize;
+            }
             // console.log(`Life ${this.index} is Growing (${this.size},${this.lerpSize})`);
         }
         
@@ -234,6 +241,7 @@ class Life_Genetic extends Life_EatOther {
             this.energy > this.division_energy && 
             this.isReadyToDivision == false) {
 
+                this.energy -= this.division_energy;
                 this.isReadyToDivision = true;
             }
 
@@ -255,8 +263,6 @@ class Life_Genetic extends Life_EatOther {
         if (this.isReadyToDivision == true){
             if (this.velocity.length() >= 0.001) this.velocity.multiplyScalar(0.01);
 
-            this.energy -= (this.division_energy + this.size)/2;
-            
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
                                          new THREE.Vector3().copy(this.position));
             
