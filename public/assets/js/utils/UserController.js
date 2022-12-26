@@ -149,6 +149,8 @@ class UserController {
 
                 // 카메라 유저 따라다니기
                 this.camera_focusOn_update();
+                
+                this.camDis = this.user.mass * config.ZoomIn_Distance;
                 this.camera.position.lerp(this.camLerpPos, this.lerpSpeed);
 
                 // 첫 접속시 zoom in
