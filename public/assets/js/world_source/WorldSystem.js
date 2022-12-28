@@ -333,7 +333,7 @@ class WorldSystem {
                 this.particles[index].wrap();
 
                 this.lifes.forEach(life => {
-                    // life.breath(this.particles[index]);
+                    life.breath(this.particles[index]);
                     life.eat(this.particles[index]);
                 });
             }

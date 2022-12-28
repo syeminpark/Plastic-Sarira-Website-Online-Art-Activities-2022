@@ -67,7 +67,7 @@ class Life_Genetic extends Life_EatOther {
         this.lerpSize = this.size;
         
         this.sizeMax = 24 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
-        console.log(this.index, this.geneCode.size, this.sizeMax);
+        // console.log(this.index, this.geneCode.size, this.sizeMax);
 
         this.mass = this.size + this.noiseSize;
 
