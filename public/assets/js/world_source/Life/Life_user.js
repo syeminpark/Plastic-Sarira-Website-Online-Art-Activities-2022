@@ -74,7 +74,7 @@ class Life_user extends Life_Genetic {
         this.shapeX = 32;
         this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 32));
 
-        this.noiseShape = this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.1, 0.5);
+        this.noiseShape = this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.1, 1.5);
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
             0, 1, 0.05, 0.5);
        
@@ -125,7 +125,7 @@ class Life_user extends Life_Genetic {
         else {
             if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
                 this.growing();
-                console.log("user grow" + this.size);
+                // console.log("user grow" + this.size);
             }
         }
     }

@@ -81,19 +81,25 @@ class MicroPlastic_D3js extends Particle {
   constructor(index, worldSize) {
     super(index, worldSize);
 
-    this.isSarira = false;
-    this.toxicity = false;
-
-
+    this.lastLifeIndex = null;
     this.d3Data = new D3Dataset(this.index);
   }
 
   setD3PlasticData(plasticData){
-    
-    this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, `#${plasticData.uniqueID}`);
+    this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, plasticData.uniqueID);
+  }
+
+  setD3PlasticDataInLife(lifeIndex, plasticData){
+    if (this.lastLifeIndex != lifeIndex){
+      // console.log(this.lastLifeIndex, lifeIndex)
+      // console.log(plasticData)
+      this.lastLifeIndex = lifeIndex;
+      this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, plasticData.uniqueID);
+    } else console.log('life index not same')
   }
 
   setD3Life(userData){
+    
     this.d3Data?.solidify(userData);
   }
 }

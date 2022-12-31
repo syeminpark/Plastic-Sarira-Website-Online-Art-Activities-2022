@@ -6,14 +6,20 @@ class D3Dataset {
         this.links = [];
     }
 
-    static categories = ['Waste Plastic', 'Microbe', "Herbivore", "Carnivore", "Homo Sapiens"];
+    static categories = 
+    ['Waste Plastic', 
+    "Producer", "Decomposer", 
+    "Primary Consumer", "Secondary Consumer", "Tertiary Consumer", "final Consumer"];
     static subcategories = {
         "Waste Plastic": ['MASIAN', 'BANGAMEORI', 'JANGAN', 'NAECHI', 'SONGPYEONG', 
         'CHEONGGAM', 'GAMCHU', 'YUMJEON', 'DOGU', 'GURYEONGPO', 'DUMO-MONGDOL'],
-        
-        'Microbe': "MICROBE",
-        "Herbivore": "HERBIVORE",
-        "Carnivore": 'CARNIVORE'
+        "Life":"LIFE",
+        "Producer": ["ALGAE", "PLANT"],
+        "Decomposer": ["MICROBE", "FUNGI"],
+        "Primary Consumer": 'HERBIVORE',
+        "Secondary Consumer": ['OMNIVORE', 'CARNIVORE'],
+        "Tertiary Consumer": ['OMNIVORE', 'CARNIVORE'],
+        "final Consumer": ['OMNIVORE', 'CARNIVORE']
     }
 
     static id = 1;

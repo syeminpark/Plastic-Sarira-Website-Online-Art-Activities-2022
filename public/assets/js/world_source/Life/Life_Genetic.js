@@ -404,13 +404,13 @@ class Life_Genetic extends Life_EatOther {
             this.foodChainName = 'Primary Consumer';
         }
         else{
-            if (this.eatCount > 0){
+            if (this.eatCount >= 0){
                 foodChainName = 'Secondary Consumer';
             } 
-            if (this.eatCount > 10 && this.isEaten == true) {
+            if (this.eatCount > 10 || this.isEaten == true) {
                 foodChainName = 'Tertiary Consumer';
             }
-            if (this.eatCount > 20 && this.isEaten == false) {
+            if (this.eatCount > 20 || this.isEaten == false) {
                 foodChainName = 'final Consumer';
             }
         }
@@ -419,13 +419,13 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setLifeType(){
-        let type = "microbe";
+        let type = "Life";
         if (this.geneCode.size <= 0.1){
             if (this.geneCode.photosynthesis == 1){
                 type = 'Algae'; // 조류
             } 
             else{
-                type = 'Bacteria'; // 박테리아
+                type = 'microbe'; // 미생물
             }
         }
         else {
@@ -436,7 +436,7 @@ class Life_Genetic extends Life_EatOther {
                 type = 'Fungi'; // 균계
             }
             else if (this.geneCode.herbivore == 1 && this.geneCode.carnivore == 0){
-                type = 'Herbivores'; // 초식동물
+                type = 'Herbivore'; // 초식동물
             } 
             else if (this.geneCode.herbivore == 1 && this.geneCode.carnivore == 1){
                 type = 'Omnivore'; // 잡식동물
@@ -450,15 +450,21 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setD3jsData(){
-        let subLifeName = this.setLifeType();
-        // user일 경우 종 뒤에 이름 추가 ex) 호모사피엔스/김아무개
-        if (this.index == 0) subLifeName = `${this.setLifeType()}/${this.lifeName}`;
 
-        const data = [
-            this.setFoodChain(), // "category"
-            subLifeName, // "subcategory"
-            `#${this.index}` // "uniqueID"
-        ];
+        let data = {
+            category:this.setFoodChain(), // "category"
+            subcategory:this.setLifeType(), // "subcategory"
+            uniqueID:`#${this.index}` // "uniqueID"
+        };
+
+        // user일 경우 종 뒤에 이름 추가 ex) 호모사피엔스/김아무개
+        if (this.index == 0) 
+            data = {
+                category:'Omnivore', // "category"
+                subcategory:`Homo Sapiens/${this.lifeName}`, // "subcategory"
+                uniqueID:`#${this.index}` // "uniqueID"
+            };
+
         return data;
     }
 

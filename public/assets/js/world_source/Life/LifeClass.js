@@ -80,6 +80,9 @@ class Life_Absorb extends Life_noShader {
 
             //파티클 먹고 파티클 흡수 상태로 변경
             if (distance <= this.size * 0.45) {
+
+                microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
+                
                 this.absorbedParticles.push(microPlastic);
                 microPlastic.isEaten = true;
             }
@@ -104,7 +107,9 @@ class Life_Absorb extends Life_noShader {
         
                 //파티클 먹고 파티클 흡수 상태로 변경
                 if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    // microPlastic.data.setAbsorbedBy(1);
+
+                    microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
+
                     this.absorbedParticles.push(microPlastic);                   
                     microPlastic.isEaten = true;
                 }
@@ -153,6 +158,8 @@ class Life_Absorb extends Life_noShader {
             }
         }
     }
+
+    setD3jsData(){ }
 }
 
 // 사리 만드는 Life
