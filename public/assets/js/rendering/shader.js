@@ -233,6 +233,7 @@ export var lifeShader_noise = {
         }`
 }
 
+// 예전방식
 export var lifeShader = {
     vertexShader: [
         'uniform vec3 viewVector;',

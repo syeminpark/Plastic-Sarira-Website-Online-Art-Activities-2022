@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {
-    Life
+    Life, Life_noShader
 } from './Life.js'
 import {
     BodySystem
@@ -11,7 +11,7 @@ import {
 } from '/assets/js/utils/MyMath.js';
 
 // 파티클 흡수하는 Life
-class Life_Absorb extends Life {
+class Life_Absorb extends Life_noShader {
     constructor(index, world, setPos) {
         super(index, world, setPos);
 
@@ -24,6 +24,7 @@ class Life_Absorb extends Life {
 
         this.sariraCount = 0;
         this.sariraSpeed = MyMath.random(0.001, .5);
+
         this.microPlastic_breath_maxAmount = Math.floor(MyMath.random(10, 30));
 
         this.isMakeSarira = false;
@@ -65,7 +66,7 @@ class Life_Absorb extends Life {
         const lifeSize = (this.size + this.noiseSize) * 0.9;
 
         if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false && 
-            this.absorbedParticles.length < this.mass){
+            this.absorbedParticles.length < this.mass*2){
             //아직 먹히지 않은 상태의 파티클 끌어당기기
             if (distance < lifeSize && distance > this.size * 0.45) {
 
@@ -79,6 +80,9 @@ class Life_Absorb extends Life {
 
             //파티클 먹고 파티클 흡수 상태로 변경
             if (distance <= this.size * 0.45) {
+
+                microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
+                
                 this.absorbedParticles.push(microPlastic);
                 microPlastic.isEaten = true;
             }
@@ -103,7 +107,9 @@ class Life_Absorb extends Life {
         
                 //파티클 먹고 파티클 흡수 상태로 변경
                 if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    // microPlastic.data.setAbsorbedBy(1);
+
+                    microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
+
                     this.absorbedParticles.push(microPlastic);                   
                     microPlastic.isEaten = true;
                 }
@@ -112,7 +118,7 @@ class Life_Absorb extends Life {
     }
 
     wrapParticles() {
-        let sariraPos = new THREE.Vector3().copy(this.position);
+        const sariraPos = new THREE.Vector3().copy(this.position);
         let sariraSpace = this.size * 0.3;
 
         //흡수된 파티클 몸안에 가둠
@@ -123,15 +129,20 @@ class Life_Absorb extends Life {
 
             let distance = this.position.distanceTo(this.absorbedParticles[i].position);
             const force = new THREE.Vector3().subVectors(sariraPos, this.absorbedParticles[i].position);
-            const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * 0.6));
+            const wrapPos = new THREE.Vector3().addVectors(sariraPos, force.setLength(this.size * -0.5));
 
             //if (distance < this.size*0.7) force.multiplyScalar(((distance*distance*distance)/150));
             force.multiplyScalar(((distance * distance * distance) / 900));
             this.absorbedParticles[i].applyForce(force);
-            if (distance > this.size) this.absorbedParticles[i].position = wrapPos;
+            if (distance > this.size) {
+                this.absorbedParticles[i].initWrap();
+                this.absorbedParticles[i].isEaten = false;
+                this.absorbedParticles.splice(i, 1);
+            }
+            else if (distance <= this.size && distance > this.size * 0.5) this.absorbedParticles[i].position = wrapPos;
 
             //그중에서 일정 확률로 몇몇 파티클이 사리가 되도록 함   
-            if (MyMath.random(0, 100) < this.sariraSpeed && 
+            if (MyMath.random(0, 50) < this.sariraSpeed && 
                 distance < sariraSpace &&
                 this.absorbedParticles[i].isSarira == false &&
                 this.sariraCount < 100) {
@@ -147,6 +158,8 @@ class Life_Absorb extends Life {
             }
         }
     }
+
+    setD3jsData(){ }
 }
 
 // 사리 만드는 Life
