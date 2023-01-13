@@ -27,7 +27,8 @@ class Life_Absorb extends Life_noShader {
 
         this.microPlastic_breath_maxAmount = Math.floor(MyMath.random(10, 30));
 
-        this.isMakeSarira = false;
+        this.canAbsorb = true;
+        this.canMakeSarira = false;
     }
 
     update() {
@@ -56,7 +57,7 @@ class Life_Absorb extends Life_noShader {
     //             this.absorbedParticles.push(microPlastic);
 
     //             microPlastic.isEaten = true;
-    //             this.isMakeSarira = true;
+    //             this.canMakeSarira = true;
     //         }
     //     }
     // }
@@ -81,7 +82,7 @@ class Life_Absorb extends Life_noShader {
             //파티클 먹고 파티클 흡수 상태로 변경
             if (distance <= this.size * 0.45) {
 
-                microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
+                // microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
                 
                 this.absorbedParticles.push(microPlastic);
                 microPlastic.isEaten = true;
@@ -108,7 +109,7 @@ class Life_Absorb extends Life_noShader {
                 //파티클 먹고 파티클 흡수 상태로 변경
                 if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
 
-                    microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
+                    // microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
 
                     this.absorbedParticles.push(microPlastic);                   
                     microPlastic.isEaten = true;
@@ -153,7 +154,7 @@ class Life_Absorb extends Life_noShader {
                 this.absorbedParticles.splice(i, 1);
 
                 if (sariraSpace < this.size) sariraSpace += 0.01;
-                this.isMakeSarira = true;
+                this.canMakeSarira = true;
                 this.sariraCount ++;
             }
         }
@@ -172,7 +173,7 @@ class Life_Sarira extends Life_Absorb {
     }
 
     setSarira(microPlastic_Material,  standardMaterial) {
-        this.isMakeSarira = false;
+        this.canMakeSarira = false;
         this.sariraPosition = new THREE.Vector3();
         this.sariraType = Math.floor(MyMath.random(1, 4));
 
@@ -198,7 +199,7 @@ class Life_Sarira extends Life_Absorb {
     }
 
     add_MicroPlasticToSarira() {
-        if (this.isMakeSarira == true) {
+        if (this.canMakeSarira == true) {
             let send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
             // console.log(data)
             // this.bodySystem.addFloatingPlastics(send_pos, data);
@@ -207,7 +208,7 @@ class Life_Sarira extends Life_Absorb {
             this.sariraParticles[this.sariraParticles.length - 1].isActive = false;
             this.sariraParticles.splice(this.sariraParticles.length - 1, 1);
 
-            this.isMakeSarira = false;
+            this.canMakeSarira = false;
         }
         for (let j = 0; j < this.sariraParticles.length; j++) {
             this.sariraParticles[j].position = new THREE.Vector3().copy(this.position);
