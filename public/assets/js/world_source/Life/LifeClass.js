@@ -27,6 +27,8 @@ class Life_Absorb extends Life_noShader {
         this.microPlastic_breath_maxAmount = Math.floor(MyMath.random(10, 30));
 
         this.isMakeSarira = false;
+
+        this.absorbMaxCount = this.mass;
     }
 
     update() {
@@ -65,7 +67,7 @@ class Life_Absorb extends Life_noShader {
         const lifeSize = (this.size + this.noiseSize) * 0.9;
 
         if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false && 
-            this.absorbedParticles.length < this.mass){
+            this.absorbedParticles.length <= this.absorbMaxCount){
             //아직 먹히지 않은 상태의 파티클 끌어당기기
             if (distance < lifeSize && distance > this.size * 0.45) {
 
@@ -90,7 +92,8 @@ class Life_Absorb extends Life_noShader {
         const distance = this.position.distanceTo(microPlastic.position);
         const lifeSize = (this.size + this.noiseSize) * 1;
 
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
+        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false && 
+            this.absorbedParticles.length <= this.absorbMaxCount * 2){
             if (distance < lifeSize && distance > this.size * 0.55) {
                 let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
 

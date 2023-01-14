@@ -165,6 +165,7 @@ class Life_Genetic extends Life_EatOther {
             if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
                 this.growing();
                 this.energy -= this.metaEnergyUse;
+                this.absorbMaxCount += MyMath.random(1, 10);
                 
                 if (this.geneCode.photosynthesis == 1) this.getEnergy(this.metaEnergyGet);
             }

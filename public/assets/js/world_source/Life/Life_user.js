@@ -125,6 +125,8 @@ class Life_user extends Life_Genetic {
         else {
             if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
                 this.growing();
+                this.absorbMaxCount += MyMath.random(1, 10);
+                
                 console.log("user grow" + this.size);
             }
         }
