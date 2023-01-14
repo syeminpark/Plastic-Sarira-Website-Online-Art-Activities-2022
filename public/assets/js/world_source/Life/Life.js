@@ -244,8 +244,8 @@ class Life {
         normal.copy(this.position).sub(otherLife.position);
         const distance = normal.length();
 
-        if ( distance < (this.size + otherLife.size) * 0.5 ) {
-            normal.multiplyScalar( 0.5 * distance - ((this.size + otherLife.size) * 0.4) );
+        if ( distance < (this.mass + otherLife.mass) * 0.5 ) {
+            normal.multiplyScalar( 0.5 * distance - ((this.mass + otherLife.size) * 0.4) );
             normal.multiplyScalar(0.01);
 
             this.position.sub( normal );
@@ -423,16 +423,9 @@ class Life_noShader extends Life {
             this.velLimit = 0.01;
             this.velocity.multiplyScalar(0.1);
 
-            if (this.lifeMesh.scale.x > 5){
-                this.lifeMesh.scale.x *= 0.99;
-                this.lifeMesh.scale.y *= 0.99;
-                this.lifeMesh.scale.z *= 0.99;
-            }
-            else {
-                this.lifeMesh.scale.x -= 0.09;
-                this.lifeMesh.scale.y -= 0.09;
-                this.lifeMesh.scale.z -= 0.09;
-            }
+            this.lifeMesh.scale.x *= 0.95;
+            this.lifeMesh.scale.y *= 0.95;
+            this.lifeMesh.scale.z *= 0.95;
 
             // if(this.noiseShape < 0.5) 
             this.noiseShape += 0.1;
