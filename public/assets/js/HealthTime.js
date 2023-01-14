@@ -14,7 +14,7 @@ export default class HealthTime {
             let currentTime= this.maxTime-seconds
             this.convert(currentTime)
 
-            if (currentTime <= 0) clearInterval(countdownInterval);
+            if (currentTime < 0) clearInterval(countdownInterval);
         },1000)
     }
 
