@@ -435,7 +435,7 @@ class Life_noShader extends Life {
             this.lifeMesh.material.opacity -= 0.01;
         }
         
-        if (this.isDead == false && this.lifeMesh.scale.x <= 0.010){
+        if (this.isDead == false && this.lifeMesh.scale.x <= 0.05){
             for (let i = 0; i < this.absorbedParticles.length; i++) {
                 // this.absorbedParticles[i].data.setPassBy(this.lifeName);
                 this.absorbedParticles[i].initWrap();
