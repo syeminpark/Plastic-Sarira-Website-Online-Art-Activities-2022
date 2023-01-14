@@ -66,8 +66,8 @@ class Life_Genetic extends Life_EatOther {
         this.noiseSize = MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, 0.01, 0.5);
         this.lerpSize = this.size;
         
-        this.sizeMax = 24 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
-        console.log(this.index, this.geneCode.size, this.sizeMax);
+        this.sizeMax = 20 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
+        // console.log(this.index, this.geneCode.size, this.sizeMax);
 
         this.mass = this.size + this.noiseSize;
 
@@ -246,7 +246,7 @@ class Life_Genetic extends Life_EatOther {
                 this.isReadyToDivision = true;
             }
 
-        if (this.age >= this.lifespan - 0.1 || this.energy < 0){
+        if (this.age >= this.lifespan * 0.9 || this.energy <= 0){
             this.die(callback);
         }
     }
@@ -261,7 +261,7 @@ class Life_Genetic extends Life_EatOther {
     }
 
     division(lifes, lifeSystem){
-        if (this.isReadyToDivision == true){
+        if (this.isReadyToDivision == true && this.clock.getElapsedTime() % this.metaTerm * 3 <= 0.05){
             if (this.velocity.length() >= 0.001) this.velocity.multiplyScalar(0.01);
 
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
@@ -277,7 +277,7 @@ class Life_Genetic extends Life_EatOther {
             this.isReadyToDivision = false;
             this.division_after = this.division_term;
 
-            // console.log("create life_" + child.index);
+            console.log("create life_" + child.index);
             // console.log(child.position)
             // console.log(`life${this.index} energy: ${this.energy} / DE:${(this.division_energy + this.size)/2}`)
         }

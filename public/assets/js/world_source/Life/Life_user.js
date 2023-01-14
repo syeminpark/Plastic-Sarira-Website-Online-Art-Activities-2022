@@ -127,7 +127,7 @@ class Life_user extends Life_Genetic {
                 this.growing();
                 if (this.absorbMaxCount < 200) this.absorbMaxCount ++;
                 
-                console.log("user grow" + this.size);
+                // console.log("user grow" + this.size);
             }
         }
     }

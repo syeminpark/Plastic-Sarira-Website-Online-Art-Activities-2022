@@ -134,7 +134,7 @@ class Life {
 
         if (this.age > this.lifespan * 0.7) this.velLimit = this.mass * 0.5;
 
-        if (this.age >= this.lifespan - 0.1){
+        if (this.age >= this.lifespan * 0.9){
             this.die(callback);
         }
     }
@@ -177,7 +177,7 @@ class Life {
     }
 
     die(callback){
-        if (this.lifeMesh.scale.x > 0.011){
+        if (this.lifeMesh.scale.x > 0.011 || this.lifeMesh.scale.y > 0.011){
             // this.velocity.add(new THREE.Vector3(
             //     MyMath.random(-0.2, 0.2),
             //     MyMath.random(-0.2, 0.2),
@@ -271,7 +271,7 @@ class Life {
         normal.copy(this.wrapTar.position).sub(this.wrapCenter); // sub other center
         const distance = normal.length();
 
-        if (distance > this.wrapSize) {
+        if (distance > this.wrapSize - this.mass/2) {
 
             this.velocity.multiplyScalar(-0.1);
 
@@ -412,6 +412,52 @@ class Life_noShader extends Life {
 
         this.lifeMesh.geometry.computeVertexNormals();
         this.lifeMesh.geometry.attributes.position.needsUpdate = true;
+    }
+
+    die(callback){
+        // if (this.lifeMesh.scale.x > 0.011 || this.lifeMesh.scale.y > 0.011){
+            // this.velocity.add(new THREE.Vector3(
+            //     MyMath.random(-0.2, 0.2),
+            //     MyMath.random(-0.2, 0.2),
+            //     MyMath.random(-0.2, 0.2)));
+            this.velLimit = 0.01;
+            this.velocity.multiplyScalar(0.1);
+
+            if (this.lifeMesh.scale.x > 5){
+                this.lifeMesh.scale.x *= 0.99;
+                this.lifeMesh.scale.y *= 0.99;
+                this.lifeMesh.scale.z *= 0.99;
+            }
+            else {
+                this.lifeMesh.scale.x -= 0.09;
+                this.lifeMesh.scale.y -= 0.09;
+                this.lifeMesh.scale.z -= 0.09;
+            }
+
+            // if(this.noiseShape < 0.5) 
+            this.noiseShape += 0.1;
+        // }
+
+        if (this.lifeMesh.material.opacity > 0.01){
+            this.lifeMesh.material.opacity -= 0.01;
+        }
+        
+        if (this.isDead == false && this.lifeMesh.scale.x <= 0.010){
+            for (let i = 0; i < this.absorbedParticles.length; i++) {
+                // this.absorbedParticles[i].data.setPassBy(this.lifeName);
+                this.absorbedParticles[i].initWrap();
+            }
+
+            console.log(this.index + ' is die');
+            this.isDead = true;
+
+            this.contentsText = "";
+
+            this.worldThree.removeFromGroup(this.lifeMesh);
+
+            //make Dead alert if user 
+            //callback!= undefined? callback() : null;
+        }
     }
 }
 
