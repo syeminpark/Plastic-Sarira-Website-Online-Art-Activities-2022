@@ -144,7 +144,41 @@ class Life_user extends Life_Genetic {
     }
 
     stateMachine(otherLife) {
+        this.findLife(otherLife);
+    }
 
+    findLife(otherLife){
+        let distance = this.position.distanceTo(otherLife.position);
+        this.sightRange = this.mass * this.attack;
+        if (distance < this.sightRange && otherLife.isEaten == false) {
+            this.chaseTarget = otherLife;
+            //console.log("find life");
+        } 
+        else {
+            this.chaseTarget = null;
+        }
+    }
+
+    userEat(){
+        this.playEatMotion();
+        if (this.chaseTarget != null){
+            this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0,0);
+
+            this.chaseTarget.isEaten = true;
+            
+            if (this.position.distanceTo(this.chaseTarget.position) > this.size / 2){
+                const dir = new THREE.Vector3().subVectors(new THREE.Vector3().copy(this.position),
+                                                        new THREE.Vector3().copy(this.chaseTarget.position));
+
+                if (dir.length() > this.chaseTarget.velLimit * .1) dir.setLength(this.chaseTarget.velLimit * .1);
+                this.chaseTarget.applyForce(dir);
+                this.chaseTarget.acceleration.set(0,0,0);
+            } 
+
+            if (this.chaseTarget.energy > 0){
+                this.chaseTarget.energy -= this.digestionSpeed;
+            }
+        }
     }
 
 
