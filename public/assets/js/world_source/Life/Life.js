@@ -1,7 +1,8 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
 import {MyMath} from '/assets/js/utils/MyMath.js';
-import {createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
+import {createLifeMaterial, createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
+import {THREE_Noise} from '/assets/js/rendering/ThreeNoise.js';
 
 class Life {
     constructor(index, world, setPos) {
@@ -88,17 +89,11 @@ class Life {
     setDisplay() {
         let geometry = new THREE.SphereGeometry(this.size, this.shapeX, this.shapeY);
         let material = createLifeNoiseMaterial(this.worldThree.camera, this.noiseShape, this.noiseSize);
-        // let material = createLifeMaterial(this.worldThree.camera);
 
         material.transparent = true;
 
         this.lifeMesh = new THREE.Mesh(geometry, material);
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
-        
-        this.lifeMesh.frustumCulled = false
-        this.lifeMesh.traverse(function (object) {
-            object.frustumCulled = false;
-        });
 
         this.worldThree.addToGroup(this.lifeMesh);
     }
@@ -145,7 +140,7 @@ class Life {
     }
 
     gravity(){
-        this.velocity.multiplyScalar(0.9);
+        this.velocity.multiplyScalar(0.01);
     }
 
     applyForce(force){
@@ -153,17 +148,18 @@ class Life {
         this.position = this.lifeMesh.position;
 
         this.acceleration.multiplyScalar(0.999);
+        if (this.acceleration > this.velLimit * .1) this.acceleration.setLength(this.velLimit * .1);
 
         this.look(force);
 
         this.acceleration.add(force);
         this.velocity.add(this.acceleration);
 
-        if (this.velocity > this.velLimit) this.velocity.multiplyScalar(0.01);
+        if (this.velocity > this.velLimit) this.velocity.setLength(this.velLimit);
 
         this.position.add(this.velocity);
 
-        this.velocity.multiplyScalar(0.1);
+        this.velocity.multiplyScalar(0.01);
     }
 
     look(dir){
@@ -193,7 +189,7 @@ class Life {
             this.lifeMesh.scale.y -= 0.015;
             this.lifeMesh.scale.z -= 0.015;
 
-            if(this.lifeMesh.material.uniforms.noiseCount.value < 100.) 
+            if(this.lifeMesh.material.uniforms.noiseCount?.value < 100.) 
                 this.lifeMesh.material.uniforms.noiseCount.value += 1.;
         }
 
@@ -269,7 +265,7 @@ class Life {
     }
 
     wrapLife() {
-        let normal = new THREE.Vector3();  // 중심점
+        let normal = new THREE.Vector3();  
         const relativeVelocity = new THREE.Vector3(0, 0, 0);
         
         normal.copy(this.wrapTar.position).sub(this.wrapCenter); // sub other center
@@ -277,17 +273,17 @@ class Life {
 
         if (distance > this.wrapSize) {
 
-            this.velocity.multiplyScalar(-0.9);
+            this.velocity.multiplyScalar(-0.1);
 
-            normal.setLength( -0.1 );
+            normal.setLength( -0.01 );
             this.applyForce( normal );
 
             relativeVelocity.sub( this.velocity.multiplyScalar(0.1) );
             normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
-            normal.multiplyScalar(0.1);
+            normal.multiplyScalar(0.01);
             this.applyForce( normal );
 
-            this.velocity.multiplyScalar(0.8);
+            this.velocity.multiplyScalar(0.1);
         }
 
         // const distance = this.wrapCenter.distanceTo(this.position);
@@ -322,8 +318,12 @@ class Life {
         this.text.style.position = 'fixed';
         document.body.appendChild(this.text);
 
-        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size, 0xffff00 );
-        // this.lifeMesh.add( this.arrowHelper );
+        if(this.index==0){
+        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size*1, 0xffffff,0.5,0.5 );
+        const axesHelper = new THREE.AxesHelper( 5 );
+        this.lifeMesh.add(  axesHelper);
+     
+        }
     }
 
     updateTestText(){
@@ -345,4 +345,74 @@ class Life {
     }
 }
 
-export {Life}
+class Life_noShader extends Life {
+    constructor(index, world, setPos) {
+        super(index, world, setPos);
+    }
+
+    init(){
+        super.init();
+
+        this.sizeMax = 0;
+        
+        this.noiseShape = MyMath.random(0.05, 0.3);
+        this.noiseSpeed = MyMath.random(0.1, 0.5);
+    }
+
+    initNoise() {
+        const { Perlin } = THREE_Noise;
+        this.perlin = new Perlin(Math.random());
+
+        this.n_position = this.lifeMesh.geometry.attributes.position.clone();
+        this.n_normal = this.lifeMesh.geometry.attributes.normal.clone();
+        this.n_position_num = this.n_position.count;
+    }
+
+
+    setDisplay() {
+        let geometry = new THREE.SphereGeometry(this.size, this.shapeX, this.shapeY);
+        let material = createLifeMaterial(this.worldThree.camera);
+
+        material.transparent = true;
+
+        this.lifeMesh = new THREE.Mesh(geometry, material);
+        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
+
+        this.worldThree.addToGroup(this.lifeMesh);
+
+        this.initNoise();
+    }
+
+    updateShaderMat(){
+        this.updateGlow_3D();
+        this.updateNoise();
+    }
+
+    updateNoise() {
+        const position = this.lifeMesh.geometry.attributes.position;
+        // const normal = this.lifeMesh.geometry.attributes.normal;
+        const elapsedTime = this.clock.getElapsedTime();
+
+        const noise = [];
+        for (let i = 0; i < this.n_position_num; i++) {
+            const pos = new THREE.Vector3().fromBufferAttribute(this.n_position, i);
+            const norm = new THREE.Vector3().fromBufferAttribute(this.n_normal, i);
+            const newPos = pos.clone();
+
+            pos.multiplyScalar(this.noiseShape);
+            pos.x += elapsedTime * this.noiseSpeed;
+            const n = this.perlin.get3(pos) * this.noiseSize;
+
+            newPos.add(norm.multiplyScalar(n));
+
+            noise.push(newPos);
+        }
+
+        position.copyVector3sArray(noise);
+
+        this.lifeMesh.geometry.computeVertexNormals();
+        this.lifeMesh.geometry.attributes.position.needsUpdate = true;
+    }
+}
+
+export {Life, Life_noShader}

@@ -69,7 +69,9 @@ class Particle {
     const distance = this.wrapCenter.distanceTo(this.position);
     if (distance > this.wrapSize) {
       //this.velocity.multiplyScalar(-0.9999);
-      let dir = new THREE.Vector3().copy(this.wrapCenter).sub(this.position).normalize().multiplyScalar(0.001);
+      const dir = new THREE.Vector3().subVectors(new THREE.Vector3().copy(this.wrapCenter), 
+                                                 new THREE.Vector3().copy(this.position));
+      dir.multiplyScalar(0.1);
       this.applyForce(dir);
     }
   }
@@ -79,19 +81,26 @@ class MicroPlastic_D3js extends Particle {
   constructor(index, worldSize) {
     super(index, worldSize);
 
-    this.isSarira = false;
-
+    this.lastLifeIndex = null;
     this.d3Data = new D3Dataset(this.index);
   }
 
   setD3PlasticData(plasticData){
-    
-    // console.log(plasticData)
-    this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, `#${plasticData.uniqueID}`);
+    this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, plasticData.uniqueID);
   }
 
-  setD3Life(name){
-    this.d3Data?.solidify(name);
+  setD3PlasticDataInLife(lifeIndex, plasticData){
+    if (this.lastLifeIndex != lifeIndex){
+      // console.log(this.lastLifeIndex, lifeIndex)
+      // console.log(plasticData)
+      this.lastLifeIndex = lifeIndex;
+      this.d3Data?.saveNode(plasticData.category, plasticData.subcategory, plasticData.uniqueID);
+    } else console.log('life index not same')
+  }
+
+  setD3Life(userData){
+    
+    this.d3Data?.solidify(userData);
   }
 }
 

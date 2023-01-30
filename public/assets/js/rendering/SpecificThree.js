@@ -3,11 +3,10 @@ import {
 } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/PLYLoader.js"
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
+import { OrbitControls } from '/assets/js/utils/OrbitControls.js';
+
 import Convex from '../world_source/Sarira/Convex.js';
 import BasicThree from "./basicThree.js"
-import {
-    OrbitControls
-} from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
 import waste_plastic_dataset from "../utils/waste_plastic_dataset.js";
 
 
@@ -197,12 +196,16 @@ export class WorldThree extends BasicThree {
         super(renderer, type, isDetail);
         this.camera.fov = 75
 
+        this.controls.dispose();
+        this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
+
+        this.controls.enableDamping = true
+        this.controls.enablePan = false;
+
         let ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
         let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3);
      
-        
         this.scene.add(ambientLight, hemiLight, );
-
     }
 
     render = () => {

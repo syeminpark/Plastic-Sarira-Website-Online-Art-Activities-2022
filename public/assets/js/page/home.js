@@ -20,10 +20,6 @@ class Home12345 extends Page12345 {
         this.homeThree.import(wastePlasticDataset.getRandomPLY().path);
     }
 
-    reset_page() {
-        super.reset_page()
-    }
-
 }
 
 export {

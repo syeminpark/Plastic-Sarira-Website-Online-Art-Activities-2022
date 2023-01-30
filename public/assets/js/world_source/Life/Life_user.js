@@ -25,13 +25,13 @@ class Life_user extends Life_Genetic {
             shapeX: MyMath.random(0, 1), // 
             shapeY: MyMath.random(0, 1), // 
 
-            growValue: MyMath.random(.4, .5), // 시간당 자라는 양
+            growValue: MyMath.random(.2, .3), // 시간당 자라는 양
             growAge: MyMath.random(0, .2), // 성장이 멈추는 나이
 
             moveActivity: MyMath.random(.5, .6), // 1일 경우 활동적임 (움직임 많음 = 속도 빠름)
             // 노이즈 애니메이팅 효과에도 영향
             // 높을 수록 에너지 소모량 높음
-            metabolismActivity: MyMath.random(.4, .5), // 대사 활동. 에너지 소모와 동시에 획득
+            metabolismActivity: MyMath.random(.8, .9), // 대사 활동. 에너지 소모와 동시에 획득
             // 동물의 경우 소화 속도, 식물의 경우 광합성시 에너지 획득량
             // 분열 속도에 영향
             lifespan: MyMath.random(.6, .7),
@@ -48,18 +48,14 @@ class Life_user extends Life_Genetic {
 
         this.velocity = new THREE.Vector3();
         this.acceleration = new THREE.Vector3();
-
         this.angle = new THREE.Vector3();
 
-
         this.SetWindowSarira(options.Sarira_Material, options.standardMaterial, options.miniSariraThree);
-        // this.SetWindowSarira(options.Sarira_Material, options.Sarira_ConvexMaterial, options.miniSariraThree);
 
-        this.lifeName = undefined
+        this.lifeName = undefined;
+        this.lifespan = config.lifespan;
 
-        //라이프에도영향을 줌 
-        this.lifespan = config.lifespan
-        this.metaTerm = 1;
+        this.sariraSpeed = .5;
     }
 
     init() {
@@ -67,21 +63,21 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = MyMath.random(3, 10);
-        // this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 50);
-
-        this.noiseSize = MyMath.random(0, this.size * 0.5);
+        this.size = 1;
+        this.noiseSize = this.size * MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, .5, 1.5);
+        this.lerpSize = this.size;
+        
+        this.sizeMax = 10;
+        
         this.mass = this.size + this.noiseSize;
-        this.noiseSizeMax = MyMath.map(this.geneCode.shape, 0, 1, this.sizeMax, 50);
+        
+        this.shapeX = 32;
+        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 32));
 
+        this.noiseShape = this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.1, 1.5);
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
-            0, 1, 0.05, 0.15);
-
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 1, 32));
-
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
-
+            0, 1, 0.05, 0.5);
+       
         // document.addEventListener('keydown', 
         //     (evenet)=>{
         //         if(event.key=='1'){
@@ -93,73 +89,65 @@ class Life_user extends Life_Genetic {
 
 
     update() {
+
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.lifeMesh.rotation.set(this.angle.x, this.angle.y, this.angle.z);
+
         this.updateShaderMat();
         this.wrapParticles();
+        this.updateMetabolism();
 
         this.add_MicroPlasticToBodySystem();
         this.sarira_position = new THREE.Vector3().copy(this.position);
 
         this.bodySystem.update();
-        this.bodySystemWindow.update();
         this.bodySystem.setPosition(this.sarira_position);
+        
+        this.bodySystemWindow.update();
         this.bodySystemWindow.setPosition(this.sarira_position);
     }
 
-    stateMachine(otherLife) {
-        if (otherLife.index == 0) return;
-        this.eatLife(otherLife);
+    lifeGo(callback){
+        if (this.age >= this.lifespan - 0.1 || this.energy < 0){
+            this.die(callback);
+        }
     }
 
-    eatLife(otherLife) {
-        this.chaseTarget = undefined;
-        const distance = this.position.distanceTo(otherLife.position);
-
-        if (this.chaseTarget == undefined) this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1, 1, 1);
-
-        if (this.chaseTarget == undefined && distance < (this.size + otherLife.size) * 0.5) {
-            this.chaseTarget = otherLife;
-        }
+    updateMetabolism(){
+        
+        if (this.lerpSize > this.size){
+            this.size += 0.01;
+            this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
+                                    this.size + (this.shapeY * 0.01), 
+                                    this.size);
+            this.mass = this.size + this.noiseSize;
+        } 
         else {
-            this.chaseTarget = undefined;
-        }
-
-        if (this.chaseTarget != undefined) {
-            if (this.chaseTarget.isDead == false) {
-                // console.log(this.index + " eat " + this.chaseTarget.index);
-
-                this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0, 0, 1);
-
-                this.chaseTarget.isEaten = true;
-                this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
-
-                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1, .8, .8);
-
-                let wrapSize = this.size * 0.25;
-                this.chaseTarget.wrapSize = wrapSize;
-
-                let dir = new THREE.Vector3().subVectors(
-                    new THREE.Vector3().copy(this.chaseTarget.position), 
-                    new THREE.Vector3().copy(this.position));
-
-                dir.setLength(this.moveSpeed/2);
-                dir.multiplyScalar(0.1);
-                this.chaseTarget.applyForce(dir);
-
-                if (this.chaseTarget.energy > 0) {
-                    this.energy++;
-                    this.chaseTarget.energy -= this.digestionSpeed;
-                    if (wrapSize > 0) {
-                        wrapSize *= 0.9;
-                    }
-                }
-            }
-            else if (this.chaseTarget.isDead == true) {
-                this.chaseTarget = undefined;
+            if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
+                this.growing();
+                // console.log("user grow" + this.size);
             }
         }
     }
+
+    growing(){
+        if (this.age <= this.growAge && this.lerpSize < this.sizeMax) { 
+            const growValue = this.growValue;
+            this.lerpSize += growValue;
+            if (this.noiseSize < this.size * .3) {
+                this.noiseSize += (growValue * .1);
+                this.noiseShape += (growValue * .03);
+            }
+        }
+    }
+
+    stateMachine(otherLife) {
+
+    }
+
+
+    // ===============================================================================
+    // ===============================================================================
 
     SetWindowSarira(microPlastic_Material, microPlastic_ConvexMaterial, miniSariraThree) {
         this.bodySystemWindow = new BodySystem(0, miniSariraThree, true);
@@ -199,15 +187,9 @@ class Life_user extends Life_Genetic {
 
         // if (this.isMakeSarira == true) console.log(this.absorbedParticles.length)
 
-        var age = 0 + (100 - 0) * (this.age - 0) / (this.lifespan - 0);
         if (this.isMakeSarira == true) {
-            var data = this.sariraParticlesData[this.sariraParticlesData.length - 1];
-           
             var send_pos = new THREE.Vector3().subVectors(this.sariraParticles[this.sariraParticles.length - 1].position, this.position);
 
-            // this.bodySystem.addFloatingPlastics(send_pos, data);
-            // this.bodySystemWindow.addFloatingPlastics(send_pos, data);
-            //  console.log(data)
             this.bodySystem.addFloatingPlastics(send_pos);
             this.bodySystemWindow.addFloatingPlastics(send_pos);
 
@@ -236,8 +218,9 @@ class Life_user extends Life_Genetic {
 
         return type;
     }
+
     setName(name){
-        this.lifeName=name
+        this.lifeName = name;
     }
 }
 

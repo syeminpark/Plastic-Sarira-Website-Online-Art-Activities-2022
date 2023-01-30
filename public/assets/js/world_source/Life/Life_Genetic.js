@@ -45,14 +45,11 @@ class Life_Genetic extends Life_EatOther {
         };
 
         this.init();
-        this.initMetabolism();
-        this.setMicroPlastic();
-
-        this.mass = this.size + this.noiseSize;
-
         this.initWrap();
+        this.initMetabolism();
 
         this.setDisplay();
+        this.setMicroPlastic();
 
         // this.initTestText();
     }
@@ -61,27 +58,35 @@ class Life_Genetic extends Life_EatOther {
     init(){
         if (this.geneCode == null) return;
 
-        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.001, 0.003);
-        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .2);
+        this.moveSpeed = MyMath.map(this.geneCode.moveActivity, 0, 1., 0.00001, 0.001);
+        this.velLimitMax = MyMath.map(this.geneCode.moveActivity, 0, 1., 0, .001);
         this.velLimit = this.velLimitMax * .2;
 
         this.size = 1;
-        this.noiseSize = MyMath.random(0, this.size * .5);
-
-        this.shapeX = Math.floor(MyMath.map(this.geneCode.shapeX, 0, 1, 32, 32));
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 3, 32));
-
-        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 1, 30);
+        this.noiseSize = MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, 0.01, 0.5);
+        this.lerpSize = this.size;
+        
+        this.sizeMax = 24 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
+        // console.log(this.index, this.geneCode.size, this.sizeMax);
 
         this.mass = this.size + this.noiseSize;
 
-        this.sizeMax = MyMath.map(this.geneCode.size, 0, 1, 1, 30);
-        this.noiseGrowValue = MyMath.map(this.geneCode.shape, 0, 1, -this.size * .5, this.size * .5);
+        // 구체 생성시 정점 수 가로 / 세로
+        this.shapeX = 32;
+        this.shapeY = 32;
 
+        // 노이즈 쉐이더
+        // this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
+        // this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
+        //                               0, 1, 0.05, 0.15);
+
+        this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.05, 1.5);
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5, 
-                                      0, 1, 0.05, 0.15);
-
+                                      0, 1, 0.05, 0.75);
+        
         this.attack = MyMath.map(this.geneCode.attack, 0, 1, 2, 10);
+
+        // console.log(this.index, this.size, this.noiseSize)
     }
 
     initWrap(){
@@ -111,18 +116,22 @@ class Life_Genetic extends Life_EatOther {
 
         this.metaEnergyGet = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 0.1, 0.5);
 
-        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 50, 1));
+        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 25, 1));
 
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
-                                     0, 1, 0.001, .5);
+                                     0, 1, 0.01, 5);
 
         this.isReadyToDivision = false;
         
-        this.division_energy = MyMath.map(this.geneCode.divisionEnergy, 0, 1, this.energy * 0.1, this.energy * 0.4);
+        this.division_energy = MyMath.map(this.geneCode.divisionEnergy + this.sizeMax, 0, 31, this.energy * 0.1, this.energy * 0.6);
+
         this.division_age = MyMath.map(this.geneCode.divisionAge, 0, 1, 0.1, this.lifespan * 0.2);
         this.division_term = MyMath.map(this.geneCode.divisionFreq, 0, 1, this.lifespan * 0.1, this.lifespan * 0.3);
         this.division_after = this.division_term * 0.1;
+
+        // console.log("Life", this.index, " - sizeV:", this.geneCode.size, ", size:", this.sizeMax, 
+        //             ", energy:", this.energy, ", division energy:", this.division_energy)
     }
 
     setMicroPlastic(){
@@ -144,11 +153,21 @@ class Life_Genetic extends Life_EatOther {
     // ===============================================================================
 
     updateMetabolism(){
-        if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
-            this.growing();
-            this.energy -= this.metaEnergyUse;
-            
-            if (this.geneCode.photosynthesis == 1) this.getEnergy(this.metaEnergyGet);
+        
+        if (this.lerpSize > this.size){
+            this.size += 0.01;
+            this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
+                                    this.size + (this.shapeY * 0.01), 
+                                    this.size);
+            this.mass = this.size + this.noiseSize;
+        } 
+        else {
+            if (this.clock.getElapsedTime() % this.metaTerm <= 0.05) { 
+                this.growing();
+                this.energy -= this.metaEnergyUse;
+                
+                if (this.geneCode.photosynthesis == 1) this.getEnergy(this.metaEnergyGet);
+            }
         }
     }
 
@@ -159,27 +178,29 @@ class Life_Genetic extends Life_EatOther {
     }
 
     growing(){
-        if (this.age <= this.growAge && this.size < this.sizeMax) { 
-            this.size += this.growValue;
-            this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
-                                    this.size + (this.shapeY * 0.01), 
-                                    this.size);
-            if (this.noiseSize < this.size*.8) this.noiseSize += MyMath.random(0, this.noiseGrowValue * .5);
-
-            this.mass = this.size + this.noiseSize;
-
-            // console.log(`Life ${this.index} is Growing (${this.size})`);
+        if (this.age <= this.growAge && this.lerpSize < this.sizeMax) { 
+            const growValue = this.growValue;
+            this.lerpSize += growValue;
+            if (this.noiseSize < this.size * .3) {
+                this.noiseSize += (growValue * .1);
+                this.noiseShape += (growValue * .03);
+            }
+            if (this.division_energy < this.lerpSize){
+                this.division_energy = this.lerpSize;
+            }
+            // console.log(`Life ${this.index} is Growing (${this.size},${this.lerpSize})`);
         }
+        
         // 자라면서 속력이 빨라짐
         if (this.velLimit < this.velLimitMax) {
-            this.velLimit += 0.05;
+            this.velLimit += 0.001;
         }
     }
 
     // ===============================================================================
     // ===============================================================================
 
-    update(){
+    update() {
         super.update();
         this.updateMetabolism();
     }
@@ -220,6 +241,7 @@ class Life_Genetic extends Life_EatOther {
             this.energy > this.division_energy && 
             this.isReadyToDivision == false) {
 
+                this.energy -= this.division_energy;
                 this.isReadyToDivision = true;
             }
 
@@ -241,23 +263,22 @@ class Life_Genetic extends Life_EatOther {
         if (this.isReadyToDivision == true){
             if (this.velocity.length() >= 0.001) this.velocity.multiplyScalar(0.01);
 
-            this.energy -= this.division_energy;
-            
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 
                                          new THREE.Vector3().copy(this.position));
             
-            console.log("life" + this.index + " create " + lifes.length)
-        
             if (child == null) return;
 
             lifeSystem.lifeNum ++;
             lifes.push(child);
+
+            // console.log(`life${this.index} create child${lifeSystem.lifeNum}`)
 
             this.isReadyToDivision = false;
             this.division_after = this.division_term;
 
             // console.log("create life_" + child.index);
             // console.log(child.position)
+            // console.log(`life${this.index} energy: ${this.energy} / DE:${(this.division_energy + this.size)/2}`)
         }
     }
 
@@ -372,25 +393,25 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setFoodChain(){
-        let foodChainName = "Primary Consumer";
+        let foodChainName = "Life";
         if (this.geneCode.photosynthesis == 1) {
-            foodChainName = "Producer";
+            foodChainName = 'Producer';
         } 
         else if (this.geneCode.decomposer == 1) {
-            foodChainName = "Decomposer";
+            foodChainName = 'Decomposer';
         }
         else if (this.geneCode.carnivore == 0 && this.geneCode.herbivore == 1){
-            this.foodChainName = "Primary Consumer";
+            this.foodChainName = 'Primary Consumer';
         }
         else{
-            if (this.eatCount > 0){
-                foodChainName = "Secondary Consumer";
+            if (this.eatCount >= 0){
+                foodChainName = 'Secondary Consumer';
             } 
-            if (this.eatCount > 10 && this.isEaten == true) {
-                foodChainName = "Tertiary Consumer";
+            if (this.eatCount > 10 || this.isEaten == true) {
+                foodChainName = 'Tertiary Consumer';
             }
-            if (this.eatCount > 20 && this.isEaten == false) {
-                foodChainName = "Final Consumer";
+            if (this.eatCount > 20 || this.isEaten == false) {
+                foodChainName = 'final Consumer';
             }
         }
 
@@ -398,13 +419,13 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setLifeType(){
-        let type = "microbe";
+        let type = "Life";
         if (this.geneCode.size <= 0.1){
             if (this.geneCode.photosynthesis == 1){
                 type = 'Algae'; // 조류
             } 
             else{
-                type = 'Bacteria'; // 박테리아
+                type = 'microbe'; // 미생물
             }
         }
         else {
@@ -415,7 +436,7 @@ class Life_Genetic extends Life_EatOther {
                 type = 'Fungi'; // 균계
             }
             else if (this.geneCode.herbivore == 1 && this.geneCode.carnivore == 0){
-                type = 'Herbivores'; // 초식동물
+                type = 'Herbivore'; // 초식동물
             } 
             else if (this.geneCode.herbivore == 1 && this.geneCode.carnivore == 1){
                 type = 'Omnivore'; // 잡식동물
@@ -429,80 +450,22 @@ class Life_Genetic extends Life_EatOther {
     }
 
     setD3jsData(){
-        let mainLifeName = this.setFoodChain();
-        let subLifeName = this.setLifeType();
-        // user일 경우 종 뒤에 이름 추가 ex) 호모사피엔스/김아무개
-        if (this.index == 0) {
-            mainLifeName = "Final Consumer";
-            subLifeName = `Homo Sapiens "${this.lifeName}"`;
-        }
 
-        const data = {
-            category: mainLifeName, 
-            subcategory: subLifeName, 
-            uniqueID: `#${this.index}`
+        let data = {
+            category:this.setFoodChain(), // "category"
+            subcategory:this.setLifeType(), // "subcategory"
+            uniqueID:`#${this.index}` // "uniqueID"
         };
+
+        // user일 경우 종 뒤에 이름 추가 ex) 호모사피엔스/김아무개
+        if (this.index == 0) 
+            data = {
+                category:'Omnivore', // "category"
+                subcategory:`Homo Sapiens/${this.lifeName}`, // "subcategory"
+                uniqueID:`#${this.index}` // "uniqueID"
+            };
+
         return data;
-    }
-
-    eat(microPlastic) {
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 0.9;
-
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            //아직 먹히지 않은 상태의 파티클 끌어당기기
-            if (distance < lifeSize && distance > this.size * 0.45) {
-
-                let sariraPos = this.position;
-                let force = new THREE.Vector3().subVectors(sariraPos, microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_eat_maxAmount) {
-
-                if (distance <= this.size * 0.45) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                    microPlastic.setD3PlasticData(this.setD3jsData());
-                }
-            }
-        }
-    }
-
-    breath(microPlastic) {
-        //아직 먹히지 않은 상태의 파티클 끌어당기기
-        const distance = this.position.distanceTo(microPlastic.position);
-        const lifeSize = (this.size + this.noiseSize) * 1;
-
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
-            if (distance < lifeSize && distance > this.size * 0.55) {
-                let force = new THREE.Vector3().copy(this.position).sub(microPlastic.position);
-
-                force.multiplyScalar(0.1);
-                microPlastic.applyForce(force);
-                microPlastic.velocity.multiplyScalar(0.9);
-            }
-
-            if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {
-        
-                if (distance <= this.size * 0.55 && MyMath.random(0, 1) < 0.55) {
-                    this.absorbedParticles.push(microPlastic);
-                    if (microPlastic?.d3Data != undefined) {
-                        this.sariraParticlesData.push(microPlastic.d3Data);
-                    }
-                    
-                    microPlastic.isEaten = true;
-                    microPlastic.setD3PlasticData(this.setD3jsData());
-                }
-            }
-        }
     }
 
     // ===============================================================================

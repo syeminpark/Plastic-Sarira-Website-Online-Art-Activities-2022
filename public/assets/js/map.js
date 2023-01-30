@@ -43,9 +43,9 @@ class Map12345{
 			this.canvas.addEventListener('mousemove', this.mapDragging.bind(this));
 			window.addEventListener('mouseup', this.mapReleased.bind(this));
 		}else{
-			this.canvas.addEventListener('touchstart', this.mapPressed.bind(this));
-			this.canvas.addEventListener('touchmove', this.mapDragging.bind(this));
-			window.addEventListener('touchend', this.mapReleased.bind(this));
+			// this.canvas.addEventListener('touchstart', this.mapPressed.bind(this));
+			// this.canvas.addEventListener('touchmove', this.mapDragging.bind(this));
+			// window.addEventListener('touchend', this.mapReleased.bind(this));
 		}
 	}
 
