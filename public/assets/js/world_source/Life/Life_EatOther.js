@@ -89,7 +89,10 @@ class Life_EatOther extends Life_Sarira {
         this.applyForce(dir);
         this.acceleration.set(0,0,0);
         
-        if (distance < (this.size + this.chaseTarget.size) * 0.5){
+        if (distance < (this.size + this.chaseTarget.size) * 0.55 && distance >= (this.size + this.chaseTarget.size) * 0.5){
+            this.playEatMotion();
+        }
+        else if (distance < (this.size + this.chaseTarget.size) * 0.5){
             this.state = 2;
         } 
 
@@ -98,21 +101,21 @@ class Life_EatOther extends Life_Sarira {
         //     chase Target = ${this.chaseTarget?.index}`);
 
     }
-    
+
     eatLife(){
         if (this.chaseTarget == undefined){
             this.state = 0;
             return;
         }
 
-        if (this.chaseTarget.isDead == false){
+        if (this.chaseTarget.isEaten == false){
             // console.log(this.index + " eat " + this.chaseTarget.index);
 
             // this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.8,.8,1);
 
             this.chaseTarget.isEaten = true;
             
-            let wrapSize = this.size * 0.25;
+            // let wrapSize = this.size * 0.25;
             // this.chaseTarget.wrapSize = wrapSize;
             // this.chaseTarget.wrapCenter = new THREE.Vector3().copy(this.position);
             // this.chaseTarget.acceleration.multiplyScalar(0.01);
@@ -125,16 +128,14 @@ class Life_EatOther extends Life_Sarira {
                 if (dir.length() > this.chaseTarget.velLimit * .1) dir.setLength(this.chaseTarget.velLimit * .1);
                 this.chaseTarget.applyForce(dir);
                 this.chaseTarget.acceleration.set(0,0,0);
-            } else {
-                
-            }
+            } 
 
             if (this.chaseTarget.energy > 0){
                 this.energy ++;
                 this.chaseTarget.energy -= this.digestionSpeed;
-                if (wrapSize > 0){
-                    wrapSize *= 0.9;
-                }
+                // if (wrapSize > 0){
+                //     wrapSize *= 0.9;
+                // }
             }
         } 
         else {

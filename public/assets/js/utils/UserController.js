@@ -241,6 +241,10 @@ class UserController {
             this.isKey_down = true;
         }
 
+        if (this.keyboard.down("space")){
+            this.user.userEat()
+        }
+
         // velocity 초기화
         if (this.keyboard.up("W") || this.keyboard.up("S") || this.keyboard.up("A") || this.keyboard.up("D")) {
 

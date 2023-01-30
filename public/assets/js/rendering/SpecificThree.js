@@ -9,6 +9,7 @@ import Convex from '../world_source/Sarira/Convex.js';
 import BasicThree from "./basicThree.js"
 import waste_plastic_dataset from "../utils/waste_plastic_dataset.js";
 
+import TWEEN from 'https://cdn.skypack.dev/tween-js-modern-module';
 
 export default class PointThree extends BasicThree {
     constructor(renderer, type, isDetail) {
@@ -44,8 +45,9 @@ export default class PointThree extends BasicThree {
             })
 
     }
-    animate = () => {
+    animate = (t) => {
         requestAnimationFrame(this.animate);
+        TWEEN.update(t);
         if (this.object != undefined) {
             if (document.getElementById("currentPage").innerHTML == this.type) {
                 if (this.valid()) {

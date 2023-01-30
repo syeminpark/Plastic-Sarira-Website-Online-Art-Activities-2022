@@ -4,6 +4,8 @@ import {MyMath} from '/assets/js/utils/MyMath.js';
 import {createLifeMaterial, createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
 import {THREE_Noise} from '/assets/js/rendering/ThreeNoise.js';
 
+import TWEEN from 'https://cdn.skypack.dev/tween-js-modern-module';
+
 class Life {
     constructor(index, world, setPos) {
         this.index = index;
@@ -37,6 +39,8 @@ class Life {
         this.clock = new THREE.Clock();
         this.setDisplay();
 
+        this.isEatMotionPlaying = false;
+
         this.initWrap();
         this.initMetabolism();
         
@@ -61,6 +65,8 @@ class Life {
         this.lifeName = 'life' + String(this.index);
         
         this.velLimit = 0.1;
+
+        this.setEatMotion();
     }
 
     initWrap(){
@@ -110,6 +116,42 @@ class Life {
 
     updateNoiseShader(){
         this.lifeMesh.material.uniforms.time.value = this.noiseSpeed * this.clock.getElapsedTime();
+    }
+
+    // ===============================================================================
+    // ===============================================================================
+
+    setEatMotion(){
+        this.currentSize = this.size;
+        this.magnifySize = this.size * 1.6;
+    }
+
+    playEatMotion(){
+        if (this.isEatMotionPlaying == false){
+            this.isEatMotionPlaying = true;
+            this.setEatMotion();
+            const eatOpenTween = new TWEEN.Tween({x:this.size}).
+                to({x:this.magnifySize}, 1000).
+                easing(TWEEN.Easing.Quartic.Out).
+                onUpdate((coords)=>{
+                    this.size = coords.x;
+                    this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+                });
+
+            const eatCloseTween = new TWEEN.Tween({x:this.magnifySize}).
+                to({x:this.currentSize}, 1000).
+                easing(TWEEN.Easing.Elastic.Out).
+                onUpdate((coords)=>{
+                    this.size = coords.x;
+                    this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+                }).delay(100);
+
+            
+            eatOpenTween.chain(eatCloseTween);
+            eatOpenTween.start();
+            
+            this.isEatMotionPlaying = false;
+        }
     }
 
     // ===============================================================================
