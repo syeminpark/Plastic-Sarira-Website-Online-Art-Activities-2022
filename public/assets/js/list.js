@@ -80,9 +80,9 @@ class List12345 {
 			this.container.appendChild(item);
 			if (this.detail_layer)
 				item.addEventListener('click', () => {
-					if (this.marker_data[i].properties != undefined) {
+					// if (this.marker_data[i].properties != undefined) {
 					this.detailLoad(this.total_marker_data[ index*range+i ], param);
-				}
+				// }
 				});
 		}
 

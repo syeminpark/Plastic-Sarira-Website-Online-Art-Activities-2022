@@ -17,8 +17,8 @@ export default function forcedD3(data) {
 
     let colorScale = d3.scaleOrdinal()
         .domain(["Waste Plastic", "Microbe", "Herbivore", "Carnivore", "Homo Sapiens", ])
-        .range(['#eee9e9 ',"#0000FF", '#78924e', '#EE4B2B', '#DFBCFF'])
-        // .range(['#ededed', '#bfbfbf', '#757474', '#525050', '#141414'])
+        .range(['#eee9e9 ', "#0000FF", '#78924e', '#EE4B2B', '#DFBCFF'])
+    // .range(['#ededed', '#bfbfbf', '#757474', '#525050', '#141414'])
     let aura = function (category) {
         if (category == "Homo Sapiens") {
             return "2%"
@@ -87,9 +87,9 @@ export default function forcedD3(data) {
             .style("pointer-events", "none")
             .attr("startOffset", "45%")
             .attr('font-size', "var(--font-citation)")
-            .text(d => {
-                return "MP " + d.uniqueID
-            })
+            // .text(d => {
+            //     return "Microplastic" 
+            // })
 
         // Initialize the nodes
         const node = svg.append("g")
@@ -100,11 +100,9 @@ export default function forcedD3(data) {
 
         node.each(function (d) {
             if (d.category == "Waste Plastic") {
-                d3.select(this).append("rect")
-                    .attr("x", -10)
-                    .attr("y", -10)
-                    .attr("width", "3%")
-                    .attr("height", "3%")
+                d3.select(this).append("circle")
+                    .attr("r", "2%")
+
                     .style("fill", '#999')
 
                     .style("stroke", "grey")
@@ -124,19 +122,19 @@ export default function forcedD3(data) {
             }
         })
 
-        const lables = node.append("text")
-            .text(function (d) {
-                return d.subcategory + d.uniqueID;
-            })
-            .attr("dy", "-3.5%")
-            .attr("dx", "-2%")
+        // const lables = node.append("text")
+        //     .text(function (d) {
+        //         return d.subcategory + d.uniqueID;
+        //     })
+        //     .attr("dy", "-3.5%")
+        //     .attr("dx", "-2%")
 
 
-         
+
         const drag_handler = d3.drag()
             .on("start", dragstarted)
-            .on("drag", dragged)
-            // .on("end", dragended)
+        // .on("drag", dragged)
+        // .on("end", dragended)
 
 
 
@@ -213,7 +211,7 @@ export default function forcedD3(data) {
     svg.append("text")
         .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 0 * 20 + 5)
-        .text("Waste Plastic ID")
+        .text("Waste Plastic")
     // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
@@ -231,7 +229,7 @@ export default function forcedD3(data) {
     svg.append("text")
         .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 1 * 20 + 5)
-        .text("Microbe ID")
+        .text("Microbe")
     // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
@@ -251,7 +249,7 @@ export default function forcedD3(data) {
     svg.append("text")
         .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 2 * 20 + 5)
-        .text("Herbivore ID")
+        .text("Herbivore")
     // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
@@ -270,7 +268,7 @@ export default function forcedD3(data) {
     svg.append("text")
         .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 3 * 20 + 5)
-        .text("Carnivore ID")
+        .text("Carnivore")
     // .attr("class", "EN")
     // svg.append("text")
     //     .attr("x", legend_g.attr("x") + width - 50 + 10)
@@ -289,7 +287,7 @@ export default function forcedD3(data) {
     svg.append("text")
         .attr("x", "4%")
         .attr("y", legend_g.attr("y") + 4 * 20 + 5)
-        .text("Homo Sapiens ID")
+        .text("Homo Sapiens")
     // .attr("class", "EN")
 
     // svg.append("text")
@@ -306,23 +304,7 @@ export default function forcedD3(data) {
         .attr("fill-opacity", 1);
 
 
-    svg.append("text")
-        .attr("x", "4%")
-        .attr("y", legend_g.attr("y") + 5 * 20 + 5)
-        .text("Microplastic ID")
-    // .attr("class", "EN")
-    // svg.append("text")
-    //     .attr("x", legend_g.attr("x") + width - 50 + 10)
-    //     .attr("y", legend_g.attr("y") + 5 * 20 + 5)
-    //     .text("미세플라스틱 ID")
-    //     .attr("class", "KR")
 
-    svg.append("circle")
-        .attr("r", 5)
-        .attr("cx", "2%")
-        .attr("cy", legend_g.attr("y") + 5 * 20)
-        .attr("fill", "#FF3659")
-        .attr("fill-opacity", 0.6);
 
 }
 

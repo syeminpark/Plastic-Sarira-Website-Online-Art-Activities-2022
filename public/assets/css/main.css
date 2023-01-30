@@ -5,6 +5,7 @@
 	--font-large: 1.2vw;
 	--font-small: 0.75vw;
 	--font-nav: 0.6vw;
+
 	--font-citation: 0.5vw;
 	--bevel-large: 10px;
 	--bevel-small: 5px;
@@ -1338,7 +1339,7 @@ text {
 }
 
 .plane-caption {
-	font-size: var(--font-small);
+	font-size: var(--font-nav);
 	display: flex;
 	justify-content: center;
 	transform: translate(0, -150%);
