@@ -19,7 +19,7 @@ class Language12345 {
 	async getIP() {
 
 		try {
-			await $.get("https://api.ip2location.io/?key=355C300900D3DA8EE5E08DFCE99B477A", (result) => {
+			await $.get("https://api.ip2location.io/?key=355C300900D3DA8EE5E08DFCE99B477A&ip=8.8.8.8&format=json", (result) => {
 				console.log(result)
 
 			})
