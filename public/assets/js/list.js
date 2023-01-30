@@ -45,7 +45,7 @@ class List12345 {
 		let range =  this.marker_data.length
 
 		let index= this.list_items.length /range 
-		console.log(_data,this.list_items.length, range, index)
+		
 		
 		//this.reset();
 		for (let i = 0; i < this.marker_data.length; i++) {

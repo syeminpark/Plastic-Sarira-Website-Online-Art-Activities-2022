@@ -58,9 +58,7 @@ class SariArchive12345 extends Page12345 {
 		let res;
 		this.totalSariraCount = await this.serverClientCommunication.getTotalSariraCount()
 		this.sariraThreeController.setup(document.getElementById("full-container"),	this.totalSariraCount)
-		console.log('sariraTotalCount', this.totalSariraCount)
-
-
+		
 		if (list_container) {
 			this.list.setup(list_container, list_scroller, detail_layer);
 			res = await this.loadData()
@@ -102,7 +100,7 @@ class SariArchive12345 extends Page12345 {
 	async loadData() {
 		//current code 
 		let res = await this.serverClientCommunication.getSariraByRange(this.load_index, this.range)
-		console.log(res.sariraData)
+	
 		if (res.sariraData.length > 0) {
 			//dynamically creating a bot_caption by its id 
 			for (let i = 0; i < res.sariraData.length; i++) {
