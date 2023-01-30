@@ -23,13 +23,13 @@ import {
 	createPointMaterial
 } from '../rendering/material.js';
 
+import config from '../utils/config.js';
 class SariArchive12345 extends Page12345 {
 	constructor(_pagelayer) {
 		super();
-		this.range = 8
+		this.range = config.sariraCountPerLoad
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
-
 
 		this.pointMaterial = createPointMaterial()
 		this.convexMaterial = createConvexMaterial()
@@ -47,36 +47,44 @@ class SariArchive12345 extends Page12345 {
 	}
 
 	async setup() {
-		this.load_index = 0;
-		let res;
 		const list_container = this.pagelayer.popup.querySelector("#sari-list");
 		const list_scroller = this.pagelayer.popup.querySelector(".scrollable");
 		const detail_layer = this.pagelayer.popup.querySelector("#sari-detail-layer");
 		const load_more_btn = this.pagelayer.popup.querySelector('#load-more-btn');
 
+
+
+		this.load_index = 0;
+		let res;
+		this.totalSariraCount = await this.serverClientCommunication.getTotalSariraCount()
+		this.sariraThreeController.setup(document.getElementById("full-container"),	this.totalSariraCount)
+		console.log('sariraTotalCount', this.totalSariraCount)
+
+
 		if (list_container) {
 			this.list.setup(list_container, list_scroller, detail_layer);
-			res= await this.loadData()
+			res = await this.loadData()
 			document.getElementById('archive-loading').classList.add('inactive')
 			if (load_more_btn) {
 				load_more_btn.classList.remove('inactive')
-				
 			}
 		}
 		if (load_more_btn) {
-			load_more_btn.addEventListener('click', () => {
-				if (this.sliced_data.length - 1 > this.load_index) {
+			load_more_btn.addEventListener('click', async () => {
+				this.availableIndexLength = this.totalSariraCount / this.range - this.load_index-1
+				if (this.availableIndexLength > 0) {
 					this.load_index++;
-					this.loadList(this.sliced_data[this.load_index]);
-					this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
-
-				} else {
-					load_more_btn.innerHTML = "END OF LIST"
-				}
+					this.loadData();
+					// this.loadList(this.sliced_data[this.load_index]);
+					// this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
+					
+					if(this.totalSariraCount / this.range - this.load_index- 1< 1){
+						load_more_btn.innerHTML = "END OF LIST"
+					}
+					
+				} 
 			});
-
 		}
-
 		this.loadsvg();
 	}
 
@@ -93,27 +101,27 @@ class SariArchive12345 extends Page12345 {
 
 	async loadData() {
 		//current code 
-		let res = await this.serverClientCommunication.getSariraByRange(this.sariraThreeController.max)
-		
-		//dynamically creating a bot_caption by its id 
-		for (let i = 0; i < res.allSariraData.length; i++) {
-			res.allSariraData[i].bot_caption = res.allSariraData[i].name
-			res.allSariraData[i].vert_caption = res.allSariraData[i].createdAt.split('T')[0]
+		let res = await this.serverClientCommunication.getSariraByRange(this.load_index, this.range)
+		console.log(res.sariraData)
+		if (res.sariraData.length > 0) {
+			//dynamically creating a bot_caption by its id 
+			for (let i = 0; i < res.sariraData.length; i++) {
+				res.sariraData[i].bot_caption = res.sariraData[i].name
+				res.sariraData[i].vert_caption = res.sariraData[i].createdAt.split('T')[0]
+			}
+			//--> split data at intervals of 20, and load first part.
+			// this.sliceData(res.sariraData, this.range);
+			// this.loadList(this.sliced_data[this.load_index])
+			this.list.load(res.sariraData, this.sariraThree, );
+			// this.set_scrolls(this.pagelayer);
+			this.sariraThreeController.create(this.load_index, this.range, res.sariraData, this.list.container.children)
+			return res
 		}
-		//--> split data at intervals of 20, and load first part.
-		this.sliceData(res.allSariraData, this.range);
-		this.loadList(this.sliced_data[this.load_index])
-		this.set_scrolls(this.pagelayer);
-		// console.log(this.load_index)
-
-		this.sariraThreeController.setup(document.getElementById("full-container"))
-		this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
-		return res
 	}
 
-	loadList(_data) {
-		this.list.load(_data, this.sariraThree);
-	}
+	// loadList(_data) {
+	// 	this.list.load(_data, this.sariraThree);
+	// }
 }
 
 export {

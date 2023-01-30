@@ -99,13 +99,27 @@ export default class ServerClientCommunication {
         }
     }
 
-    async getSariraByRange(range) {
+    async getSariraByRange(currentIndex,range) {
+
         try {
             let response = await $.get(`${this.url}/sarira`, {
-                page: "0",
-                limit: range
+                index: currentIndex,
+                range:range
             })
             return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getTotalSariraCount() {
+        try {
+            let response = await $.get(`${this.url}/sarira`, {
+                index: "0",
+                range: 800
+            })
+            return response.totalCount
+
         } catch (error) {
             console.log(error)
         }

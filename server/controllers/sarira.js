@@ -74,19 +74,18 @@ export default {
       }
     },
 
-    onGetAllSarira: async (req, res) => {
+    onGetSariraByRange: async (req, res) => {
       try{
       const totalCount= await SariraModel.count()
 
-
       const pageLimit={
-        page: parseInt(url.parse(req.url,true).query.page),
-        limit: parseInt(url.parse(req.url,true).query.limit)
+        index: parseInt(url.parse(req.url,true).query.index),
+        range: parseInt(url.parse(req.url,true).query.range)
       };
       
-     const allSariraData = await SariraModel.getAllSarira(pageLimit);
+     const sariraData = await SariraModel.getSariraByRange(pageLimit);
 
-     if (!allSariraData){ 
+     if (!sariraData){ 
        return res.status(400).json({
       success: false,
       message: 'There are no sariras',
@@ -94,7 +93,7 @@ export default {
   }
    return res.status(200).json({
           success: true,
-          allSariraData,
+          sariraData,
           totalCount: totalCount
         });
     }

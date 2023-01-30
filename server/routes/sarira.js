@@ -7,7 +7,7 @@ const router = express.Router();
 router
     .post('/:id', sarira.onPostSariraById)
     .get('/:id', sarira.onGetSariraById)
-    .get('/', sarira.onGetAllSarira)
+    .get('/', sarira.onGetSariraByRange)
     .delete('/:id',sarira.onDeleteSariraById)
     .delete('/all/:name',sarira.onDeleteSarirasByName)
 

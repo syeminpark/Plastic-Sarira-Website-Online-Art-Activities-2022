@@ -20,12 +20,10 @@ class List12345 {
 		}
 
 		if (this.detail_layer) {
-
 			const detail_closer = this.detail_layer.querySelector('.closer');
 			detail_closer.addEventListener('click', () => {
 				this.detail_layer.classList.add('inactive');
 				document.getElementById('currentPage').classList.add('detail_inactive');
-			
 			});
 		}
 	}
@@ -45,7 +43,10 @@ class List12345 {
 
 		this.marker_data = _data;
 		let range =  this.marker_data.length
+
 		let index= this.list_items.length /range 
+		console.log(_data,this.list_items.length, range, index)
+		
 		//this.reset();
 		for (let i = 0; i < this.marker_data.length; i++) {
 			let item = document.createElement('div');

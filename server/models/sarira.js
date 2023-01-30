@@ -57,7 +57,7 @@ sariraSchema.statics.getSariraById = async function (id) {
 
 }
 
-sariraSchema.statics.getAllSarira = async function (options) {
+sariraSchema.statics.getSariraByRange = async function (options) {
   try {
     return this.aggregate([
       //sort messages. get the newest at the top 
@@ -65,9 +65,9 @@ sariraSchema.statics.getAllSarira = async function (options) {
           createdAt: -1
         }
       },
-      { $skip: options.page * options.limit },
-      { $skip: options.page * options.limit },
-      { $limit: options.limit },
+      { $skip: options.index * options.range},
+      // { $skip: options.index * options.range },
+      { $limit: options.range },
         
     ]);
   } catch (error) {
