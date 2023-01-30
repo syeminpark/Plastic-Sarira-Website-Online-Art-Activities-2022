@@ -123,7 +123,7 @@ class Life {
 
     setEatMotion(){
         this.currentSize = this.size;
-        this.magnifySize = this.size * 1.6;
+        this.magnifySize = this.size * 1.8;
     }
 
     playEatMotion(){
@@ -144,13 +144,14 @@ class Life {
                 onUpdate((coords)=>{
                     this.size = coords.x;
                     this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
-                }).delay(100);
+                }).delay(100).
+                onComplete(()=>{
+                    this.isEatMotionPlaying = false;
+                });
 
             
             eatOpenTween.chain(eatCloseTween);
             eatOpenTween.start();
-            
-            this.isEatMotionPlaying = false;
         }
     }
 
