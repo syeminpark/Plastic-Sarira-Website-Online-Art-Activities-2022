@@ -9,12 +9,18 @@ export default class HealthTime {
         let seconds; 
 
         let countdownInterval = setInterval(() =>{
+        
             let delta = Date.now() - start; // milliseconds elapsed since start
             seconds= Math.floor(delta / 1000); // in seconds
             let currentTime= this.maxTime-seconds
-            this.convert(currentTime)
 
-            if (currentTime < 0) clearInterval(countdownInterval);
+            if (currentTime < 0){
+                clearInterval(countdownInterval);
+            } 
+            else{
+                this.convert(currentTime)
+            }
+ 
         },1000)
     }
 
