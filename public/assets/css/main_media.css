@@ -5,6 +5,7 @@
 		--font-large: 3.5vw;
 		--font-title: 4vw;
 		--font-small: 2.5vw;
+		--font-nav: 2.0vw;
 		--font-citation: 1.4vw;
 		--bevel-large: 5px;
 		--bevel-small: 2.5px;
@@ -446,6 +447,11 @@
 	.joystick-r {
 		right: var(--main-padding);
 	}
+
+	.joystick-m {
+		transform: translate(0,-50%);
+	}
+
 
 	.joystick.m-inactive {
 		bottom: -50vw;
