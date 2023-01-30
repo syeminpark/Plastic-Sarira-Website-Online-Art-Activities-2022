@@ -10,30 +10,26 @@ class Language12345 {
 			console.error("Language: Button is not DOM.");
 			return false;
 		}
-
-
-		this.getIP();
-
+		this.getIP()
 	}
 
 	async getIP() {
-
 		try {
-			await $.getJSON("https://api.ip2location.io/?key=355C300900D3DA8EE5E08DFCE99B477A&ip=8.8.8.8&format=json", (result) => {
-				console.log(result)
-
+			await $.getJSON('https://ipapi.co/json/',  (data) =>{
+				console.log(data.country)
+				if (data.country == 'KR') {
+					this.KR();
+				} else {
+					this.EN();
+				}
 			})
 		} catch (error) {
-			console.error(error)
-			this.language = window.navigator.userLanguage || window.navigator.language;
-			console.log(this.language);
-
-			if (this.language === 'ko-KR') {
+			let language = window.navigator.userLanguage || window.navigator.language;
+			if (language == 'KR')
 				this.KR();
-			} else {
+			else {
 				this.EN();
 			}
-
 		}
 	}
 
