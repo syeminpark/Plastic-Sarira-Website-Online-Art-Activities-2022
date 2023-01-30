@@ -76,7 +76,7 @@ class SariArchive12345 extends Page12345 {
 					// this.loadList(this.sliced_data[this.load_index]);
 					// this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
 					
-					if(this.totalSariraCount / this.range - this.load_index- 1< 1){
+					if(this.totalSariraCount / this.range - this.load_index< 1){
 						load_more_btn.innerHTML = "END OF LIST"
 					}
 					
