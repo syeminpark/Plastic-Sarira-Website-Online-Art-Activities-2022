@@ -66,7 +66,7 @@ class Life_Genetic extends Life_EatOther {
         this.noiseSize = MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, 0.01, 0.5);
         this.lerpSize = this.size;
         
-        this.sizeMax = 20 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
+        this.sizeMax = 18 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
         // console.log(this.index, this.geneCode.size, this.sizeMax);
 
         this.mass = this.size + this.noiseSize;
@@ -105,7 +105,6 @@ class Life_Genetic extends Life_EatOther {
         this.age = 0;
         this.lifespan = MyMath.map(this.geneCode.lifespan, 0, 1, 10, 100);
 
-        this.eatCount = 0;
         this.digestionSpeed = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 1., 5.);
 
         this.isGetEnergy == false;
@@ -116,7 +115,7 @@ class Life_Genetic extends Life_EatOther {
 
         this.metaEnergyGet = MyMath.map(this.geneCode.metabolismActivity, 0, 1, 0.1, 0.5);
 
-        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 25, 1));
+        this.metaTerm = Math.floor(MyMath.map(this.geneCode.metabolismActivity, 0, 1, 25, 1)) + this.size;
 
         this.growAge = MyMath.map(this.geneCode.growAge, 0, 1, this.lifespan * 0.1, this.lifespan * .6);
         this.growValue = MyMath.map((this.geneCode.growValue + this.geneCode.size) * .5, 
@@ -179,7 +178,7 @@ class Life_Genetic extends Life_EatOther {
     }
 
     growing(){
-        if (this.age <= this.growAge && this.lerpSize < this.sizeMax) { 
+        if (this.age <= this.growAge && this.lerpSize < Math.floor(this.sizeMax)) { 
             const growValue = this.growValue;
             this.lerpSize += growValue;
             if (this.noiseSize < this.size * .3) {
@@ -203,6 +202,7 @@ class Life_Genetic extends Life_EatOther {
 
     update() {
         super.update();
+        if (this.isDead == true) return;
         this.updateMetabolism();
     }
 
@@ -221,8 +221,8 @@ class Life_Genetic extends Life_EatOther {
         //console.log("life_" + this.index + " randomWalk");
     }
 
-    lifeGo(callback){
-        if (this.age < this.lifespan && this.clock.getElapsedTime() % this.metaTerm <= 0.1) {
+    lifeGo(){
+        if (this.age < this.lifespan && this.clock.getElapsedTime() % this.metaTerm <= 0.05) {
             this.age += 0.5;
             if (this.age > this.lifespan * 0.7) this.velLimit -= 0.01;
         }
@@ -247,7 +247,7 @@ class Life_Genetic extends Life_EatOther {
             }
 
         if (this.age >= this.lifespan * 0.9 || this.energy <= 0){
-            this.die(callback);
+            this.die();
         }
     }
 
@@ -261,7 +261,7 @@ class Life_Genetic extends Life_EatOther {
     }
 
     division(lifes, lifeSystem){
-        if (this.isReadyToDivision == true && this.clock.getElapsedTime() % this.metaTerm * 3 <= 0.05){
+        if (this.isReadyToDivision == true && this.clock.getElapsedTime() % this.metaTerm * 2 <= 0.1){
             if (this.velocity.length() >= 0.001) this.velocity.multiplyScalar(0.01);
 
             let child = new Life_Genetic(lifeSystem.lifeNum, this.options, this.createGeneCode(), 

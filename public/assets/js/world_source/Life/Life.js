@@ -207,6 +207,29 @@ class Life {
 
     }
 
+    playEatenMotion(predatorPos, predatorSize){
+        const posTween = new TWEEN.Tween({x:this.position.x, y:this.position.y, z:this.position.z}).
+            to({x:predatorPos.x, y:predatorPos.y, z:predatorPos.z}, 1500).
+            easing(TWEEN.Easing.Elastic.Out).
+            onUpdate((coords)=>{
+                this.position.x = coords.x;
+                this.position.y = coords.y;
+                this.position.z = coords.z;
+            });
+        const sizeTween = new TWEEN.Tween({x:this.size}).
+            to({x:predatorSize/2}, 1000).
+            easing(TWEEN.Easing.Quartic.Out).
+            onUpdate((coords)=>{
+                if (coords.x < this.size){
+                    this.size = coords.x;
+                    this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+                }
+            });
+        
+        posTween.chain(sizeTween);
+        posTween.start();
+    }
+
     // ===============================================================================
     // ===============================================================================
 
@@ -217,7 +240,7 @@ class Life {
         this.wrapLife();
     }
 
-    lifeGo(callback) {
+    lifeGo(){
         if (this.age < this.lifespan) {
             this.age += 0.1;
             this.energy -= 0.001;
@@ -229,8 +252,8 @@ class Life {
 
         if (this.age > this.lifespan * 0.7) this.velLimit = this.mass * 0.5;
 
-        if (this.age >= this.lifespan * 0.9) {
-            this.die(callback);
+        if (this.age >= this.lifespan * 0.9){
+            this.die();
         }
     }
 
@@ -271,8 +294,8 @@ class Life {
         //console.log("life_" + this.index + " randomWalk");
     }
 
-    die(callback) {
-        if (this.lifeMesh.scale.x > 0.011 || this.lifeMesh.scale.y > 0.011) {
+    die(){
+        if (this.lifeMesh.scale.x > 0.011 || this.lifeMesh.scale.y > 0.011){
             // this.velocity.add(new THREE.Vector3(
             //     MyMath.random(-0.2, 0.2),
             //     MyMath.random(-0.2, 0.2),
@@ -511,30 +534,18 @@ class Life_noShader extends Life {
         this.lifeMesh.geometry.attributes.position.needsUpdate = true;
     }
 
-    die(callback) {
-        // if (this.lifeMesh.scale.x > 0.011 || this.lifeMesh.scale.y > 0.011){
-        // this.velocity.add(new THREE.Vector3(
-        //     MyMath.random(-0.2, 0.2),
-        //     MyMath.random(-0.2, 0.2),
-        //     MyMath.random(-0.2, 0.2)));
-        this.velLimit = 0.01;
-        this.velocity.multiplyScalar(0.1);
-
+    die(){
         this.lifeMesh.scale.x *= 0.95;
         this.lifeMesh.scale.y *= 0.95;
         this.lifeMesh.scale.z *= 0.95;
 
-        // if(this.noiseShape < 0.5) 
-        this.noiseShape += 0.1;
-        // }
+        this.noiseShape += 0.05;
+        
+        this.velLimit = 0.01;
+        this.velocity.multiplyScalar(0.1);
 
-        if (this.lifeMesh.material.opacity > 0.01) {
-            this.lifeMesh.material.opacity -= 0.01;
-        }
-
-        if (this.isDead == false && this.lifeMesh.scale.x <= 0.05) {
+        if (this.isDead == false && this.lifeMesh.scale.x <= 0.05){
             for (let i = 0; i < this.absorbedParticles.length; i++) {
-                // this.absorbedParticles[i].data.setPassBy(this.lifeName);
                 this.absorbedParticles[i].initWrap();
             }
 
@@ -544,9 +555,6 @@ class Life_noShader extends Life {
             this.contentsText = "";
 
             this.worldThree.removeFromGroup(this.lifeMesh);
-
-            //make Dead alert if user 
-            //callback!= undefined? callback() : null;
         }
     }
 }

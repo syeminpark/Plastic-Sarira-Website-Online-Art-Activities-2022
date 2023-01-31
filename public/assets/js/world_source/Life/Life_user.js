@@ -55,6 +55,8 @@ class Life_user extends Life_Genetic {
         this.lifeName = undefined;
         this.lifespan = config.lifespan;
 
+        this.eatPosition = new THREE.Vector3();
+
         this.sariraSpeed = .5;
     }
 
@@ -63,7 +65,7 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = 1;
+        this.size = 2;
         this.noiseSize = this.size * MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, .5, 1.5);
         this.lerpSize = this.size;
         
@@ -96,6 +98,7 @@ class Life_user extends Life_Genetic {
         this.updateShaderMat();
         this.wrapParticles();
         this.updateMetabolism();
+        this.userEat();
 
         this.add_MicroPlasticToBodySystem();
         this.sarira_position = new THREE.Vector3().copy(this.position);
@@ -149,34 +152,53 @@ class Life_user extends Life_Genetic {
 
     findLife(otherLife){
         let distance = this.position.distanceTo(otherLife.position);
-        this.sightRange = this.mass * this.attack;
-        if (distance < this.sightRange && otherLife.isEaten == false) {
-            this.chaseTarget = otherLife;
-            //console.log("find life");
+        this.sightRange = this.mass * 2;
+        if (this.chaseTarget == null) {
+            if (distance < this.sightRange && otherLife.index != this.index){
+                this.chaseTarget = otherLife;
+                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0,0);
+                // console.log("user find life" + this.chaseTarget.index);
+            }
         } 
         else {
-            this.chaseTarget = null;
+            if (this.position.distanceTo(this.chaseTarget.position) > this.sightRange){
+                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,1,1);
+                this.chaseTarget = null;
+            }
+        }
+
+    }
+
+    setEatPosition(){
+        this.eatPosition = new THREE.Vector3(MyMath.random(0, this.size), MyMath.random(0, this.size), MyMath.random(0, this.size));
+    }
+
+    playEatMotion(){
+        super.playEatMotion();
+        if (this.chaseTarget != null){
+            if (this.chaseTarget.isEaten == false && 
+                this.position.distanceTo(this.chaseTarget.position) > this.size / 2){
+
+                this.chaseTarget.isEaten = true;
+                this.chaseTarget.playEatenMotion(new THREE.Vector3().copy(this.position).add(this.eatPosition), this.mass);
+                
+                // console.log(this.absorbedParticles.length)
+                this.absorbedParticles.push(...this.chaseTarget.absorbedParticles);
+                // console.log(this.absorbedParticles.length)
+
+            }
         }
     }
 
     userEat(){
-        this.playEatMotion();
-        if (this.chaseTarget != null){
-            this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0,0);
+        if (this.chaseTarget != null && this.chaseTarget.isEaten == true){
 
-            this.chaseTarget.isEaten = true;
-            
-            if (this.position.distanceTo(this.chaseTarget.position) > this.size / 2){
-                const dir = new THREE.Vector3().subVectors(new THREE.Vector3().copy(this.position),
-                                                        new THREE.Vector3().copy(this.chaseTarget.position));
-
-                if (dir.length() > this.chaseTarget.velLimit * .1) dir.setLength(this.chaseTarget.velLimit * .1);
-                this.chaseTarget.applyForce(dir);
-                this.chaseTarget.acceleration.set(0,0,0);
-            } 
+            this.chaseTarget.position = new THREE.Vector3().copy(this.position).add(this.eatPosition);
 
             if (this.chaseTarget.energy > 0){
                 this.chaseTarget.energy -= this.digestionSpeed;
+            } else {
+                this.chaseTarget = null;
             }
         }
     }

@@ -13,6 +13,7 @@ class Life_EatOther extends Life_Sarira {
         this.sightRange = this.mass + this.attack;
         this.chaseTarget = null;
         this.isEaten = false;
+        this.eatCount = 0;
         this.digestionSpeed = MyMath.random(1, 3);
     }
 
@@ -23,7 +24,8 @@ class Life_EatOther extends Life_Sarira {
         let result = false;
         let distance = this.position.distanceTo(otherLife.position);
         this.sightRange = this.mass * this.attack;
-        if (distance < this.sightRange && this.mass > otherLife.mass * 2 && otherLife.isEaten == false) {
+        if (distance < this.sightRange && this.mass > otherLife.mass * 2 && 
+            otherLife.isEaten == false && otherLife.index != this.index) {
             result = true;
             this.chaseTarget = otherLife;
             //console.log("find life");
@@ -113,7 +115,11 @@ class Life_EatOther extends Life_Sarira {
 
             // this.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(0.8,.8,1);
 
+            this.eatCount ++;
+            this.eatCount += this.chaseTarget.eatCount;
             this.chaseTarget.isEaten = true;
+
+            this.absorbedParticles.push(...this.chaseTarget.absorbedParticles);
             
             // let wrapSize = this.size * 0.25;
             // this.chaseTarget.wrapSize = wrapSize;
