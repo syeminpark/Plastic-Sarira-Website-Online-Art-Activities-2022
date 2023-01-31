@@ -886,9 +886,11 @@ body {
 }
 
 #world-help .block {
-	width: 3.4vw;
-	height: 3.4vw;
-	margin: 0.2vw;
+	width: 3vw;
+	height: 3vw;
+	margin: 0.4vw;
+	/* margin-top: 0.1vw;
+	margin-bottom: 0.1vw; */
 	display: inline-flex;
 	align-items: center;
 	float: left;
@@ -898,6 +900,20 @@ body {
 	color: white;
 	box-shadow: var(--shadow-diagonal) var(--shadow-color);
 }
+#world-help .block.space {
+	width: 10.6vw;
+	height: 2.5vw;
+	margin: 0.4vw;
+	display: inline-flex;
+	align-items: center;
+	float: left;
+	background-color: black;
+	border-radius: var(--bevel-small);
+	justify-content: center;
+	color: white;
+	box-shadow: var(--shadow-diagonal) var(--shadow-color);
+}
+
 
 #world-help .block.empty {
 	background-color: transparent;
