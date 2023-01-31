@@ -1,8 +1,15 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-import {MyMath} from '/assets/js/utils/MyMath.js';
-import {createLifeMaterial, createLifeNoiseMaterial} from '/assets/js/rendering/material.js';
-import {THREE_Noise} from '/assets/js/rendering/ThreeNoise.js';
+import {
+    MyMath
+} from '/assets/js/utils/MyMath.js';
+import {
+    createLifeMaterial,
+    createLifeNoiseMaterial
+} from '/assets/js/rendering/material.js';
+import {
+    THREE_Noise
+} from '/assets/js/rendering/ThreeNoise.js';
 
 import TWEEN from 'https://cdn.skypack.dev/tween-js-modern-module';
 
@@ -11,7 +18,7 @@ class Life {
         this.index = index;
         this.worldThree = world.worldThree;
         this.worldSize = world.worldSize || 300;
-                
+
         this.init();
 
         this.mass = this.size + this.noiseSize;
@@ -22,7 +29,7 @@ class Life {
         else this.position = new THREE.Vector3(
             MyMath.random(-spaceLimited, spaceLimited),
             MyMath.random(-spaceLimited, spaceLimited),
-            MyMath.random(-spaceLimited, spaceLimited));        
+            MyMath.random(-spaceLimited, spaceLimited));
 
         if (this.position.length() > spaceLimited) this.position.setLength(spaceLimited);
 
@@ -43,7 +50,7 @@ class Life {
 
         this.initWrap();
         this.initMetabolism();
-        
+
         this.setTestText("");
         this.initTestText();
     }
@@ -51,7 +58,7 @@ class Life {
     // ===============================================================================
     // ===============================================================================
 
-    init(){ //상속할 때 다형화 용
+    init() { //상속할 때 다형화 용
         this.size = MyMath.random(5, 20);
         this.noiseSize = MyMath.random(5, 20);
         this.noiseSpeed = MyMath.random(0.05, 0.15);
@@ -59,34 +66,34 @@ class Life {
         this.shapeX = Math.floor(MyMath.random(1, 24));
         this.shapeY = Math.floor(MyMath.random(1, 24));
         this.noiseShape = MyMath.random(1., 30.);
-        
+
         this.moveTerm = this.mass * 500;
 
         this.lifeName = 'life' + String(this.index);
-        
+
         this.velLimit = 0.1;
 
         this.setEatMotion();
     }
 
-    initWrap(){
-        this.wrapCenter = new THREE.Vector3(0,0,0);
+    initWrap() {
+        this.wrapCenter = new THREE.Vector3(0, 0, 0);
         this.wrapTar = this;
         this.wrapSize = this.worldSize - ((this.size + this.noiseSize) * 0.5);
     }
 
-    initMetabolism(){
+    initMetabolism() {
         this.isDead = false;
         this.age = 0;
         this.lifespan = (this.size + this.noiseSize) * 10;
 
         this.isReadyToDivision = false;
 
-        this.energy = MyMath.random(this.size/2, this.size*3);
-        
+        this.energy = MyMath.random(this.size / 2, this.size * 3);
+
         this.division_energy = this.size;
-        this.division_age = this.lifespan/3;
-        this.division_term = this.size*5;
+        this.division_age = this.lifespan / 3;
+        this.division_term = this.size * 5;
     }
 
     // ===============================================================================
@@ -104,55 +111,100 @@ class Life {
         this.worldThree.addToGroup(this.lifeMesh);
     }
 
-    updateShaderMat(){
+    updateShaderMat() {
         this.updateGlow_3D();
         this.updateNoiseShader();
     }
 
-    updateGlow_3D(){
-        this.lifeMesh.material.uniforms.viewVector.value = 
-			new THREE.Vector3().subVectors( this.worldThree.camera.position, this.position );
+    updateGlow_3D() {
+        this.lifeMesh.material.uniforms.viewVector.value =
+            new THREE.Vector3().subVectors(this.worldThree.camera.position, this.position);
     }
 
-    updateNoiseShader(){
+    updateNoiseShader() {
         this.lifeMesh.material.uniforms.time.value = this.noiseSpeed * this.clock.getElapsedTime();
     }
 
     // ===============================================================================
     // ===============================================================================
 
-    setEatMotion(){
+    setEatMotion() {
         this.currentSize = this.size;
         this.magnifySize = this.size * 1.8;
     }
 
-    playEatMotion(){
-        if (this.isEatMotionPlaying == false){
+    playEatMotion() {
+        if (this.eatOpenTween2) {
+            this.eatOpenTween2.stop()
+            this.eatCloseTween2.stop()
+        }
+        console.log(this.size
+            )
+        if (this.isEatMotionPlaying == false) {
+            console.log('1')
             this.isEatMotionPlaying = true;
             this.setEatMotion();
-            const eatOpenTween = new TWEEN.Tween({x:this.size}).
-                to({x:this.magnifySize}, 1000).
-                easing(TWEEN.Easing.Quartic.Out).
-                onUpdate((coords)=>{
-                    this.size = coords.x;
-                    this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
-                });
+            this.eatOpenTween1 = new TWEEN.Tween({
+                x: this.size
+            }).
+            to({
+                x: this.magnifySize
+            }, 1000).
+            easing(TWEEN.Easing.Quartic.Out).
+            onUpdate((coords) => {
+                this.size = coords.x;
+                this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+            });
 
-            const eatCloseTween = new TWEEN.Tween({x:this.magnifySize}).
-                to({x:this.currentSize}, 1000).
-                easing(TWEEN.Easing.Elastic.Out).
-                onUpdate((coords)=>{
-                    this.size = coords.x;
-                    this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
-                }).delay(100).
-                onComplete(()=>{
-                    this.isEatMotionPlaying = false;
-                });
+            this.eatCloseTween1 = new TWEEN.Tween({
+                x: this.magnifySize
+            }).
+            to({
+                x: this.currentSize
+            }, 1000).
+            easing(TWEEN.Easing.Elastic.Out).
+            onUpdate((coords) => {
+                this.size = coords.x;
+                this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+            }).delay(100).
+            onComplete(() => {
+                this.isEatMotionPlaying = false;
+            });
 
-            
-            eatOpenTween.chain(eatCloseTween);
-            eatOpenTween.start();
+            this.eatOpenTween1.chain(this.eatCloseTween1);
+            this.eatOpenTween1.start();
+
+        } else {
+            console.log('2')
+    
+            this.eatOpenTween2 = new TWEEN.Tween({
+                x: this.currentSize
+            }).
+            to({
+                x: this.size
+            }, 1000).
+            easing(TWEEN.Easing.Quartic.Out).
+            onUpdate((coords) => {
+                this.size = coords.x;
+                this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+            });
+
+            this.eatCloseTween2 = new TWEEN.Tween({
+                x: this.size
+            }).
+            to({
+                x: this.currentSize
+            }, 1000).
+            easing(TWEEN.Easing.Elastic.Out).
+            onUpdate((coords) => {
+                this.size = coords.x;
+                this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+            }).delay(100)
+
+            this.eatOpenTween2.chain(this.eatOpenTween2, this.eatCloseTween2);
+            this.eatOpenTween2.start();
         }
+
     }
 
     playEatenMotion(predatorPos, predatorSize){
@@ -195,7 +247,7 @@ class Life {
             if (this.division_term > 0) this.division_term -= 0.05;
         }
 
-        if (this.age >= this.division_age && this.energy > this.division_energy && 
+        if (this.age >= this.division_age && this.energy > this.division_energy &&
             this.division_term <= 0 && this.isReadyToDivision == false) this.isReadyToDivision = true;
 
         if (this.age > this.lifespan * 0.7) this.velLimit = this.mass * 0.5;
@@ -205,11 +257,11 @@ class Life {
         }
     }
 
-    gravity(){
+    gravity() {
         this.velocity.multiplyScalar(0.01);
     }
 
-    applyForce(force){
+    applyForce(force) {
         this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
         this.position = this.lifeMesh.position;
 
@@ -228,12 +280,12 @@ class Life {
         this.velocity.multiplyScalar(0.01);
     }
 
-    look(dir){
+    look(dir) {
         this.lifeMesh.lookAt(this.position.add(dir));
     }
 
     randomWalk() {
-        const speed = MyMath.mapRange(this.mass, 0, 40, 0.0001, 0.001); 
+        const speed = MyMath.mapRange(this.mass, 0, 40, 0.0001, 0.001);
         this.applyForce(new THREE.Vector3(
             MyMath.random(-speed, speed),
             MyMath.random(-speed, speed),
@@ -255,15 +307,15 @@ class Life {
             this.lifeMesh.scale.y -= 0.015;
             this.lifeMesh.scale.z -= 0.015;
 
-            if(this.lifeMesh.material.uniforms.noiseCount?.value < 100.) 
+            if (this.lifeMesh.material.uniforms.noiseCount.value < 100.)
                 this.lifeMesh.material.uniforms.noiseCount.value += 1.;
         }
 
-        if (this.lifeMesh.material.opacity > 0.01){
+        if (this.lifeMesh.material.opacity > 0.01) {
             this.lifeMesh.material.opacity -= 0.01;
         }
-        
-        if (this.isDead == false && this.lifeMesh.scale.x <= 0.010){
+
+        if (this.isDead == false && this.lifeMesh.scale.x <= 0.010) {
             for (let i = 0; i < this.absorbedParticles.length; i++) {
                 // this.absorbedParticles[i].data.setPassBy(this.lifeName);
                 this.absorbedParticles[i].initWrap();
@@ -282,13 +334,13 @@ class Life {
     }
 
     division(lifes, lifeSystem) {
-        if (this.isReadyToDivision == true){
+        if (this.isReadyToDivision == true) {
             this.energy -= this.size;
-            this.lifespan -= this.size/2;
-            
+            this.lifespan -= this.size / 2;
+
             let child = new Life(lifes.length, this.worldSize, new THREE.Vector3().copy(this.position));
             console.log("life " + lifes.length + " created")
-            
+
             if (child == null) return;
             lifeSystem.lifeNum++;
             lifes.push(child);
@@ -300,28 +352,28 @@ class Life {
     // ===============================================================================
     // ===============================================================================
 
-    pushOtherLife(otherLife){
+    pushOtherLife(otherLife) {
         // 자기 자신은 밀어내지 않음
         if (this.index == otherLife.index) return;
 
-        let normal = new THREE.Vector3(); 
+        let normal = new THREE.Vector3();
         const relativeVelocity = new THREE.Vector3();
 
         normal.copy(this.position).sub(otherLife.position);
         const distance = normal.length();
 
-        if ( distance < (this.mass + otherLife.mass) * 0.5 ) {
-            normal.multiplyScalar( 0.5 * distance - ((this.mass + otherLife.size) * 0.4) );
+        if (distance < (this.mass + otherLife.mass) * 0.5) {
+            normal.multiplyScalar(0.5 * distance - ((this.mass + otherLife.size) * 0.4));
             normal.multiplyScalar(0.01);
 
-            this.position.sub( normal );
+            this.position.sub(normal);
             //otherLife.position.add( normal );
 
             normal.normalize();
 
-            relativeVelocity.copy( this.velocity ).sub( otherLife.velocity );
-            normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
-            this.applyForce( normal.multiplyScalar(-0.1) );
+            relativeVelocity.copy(this.velocity).sub(otherLife.velocity);
+            normal = normal.multiplyScalar(relativeVelocity.dot(normal));
+            this.applyForce(normal.multiplyScalar(-0.1));
             //otherLife.applyForce( normal.multiplyScalar(0.1) );
 
             this.velocity.multiplyScalar(0.01);
@@ -331,23 +383,23 @@ class Life {
     }
 
     wrapLife() {
-        let normal = new THREE.Vector3();  
+        let normal = new THREE.Vector3();
         const relativeVelocity = new THREE.Vector3(0, 0, 0);
-        
+
         normal.copy(this.wrapTar.position).sub(this.wrapCenter); // sub other center
         const distance = normal.length();
 
-        if (distance > this.wrapSize - this.mass/2) {
+        if (distance > this.wrapSize - this.mass / 2) {
 
             this.velocity.multiplyScalar(-0.1);
 
-            normal.setLength( -0.01 );
-            this.applyForce( normal );
+            normal.setLength(-0.01);
+            this.applyForce(normal);
 
-            relativeVelocity.sub( this.velocity.multiplyScalar(0.1) );
-            normal = normal.multiplyScalar( relativeVelocity.dot( normal ) );
+            relativeVelocity.sub(this.velocity.multiplyScalar(0.1));
+            normal = normal.multiplyScalar(relativeVelocity.dot(normal));
             normal.multiplyScalar(0.01);
-            this.applyForce( normal );
+            this.applyForce(normal);
 
             this.velocity.multiplyScalar(0.1);
         }
@@ -358,18 +410,18 @@ class Life {
         // }
     }
 
-    stateMachine(){
+    stateMachine() {
 
     }
 
     // ===============================================================================
     // ===============================================================================
 
-    setTestText(text){
+    setTestText(text) {
         this.contentsText = text;
     }
 
-    initTestText(){
+    initTestText() {
         this.canvas = this.worldThree.canvas;
 
         this.text = document.createElement('text');
@@ -380,21 +432,21 @@ class Life {
         this.text.size = 15
 
         this.text.style.border = "0px"
-    
+
         this.text.style.position = 'fixed';
         document.body.appendChild(this.text);
 
-        if(this.index==0){
-        // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size*1, 0xffffff,0.5,0.5 );
-        const axesHelper = new THREE.AxesHelper( 5 );
-        this.lifeMesh.add(  axesHelper);
-     
+        if (this.index == 0) {
+            // this.arrowHelper = new THREE.ArrowHelper( this.velocity, new THREE.Vector3( 0, 0, 0 ), this.size*1, 0xffffff,0.5,0.5 );
+            const axesHelper = new THREE.AxesHelper(5);
+            this.lifeMesh.add(axesHelper);
+
         }
     }
 
-    updateTestText(){
+    updateTestText() {
         this.text.innerHTML = this.contentsText;
-    
+
         //let tempV = _.cloneDeep(this.position);
         let tempV = new THREE.Vector3().copy(this.position);
         let orbitV = new THREE.Vector3();
@@ -404,8 +456,8 @@ class Life {
         this.text.style.fontSize = MyMath.map(Math.abs(this.position.distanceTo(orbitV)), 0, 600, 2, 0) + "vh";
         const x = (tempV.x * .5 + .5) * this.canvas.clientWidth + this.canvas.getBoundingClientRect().left;
         const y = (tempV.y * -.5 + .5) * this.canvas.clientHeight + this.canvas.getBoundingClientRect().top;
-        this.text.style.left = x+"px"//`translate(-50%, -50%) translate(${x}px,${y}px)`;
-        this.text.style.top=y+"px";
+        this.text.style.left = x + "px" //`translate(-50%, -50%) translate(${x}px,${y}px)`;
+        this.text.style.top = y + "px";
 
         // this.arrowHelper.setDirection(this.velocity);
     }
@@ -416,17 +468,19 @@ class Life_noShader extends Life {
         super(index, world, setPos);
     }
 
-    init(){
+    init() {
         super.init();
 
         this.sizeMax = 0;
-        
+
         this.noiseShape = MyMath.random(0.05, 0.3);
         this.noiseSpeed = MyMath.random(0.1, 0.5);
     }
 
     initNoise() {
-        const { Perlin } = THREE_Noise;
+        const {
+            Perlin
+        } = THREE_Noise;
         this.perlin = new Perlin(Math.random());
 
         this.n_position = this.lifeMesh.geometry.attributes.position.clone();
@@ -449,7 +503,7 @@ class Life_noShader extends Life {
         this.initNoise();
     }
 
-    updateShaderMat(){
+    updateShaderMat() {
         this.updateGlow_3D();
         this.updateNoise();
     }
@@ -505,4 +559,7 @@ class Life_noShader extends Life {
     }
 }
 
-export {Life, Life_noShader}
+export {
+    Life,
+    Life_noShader
+}
