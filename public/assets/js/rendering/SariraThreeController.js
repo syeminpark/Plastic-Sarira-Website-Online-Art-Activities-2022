@@ -43,8 +43,6 @@
              this.sariraObject.push(this.sariraThreeList[i].getObject())
              normalI++
          }
-
-
      }
 
      render = () => {
