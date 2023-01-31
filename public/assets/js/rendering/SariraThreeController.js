@@ -27,6 +27,7 @@
              let sariraThree = new SariraThree(this.renderer, this.type, false)
              sariraThree.setup(this.canvas)
              sariraThree.animate()
+             sariraThree.setMaterial(this.pointMaterial, this.sariraMaterial)
              this.sariraThreeList.push(sariraThree)
          }
 
@@ -36,7 +37,6 @@
          let normalI = 0
 
          for (let i = index * range; i < (index + 1) * range; i++) {
-             this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
              this.sariraThreeList[i].setElement(element[i])
              this.sariraThreeList[i].import(JSON.parse(data[normalI].message).vertices)
              this.sariraObject.push(this.sariraThreeList[i].getObject())
