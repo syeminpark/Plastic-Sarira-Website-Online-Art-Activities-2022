@@ -134,12 +134,11 @@ class Life {
     }
 
     playEatMotion() {
-        if (this.eatOpenTween2) {
-            this.eatOpenTween2.stop()
-            this.eatCloseTween2.stop()
-        }
-        console.log(this.size
-            )
+        // if (this.eatOpenTween2) {
+        //     this.eatOpenTween2.stop()
+        //     this.eatCloseTween2.stop()
+        // }
+
         if (this.isEatMotionPlaying == false) {
             console.log('1')
             this.isEatMotionPlaying = true;
@@ -161,7 +160,7 @@ class Life {
             }).
             to({
                 x: this.currentSize
-            }, 1000).
+            }, 3000).
             easing(TWEEN.Easing.Elastic.Out).
             onUpdate((coords) => {
                 this.size = coords.x;
@@ -174,36 +173,37 @@ class Life {
             this.eatOpenTween1.chain(this.eatCloseTween1);
             this.eatOpenTween1.start();
 
-        } else {
-            console.log('2')
+        } 
+        // else {
+        //     console.log('2')
     
-            this.eatOpenTween2 = new TWEEN.Tween({
-                x: this.currentSize
-            }).
-            to({
-                x: this.size
-            }, 1000).
-            easing(TWEEN.Easing.Quartic.Out).
-            onUpdate((coords) => {
-                this.size = coords.x;
-                this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
-            });
+        //     this.eatOpenTween2 = new TWEEN.Tween({
+        //         x: this.currentSize
+        //     }).
+        //     to({
+        //         x: this.size
+        //     }, 1000).
+        //     easing(TWEEN.Easing.Quartic.Out).
+        //     onUpdate((coords) => {
+        //         this.size = coords.x;
+        //         this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+        //     });
 
-            this.eatCloseTween2 = new TWEEN.Tween({
-                x: this.size
-            }).
-            to({
-                x: this.currentSize
-            }, 1000).
-            easing(TWEEN.Easing.Elastic.Out).
-            onUpdate((coords) => {
-                this.size = coords.x;
-                this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
-            }).delay(100)
+        //     this.eatCloseTween2 = new TWEEN.Tween({
+        //         x: this.size
+        //     }).
+        //     to({
+        //         x: this.currentSize
+        //     }, 1000).
+        //     easing(TWEEN.Easing.Elastic.Out).
+        //     onUpdate((coords) => {
+        //         this.size = coords.x;
+        //         this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+        //     }).delay(100)
 
-            this.eatOpenTween2.chain(this.eatOpenTween2, this.eatCloseTween2);
-            this.eatOpenTween2.start();
-        }
+        //     this.eatOpenTween2.chain(this.eatOpenTween2, this.eatCloseTween2);
+        //     this.eatOpenTween2.start();
+        // }
 
     }
 
