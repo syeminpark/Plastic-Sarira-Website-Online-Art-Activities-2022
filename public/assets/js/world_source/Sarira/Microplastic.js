@@ -14,7 +14,7 @@ class Microplastic {
         this.mass = 1
         // this.mass =  this.size *2
 
-        this.size = 0.4
+        this.size = 1
 
         this.threeSystem = threeSystem
         this.d3Dataset = d3Dataset
