@@ -252,7 +252,7 @@ class Life {
 
         if (this.age > this.lifespan * 0.7) this.velLimit = this.mass * 0.5;
 
-        if (this.age >= this.lifespan * 0.9){
+        if (this.age >= this.lifespan * 0.9 || this.energy <= 0){
             this.die();
         }
     }
@@ -536,6 +536,8 @@ class Life_noShader extends Life {
 
     die(){
         if (this.lifeMesh.scale.x > 0.1){
+
+            this.size *= 0.95;
             this.lifeMesh.scale.x *= 0.95;
             this.lifeMesh.scale.y *= 0.95;
             this.lifeMesh.scale.z *= 0.95;

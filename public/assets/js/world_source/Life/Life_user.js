@@ -65,7 +65,7 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = 2;
+        this.size = 1.5;
         this.noiseSize = this.size * MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, .5, 1.5);
         this.lerpSize = this.size;
         
@@ -195,8 +195,16 @@ class Life_user extends Life_Genetic {
 
             this.chaseTarget.position = new THREE.Vector3().copy(this.position).add(this.eatPosition);
 
-            if (this.chaseTarget.energy > 0){
-                this.chaseTarget.energy -= this.digestionSpeed * 2;
+            // if (this.chaseTarget.energy > 0){
+            //     this.chaseTarget.energy -= this.digestionSpeed * 2;
+            // } else {
+            //     this.chaseTarget = null;
+            // }
+
+            if (this.chaseTarget.isDead == false){
+                this.chaseTarget.energy = -1;
+                // this.chaseTarget.die();
+
             } else {
                 this.chaseTarget = null;
             }

@@ -27,7 +27,7 @@ export default{
 
     //controls
     lerpSpeed : 0.1,
-    ZoomIn_Distance : 3.5, // this.user.mass * config.ZoomIn_Distance => 숫자가 클수록 멀어짐
+    ZoomIn_Distance : 5, // this.user.mass * config.ZoomIn_Distance => 숫자가 클수록 멀어짐
     ZoomOut_Distance : 1.5,
 
     ///////////////////////////////////////////////////
