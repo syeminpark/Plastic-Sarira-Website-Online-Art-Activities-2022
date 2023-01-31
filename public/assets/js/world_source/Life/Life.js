@@ -535,22 +535,24 @@ class Life_noShader extends Life {
     }
 
     die(){
-        this.lifeMesh.scale.x *= 0.95;
-        this.lifeMesh.scale.y *= 0.95;
-        this.lifeMesh.scale.z *= 0.95;
+        if (this.lifeMesh.scale.x > 0.1){
+            this.lifeMesh.scale.x *= 0.95;
+            this.lifeMesh.scale.y *= 0.95;
+            this.lifeMesh.scale.z *= 0.95;
 
-        this.noiseShape += 0.05;
+            this.noiseShape += 0.05;
+        }
         
         this.velLimit = 0.01;
         this.velocity.multiplyScalar(0.1);
 
-        if (this.isDead == false && this.lifeMesh.scale.x <= 0.05){
+        if (this.isDead == false && this.lifeMesh.scale.x <= 0.1){
             for (let i = 0; i < this.absorbedParticles.length; i++) {
                 this.absorbedParticles[i].initWrap();
             }
 
-            console.log(this.index + ' is die');
             this.isDead = true;
+            console.log(this.index + ' is die');
 
             this.contentsText = "";
 

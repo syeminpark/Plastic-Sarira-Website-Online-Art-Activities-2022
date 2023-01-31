@@ -63,6 +63,10 @@ class Life_Absorb extends Life_noShader {
     // }
 
     eat(microPlastic) {
+        if (this.isEatMotionPlaying == false) return;
+        
+        // if (this.index == 0) console.log("eat");
+
         const distance = this.position.distanceTo(microPlastic.position);
         const lifeSize = (this.size + this.noiseSize) * 0.9;
 

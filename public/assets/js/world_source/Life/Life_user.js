@@ -156,13 +156,13 @@ class Life_user extends Life_Genetic {
         if (this.chaseTarget == null) {
             if (distance < this.sightRange && otherLife.index != this.index){
                 this.chaseTarget = otherLife;
-                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0,0);
+                // this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,0,0);
                 // console.log("user find life" + this.chaseTarget.index);
             }
         } 
         else {
             if (this.position.distanceTo(this.chaseTarget.position) > this.sightRange){
-                this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,1,1);
+                // this.chaseTarget.lifeMesh.material.uniforms.glowColor.value = new THREE.Color(1,1,1);
                 this.chaseTarget = null;
             }
         }
@@ -196,7 +196,7 @@ class Life_user extends Life_Genetic {
             this.chaseTarget.position = new THREE.Vector3().copy(this.position).add(this.eatPosition);
 
             if (this.chaseTarget.energy > 0){
-                this.chaseTarget.energy -= this.digestionSpeed;
+                this.chaseTarget.energy -= this.digestionSpeed * 2;
             } else {
                 this.chaseTarget = null;
             }
