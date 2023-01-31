@@ -38,7 +38,7 @@
 
          for (let i = index * range; i < (index + 1) * range; i++) {
              this.sariraThreeList[i].setElement(element[i])
-             this.sariraThreeList[i].import(JSON.parse(data[normalI].message).vertices)
+             this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
              this.sariraObject.push(this.sariraThreeList[i].getObject())
              normalI++
          }

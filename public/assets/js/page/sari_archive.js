@@ -57,7 +57,7 @@ class SariArchive12345 extends Page12345 {
 		this.load_index = 0;
 		let res;
 		this.totalSariraCount = await this.serverClientCommunication.getTotalSariraCount()
-		this.sariraThreeController.setup(document.getElementById("full-container"),	this.totalSariraCount)
+
 		
 		if (list_container) {
 			this.list.setup(list_container, list_scroller, detail_layer);
@@ -69,12 +69,14 @@ class SariArchive12345 extends Page12345 {
 		}
 		if (load_more_btn) {
 			load_more_btn.addEventListener('click', async () => {
-				this.availableIndexLength = this.totalSariraCount / this.range - this.load_index-1
-				if (this.availableIndexLength > 0) {
+				// this.availableIndexLength = this.totalSariraCount / this.range - this.load_index-1
+				// if (this.availableIndexLength > 0) {
+				if (this.sliced_data.length - 1 > this.load_index) {
 					this.load_index++;
-					this.loadData();
-					// this.loadList(this.sliced_data[this.load_index]);
-					// this.sariraThreeController.create(this.load_index, this.range, res.allSariraData, this.list.container.children)
+					// this.loadData();
+					this.loadList(this.sliced_data[this.load_index]);
+			
+					this.sariraThreeController.create(this.load_index, this.range, res.sariraData, this.list.container.children)
 					
 					if(this.totalSariraCount / this.range - this.load_index< 1){
 						load_more_btn.innerHTML = "END OF LIST"
@@ -98,8 +100,9 @@ class SariArchive12345 extends Page12345 {
 
 	async loadData() {
 		//current code 
-		let res = await this.serverClientCommunication.getSariraByRange(this.load_index, this.range)
-	
+		// let res = await this.serverClientCommunication.getSariraByRange(this.load_index, this.range)
+		let res = await this.serverClientCommunication.getSariraByRange(0,this.totalSariraCount)
+
 		if (res.sariraData.length > 0) {
 			//dynamically creating a bot_caption by its id 
 			for (let i = 0; i < res.sariraData.length; i++) {
@@ -107,18 +110,19 @@ class SariArchive12345 extends Page12345 {
 				res.sariraData[i].vert_caption = res.sariraData[i].createdAt.split('T')[0]
 			}
 			//--> split data at intervals of 20, and load first part.
-			// this.sliceData(res.sariraData, this.range);
-			// this.loadList(this.sliced_data[this.load_index])
-			this.list.load(res.sariraData, this.sariraThree, );
+			this.sliceData(res.sariraData, this.range);
+			this.loadList(this.sliced_data[this.load_index])
+			// this.list.load(res.sariraData, this.sariraThree, );
 			// this.set_scrolls(this.pagelayer);
+			this.sariraThreeController.setup(document.getElementById("full-container"),	this.totalSariraCount)
 			this.sariraThreeController.create(this.load_index, this.range, res.sariraData, this.list.container.children)
 			return res
 		}
 	}
 
-	// loadList(_data) {
-	// 	this.list.load(_data, this.sariraThree);
-	// }
+	loadList(_data) {
+		this.list.load(_data, this.sariraThree);
+	}
 }
 
 export {
