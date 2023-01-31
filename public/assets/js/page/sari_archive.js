@@ -79,7 +79,6 @@ class SariArchive12345 extends Page12345 {
 					if(this.totalSariraCount / this.range - this.load_index< 1){
 						load_more_btn.innerHTML = "END OF LIST"
 					}
-					
 				} 
 			});
 		}
