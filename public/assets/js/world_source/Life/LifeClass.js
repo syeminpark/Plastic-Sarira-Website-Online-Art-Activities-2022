@@ -70,8 +70,7 @@ class Life_Absorb extends Life_noShader {
         const distance = this.position.distanceTo(microPlastic.position);
         const lifeSize = (this.size + this.noiseSize) * 0.9;
 
-        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false && 
-            this.absorbedParticles.length <= this.absorbMaxCount){
+        if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
             //아직 먹히지 않은 상태의 파티클 끌어당기기
             if (distance < lifeSize && distance > this.size * 0.45) {
 

@@ -152,7 +152,8 @@ class Life_Genetic extends Life_EatOther {
     // ===============================================================================
 
     updateMetabolism(){
-        
+        if (this.energy <= 0 || this.isEaten == true) return;
+
         if (this.lerpSize > this.size){
             this.size += 0.01;
             this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 
