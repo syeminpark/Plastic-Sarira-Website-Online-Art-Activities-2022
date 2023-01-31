@@ -47,6 +47,7 @@ class Life {
         this.setDisplay();
 
         this.isEatMotionPlaying = false;
+        this.isDieMotionPlaying = false;
 
         this.initWrap();
         this.initMetabolism();
@@ -226,7 +227,7 @@ class Life {
                 }
             });
         
-        posTween.chain(sizeTween);
+        // posTween.chain(sizeTween);
         posTween.start();
     }
 
@@ -535,9 +536,23 @@ class Life_noShader extends Life {
     }
 
     die(){
+        // if (this.isDieMotionPlaying == false){
+        //     const sizeTween = new TWEEN.Tween({x: this.size, y: this.noiseShape}).
+        //     to({x: 0.05, y:5}, 500).
+        //     easing(TWEEN.Easing.Linear.None).
+        //     onUpdate((coords) => {
+        //         this.size = coords.x;
+        //         this.lifeMesh.scale.set(coords.x, coords.x, coords.x);
+        //         this.noiseShape = coords.y;
+        //     }).onComplete(() => {
+        //         this.isDieMotionPlaying = false;
+        //     });
+        //     sizeTween.start();
+        // }
+        
+
         if (this.lifeMesh.scale.x > 0.1){
 
-            this.size *= 0.95;
             this.lifeMesh.scale.x *= 0.95;
             this.lifeMesh.scale.y *= 0.95;
             this.lifeMesh.scale.z *= 0.95;
@@ -547,6 +562,8 @@ class Life_noShader extends Life {
         
         this.velLimit = 0.01;
         this.velocity.multiplyScalar(0.1);
+
+        // console.log(this.size, this.lifeMesh.scale.x)
 
         if (this.isDead == false && this.lifeMesh.scale.x <= 0.1){
             for (let i = 0; i < this.absorbedParticles.length; i++) {
