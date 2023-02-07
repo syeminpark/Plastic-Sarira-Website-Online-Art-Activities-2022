@@ -34,14 +34,14 @@
      }
 
      create(index, range, data, element) {
-         let normalI = 0
 
          for (let i = index * range; i < (index + 1) * range; i++) {
-             this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
-             this.sariraThreeList[i].setElement(element[i])
-             this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
-             this.sariraObject.push(this.sariraThreeList[i].getObject())
-             normalI++
+             if (this.sariraThreeList[i] && data[i]) {
+                 this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
+                 this.sariraThreeList[i].setElement(element[i])
+                 this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
+                 this.sariraObject.push(this.sariraThreeList[i].getObject())
+             }
          }
      }
 

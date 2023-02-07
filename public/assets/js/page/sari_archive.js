@@ -68,6 +68,7 @@ class SariArchive12345 extends Page12345 {
 			}
 		}
 		if (load_more_btn) {
+			
 			load_more_btn.addEventListener('click', async () => {
 				// this.availableIndexLength = this.totalSariraCount / this.range - this.load_index-1
 				// if (this.availableIndexLength > 0) {
@@ -77,11 +78,11 @@ class SariArchive12345 extends Page12345 {
 					this.loadList(this.sliced_data[this.load_index]);
 			
 					this.sariraThreeController.create(this.load_index, this.range, res.sariraData, this.list.container.children)
-					
-					if(this.totalSariraCount / this.range - this.load_index< 1){
-						load_more_btn.innerHTML = "END OF LIST"
-					}
 				} 
+				else if(this.sliced_data.length - 1 == this.load_index){
+					load_more_btn.innerHTML = "END OF LIST"
+				}
+				
 			});
 		}
 		this.loadsvg();
