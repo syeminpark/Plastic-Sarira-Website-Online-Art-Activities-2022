@@ -8,9 +8,6 @@
          this.isDetail = isDetail
          this.type = type
          this.renderer = renderer
-         this.sariraObject = []
-         this.sariraThreeList = []
-
      }
      setMaterial(pointMaterial, sariraMaterial) {
          this.pointMaterial = pointMaterial
@@ -18,6 +15,7 @@
      }
 
      setup(canvas, sariraTotalCount) {
+        this.sariraThreeList = []
          this.sariraObject = []
 
          this.renderer.clear()
@@ -47,7 +45,7 @@
 
      render = () => {
          requestAnimationFrame(this.render)
-         if (this.sariraObject.length != 0) {
+         if (this.sariraObject) {
              if (this.valid()) {
                  this.checkCanvas()
                  this.rendererResizeMobile();

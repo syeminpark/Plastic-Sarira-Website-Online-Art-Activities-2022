@@ -52,8 +52,6 @@ class SariArchive12345 extends Page12345 {
 		const detail_layer = this.pagelayer.popup.querySelector("#sari-detail-layer");
 		const load_more_btn = this.pagelayer.popup.querySelector('#load-more-btn');
 
-
-
 		this.load_index = 0;
 		let res;
 		this.totalSariraCount = await this.serverClientCommunication.getTotalSariraCount()
@@ -82,7 +80,6 @@ class SariArchive12345 extends Page12345 {
 				else if(this.sliced_data.length - 1 == this.load_index){
 					load_more_btn.innerHTML = "END OF LIST"
 				}
-				
 			});
 		}
 		this.loadsvg();
