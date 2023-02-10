@@ -26,13 +26,27 @@ export function createGlassMaterial() {
 
     })
 }
-
-export function createPointMaterial() {
+export function createSariraParticleMaterial(){
     return new THREE.PointsMaterial({
         color: 'white',
         size: config.particleSize,
-        side: THREE.DoubleSide,
+    });
+}
 
+export function createParticleMaterial(){
+    return new THREE.PointsMaterial({
+        color: 'white',
+        size: config.particleSize,
+        vertexColors:true
+       
+    });
+}
+export function createInvisibleMaterial() {
+    return new THREE.PointsMaterial({
+        color: 'white',
+        transparent: true,
+        size: config.particleSize,
+        vertexColors: true,
     });
 }
 
@@ -54,14 +68,6 @@ export function createStandardMaterial() {
     });
 }
 
-export function createParticleMaterial(){
-    return new THREE.PointsMaterial({
-        color: 'white',
-        size: config.particleSize,
-        side: THREE.DoubleSide,
-        vertexColors: true,
-    });
-}
 
 // 이전 방식
 export function createLifeMaterial(camera){

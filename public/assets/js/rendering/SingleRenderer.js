@@ -9,11 +9,12 @@ export default class SingleRenderer {
             // premultipliedAlpha: false,
             antialias: true
         })
+        this.renderer.gammaFactor=2.2
         this.renderer.outputEncoding = THREE.sRGBEncoding
         // this.renderer.setPixelRatio(window.devicePixelRatio)
 
         this.currentCanvas=undefined;
-     
+        this.renderer. powerPreference ="high-performance"
     }
 
     appendToCanvas(canvas) {

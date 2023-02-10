@@ -227,7 +227,7 @@ class Life_user extends Life_Genetic {
         // console.log(this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array)
         let originalPositionArray = this.bodySystemWindow.sariraBuffer.bufferGeometry.attributes.position.array;
 
-        let d3Dataset = this.bodySystemWindow.sarira.getDataset()
+        // let d3Dataset = this.bodySystemWindow.sarira.getDataset()
 
         for (let i = 0; i <this.bodySystemWindow.sarira.getPlasticListLength()* 3; i+=3) {
  
@@ -274,14 +274,13 @@ class Life_user extends Life_Genetic {
     // ===============================================================================
 
     setFoodChain() {
-        let foodChainName = 'final Consumer';
+        let foodChainName = 'Final Consumer';
 
         return foodChainName;
     }
 
     setLifeType() {
         let type = 'Homo Sapiens';
-
         return type;
     }
 

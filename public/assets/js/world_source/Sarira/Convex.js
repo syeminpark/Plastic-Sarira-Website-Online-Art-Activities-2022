@@ -35,23 +35,13 @@ export default class Convex {
 
     updateBuffer(plastic) {
         this.clearObject()
-        if(plastic.positionVector3.x!=null && plastic.positionVector3.y!=null&&  plastic.positionVector3.z!=null){
         this.vertices.push(plastic.positionVector3);
- 
         this.meshGeometry = new ConvexGeometry(this.vertices);
-        }
-        else{
-            console.log(plastic.positionVector3)
-        }
     }
-
 
 
     updateVertices(bufferGeometry, sariraListlength) {
      
-
-
-
         this.vertices = []
         const positionAttribute = bufferGeometry.getAttribute('position');
 
@@ -74,17 +64,15 @@ export default class Convex {
         this.group.add(this.convexMeshBack)
         this.group.add(this.convexMeshFront)
         
-      
-
-
         this.threeSystem.scene.add(this.group)
 
     }
 
     clearObject() {
-        let selectedObject = this.threeSystem.scene.getObjectByName(this.groupName);
+        let selectedObject = this.threeSystem.scene.getObjectByName(this.group.name);
         this.threeSystem.scene.remove(selectedObject);
         this.meshGeometry.dispose()
+        
         this.group.clear()
      
     }

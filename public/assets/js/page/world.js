@@ -118,17 +118,7 @@ class World12345 extends Page12345 {
 	}
 
 	enter() {
-		// let i =0; 
-		// let importPLY =setInterval( ()=>{
-		// 	this.world.importPLY(this.imageslider.add_data, this.imageslider.reposition,1);	
-		// 	i++ 
-		// 	if( i >10){
-				
-		// 		clearInterval(this.lifecheck);
-		// 	}
 		
-		// },5000)
-
 		this.userController.resetKeyboardState();
 
 		let inputs = (document.querySelectorAll('input'))

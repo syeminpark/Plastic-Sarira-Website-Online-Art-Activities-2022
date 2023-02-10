@@ -6,14 +6,16 @@ class D3Dataset {
         this.links = [];
     }
 
-    static categories = ['Waste Plastic', 'Microbe', "Herbivore", "Carnivore", "Homo Sapiens"];
+    static categories = ['Waste Plastic', 'Producer', "Decomposer", "Primary Consumer", "Secondary Consumer",'Tertiary Consumer', 'Final Consumer'];
     static subcategories = {
         "Waste Plastic": ['MASIAN', 'BANGAMEORI', 'JANGAN', 'NAECHI', 'SONGPYEONG', 
         'CHEONGGAM', 'GAMCHU', 'YUMJEON', 'DOGU', 'GURYEONGPO', 'DUMO-MONGDOL'],
         
-        'Microbe': "MICROBE",
-        "Herbivore": "HERBIVORE",
-        "Carnivore": 'CARNIVORE'
+        'Producer': "PRODUCER",
+        "Decomposer": "DECOMPOSER",
+        "Secondary Consumer": 'SECONDARY CONSUMER',
+        "Tertiary Consumer": 'TERTIARY CONSUMER',
+        "Final Consumer": 'FINAL CONSUMER'
     }
 
     static id = 1;
@@ -22,15 +24,16 @@ class D3Dataset {
 
 
     //모든 미세플라스틱이 이 함수를 사용해야함 
-    saveNode(_category, _subcategory, _uniqueID) {
-        if (D3Dataset.isValid(_category)) {
-            let node = new Map([
-                ["category", _category],
-                ["subcategory", _subcategory],
-                ["uniqueID", _uniqueID]
-            ])
-            this.nodes.push(node)
-        }
+    saveNode(plasticData) {
+     
+        // if (D3Dataset.isValid(plasticData.category)) {
+        //     this.nodes.push(new Map([
+        //         ["category", plasticData.category],
+        //         ["subcategory", plasticData.subcategory],
+        //         ["uniqueID", plasticData.uniqueID]
+        //     ]))
+        //     plasticData=undefined
+        // }
     }
 
 
@@ -99,7 +102,7 @@ class D3Dataset {
         if (D3Dataset.categories.find(element => element === category)) {
             return true;
         } else {
-            console.error("Does not match any existing category")
+            console.error(category,": Does not match any existing category")
             return false;
         }
     }

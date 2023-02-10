@@ -13,7 +13,7 @@ import {
 } from '/assets/js/utils/MyMath.js';
 import {
     createParticleMaterial,
-    createPointMaterial,
+    createSariraParticleMaterial,
     createConvexMaterial,
     createStandardMaterial,
 } from '../rendering/material.js';
@@ -23,6 +23,9 @@ import {
 } from '../rendering/SpecificThree.js';
 import config from '../utils/config.js';
 import Waste_plastic_dataset from '../utils/waste_plastic_dataset.js';
+import {
+    Boundary
+} from '../Boundary.js';
 
 //세계
 class WorldSystem {
@@ -40,43 +43,40 @@ class WorldSystem {
         this.velMax = config.velMax
         this.enterDom = undefined
 
-        this.pointsMaterial = createPointMaterial()
         this.convexMaterial = createConvexMaterial();
         this.standardMaterial = createStandardMaterial()
+        this.particleMaterial = createParticleMaterial();
+        this.sariraParticleMaterial = createSariraParticleMaterial();
 
         this.initialCameraPosition = config.worldCameraPositon
-        this.particleAppearence = undefined
     }
 
     //해당 페이지 재접속시 다시 실행
     setup(worldDom, enterDom, miniSariraThree) {
 
+
         //활성화된 파티클 개수 초과로 인해 세상에 들어가지 않은 오브젝트들은 이 배열에 들어간다
         //이후 이 배열에 들어있는 오브젝트들을 checkWorldForInput()의 인자로 넘기면 된다. 
-        this.rejectedObject = []
-        this.importedPLYCount = []
 
         this.worldThree.setup(worldDom)
         this.worldThree.setCameraPosition(...this.initialCameraPosition)
         this.worldThree.updateSize()
         this.enterDom = enterDom
 
-        //세계 경계선 생성
-        this.createWorldboundary();
+        this.rejectedObject = []
+        this.importedPLYCount = []
+        this.lifes = [];
+        this.particles = [];
+        this.particleAppearence = undefined
 
         //파티클, 라이프 생성
         this.createParticle();
         this.createLife(miniSariraThree);
-    }
-    unload() {
-        if (this.life_user) {
-            this.life_user.bodySystemWindow.unload()
-        }
-    }
-    setUserName(name) {
-        this.life_user.setName(name)
-    }
+        // //세계 경계선 생성
+        this.worldThree.addToGroup(new Boundary(this.maxParticleCount, this.sariraParticleMaterial));
 
+    }
+ 
 
     importPLY(addToslider, reorganize, count) {
         let randomSource = Waste_plastic_dataset.getRandomBatchPLY(count)
@@ -89,12 +89,9 @@ class WorldSystem {
         if (this.particleAppearence != undefined) {
             this.worldThree.render()
             this.worldThree.update()
-
             this.updateParticles();
-
         }
         if (this.valid()) {
-
             this.updateLifes();
         }
     }
@@ -113,30 +110,6 @@ class WorldSystem {
     //=====================================================================================
     //=====================================================================================
 
-    createWorldboundary() {
-        let boundaryParticlePositions = [];
-        for (let i = 0; i < this.maxParticleCount * 0.1; i++) {
-            const position = new THREE.Vector3(
-                MyMath.random(-this.worldSize, this.worldSize),
-                MyMath.random(-this.worldSize, this.worldSize),
-                MyMath.random(-this.worldSize, this.worldSize));
-
-            position.setLength(this.worldSize);
-
-            boundaryParticlePositions.push(position);
-        }
-
-        let geometry = new THREE.BufferGeometry().setFromPoints(boundaryParticlePositions);
-        let material = createPointMaterial();
-
-        let worldBoundary = new THREE.Points(geometry, material);
-        worldBoundary.frustumCulled = false
-        worldBoundary.position.set(0, 0, 0);
-        worldBoundary.traverse(function (object) {
-            object.frustumCulled = false;
-        });
-        this.worldThree.addToGroup(worldBoundary);
-    }
 
     createLife(miniSariraThree) {
         //생물 개체수 시작값
@@ -150,13 +123,11 @@ class WorldSystem {
         let options = {
             world: this,
             miniSariraThree: miniSariraThree,
-            Sarira_Material: this.pointsMaterial,
+            Sarira_Material: this.particleMaterial,
             Sarira_ConvexMaterial: this.convexMaterial,
             standardMaterial: this.standardMaterial
         }
         //console.log(options);
-
-        this.lifes = [];
         this.life_user = new Life_user(options);
         this.lifes.push(this.life_user);
 
@@ -165,22 +136,12 @@ class WorldSystem {
         }
     }
 
-
     createParticle() {
         //생성
-        this.particles = [];
         let particlePositions = [];
-        let material = createParticleMaterial();
 
         for (let i = 0; i < this.maxParticleCount; i++) {
             let p = new MicroPlastic_D3js(i, this.worldSize);
-            // 랜덤 위치 파티클 생성
-            // if (i < this.maxParticleCount * 0.1) {
-            //     p.setPos();
-            //     p.position.setLength(this.worldSize)
-            //     p.isActive = true;
-            // }
-
             this.particles.push(p);
             particlePositions.push(p.position);
         }
@@ -190,7 +151,7 @@ class WorldSystem {
         geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(this.maxParticleCount * 3), 3));
         geometry.setDrawRange(0, this.maxParticleCount);
 
-        this.particleAppearence = new THREE.Points(geometry, material);
+        this.particleAppearence = new THREE.Points(geometry, this.particleMaterial);
         this.particleAppearence.frustumCulled = false
         this.particleAppearence.position.set(0, 0, 0);
         // 카메라에 일부 mesh 안잡히는 문제 https://discourse.threejs.org/t/zooming-in-camera-make-some-meshes-not-visible/3872/6
@@ -308,25 +269,10 @@ class WorldSystem {
             if (this.valid()) {
                 //index 5000
                 let flow = new THREE.Vector3(
-                            MyMath.random(-this.velMin, this.velMin),
-                            MyMath.random(-this.velMin, this.velMin),
-                            MyMath.random(-this.velMin, this.velMin))
-                    
-                // let flows = []
-                // for (let i = 0; i < this.importedPLYCount.length; i++) {
-                //     flows.push(new THREE.Vector3(
-                //         MyMath.random(-this.velMin, this.velMin),
-                //         MyMath.random(-this.velMin, this.velMin),
-                //         MyMath.random(-this.velMin, this.velMin)))
-                // }
-                // for (let i = 0; i < this.importedPLYCount.length; i++) {
-                //     if (index <= this.importedPLYCount[i]) {
-                //         //해당하는 PLY모델 소속의 index임 
-                //         // console.log(index,i, this.importedPLYCount[i])
-                //         this.particles[index].applyForce(flows[i]);
-                //         break
-                //     }
-                // }
+                    MyMath.random(-this.velMin, this.velMin),
+                    MyMath.random(-this.velMin, this.velMin),
+                    MyMath.random(-this.velMin, this.velMin))
+
 
                 ///index = particle Count approx 15,000
                 this.particles[index].applyForce(flow);
@@ -365,9 +311,7 @@ class WorldSystem {
 
     updateLifes() {
         for (let i = 0; i < this.lifes.length; i++) {
-
             this.lifes[i].lifeGo();
-
             if (this.lifes[i].isDead == true) {
                 this.lifes.splice(i, 1);
                 continue;
@@ -389,6 +333,15 @@ class WorldSystem {
     getSariraData() {
         return this.life_user.getSariraDataForServer()
     }
+    unload() {
+        if (this.life_user) {
+            this.life_user.bodySystemWindow.unload()
+        }
+    }
+    setUserName(name) {
+        this.life_user.setName(name)
+    }
+
 }
 
 export {

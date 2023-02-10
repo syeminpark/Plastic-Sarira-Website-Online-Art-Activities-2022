@@ -20,7 +20,7 @@ import SariraThreeController from '../rendering/SariraThreeController.js';
 
 import {
 	createConvexMaterial,
-	createPointMaterial
+	createSariraParticleMaterial
 } from '../rendering/material.js';
 
 import config from '../utils/config.js';
@@ -31,7 +31,7 @@ class SariArchive12345 extends Page12345 {
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
 
-		this.pointMaterial = createPointMaterial()
+		this.pointMaterial = createSariraParticleMaterial()
 		this.convexMaterial = createConvexMaterial()
 
 		this.sariraThree = new SariraThree(this.pagelayer.singleRenderer, 'sarira', true)
