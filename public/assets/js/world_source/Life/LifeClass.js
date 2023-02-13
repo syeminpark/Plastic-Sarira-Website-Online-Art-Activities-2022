@@ -67,8 +67,9 @@ class Life_Absorb extends Life_noShader {
         
         // if (this.index == 0) console.log("eat");
 
-        const distance = this.position.distanceTo(microPlastic.position);
         const lifeSize = (this.size + this.noiseSize) * 0.9;
+        const distance = this.position.distanceTo(microPlastic.position);
+        if (distance > this.mass > 2) return;
 
         if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false){
             //아직 먹히지 않은 상태의 파티클 끌어당기기
@@ -92,8 +93,9 @@ class Life_Absorb extends Life_noShader {
 
     breath(microPlastic) {
         //아직 먹히지 않은 상태의 파티클 끌어당기기
-        const distance = this.position.distanceTo(microPlastic.position);
         const lifeSize = (this.size + this.noiseSize) * 1;
+        const distance = this.position.distanceTo(microPlastic.position);
+        if (distance > this.mass > 2) return;
 
         if (microPlastic.isEaten == false && microPlastic.isActive == true && this.isDead == false && 
             this.absorbedParticles.length <= this.absorbMaxCount * 2){
