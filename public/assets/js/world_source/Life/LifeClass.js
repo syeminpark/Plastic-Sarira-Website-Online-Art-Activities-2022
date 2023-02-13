@@ -81,6 +81,8 @@ class Life_Absorb extends Life_noShader {
                 force.multiplyScalar(0.1);
                 microPlastic.applyForce(force);
                 microPlastic.velocity.multiplyScalar(0.9);
+               
+                //  microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
             }
 
             //파티클 먹고 파티클 흡수 상태로 변경
@@ -105,6 +107,8 @@ class Life_Absorb extends Life_noShader {
                 force.multiplyScalar(0.1);
                 microPlastic.applyForce(force);
                 microPlastic.velocity.multiplyScalar(0.9);
+             
+                //  microPlastic.setD3PlasticDataInLife(this.index, this.setD3jsData());
             }
 
             if (this.absorbedParticles.length < this.microPlastic_breath_maxAmount) {

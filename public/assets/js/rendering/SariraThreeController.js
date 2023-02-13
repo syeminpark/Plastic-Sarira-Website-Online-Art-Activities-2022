@@ -8,9 +8,6 @@
          this.isDetail = isDetail
          this.type = type
          this.renderer = renderer
-         this.sariraObject = []
-         this.sariraThreeList = []
-
      }
      setMaterial(pointMaterial, sariraMaterial) {
          this.pointMaterial = pointMaterial
@@ -18,6 +15,7 @@
      }
 
      setup(canvas, sariraTotalCount) {
+        this.sariraThreeList = []
          this.sariraObject = []
 
          this.renderer.clear()
@@ -34,20 +32,20 @@
      }
 
      create(index, range, data, element) {
-         let normalI = 0
 
          for (let i = index * range; i < (index + 1) * range; i++) {
-             this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
-             this.sariraThreeList[i].setElement(element[i])
-             this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
-             this.sariraObject.push(this.sariraThreeList[i].getObject())
-             normalI++
+             if (this.sariraThreeList[i] && data[i]) {
+                 this.sariraThreeList[i].setMaterial(this.pointMaterial, this.sariraMaterial)
+                 this.sariraThreeList[i].setElement(element[i])
+                 this.sariraThreeList[i].import(JSON.parse(data[i].message).vertices)
+                 this.sariraObject.push(this.sariraThreeList[i].getObject())
+             }
          }
      }
 
      render = () => {
          requestAnimationFrame(this.render)
-         if (this.sariraObject.length != 0) {
+         if (this.sariraObject) {
              if (this.valid()) {
                  this.checkCanvas()
                  this.rendererResizeMobile();

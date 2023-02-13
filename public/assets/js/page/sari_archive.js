@@ -20,7 +20,7 @@ import SariraThreeController from '../rendering/SariraThreeController.js';
 
 import {
 	createConvexMaterial,
-	createPointMaterial
+	createSariraParticleMaterial
 } from '../rendering/material.js';
 
 import config from '../utils/config.js';
@@ -31,7 +31,7 @@ class SariArchive12345 extends Page12345 {
 		this.pagelayer = _pagelayer
 		this.list = new List12345(_pagelayer);
 
-		this.pointMaterial = createPointMaterial()
+		this.pointMaterial = createSariraParticleMaterial()
 		this.convexMaterial = createConvexMaterial()
 
 		this.sariraThree = new SariraThree(this.pagelayer.singleRenderer, 'sarira', true)
@@ -52,8 +52,6 @@ class SariArchive12345 extends Page12345 {
 		const detail_layer = this.pagelayer.popup.querySelector("#sari-detail-layer");
 		const load_more_btn = this.pagelayer.popup.querySelector('#load-more-btn');
 
-
-
 		this.load_index = 0;
 		let res;
 		this.totalSariraCount = await this.serverClientCommunication.getTotalSariraCount()
@@ -68,6 +66,7 @@ class SariArchive12345 extends Page12345 {
 			}
 		}
 		if (load_more_btn) {
+			
 			load_more_btn.addEventListener('click', async () => {
 				// this.availableIndexLength = this.totalSariraCount / this.range - this.load_index-1
 				// if (this.availableIndexLength > 0) {
@@ -77,11 +76,10 @@ class SariArchive12345 extends Page12345 {
 					this.loadList(this.sliced_data[this.load_index]);
 			
 					this.sariraThreeController.create(this.load_index, this.range, res.sariraData, this.list.container.children)
-					
-					if(this.totalSariraCount / this.range - this.load_index< 1){
-						load_more_btn.innerHTML = "END OF LIST"
-					}
 				} 
+				else if(this.sliced_data.length - 1 == this.load_index){
+					load_more_btn.innerHTML = "END OF LIST"
+				}
 			});
 		}
 		this.loadsvg();

@@ -413,7 +413,10 @@ class Life_Genetic extends Life_EatOther {
                 foodChainName = 'Tertiary Consumer';
             }
             if (this.eatCount > 20 && this.isEaten == false) {
-                foodChainName = 'final Consumer';
+                foodChainName = 'Final Consumer';
+            }
+            else{
+                // console.error("out of scope for category")
             }
         }
 
@@ -446,6 +449,9 @@ class Life_Genetic extends Life_EatOther {
             else if (this.geneCode.herbivore == 1 && this.geneCode.carnivore == 1){
                 type = 'Carnivore'; // 육식동물
             }
+            else{
+                // console.error("out of scope for subcategory")
+            }
         } 
 
         return type;
@@ -456,11 +462,11 @@ class Life_Genetic extends Life_EatOther {
         // user일 경우 종 뒤에 이름 추가 ex) 호모사피엔스/김아무개
         if (this.index == 0) subLifeName = `${this.setLifeType()}/${this.lifeName}`;
 
-        const data = [
-            this.setFoodChain(), // "category"
-            subLifeName, // "subcategory"
-            `#${this.index}` // "uniqueID"
-        ];
+        const data = {
+            category: this.setFoodChain(), // "category"
+            subcategory: subLifeName, // "subcategory"
+            uniqueID: `#${this.index}` // "uniqueID"
+        };
         return data;
     }
 

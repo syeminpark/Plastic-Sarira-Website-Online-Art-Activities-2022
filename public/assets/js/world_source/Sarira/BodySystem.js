@@ -8,7 +8,7 @@ import {
 import {
     Microplastic
 } from './Microplastic.js';
-
+import { createInvisibleMaterial } from '../../rendering/material.js';
 
 
 class BodySystem {
@@ -52,9 +52,10 @@ class BodySystem {
     createBuffer(material) {
         this.floatingBuffer = new Buffer()
         this.particleMaterial = material;
-        this.floatingBuffer.initialize(this.particleMaterial)
+
+        this.floatingBuffer.initialize(createInvisibleMaterial())
         //디버깅용으로 일단 켜두기 
-        // this.floatingBuffer.render(this.threeSystem)
+        this.floatingBuffer.render(this.threeSystem)
 
         this.sariraBuffer = new Buffer()
         this.sariraBuffer.initialize(this.particleMaterial)
@@ -79,8 +80,7 @@ class BodySystem {
 
 
     addFloatingPlastics(positionList, d3Dataset) {
-        this.floatingBuffer.dispose()
-        this.floatingPlasticsList = []
+
         let tempMicro = new Microplastic(this.threeSystem)
         tempMicro.initialize(positionList)
 
@@ -105,7 +105,6 @@ class BodySystem {
 
                 if (this.window) {
                     //only does once
-
 
                     let sariraSize = this.sariraBuffer.getBoundingBox()
                     let microCount = this.sarira.getPlasticList().length;

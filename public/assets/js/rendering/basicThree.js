@@ -1,4 +1,3 @@
-
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {
     OrbitControls
@@ -17,19 +16,19 @@ export default class BasicThree {
             25,
             0.8,
             0.02,
-            1300
+            500
         )
         this.camera.position.set(0, 0, 5)
-        this.camera.up.set( 0, 1, 0 );
+        this.camera.up.set(0, 1, 0);
         this.controls = new OrbitControls(this.camera, this.renderer.getDomElement())
 
         this.controls.enableDamping = true
-        this.controls.maxDistance = 1000
+        this.controls.maxDistance = 400
         this.controls.enablePan = false;
 
         this.scene.add(this.group)
         this.groupNames = []
-     
+
         window.addEventListener('resize', () => this.updateSize(), false)
 
     }
@@ -42,7 +41,7 @@ export default class BasicThree {
         this.renderer.appendToCanvas(this.canvas)
         this.reset()
         this.controls.reset()
-        this.groupNames=[]
+        this.groupNames = []
 
     }
 
@@ -78,26 +77,28 @@ export default class BasicThree {
 
     reset() {
         this.scene.traverse((child) => {
-        
             if (child.type == 'Group') {
-                console.log()
-
                 for (let i = 0; i < child.children.length; i++) {
                     const mesh = child.children[i];
                     mesh.geometry.dispose()
                     mesh.material.dispose();
                     this.scene.remove(mesh)
                 }
-                child.clear()
+                child.clear() 
+            } 
+        }) 
+      
+        for (let groupName of this.groupNames) {
+            let selectedObject = this.scene.getObjectByName(groupName);
+            for (let i = 0; i < selectedObject.children.length; i++) {
+                selectedObject.children[i].geometry.dispose()
+                selectedObject.children[i].material.dispose()
+                this.scene.remove(selectedObject.children[i])  
             }
-
-            for (let groupName of this.groupNames) {
-                console.log('g',groupName)
-                let selectedObject = this.scene.getObjectByName(groupName);
-                this.scene.remove(selectedObject)
-            }
-        
-        })
+            selectedObject.clear()
+            this.scene.remove(selectedObject)  
+        }
+    
         this.renderer.clear();
 
     }
@@ -112,8 +113,8 @@ export default class BasicThree {
 
         geometry.dispose();
         material.dispose();
+        this.scene.remove(mesh)
 
-        // console.log(this.renderer.renderer.info)
     }
     setCameraPosition(x, y, z) {
         this.camera.position.set(x, y, z)
