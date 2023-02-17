@@ -27,7 +27,6 @@ import {
 
 import config from '../utils/config.js';
 
-import SariraGenerationSound from '../sound/SariraGenerationSound.js';
 
 class World12345 extends Page12345 {
 	constructor(_pagelayer) {
@@ -136,7 +135,6 @@ class World12345 extends Page12345 {
 				this.ServerClientCommunication.createUser(input.value)
 				this.world.setUserName(input.value)
 
-
 				const world_btns = this.pagelayer.popup.querySelectorAll('.world-nav-btn');
 				this.any_world_btn_clicked = false;
 
@@ -178,6 +176,7 @@ class World12345 extends Page12345 {
 				// window.addEventListener('keyup', this.moveSari.bind(this));
 			}
 		}
+		
 	}
 
 	animate = () => {
