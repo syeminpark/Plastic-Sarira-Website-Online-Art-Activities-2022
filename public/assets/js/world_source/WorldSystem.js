@@ -123,7 +123,7 @@ class WorldSystem {
         let options = {
             world: this,
             miniSariraThree: miniSariraThree,
-            Sarira_Material: this.particleMaterial,
+            Sarira_Material: this.sariraParticleMaterial,
             Sarira_ConvexMaterial: this.convexMaterial,
             standardMaterial: this.standardMaterial
         }
@@ -131,7 +131,7 @@ class WorldSystem {
         this.life_user = new Life_user(options);
         this.lifes.push(this.life_user);
 
-        for (let i = 1; i < this.lifeNum; i++) {
+        for (let i = 1; i < 100; i++) {
             this.lifes.push(new Life_Genetic(i, options));
         }
     }
@@ -259,7 +259,10 @@ class WorldSystem {
             particlePositionAttributes[i + 0] = this.particles[index].position.x;
             particlePositionAttributes[i + 1] = this.particles[index].position.y;
             particlePositionAttributes[i + 2] = this.particles[index].position.z;
-
+        }
+        
+        for (let i = 0; i < particlePositionAttributes.length; i += 3) {
+            const index = i / 3;
 
             if (this.particles[index].isActive == false) {
                 this.particles[index].setPos(new THREE.Vector3(0, this.worldSize - 1, 0));
