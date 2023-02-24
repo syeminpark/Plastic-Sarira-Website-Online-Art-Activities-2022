@@ -243,6 +243,7 @@ class UserController {
 
         if (this.keyboard.down("space")){
             this.user.playEatMotion()
+            
         }
 
         // velocity 초기화
@@ -452,5 +453,5 @@ class UserController {
         }
     }
 }
-
+	
 export { UserController }
