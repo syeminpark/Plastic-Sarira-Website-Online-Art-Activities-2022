@@ -113,10 +113,10 @@ class WorldSystem {
 
     createLife(miniSariraThree) {
         //생물 개체수 시작값
-        const minNum = Math.floor(this.worldSize * 0.1);
+        const minNum = Math.floor(this.worldSize * 0.15);
 
         //생물 개체수 최댓값
-        this.maxNum = Math.floor(this.worldSize * 0.4);
+        this.maxNum = Math.floor(this.worldSize * 0.5);
 
         this.lifeNum = 1 + minNum;
 
@@ -131,7 +131,7 @@ class WorldSystem {
         this.life_user = new Life_user(options);
         this.lifes.push(this.life_user);
 
-        for (let i = 1; i < 100; i++) {
+        for (let i = 1; i < this.lifeNum; i++) {
             this.lifes.push(new Life_Genetic(i, options));
         }
     }
