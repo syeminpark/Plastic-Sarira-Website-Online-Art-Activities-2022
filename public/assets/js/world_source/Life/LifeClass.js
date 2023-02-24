@@ -190,10 +190,10 @@ class Life_Sarira extends Life_Absorb {
         super.update();
 
         this.add_MicroPlasticToSarira();
-        this.sarira_position = new THREE.Vector3().copy(this.position);
+    
 
         this.bodySystem.update();
-        this.bodySystem.setPosition(this.sarira_position);
+        this.bodySystem.setPosition(this.position);
     }
 
     add_MicroPlasticToSarira() {
