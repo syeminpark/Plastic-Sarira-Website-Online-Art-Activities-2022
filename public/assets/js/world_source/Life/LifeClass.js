@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 import {
-    Life, Life_noShader
+    Life, Life_noShader, Life_newShader
 } from './Life.js'
 import {
     BodySystem
@@ -11,7 +11,7 @@ import {
 } from '/assets/js/utils/MyMath.js';
 
 // 파티클 흡수하는 Life
-class Life_Absorb extends Life_noShader {
+class Life_Absorb extends Life_newShader {
     constructor(index, world, setPos) {
         super(index, world, setPos);
 
@@ -190,10 +190,10 @@ class Life_Sarira extends Life_Absorb {
         super.update();
 
         this.add_MicroPlasticToSarira();
-        this.sarira_position = new THREE.Vector3().copy(this.position);
+    
 
         this.bodySystem.update();
-        this.bodySystem.setPosition(this.sarira_position);
+        this.bodySystem.setPosition(this.position);
     }
 
     add_MicroPlasticToSarira() {

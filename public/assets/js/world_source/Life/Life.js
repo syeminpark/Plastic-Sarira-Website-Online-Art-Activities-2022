@@ -5,7 +5,8 @@ import {
 } from '/assets/js/utils/MyMath.js';
 import {
     createLifeMaterial,
-    createLifeNoiseMaterial
+    createLifeNoiseMaterial,
+    createLifeNoiseMaterial2
 } from '/assets/js/rendering/material.js';
 import {
     THREE_Noise
@@ -504,11 +505,6 @@ class Life_noShader extends Life {
         this.initNoise();
     }
 
-    updateShaderMat() {
-        this.updateGlow_3D();
-        this.updateNoise();
-    }
-
     updateNoise() {
         const position = this.lifeMesh.geometry.attributes.position;
         // const normal = this.lifeMesh.geometry.attributes.normal;
@@ -580,7 +576,68 @@ class Life_noShader extends Life {
     }
 }
 
+class Life_newShader extends Life {
+    constructor(index, world, setPos) {
+        super(index, world, setPos);
+    }
+
+    init() {
+        super.init();
+
+        this.sizeMax = 0;
+
+        this.noiseShape = MyMath.random(0.3, 1.5);
+        this.noiseSpeed = MyMath.random(0.1, 0.5);
+    }
+
+    setDisplay() {
+        let geometry = new THREE.IcosahedronGeometry(this.size, this.shapeX);
+        let material = createLifeNoiseMaterial2(this.worldThree.camera, this.noiseShape, this.noiseSpeed);
+
+        material.transparent = true;
+
+        this.lifeMesh = new THREE.Mesh(geometry, material);
+        this.lifeMesh.position.set(this.position.x, this.position.y, this.position.z);
+
+        this.worldThree.addToGroup(this.lifeMesh);
+    }
+
+    updateNoiseShader() {
+        this.lifeMesh.material.uniforms['uTime'].value = this.clock.getElapsedTime();
+    }
+
+    die(){
+        if (this.lifeMesh.scale.x > 0.1){
+
+            this.lifeMesh.scale.x *= 0.95;
+            this.lifeMesh.scale.y *= 0.95;
+            this.lifeMesh.scale.z *= 0.95;
+
+            this.noiseShape += 0.05;
+        }
+        
+        this.velLimit = 0.01;
+        this.velocity.multiplyScalar(0.1);
+
+        // console.log(this.size, this.lifeMesh.scale.x)
+
+        if (this.isDead == false && this.lifeMesh.scale.x <= 0.1){
+            for (let i = 0; i < this.absorbedParticles.length; i++) {
+                this.absorbedParticles[i].initWrap();
+            }
+
+            this.isDead = true;
+            console.log(this.index + ' is die');
+
+            this.contentsText = "";
+
+            this.worldThree.removeFromGroup(this.lifeMesh);
+        }
+    }
+}
+
 export {
     Life,
-    Life_noShader
+    Life_noShader,
+    Life_newShader
 }

@@ -101,13 +101,12 @@ class Life_user extends Life_Genetic {
         this.userEat();
 
         this.add_MicroPlasticToBodySystem();
-        this.sarira_position = new THREE.Vector3().copy(this.position);
 
         this.bodySystem.update();
-        this.bodySystem.setPosition(this.sarira_position);
+        this.bodySystem.setPosition(this.position);
         
         this.bodySystemWindow.update();
-        this.bodySystemWindow.setPosition(this.sarira_position);
+        this.bodySystemWindow.setPosition(this.position);
     }
 
     lifeGo(callback){
