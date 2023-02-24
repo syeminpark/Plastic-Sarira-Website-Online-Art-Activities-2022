@@ -1,11 +1,11 @@
 # Plastic Sarira
  
-## Project Description
+### Description
 Plastic Sarira is a web-based media art project that presents a virtual ecosystem 
 in which computer-programmed life forms and 3D-scanned plastic marine debris coexist 
 in symbiosis.
 
-## Project Website
+### Website
 https://www.plasticsarira.com/
 
 ![alt text](https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022/blob/steady/screenshots/pc/world_en_pc.jpg?raw=true)
