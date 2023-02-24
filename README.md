@@ -11,7 +11,6 @@ humans as interdependent, synthetic beings that are both intimately affected by 
 influence other organisms and objects in our already plasticized world.
 
 
-https://gatheringmoss.art/artworks/plastic-sarira/
+https://www.plasticsarira.com/
 
-
-![alt text](https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities/blob/main/screenshots/pc/world_en_pc.jpg?raw=true)
+![alt text](https://github.com/syeminpark/Plastic-Sarira-Website-Online-Art-Activities-2022/blob/main/screenshots/pc/world_en_pc.jpg?raw=true)
