@@ -1,5 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
-import {lifeShader, lifeShader_noise} from './shader.js'
+import {lifeShader, lifeShader_noise, lifeShader2} from './shader.js'
 import config from '../utils/config.js';
 
 export function createConvexMaterial() {
@@ -102,6 +102,31 @@ export function createLifeNoiseMaterial(camera, count, gap){
         },
         vertexShader: lifeShader_noise.vertexShader, 
         fragmentShader: lifeShader_noise.fragmentShader,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending
+    });
+}
+
+// 노이즈 쉐이더2
+export function createLifeNoiseMaterial2(camera, noiseShape, noiseSpeed){
+    return new THREE.ShaderMaterial({
+        vertexShader: lifeShader2.vertexShader,
+        fragmentShader: lifeShader2.fragmentShader,
+        uniforms: {
+            uTime: { type: 'f', value: 0.0 },
+            uSpeed: { value: noiseSpeed },
+            uNoiseDensity: { value: 1.2 },
+            uNoiseStrength: { value: noiseShape },
+            uFrequency: { value: .2 },
+            uAmplitude: { value: .15 },
+            uRed: { value: .3 },
+            uBlue: { value: .3 },
+
+            "c": { type: "f", value: 1.0 },
+            "p": { type: "f", value: 1.4 },
+            glowColor: { type: "c", value: new THREE.Color(0xffffff) },
+            viewVector: { type: "v3", value: camera.position }
+        },
         side: THREE.FrontSide,
         blending: THREE.AdditiveBlending
     });
