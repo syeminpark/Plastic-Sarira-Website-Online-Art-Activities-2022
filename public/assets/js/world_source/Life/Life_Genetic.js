@@ -32,7 +32,7 @@ class Life_Genetic extends Life_EatOther {
             metabolismActivity : MyMath.random(0, 1), // 대사 활동. 에너지 소모와 동시에 획득
                                                       // 동물의 경우 소화 속도, 식물의 경우 광합성시 에너지 획득량
                                                       // 분열 속도에 영향
-            lifespan : MyMath.random(0, 1),
+            Aspan : MyMath.random(0, 1),
 
             startNutrients : MyMath.random(0, 1), // 태어날 때 가지고 있는 양분
 
