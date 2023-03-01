@@ -113,10 +113,10 @@ class WorldSystem {
 
     createLife(miniSariraThree) {
         //생물 개체수 시작값
-        const minNum = Math.floor(this.worldSize * 0.15);
+        const minNum = Math.floor(this.worldSize * 0.2);
 
         //생물 개체수 최댓값
-        this.maxNum = Math.floor(this.worldSize * 0.5);
+        this.maxNum = Math.floor(this.worldSize * 0.6);
 
         this.lifeNum = 1 + minNum;
 

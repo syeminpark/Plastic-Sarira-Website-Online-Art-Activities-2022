@@ -32,7 +32,7 @@ class Life_Genetic extends Life_EatOther {
             metabolismActivity : MyMath.random(0, 1), // 대사 활동. 에너지 소모와 동시에 획득
                                                       // 동물의 경우 소화 속도, 식물의 경우 광합성시 에너지 획득량
                                                       // 분열 속도에 영향
-            Aspan : MyMath.random(0, 1),
+            lifespan : MyMath.random(0, 1),
 
             startNutrients : MyMath.random(0, 1), // 태어날 때 가지고 있는 양분
 
@@ -66,14 +66,17 @@ class Life_Genetic extends Life_EatOther {
         this.noiseSize = MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, 0.01, 0.5);
         this.lerpSize = this.size;
         
-        this.sizeMax = 18 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
+        this.sizeMax = 10 * this.geneCode.size * this.geneCode.size * this.geneCode.size + 1;
         // console.log(this.index, this.geneCode.size, this.sizeMax);
 
         this.mass = this.size + this.noiseSize;
 
         // 구체 생성시 정점 수 가로 / 세로
-        this.shapeX = 32;
-        this.shapeY = 32;
+        // this.shapeX = 32;
+        // this.shapeY = 32;
+
+        this.shapeX = MyMath.map(this.geneCode.shapeX, 0, 1, 8, 32);
+        this.shapeY = MyMath.map(this.geneCode.shapeY, 0, 1, 0.1, 2);
 
         // 노이즈 쉐이더
         // this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0, 50);
@@ -153,7 +156,7 @@ class Life_Genetic extends Life_EatOther {
 
     updateMetabolism(){
         if (this.energy <= 0 || this.isEaten == true) return;
-
+        
         if (this.lerpSize > this.size){
             this.size += 0.01;
             this.lifeMesh.scale.set(this.size + (this.shapeX * 0.01), 

@@ -65,7 +65,7 @@ class Life_user extends Life_Genetic {
 
         this.velLimit = 1;
 
-        this.size = 1.5;
+        this.size = 1;
         this.noiseSize = this.size * MyMath.map(this.geneCode.shapeX + this.geneCode.shapeY, 0, 2, .5, 1.5);
         this.lerpSize = this.size;
         
@@ -73,8 +73,8 @@ class Life_user extends Life_Genetic {
         
         this.mass = this.size + this.noiseSize;
         
-        this.shapeX = 32;
-        this.shapeY = Math.floor(MyMath.map(this.geneCode.shapeY, 0, 1, 4, 32));
+        this.shapeX = MyMath.map(this.geneCode.shapeX, 0, 1, 8, 32);
+        this.shapeY = MyMath.map(this.geneCode.shapeY, 0, 1, 0.1, 1);
 
         this.noiseShape = this.noiseShape = MyMath.map(this.geneCode.shape, 0, 1, 0.1, 0.5);
         this.noiseSpeed = MyMath.map((this.geneCode.moveActivity + this.geneCode.metabolismActivity) * 0.5,
@@ -88,7 +88,6 @@ class Life_user extends Life_Genetic {
         //         }
         //     })
     }
-
 
     update() {
 

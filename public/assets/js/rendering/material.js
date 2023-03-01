@@ -108,17 +108,17 @@ export function createLifeNoiseMaterial(camera, count, gap){
 }
 
 // 노이즈 쉐이더2
-export function createLifeNoiseMaterial2(camera, noiseShape, noiseSpeed){
+export function createLifeNoiseMaterial2(camera, noiseShape, noiseShape2, noiseSpeed){
     return new THREE.ShaderMaterial({
         vertexShader: lifeShader2.vertexShader,
         fragmentShader: lifeShader2.fragmentShader,
         uniforms: {
             uTime: { type: 'f', value: 0.0 },
             uSpeed: { value: noiseSpeed },
-            uNoiseDensity: { value: 1.2 },
+            uNoiseDensity: { value: 1.2 }, // 1.2
             uNoiseStrength: { value: noiseShape },
             uFrequency: { value: .2 },
-            uAmplitude: { value: .15 },
+            uAmplitude: { value: .15 }, // .15
             uRed: { value: .3 },
             uBlue: { value: .3 },
 

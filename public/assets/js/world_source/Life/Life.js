@@ -591,8 +591,9 @@ class Life_newShader extends Life {
     }
 
     setDisplay() {
-        let geometry = new THREE.IcosahedronGeometry(this.size, this.shapeX);
-        let material = createLifeNoiseMaterial2(this.worldThree.camera, this.noiseShape, this.noiseSpeed);
+        let geometry = new THREE.SphereGeometry(this.size, this.shapeX, 32);
+
+        let material = createLifeNoiseMaterial2(this.worldThree.camera, this.noiseShape, this.shapeY, this.noiseSpeed);
 
         material.transparent = true;
 
