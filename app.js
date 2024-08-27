@@ -21,7 +21,9 @@ app.set("port", PORT);
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(express.static('public'));
 
 app.use("/users", userRouter);
@@ -39,6 +41,5 @@ const server = http.createServer(app);
 server.listen(PORT);
 /** Event listener for HTTP server "listening" event. */
 server.on("listening", () => {
-    console.log(`Listening on port:: http://localhost:${PORT}/`)
-  });
-
+  console.log(`Listening on port:: http://localhost:${PORT}/`)
+});

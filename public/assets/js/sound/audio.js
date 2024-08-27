@@ -1,4 +1,3 @@
-
 import {
 	unmute
 } from './unmute.js'
@@ -25,7 +24,7 @@ class Audio12345 {
 		this.deathDOM = document.getElementById('death')
 
 		this.clickSoundVolume = 1
-		this.backgroundVolume =1
+		this.backgroundVolume = 1
 		this.deathVolume = 1
 		this.default = 1
 
@@ -73,6 +72,7 @@ class Audio12345 {
 		} catch (error) {
 			console.error(error);
 		}
+
 	}
 
 	on() {
